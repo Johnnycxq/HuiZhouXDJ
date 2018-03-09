@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_100"
+        android:gravity="center"
+        android:text="配置IP"
+        android:textSize="36px"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/blue"></View>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:layout_marginLeft="@dimen/px_10"
+        android:gravity="center_vertical"
+        android:text="WIFI接口IP"
+        android:textSize="35px"/>
+
+    <EditText
+        android:digits="htp:/1234567890."
+        android:id="@+id/et_wifi_ip"
+        style="@style/editTextTheme"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/px_10"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical"
+        android:textSize="35px">
+    </EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:layout_marginLeft="@dimen/px_10"
+        android:gravity="center_vertical"
+        android:text="4G接口IP"
+        android:textSize="35px"/>
+
+    <EditText
+        android:digits="htp:/1234567890."
+        android:id="@+id/et_4g_ip"
+        style="@style/editTextTheme"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:layout_marginLeft="@dimen/px_10"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical"
+        android:textSize="35px">
+    </EditText>
+
+
+    <View
+        android:layout_marginTop="15px"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/blue"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_100"
+        android:layout_marginTop="@dimen/px_10"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_qd"
+            style="@style/button"
+            android:layout_marginLeft="@dimen/px_30"
+            android:layout_marginRight="@dimen/px_30"
+            android:layout_weight="1"
+            android:text="确定"/>
+
+        <Button
+            android:id="@+id/btn_qx"
+            style="@style/button"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="@dimen/px_30"
+            android:layout_weight="1"
+            android:text="@string/cancel"/>
+
+    </LinearLayout>
+
+</LinearLayout>

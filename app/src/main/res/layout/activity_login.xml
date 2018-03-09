@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/background"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".activity.LoginActivity">
+
+    <include
+        layout="@layout/toolbar"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180px"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="设备设施巡查"
+            android:textColor="#ffffff"
+            android:textSize="50px" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:gravity="center"
+            android:text="版本1.0.0"
+            android:textColor="#ffffff"
+            android:textSize="35px"
+            android:visibility="gone" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50px"
+        android:gravity="center"
+        android:text="版本1.0.0"
+        android:textColor="#ffffff"
+        android:textSize="25px"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/et_use"
+            style="@style/editTextTheme"
+            android:layout_width="550px"
+            android:layout_marginLeft="@dimen/px_20"
+            android:layout_marginRight="@dimen/px_20"
+            android:gravity="center"
+            android:hint="用户名"
+            android:textColor="#ffffff" />
+
+        <EditText
+            android:id="@+id/et_pwd"
+            style="@style/editTextTheme"
+            android:layout_width="550px"
+            android:layout_marginLeft="@dimen/px_20"
+            android:layout_marginRight="@dimen/px_20"
+            android:layout_marginTop="@dimen/px_20"
+            android:gravity="center"
+            android:hint="密码"
+            android:inputType="textPassword"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btn_login"
+            style="@style/button"
+            android:layout_width="550px"
+            android:layout_marginLeft="@dimen/px_20"
+            android:layout_marginRight="@dimen/px_20"
+            android:layout_marginTop="@dimen/px_20"
+            android:text="登录" />
+
+        <Button
+            android:id="@+id/btn_test"
+            style="@style/button"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/px_20"
+            android:layout_marginRight="@dimen/px_20"
+            android:layout_marginTop="@dimen/px_20"
+            android:text="测试"
+            android:visibility="gone" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <CheckBox
+                android:id="@+id/save_pw_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5px"
+                android:checked="true"
+                android:gravity="center_vertical"
+                android:text="记住密码"
+                android:textColor="#ffffff"
+                android:textSize="35px" />
+
+            <RadioGroup
+                android:id="@+id/rg"
+                android:layout_width="wrap_content"
+                android:layout_height="80px"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <RadioButton
+                    android:id="@+id/rb1"
+                    style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20px"
+                    android:checked="true"
+                    android:text="内网"
+                    android:textColor="#ffffff" />
+
+                <RadioButton
+                    android:id="@+id/rb2"
+                    style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="外网"
+                    android:textColor="#ffffff" />
+
+            </RadioGroup>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

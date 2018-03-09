@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="OAToolbar">
+        <attr name="tvTitle" format="string" />
+        <attr name="tvRight" format="string" />
+        <attr name="ivLeftIcon" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="InputLayout">
+        <attr name="tv_title" format="string" /><!-- 标题 -->
+        <attr name="isShowSelect" format="boolean" /><!-- 是否显示编辑框 -->
+        <attr name="isShowTextView" format="boolean" /><!-- 是否显示文本框 -->
+        <attr name="showTextView" format="boolean"/>
+        <attr name="isShowNumSubView" format="boolean" /><!-- 是否显示可以加减的控件 -->
+        <attr name="minValue" format="integer" /><!-- 设置可以加减控件的最大值 -->
+        <attr name="hintText" format="string" /><!-- 提示文本 -->
+        <attr name="must" format="boolean" /><!-- 是否一定要填写，如果一定要填写 就显示红色的* -->
+    </declare-styleable>
+
+    <declare-styleable name="NumAddSubView">
+        <attr name="maxNum" format="integer" />
+        <attr name="minNum" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="DinnerLayout">
+        <attr name="isReception" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="CbRbLayout">
+
+        <attr name="cbrb_title" format="string" />
+        <attr name="showRg1" format="boolean" />
+        <attr name="showRg" format="boolean" />
+        <attr name="showCb" format="boolean" />
+        <attr name="rbtextType">
+            <!-- 是否 -->
+            <enum name="YN" value="1" />
+            <!-- 同意不同意 -->
+            <enum name="CD" value="2" />
+            <!-- 现场检修 行动不便  -->
+            <enum name="YY" value="3" />
+            <!-- 已完成 未完成-->
+            <enum name="FF" value="4" />
+            <!-- 围餐 自助餐-->
+            <enum name="DT" value="5" />
+            <!-- 金珠公司  会议室-->
+            <enum name="WXDD" value="6" />
+
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="BottomLayout">
+
+        <attr name="rb1_text" format="string"></attr>
+        <attr name="rb2_text" format="string"></attr>
+        <attr name="rb3_text" format="string"></attr>
+
+    </declare-styleable>
+
+
+
+
+</resources>

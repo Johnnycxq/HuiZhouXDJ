@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minHeight="700px"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_100"
+            android:layout_margin="@dimen/px_10"
+            android:gravity="center">
+
+            <TextView
+                style="@style/gzqkText"
+                android:text="录入人:" />
+
+            <TextView
+                android:id="@+id/tv_lrr"
+                android:layout_width="@dimen/px_400"
+                android:layout_height="@dimen/px_70"
+                android:layout_marginLeft="15px"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/px_35" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_100"
+            android:layout_margin="@dimen/px_10"
+            android:gravity="center">
+
+            <TextView
+                style="@style/gzqkText"
+                android:text="录入时间:" />
+
+            <TextView
+                android:id="@+id/tv_inputtime"
+                android:layout_width="@dimen/px_400"
+                android:layout_height="@dimen/px_70"
+                android:layout_marginLeft="15px"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/px_35" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_100"
+            android:layout_margin="@dimen/px_10"
+            android:gravity="center">
+
+            <TextView
+                style="@style/gzqkText"
+                android:text="部门:" />
+
+            <TextView
+                android:id="@+id/tv_bm"
+                android:layout_width="@dimen/px_400"
+                android:layout_height="@dimen/px_70"
+                android:layout_marginLeft="15px"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/px_35" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_100"
+            android:layout_margin="@dimen/px_10"
+            android:gravity="center">
+
+            <TextView
+                style="@style/gzqkText"
+                android:text="承包商:" />
+
+            <TextView
+                android:id="@+id/et_cbs"
+                android:layout_width="@dimen/px_400"
+                android:layout_height="@dimen/px_70"
+                android:layout_marginLeft="15px"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/px_35" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_100"
+            android:layout_margin="@dimen/px_10"
+            android:gravity="center">
+
+            <TextView
+                style="@style/gzqkText"
+                android:text="工作地点:" />
+
+            <TextView
+                android:id="@+id/et_gzdd"
+                android:layout_width="@dimen/px_400"
+                android:layout_height="@dimen/px_70"
+                android:layout_marginLeft="15px"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/px_35" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_100"
+            android:layout_margin="@dimen/px_10"
+            android:gravity="center">
+
+            <TextView
+                style="@style/gzqkText"
+                android:text="开始时间:" />
+
+            <TextView
+                android:id="@+id/tv_starttime"
+                android:layout_width="@dimen/px_400"
+                android:layout_height="@dimen/px_70"
+                android:layout_marginLeft="15px"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/px_35" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/px_10"
+            android:gravity="center"
+            android:minHeight="100px">
+
+            <TextView
+                style="@style/gzqkText"
+                android:text="内容描述:" />
+
+            <TextView
+                android:id="@+id/tv_ms"
+                android:layout_width="@dimen/px_400"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15px"
+                android:gravity="center_vertical"
+                android:minHeight="70px"
+                android:textSize="@dimen/px_35" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

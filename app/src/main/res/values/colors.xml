@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#138CF2</color>
+    <color name="colorPrimaryDark">#138CF2</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="btn">#138CF2</color>
+    <color name="btnclk">#ffffff</color>
+    <color name="blue88">#881176e8</color>
+    <color name="bluebb">#bb1176e8</color>
+    <color name="white">#fff</color>
+    <color name="textselect">#dcdcdc</color>
+    <color name="blue">#419DE4</color>
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+
+    <color name="gray">#cccccc</color>
+    <color name="lucency">#00000000</color>
+    <color name="login_title_color">#68696D</color>
+    <color name="a1">#45A1AB</color>
+    <color name="a2">#B06D87</color>
+    <color name="a3">#6D37E5</color>
+    <color name="a4">#AA603C</color>
+    <color name="black">#000000</color>
+    <color name="b1">#2DAC74</color>
+    <color name="b2">#BABB59</color>
+    <color name="textColor">#737373</color>
+    <color name="c1">#39838C</color>
+    <color name="c2">#6C36E5</color>
+    <color name="c3">#F6A427</color>
+    <color name="c4">#8BD54C</color>
+    <color name="c5">#4CB5FD</color>
+    <color name="c6">#01CC01</color>
+    <color name="c7">#CB19FD</color>
+    <color name="bule">#0099ff</color>
+    <color name="d1">#45A1AB</color>
+    <color name="d2">#6D37E5</color>
+    <color name="d3">#39838C</color>
+    <color name="d4">#F6A427</color>
+
+    <color name="e1">#975DA1</color>
+    <color name="e2">#6D37E5</color>
+    <color name="e3">#24B56C</color>
+    <color name="e4">#2479E4</color>
+
+    <color name="red">#FF3030</color>
+    <color name="tabSelectedTextColor">#333333</color>
+    <color name="tabTextColor">#999999</color>
+    <color name="background">#138CF2</color>
+
+</resources>

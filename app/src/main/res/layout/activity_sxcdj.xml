@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.sbxdj.SxcdjActivity">
+
+    <include layout="@layout/toolbar"></include>
+
+
+    <com.rehome.huizhouxdj.weight.NoscrollViewPager
+        android:id="@+id/vp_centent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/px_20"
+        android:layout_weight="9"></com.rehome.huizhouxdj.weight.NoscrollViewPager>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#99000000"
+        android:visibility="gone"></View>
+
+    <com.rehome.huizhouxdj.weight.AutoRadioGroup
+        android:id="@+id/rg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_90"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/radiobutton"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="下载计划"
+            android:textColor="#ffffff" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#99000000"
+            android:visibility="gone"></View>
+
+        <RadioButton
+            android:id="@+id/rb2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/radiobutton"
+            android:button="@null"
+            android:gravity="center"
+            android:text="上传计划"
+            android:textColor="#777777" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#99000000"
+            android:visibility="gone"></View>
+
+        <RadioButton
+            android:id="@+id/rb3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/radiobutton"
+            android:button="@null"
+            android:gravity="center"
+            android:text="质控点"
+            android:textColor="#777777"
+            android:visibility="gone" />
+    </com.rehome.huizhouxdj.weight.AutoRadioGroup>
+</LinearLayout>

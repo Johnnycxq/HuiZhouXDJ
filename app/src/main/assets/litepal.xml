@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <!-- 数据库名字 -->
+    <dbname value="rehome"></dbname>
+    <!-- 版本号 -->
+    <version value="21"></version>
+    <!-- 配置表 -->
+    <list>
+        <!-- 配置表的路径，需要继承DataSupport -->
+        <!-- 点检计划列表 -->
+        <mapping class="com.rehome.huizhouxdj.DBModel.Djjh" />
+        <!-- 点检计划任务列表-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.DjjhRwQy" />
+        <!-- 消防巡查计划列表-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.XfDjjh" />
+
+        <!-- 消防巡查任务区域列表-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.XfDjjhRwqy" />
+        <!--消防巡查项目列表 -->
+        <mapping class="com.rehome.huizhouxdj.DBModel.XfXcxm" />
+        <!--消防巡查结果 -->
+        <mapping class="com.rehome.huizhouxdj.DBModel.XfXcxmjg" />
+        <!--消防巡查灭火器材列表 -->
+        <mapping class="com.rehome.huizhouxdj.DBModel.XfXcmhqc" />
+
+        <!--缺陷工单 -->
+        <mapping class="com.rehome.huizhouxdj.DBModel.QxgdInfo" />
+
+        <!--现场记事 -->
+        <mapping class="com.rehome.huizhouxdj.DBModel.XcjsInfo" />
+
+        <!-- 消防巡检现场记事-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.XfXcjsInfo" />
+        <!--缺陷工单专业信息 -->
+        <mapping class="com.rehome.huizhouxdj.DBModel.Zy" />
+        <!--隐患排查信息-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.YhpcInfo" />
+        <!-- 隐患排查图片-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.Yhpctp"></mapping>
+        <!-- 消防保安任务列表-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.XfBaxcRwqy" />
+        <!--安建环上传数据信息-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.AjhScInfo" />
+
+        <!--安健环计划 -->
+        <mapping class="com.rehome.huizhouxdj.DBModel.Ajhjh" />
+        <!--安健环计划任务区域 -->
+        <mapping class="com.rehome.huizhouxdj.DBModel.Ajhxzrwqy" />
+        <!--安健环现场记事 -->
+        <mapping class="com.rehome.huizhouxdj.DBModel.Ajhxcjs" />
+
+        <!--行为安全观察-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.XwaqgcSc" />
+        <!-- 行为安全观察记事-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.XwaqgcJs" />
+        <!-- 行为安全观察计划-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.XwaqgcJh" />
+        <!-- 区域 -->
+        <mapping class="com.rehome.huizhouxdj.DBModel.Qy" />
+        <!--楼宇巡查任务区域 -->
+        <mapping class="com.rehome.huizhouxdj.DBModel.Lyxcrwqy" />
+        <!-- 楼宇巡查项目-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.LyxcXm" />
+        <!-- 楼宇隐患排查-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.LyYhpcInfo" />
+        <!-- 楼宇现场记事-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.LyXcjsInfo" />
+        <!-- 楼宇巡查结果-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.LyxcXmJg" />
+
+        <!-- 上传设备联查的数据-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.Uploadsblcsave" />
+
+        <!-- 上传整改结果的数据-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.Uploadzgjg" />
+
+        <!-- 上传安全检查的数据-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.Uploadaqjcsave" />
+
+        <!-- 上传重点场所任务的数据-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.Uploadzdcsrw" />
+
+        <!-- 上传重点场所整改的数据-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.Uploadzjcszg" />
+
+        <!-- 高危作业现场确认-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.Gwzyxcqrnr" />
+
+        <!-- 巡点检下载计划-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.XDJJHXZDataBean" />
+
+
+    </list>
+</litepal>

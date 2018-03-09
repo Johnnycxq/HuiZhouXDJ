@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">惠州巡点检</string>
+    <string name="loading">加载中...</string>
+    <string name="refresh">刷新中...</string>
+    <string name="upload">上传中...</string>
+    <string name="upload_success">上传成功</string>
+    <string name="upload_error">上传失败</string>
+    <string name="cancel">取消</string>
+    <string name="save">保存</string>
+    <string name="save_success">保存成功</string>
+    <string name="last">上一条</string>
+    <string name="next">下一条</string>
+    <string name="data_error">数据出错</string>
+</resources>

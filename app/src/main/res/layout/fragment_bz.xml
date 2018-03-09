@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/px_10"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sbHeight"
+            android:gravity="center"
+            android:text="标准描述："
+            android:textSize="@dimen/sbtextSize" />
+
+        <EditText
+            android:id="@+id/et_bz"
+            style="@style/editTextTheme"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_500"
+            android:gravity="left|top"
+            android:minLines="2"
+            android:text="0正常，1轻微异常，2严重异常" />
+    </LinearLayout>
+
+</LinearLayout>
