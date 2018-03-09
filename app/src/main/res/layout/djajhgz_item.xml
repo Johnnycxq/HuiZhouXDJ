@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="100px"
     android:gravity="center"
+    android:minHeight="100px"
     android:orientation="vertical">
 
     <View
@@ -14,10 +14,9 @@
         android:visibility="gone" />
 
     <LinearLayout
-        android:minHeight="96px"
-
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:minHeight="96px">
 
         <View
             android:layout_width="1dp"
@@ -39,11 +38,11 @@
             android:background="#524658" />
 
         <TextView
-            android:layout_marginLeft="10px"
             android:id="@+id/tv_qy"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="10px"
             android:layout_weight="2"
             android:text="区域" />
 
@@ -53,29 +52,29 @@
             android:background="#524658" />
 
         <TextView
-            android:layout_marginLeft="10px"
             android:id="@+id/tv_djrw"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="10px"
             android:layout_weight="1"
             android:text="点检任务" />
 
         <View
-            android:visibility="gone"
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="#524658" />
+            android:background="#524658"
+            android:visibility="gone" />
 
         <TextView
-            android:visibility="gone"
-            android:layout_marginLeft="10px"
             android:id="@+id/tv_ajhrw"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="10px"
             android:layout_weight="1"
-            android:text="安健环任务" />
+            android:text="安健环任务"
+            android:visibility="gone" />
 
         <View
             android:layout_width="1dp"

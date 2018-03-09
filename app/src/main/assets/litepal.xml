@@ -3,7 +3,7 @@
     <!-- 数据库名字 -->
     <dbname value="rehome"></dbname>
     <!-- 版本号 -->
-    <version value="21"></version>
+    <version value="22"></version>
     <!-- 配置表 -->
     <list>
         <!-- 配置表的路径，需要继承DataSupport -->
@@ -88,7 +88,8 @@
 
         <!-- 巡点检下载计划-->
         <mapping class="com.rehome.huizhouxdj.DBModel.XDJJHXZDataBean" />
-
+        <mapping class="com.rehome.huizhouxdj.DBModel.QYAQFXDATABean" />
+        <mapping class="com.rehome.huizhouxdj.DBModel.QYDDATABean" />
 
     </list>
 </litepal>

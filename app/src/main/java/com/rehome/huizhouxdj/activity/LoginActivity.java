@@ -142,7 +142,8 @@ public class LoginActivity extends BaseActivity {
 
 //            SPUtils.put(this, Contans.KEY_4G_IP, "http://192.168.2.189:8091/");
 
-            SPUtils.put(this, Contans.KEY_WIFI_IP, "http://10.192.82.58:8082/");
+
+            SPUtils.put(this, Contans.KEY_WIFI_IP, "http://10.192.82.55:8083/");
 
 
         }

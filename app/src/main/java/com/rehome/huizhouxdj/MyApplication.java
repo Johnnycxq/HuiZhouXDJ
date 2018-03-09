@@ -2,6 +2,7 @@ package com.rehome.huizhouxdj;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.Process;
 import android.util.Log;
@@ -12,6 +13,7 @@ import com.yolanda.nohttp.Logger;
 import com.yolanda.nohttp.NoHttp;
 
 import org.litepal.LitePalApplication;
+import org.litepal.tablemanager.Connector;
 
 import java.util.List;
 
@@ -43,6 +45,9 @@ public class MyApplication extends LitePalApplication {
 //        AutoLayoutConifg.getInstance().useDeviceSize();
 //        com.orhanobut.logger.Logger.init("rehome");
 //        MyCrashHandler.getInstance().init(this);
+
+        //LitePal Init
+        SQLiteDatabase db = Connector.getDatabase();
 
         //初始化push推送服务
         if (shouldInit()) {

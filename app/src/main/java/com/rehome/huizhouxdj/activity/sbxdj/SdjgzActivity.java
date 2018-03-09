@@ -2,7 +2,6 @@ package com.rehome.huizhouxdj.activity.sbxdj;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -11,8 +10,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.rehome.huizhouxdj.DBModel.DjjhRwQy;
-import com.rehome.huizhouxdj.DBModel.DjjhRwQyList;
+import com.rehome.huizhouxdj.DBModel.QYDDATABean;
+import com.rehome.huizhouxdj.DBModel.XDJJHXZDataBean;
 import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.adapter.CommonAdapter;
 import com.rehome.huizhouxdj.adapter.ViewHolder;
@@ -25,11 +24,10 @@ import com.rehome.huizhouxdj.utils.UiUtlis;
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import butterknife.BindView;
 
@@ -48,17 +46,15 @@ public class SdjgzActivity extends BaseActivity {
 
 
     private List<DjAjhGzInfo> list;
-    private Map<String, ArrayList<DjjhRwQy>> map;
 
-    private List<DjjhRwQyList> rwqylist;
-    private List<DjjhRwQy> rwqys;
 
-    private List<String> qys;
-    private List<String> qyAll;//全部，包括相同的
-
-    private CommonAdapter<DjAjhGzInfo> adapter;
+    private CommonAdapter<XDJJHXZDataBean> adapter;
 
     private String ewm;//二维码或者条形码
+
+    private List<XDJJHXZDataBean> xdjjhxzDataBeanList = new ArrayList<>();//工作列表
+
+    private ArrayList<QYDDATABean> qyddataBeanList = new ArrayList<>();//点检记录列表
 
     @Override
     public int getContentViewID() {
@@ -76,12 +72,8 @@ public class SdjgzActivity extends BaseActivity {
 
         initNFC();
 
-        rwqylist = new ArrayList<>();
-        rwqys = new ArrayList<>();
-        map = new HashMap<>();
         list = new ArrayList<>();
-        qys = new ArrayList<>();
-        qyAll = new ArrayList<>();
+
 
         setTitle("工作");
         setBack();
@@ -101,63 +93,77 @@ public class SdjgzActivity extends BaseActivity {
         setListData();
     }
 
+
     //加载数据库中已经下载的计划
     private void getDataInSqlite() {
 
-        list.clear();
-        map.clear();
-        rwqylist.clear();
-        rwqys.clear();
-        qyAll.clear();
-        qys.clear();
-        Cursor cursor = DataSupport.findBySQL("select * from djjhrwqy group by areacode");
-        while (cursor.moveToNext()) {
-            int index = cursor.getColumnIndex("areacode");
-            qyAll.add(cursor.getString(index));
-        }
-        cursor.close();
-        Cursor cursor1 = DataSupport.findBySQL("select * from ajhxzrwqy group by areacode");
-        while (cursor1.moveToNext()) {
-            int index = cursor1.getColumnIndex("areacode");
-            qyAll.add(cursor1.getString(index));
-        }
-        cursor1.close();
-        //去除相同数据
-        Set<String> set = new HashSet<>();
-        set.addAll(qyAll);
-        qys.addAll(set);
-        int i = 0;
-        for (String code : qys) {
-            int djyj = 0;
-            DjAjhGzInfo info = new DjAjhGzInfo();
-            ArrayList<DjjhRwQy> djjhs = new ArrayList<>();
-            djjhs.addAll(DataSupport.where("AREACODE = ?", code).find(DjjhRwQy.class));
-
-            map.put(code, djjhs);
-
-            for (DjjhRwQy djjh : djjhs) {
-                info.setQy(djjh.getMEAAREA());
-                if (djjh.isChecked()) {
-                    djyj++;
-                }
-
+        xdjjhxzDataBeanList.clear();
+        //获取本地所有的工作列表数据
+        xdjjhxzDataBeanList.addAll(DataSupport.findAll(XDJJHXZDataBean.class));
+        //去除重复数据
+        Set<XDJJHXZDataBean> xdjjhxzDataBeanSet = new TreeSet<>(new Comparator<XDJJHXZDataBean>() {
+            @Override
+            public int compare(XDJJHXZDataBean o1, XDJJHXZDataBean o2) {
+                return o1.getJHID().compareTo(o2.getJHID());
             }
-            info.setXh(++i + "");
-            info.setDjrw(djyj + "/" + djjhs.size());
-            list.add(info);
-        }
+        });
+        xdjjhxzDataBeanSet.addAll(xdjjhxzDataBeanList);
+        xdjjhxzDataBeanList.clear();
+        xdjjhxzDataBeanList.addAll(xdjjhxzDataBeanSet);
+
+//        list.clear();
+//        map.clear();
+//        rwqylist.clear();
+//        rwqys.clear();
+//        qyAll.clear();
+//        qys.clear();
+//        Cursor cursor = DataSupport.findBySQL("select * from djjhrwqy group by areacode");
+//        while (cursor.moveToNext()) {
+//            int index = cursor.getColumnIndex("areacode");
+//            qyAll.add(cursor.getString(index));
+//        }
+//        cursor.close();
+//        Cursor cursor1 = DataSupport.findBySQL("select * from ajhxzrwqy group by areacode");
+//        while (cursor1.moveToNext()) {
+//            int index = cursor1.getColumnIndex("areacode");
+//            qyAll.add(cursor1.getString(index));
+//        }
+//        cursor1.close();
+//        //去除相同数据
+//        Set<String> set = new HashSet<>();
+//        set.addAll(qyAll);
+//        qys.addAll(set);
+//        int i = 0;
+//        for (String code : qys) {
+//            int djyj = 0;
+//            DjAjhGzInfo info = new DjAjhGzInfo();
+//            ArrayList<DjjhRwQy> djjhs = new ArrayList<>();
+//            djjhs.addAll(DataSupport.where("AREACODE = ?", code).find(DjjhRwQy.class));
+//
+//            map.put(code, djjhs);
+//
+//            for (DjjhRwQy djjh : djjhs) {
+//                info.setQy(djjh.getMEAAREA());
+//                if (djjh.isChecked()) {
+//                    djyj++;
+//                }
+//            }
+//            info.setXh(++i + "");
+//            info.setDjrw(djyj + "/" + djjhs.size());
+//            list.add(info);
+//        }
 
     }
 
     private void setListData() {
         if (adapter == null) {
-            adapter = new CommonAdapter<DjAjhGzInfo>(context, R.layout.djajhgz_item, list) {
+            adapter = new CommonAdapter<XDJJHXZDataBean>(context, R.layout.djajhgz_item, xdjjhxzDataBeanList) {
                 @Override
-                protected void convert(ViewHolder viewHolder, DjAjhGzInfo item, int position) {
-                    viewHolder.setText(R.id.tv_xh, item.getXh() + "");
-                    viewHolder.setText(R.id.tv_qy, item.getQy());
-                    viewHolder.setText(R.id.tv_djrw, item.getDjrw());
-                    viewHolder.setText(R.id.tv_ajhrw, item.getAjhrw());
+                protected void convert(ViewHolder viewHolder, XDJJHXZDataBean item, int position) {
+                    viewHolder.setText(R.id.tv_xh, item.getSN() + "");
+                    viewHolder.setText(R.id.tv_qy, item.getQYMC());
+//                    viewHolder.setText(R.id.tv_djrw, item.getDjrw());
+//                    viewHolder.setText(R.id.tv_ajhrw, item.getAjhrw());
                 }
             };
             lv.addHeaderView(headView, null, false);
@@ -166,8 +172,12 @@ public class SdjgzActivity extends BaseActivity {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, final int postion, long l) {
 
+                    qyddataBeanList.clear();
+                    //获取当前点击的工作栏对应的点检记录列表
+                    qyddataBeanList.addAll(DataSupport.where("xdjjhxzDataBean_id = ?", xdjjhxzDataBeanList.get(postion - 1).getId() + "").find(QYDDATABean.class));
 
-                    if (map.get(qys.get(postion - 1)).size() != 0) {
+
+                    if (qyddataBeanList.size() != 0) {
 
                         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
                         builder.setCancelable(false);
@@ -185,7 +195,7 @@ public class SdjgzActivity extends BaseActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent intent = new Intent(SdjgzActivity.this, YulActivity.class);
                                 Bundle bundle = new Bundle();
-                                bundle.putParcelableArrayList(Contans.KEY_DJJHRWQY, map.get(qys.get(postion - 1)));
+                                bundle.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
                                 bundle.putBoolean("edit", true);
                                 bundle.putInt(Contans.KEY_ITEM, 0);
                                 intent.putExtras(bundle);

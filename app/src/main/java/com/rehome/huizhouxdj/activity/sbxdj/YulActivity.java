@@ -5,20 +5,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.rehome.huizhouxdj.DBModel.DjjhRwQy;
+import com.rehome.huizhouxdj.DBModel.QYDDATABean;
 import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.adapter.DlbAdapter;
-import com.rehome.huizhouxdj.bean.DlbInfo;
 import com.rehome.huizhouxdj.contans.Contans;
 import com.rehome.huizhouxdj.utils.BaseActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -29,8 +26,8 @@ public class YulActivity extends BaseActivity {
 
     private boolean isEdit = true;
     private int item;
-    private ArrayList<DjjhRwQy> djjhs = new ArrayList<>();
-    private List<DlbInfo> infos = new ArrayList<>();
+    private ArrayList<QYDDATABean> djjhs = new ArrayList<>();
+//    private List<QYDDATABean> infos = new ArrayList<>();
     private View headView;
     private DlbAdapter adapter;
 
@@ -45,19 +42,19 @@ public class YulActivity extends BaseActivity {
             switch (action){
                 case Contans.ACTION_YULONE: //更新设备点检页面返回时编辑的item内容
 
-                    int position = intent.getIntExtra(Contans.KEY_POSITION,-1);
-                    String name = intent.getStringExtra(Contans.KEY_NAME);
-                    DlbInfo dlbInfo = infos.get(position);
-                    dlbInfo.setCjjg(name);
-                    dlbInfo.setStatu(true);
-                    infos.set(position,dlbInfo);
+//                    int position = intent.getIntExtra(Contans.KEY_POSITION,-1);
+//                    String name = intent.getStringExtra(Contans.KEY_NAME);
+//                    DlbInfo dlbInfo = infos.get(position);
+//                    dlbInfo.setCjjg(name);
+//                    dlbInfo.setStatu(true);
+//                    infos.set(position,dlbInfo);
+//
+//                    XDJJHXZDataBean.QYDDATABean djjhRwQy = djjhs.get(position);
+//                    djjhRwQy.setChecked(true);
+//                    djjhRwQy.setCJJG(name);
+//                    djjhs.set(position,djjhRwQy);
 
-                    DjjhRwQy djjhRwQy = djjhs.get(position);
-                    djjhRwQy.setChecked(true);
-                    djjhRwQy.setCJJG(name);
-                    djjhs.set(position,djjhRwQy);
-
-                    Log.e("YulActivity","name="+name+", position="+position);
+//                    Log.e("YulActivity","name="+name+", position="+position);
                     break;
                 default:
                     break;
@@ -97,15 +94,15 @@ public class YulActivity extends BaseActivity {
 
     private void setListAdapter() {
 
-        for (DjjhRwQy rw : djjhs) {
-            DlbInfo info = new DlbInfo();
-            info.setCjjg(rw.getCJJG());
-            info.setDian(rw.getPOINTNAME() + "(" + rw.getDESCRIPTION() + ")");
-            info.setStatu(rw.isChecked());
-            infos.add(info);
-        }
+//        for (DjjhRwQy rw : djjhs) {
+//            DlbInfo info = new DlbInfo();
+//            info.setCjjg(rw.getCJJG());
+//            info.setDian(rw.getPOINTNAME() + "(" + rw.getDESCRIPTION() + ")");
+//            info.setStatu(rw.isChecked());
+//            infos.add(info);
+//        }
 
-        adapter = new DlbAdapter(context, infos);
+        adapter = new DlbAdapter(context, djjhs);
         lv.addHeaderView(headView, null, false);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {

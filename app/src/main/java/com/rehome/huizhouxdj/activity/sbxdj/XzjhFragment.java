@@ -1,6 +1,5 @@
 package com.rehome.huizhouxdj.activity.sbxdj;
 
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -145,17 +144,178 @@ public class XzjhFragment extends BaseFragment {
         djjhs = new ArrayList<>();
         rwqys = new ArrayList<>();
         //如果数据库中有数据
-        if (DataSupport.count("Djjh") != 0) {
-            List<Djjh> djjhall = DataSupport.where("download = ?", "0").find(Djjh.class);
-            djjhs.clear();
-            djjhs.addAll(djjhall);
-            setListData();
+//        if (DataSupport.count("Djjh") != 0) {
+//            List<Djjh> djjhall = DataSupport.where("download = ?", "0").find(Djjh.class);
+//            djjhs.clear();
+//            djjhs.addAll(djjhall);
+//            setListData();
+//
+//        } else {
+//
+//            tvNodata.setText("暂无数据");
+//            LL.setVisibility(View.GONE);
+//        }
 
+        /*我写死的测试数据代码-Start，暂时注释**/
+        String string = "{\n" +
+                "  \"state\": 0,\n" +
+                "  \"msg\": \"暂无数据\",\n" +
+                "  \"data\": [\n" +
+                "    {\n" +
+                "      \"QYBH\": \"00000000021\",\n" +
+                "      \"QYMC\": \"测试区域1\",\n" +
+                "      \"QYEWM\": \"asdfasd\",\n" +
+                "      \"QYEWMZT\": \"1\",\n" +
+                "      \"JHID\": \"zx00000001\",\n" +
+                "      \"QYNFC\": \"12312fdwfasdf\",\n" +
+                "      \"QYNFCZT\": \"1\",\n" +
+                "      \"QYD_DATA\": [\n" +
+                "        {\n" +
+                "          \"SCID\": \"B17A736A283C47999347F8E01CB5C1A6\",\n" +
+                "          \"SBMC\": \"测试设备1\",\n" +
+                "          \"BJMC\": \"部件2\",\n" +
+                "          \"DID\": \"5C556F3D44DF420BB8D34593842AF8D2\",\n" +
+                "          \"DMC\": \"消防测试点3_SBL1\",\n" +
+                "          \"BZZ\": \"标准值\",\n" +
+                "          \"SJMC\": \"数据名称\",\n" +
+                "          \"SJDW\": \"数据单位\",\n" +
+                "          \"JCFS\": \"检查方式\",\n" +
+                "          \"XMZQ\": \"1\",\n" +
+                "          \"LRFS\": \"1\",\n" +
+                "          \"LRMRZ\": \"\"\n" +
+                "        },{\n" +
+                "          \"SCID\": \"B17A736A283C47999347F8E01CB5C1A6\",\n" +
+                "          \"SBMC\": \"测试设备11\",\n" +
+                "          \"BJMC\": \"部件21\",\n" +
+                "          \"DID\": \"5C556F3D44DF420BB8D34593842AF8D2\",\n" +
+                "          \"DMC\": \"消防测试点3_SBL1\",\n" +
+                "          \"BZZ\": \"标准值\",\n" +
+                "          \"SJMC\": \"数据名称\",\n" +
+                "          \"SJDW\": \"数据单位\",\n" +
+                "          \"JCFS\": \"检查方式\",\n" +
+                "          \"XMZQ\": \"1\",\n" +
+                "          \"LRFS\": \"1\",\n" +
+                "          \"LRMRZ\": \"\"\n" +
+                "        }\n" +
+                "      ],\n" +
+                "      \"QYAQFX_DATA\": [\n" +
+                "        {\n" +
+                "          \"AQFXID\": \"D3F75475F4D14A25BCBC1C798ED38368\",\n" +
+                "          \"FXLX\": \"安全风险测试\",\n" +
+                "          \"FXMS\": \"风险描述\",\n" +
+                "          \"FHCS\": \"防护措施\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "          \"AQFXID\": \"B0B062FDE8FF42E3B3EB59FD78E5639F\",\n" +
+                "          \"FXLX\": \"安全风险测试1\",\n" +
+                "          \"FXMS\": \"风险描述1\",\n" +
+                "          \"FHCS\": \"防护措施1\"\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    },{\n" +
+                "      \"QYBH\": \"00000000022\",\n" +
+                "      \"QYMC\": \"测试区域2\",\n" +
+                "      \"QYEWM\": \"asdfasd\",\n" +
+                "      \"QYEWMZT\": \"2\",\n" +
+                "      \"JHID\": \"zx00000002\",\n" +
+                "      \"QYNFC\": \"12312fdwfasdf\",\n" +
+                "      \"QYNFCZT\": \"2\",\n" +
+                "      \"QYD_DATA\": [\n" +
+                "        {\n" +
+                "          \"SCID\": \"B17A736A283C47999347F8E01CB5C1A6\",\n" +
+                "          \"SBMC\": \"测试设备2\",\n" +
+                "          \"BJMC\": \"部件2\",\n" +
+                "          \"DID\": \"5C556F3D44DF420BB8D34593842AF8D2\",\n" +
+                "          \"DMC\": \"消防测试点3_SBL1\",\n" +
+                "          \"BZZ\": \"标准值\",\n" +
+                "          \"SJMC\": \"数据名称\",\n" +
+                "          \"SJDW\": \"数据单位\",\n" +
+                "          \"JCFS\": \"检查方式\",\n" +
+                "          \"XMZQ\": \"1\",\n" +
+                "          \"LRFS\": \"1\",\n" +
+                "          \"LRMRZ\": \"\"\n" +
+                "        }\n" +
+                "      ],\n" +
+                "      \"QYAQFX_DATA\": [\n" +
+                "        {\n" +
+                "          \"AQFXID\": \"D3F75475F4D14A25BCBC1C798ED38368\",\n" +
+                "          \"FXLX\": \"安全风险测试2\",\n" +
+                "          \"FXMS\": \"风险描述2\",\n" +
+                "          \"FHCS\": \"防护措施2\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "          \"AQFXID\": \"B0B062FDE8FF42E3B3EB59FD78E5639F\",\n" +
+                "          \"FXLX\": \"安全风险测试22\",\n" +
+                "          \"FXMS\": \"风险描述22\",\n" +
+                "          \"FHCS\": \"防护措施22\"\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    },{\n" +
+                "      \"QYBH\": \"00000000023\",\n" +
+                "      \"QYMC\": \"测试区域3\",\n" +
+                "      \"QYEWM\": \"asdfasd\",\n" +
+                "      \"QYEWMZT\": \"1\",\n" +
+                "      \"JHID\": \"zx00000003\",\n" +
+                "      \"QYNFC\": \"12312fdwfasdf\",\n" +
+                "      \"QYNFCZT\": \"1\",\n" +
+                "      \"QYD_DATA\": [\n" +
+                "        {\n" +
+                "          \"SCID\": \"B17A736A283C47999347F8E01CB5C1A6\",\n" +
+                "          \"SBMC\": \"测试设备3\",\n" +
+                "          \"BJMC\": \"部件2\",\n" +
+                "          \"DID\": \"5C556F3D44DF420BB8D34593842AF8D2\",\n" +
+                "          \"DMC\": \"消防测试点3_SBL1\",\n" +
+                "          \"BZZ\": \"标准值\",\n" +
+                "          \"SJMC\": \"数据名称\",\n" +
+                "          \"SJDW\": \"数据单位\",\n" +
+                "          \"JCFS\": \"检查方式\",\n" +
+                "          \"XMZQ\": \"1\",\n" +
+                "          \"LRFS\": \"1\",\n" +
+                "          \"LRMRZ\": \"\"\n" +
+                "        }\n" +
+                "      ],\n" +
+                "      \"QYAQFX_DATA\": [\n" +
+                "        {\n" +
+                "          \"AQFXID\": \"D3F75475F4D14A25BCBC1C798ED38368\",\n" +
+                "          \"FXLX\": \"安全风险测试3\",\n" +
+                "          \"FXMS\": \"风险描述3\",\n" +
+                "          \"FHCS\": \"防护措施3\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "          \"AQFXID\": \"B0B062FDE8FF42E3B3EB59FD78E5639F\",\n" +
+                "          \"FXLX\": \"安全风险测试13\",\n" +
+                "          \"FXMS\": \"风险描述13\",\n" +
+                "          \"FHCS\": \"防护措施13\"\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}";
+        //解析JSON
+        xdjjhxzBean = GsonUtils.GsonToBean(string, XDJJHXZBean.class);
+
+        //数据处理
+        if (xdjjhxzBean != null && xdjjhxzBean.getState() == 0) {
+            List<XDJJHXZDataBean> xdjjhxzDataBeanList = xdjjhxzBean.getData();
+//            ContentValues values = new ContentValues();
+//            values.put("download", 1);
+//            for (int i = 0; i < xdjjhxzDataBeanList.size(); i++) {
+//                DataSupport.updateAll(XDJJHXZDataBean.class, values, "JHID = ?", xdjjhxzDataBeanList.get(i).getJHID());
+//            }
+            int index = 1;//序号（请自己优化）
+            for (int i = 0; i < xdjjhxzDataBeanList.size(); i++) {
+                xdjjhxzDataBeanList.get(i).setSN(index++);
+                //保存点检记录列表
+                DataSupport.saveAll(xdjjhxzDataBeanList.get(i).getQYD_DATA());
+                DataSupport.saveAll(xdjjhxzDataBeanList.get(i).getQYAQFX_DATA());
+            }
+            //保存工作列表数据
+            DataSupport.saveAll(xdjjhxzDataBeanList);
         } else {
-
-            tvNodata.setText("暂无数据");
-            LL.setVisibility(View.GONE);
+            showToast(UiUtlis.getString(context, R.string.data_error));
         }
+        /*我写死的测试数据代码-End**/
+
     }
 
     @OnClick(R.id.btn_xz)
@@ -251,78 +411,33 @@ public class XzjhFragment extends BaseFragment {
                     case 1:
                         ++requestCount;
 
-//                        rwlist = null;
-
-//                        xdjjhxzBeanlist = null;
-
-
                         Log.e("dataLog", response.get());
 
-//                       rwlist = GsonUtils.GsonToBean(response.get(), DjjhRwList.class);
-
-//                        xdjjhxzBeanlist = GsonUtils.GsonToBean(response.get(), XDJJHXZBean.class);
-
-                        //解析JSON
-//                        String string = "{\n" +
-//                                "  \"state\": 0,\n" +
-//                                "  \"msg\": \"暂无数据\",\n" +
-//                                "  \"data\": [\n" +
-//                                "    {\n" +
-//                                "      \"QYBH\": \"00000000021\",\n" +
-//                                "      \"QYMC\": \"测试区域1\",\n" +
-//                                "      \"QYEWM\": \"asdfasd\",\n" +
-//                                "      \"QYEWMZT\": \"1\",\n" +
-//                                "      \"JHID\": \"zx00000001\",\n" +
-//                                "      \"QYNFC\": \"12312fdwfasdf\",\n" +
-//                                "      \"QYNFCZT\": \"1\",\n" +
-//                                "      \"QYD_DATA\": [\n" +
-//                                "        {\n" +
-//                                "          \"SCID\": \"B17A736A283C47999347F8E01CB5C1A6\",\n" +
-//                                "          \"SBMC\": \"测试设备1\",\n" +
-//                                "          \"BJMC\": \"部件2\",\n" +
-//                                "          \"DID\": \"5C556F3D44DF420BB8D34593842AF8D2\",\n" +
-//                                "          \"DMC\": \"消防测试点3_SBL1\",\n" +
-//                                "          \"BZZ\": \"标准值\",\n" +
-//                                "          \"SJMC\": \"数据名称\",\n" +
-//                                "          \"SJDW\": \"数据单位\",\n" +
-//                                "          \"JCFS\": \"检查方式\",\n" +
-//                                "          \"XMZQ\": \"1\",\n" +
-//                                "          \"LRFS\": \"1\",\n" +
-//                                "          \"LRMRZ\": \"\"\n" +
-//                                "        }\n" +
-//                                "      ],\n" +
-//                                "      \"QYAQFX_DATA\": [\n" +
-//                                "        {\n" +
-//                                "          \"AQFXID\": \"D3F75475F4D14A25BCBC1C798ED38368\",\n" +
-//                                "          \"FXLX\": \"安全风险测试\",\n" +
-//                                "          \"FXMS\": \"风险描述\",\n" +
-//                                "          \"FHCS\": \"防护措施\"\n" +
-//                                "        },\n" +
-//                                "        {\n" +
-//                                "          \"AQFXID\": \"B0B062FDE8FF42E3B3EB59FD78E5639F\",\n" +
-//                                "          \"FXLX\": \"安全风险测试1\",\n" +
-//                                "          \"FXMS\": \"风险描述1\",\n" +
-//                                "          \"FHCS\": \"防护措施1\"\n" +
-//                                "        }\n" +
-//                                "      ]\n" +
-//                                "    }\n" +
-//                                "  ]\n" +
-//                                "}";
-                        xdjjhxzBean = GsonUtils.GsonToBean(response.get(), XDJJHXZBean.class);
-//                        xdjjhxzBean = GsonUtils.GsonToBean(string, XDJJHXZBean.class);
-
-                        //数据处理
-                        if (xdjjhxzBean != null && xdjjhxzBean.getState() == 0) {
-                            List<XDJJHXZDataBean> xdjjhxzDataBeanList = xdjjhxzBean.getData();
-                            ContentValues values = new ContentValues();
-                            values.put("download", 1);
-                            for (int i = 0; i < xdjjhxzDataBeanList.size(); i++) {
-                                DataSupport.updateAll(Djjh.class, values, "JHID = ?", xdjjhxzDataBeanList.get(i).getJHID());
-                            }
-                            DataSupport.saveAll(xdjjhxzDataBeanList);
-                        } else {
-                            showToast(UiUtlis.getString(context, R.string.data_error));
-                        }
+                        //正式数据请打开以下代码-Start
+//                        //解析JSON
+//                        xdjjhxzBean = GsonUtils.GsonToBean(response.get(), XDJJHXZBean.class);
+//
+//                        //数据处理
+//                        if (xdjjhxzBean != null && xdjjhxzBean.getState() == 0) {
+//                            List<XDJJHXZDataBean> xdjjhxzDataBeanList = xdjjhxzBean.getData();
+////            ContentValues values = new ContentValues();
+////            values.put("download", 1);
+////            for (int i = 0; i < xdjjhxzDataBeanList.size(); i++) {
+////                DataSupport.updateAll(XDJJHXZDataBean.class, values, "JHID = ?", xdjjhxzDataBeanList.get(i).getJHID());
+////            }
+//                            int index = 1;//序号（请自己优化）
+//                            for (int i = 0; i < xdjjhxzDataBeanList.size(); i++) {
+//                                xdjjhxzDataBeanList.get(i).setSN(index++);
+//                                //保存点检记录列表
+//                                DataSupport.saveAll(xdjjhxzDataBeanList.get(i).getQYD_DATA());
+//                                DataSupport.saveAll(xdjjhxzDataBeanList.get(i).getQYAQFX_DATA());
+//                            }
+//                            //保存工作列表数据
+//                            DataSupport.saveAll(xdjjhxzDataBeanList);
+//                        } else {
+//                            showToast(UiUtlis.getString(context, R.string.data_error));
+//                        }
+                        //正式数据请打开以下代码-End
 
                         //保存数据
 //                        if (rwlist != null) {
@@ -482,6 +597,4 @@ public class XzjhFragment extends BaseFragment {
         super.onDestroyView();
         unbinder.unbind();
     }
-
-
 }

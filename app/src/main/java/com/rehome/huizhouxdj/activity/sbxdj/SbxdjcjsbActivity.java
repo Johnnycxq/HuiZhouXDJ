@@ -16,6 +16,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.rehome.huizhouxdj.DBModel.DjjhRwQy;
+import com.rehome.huizhouxdj.DBModel.QYDDATABean;
 import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.adapter.MyFragmentAdapter;
 import com.rehome.huizhouxdj.contans.Contans;
@@ -71,6 +72,9 @@ public class SbxdjcjsbActivity extends BaseActivity {
 
     private int index = 0;
 
+    //新数据
+    private ArrayList<QYDDATABean> qyddataBeanArrayList;
+
 
     @Override
     public int getContentViewID() {
@@ -91,7 +95,8 @@ public class SbxdjcjsbActivity extends BaseActivity {
         Bundle bundle = SbxdjcjsbActivity.this.getIntent().getExtras();
         if (bundle != null) {
             isEdit = bundle.getBoolean("edit");
-            lists = bundle.getParcelableArrayList(Contans.KEY_DJJHRWQY);
+//            lists = bundle.getParcelableArrayList(Contans.KEY_DJJHRWQY);
+            qyddataBeanArrayList = bundle.getParcelableArrayList(Contans.KEY_DJJHRWQY);
             index = bundle.getInt(Contans.KEY_ITEM);
             item = bundle.getInt(Contans.KEY_ITEM) + 1;
         }
