@@ -160,8 +160,8 @@ public class Contans {
     public static String PUSH = "TZDB/GetData.aspx"; //userid=test2
 
     //-----------------------点检--------------------------//
-    public static String DJJHLIST = "DJGL/DJGL_TSJH.ashx";//prame BZMC = 测试班组
-    public static String DJJHDLB = "DJGL/DJGL_XZRW.ashx";// prame jhid=20161013141937;
+    public static String DJJHLIST = "DJGL/DJGL_GWDJ.ashx";//prame BZMC = 测试班组
+    public static String DJJHDLB = "DJGL/DJGL_GWDJ.ashx";// prame jhid=20161013141937;
     public static String DJJHXCJSSC = "DJGL/DJGL_XCJS.ashx";//ms:描述  fileps:文件  poinnum jhid
     public static String DJJHSC = "DJGL/DJGL_JLSC.ashx";//json字符串
     public static String DJJHQXGD = "DJGL/DJGL_QXGD.ashx";//json字符串

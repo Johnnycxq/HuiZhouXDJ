@@ -122,31 +122,31 @@ public class UploadDataService extends IntentService {
     }
 
 
-    //上传点检计划
-    private void djjhUploadData() {
-        djjhs.addAll(DataSupport.where("download = ?", "1").find(Djjh.class));
-        //遍历已经全部检查的计划
-        for (Djjh djjh : djjhs) {
-            List<DjjhRwQy> rwqys = DataSupport.where("jhid = ? ", djjh.getJHID()).order("date").find(DjjhRwQy.class);
-            int nochecked = 0;
-            for (DjjhRwQy rwqy : rwqys) {
-                if (!rwqy.isChecked()) {
-                    nochecked = 1;
-                    break;
-                }
-            }
-            if (nochecked == 0) {
-                //如果全部已经检查
-                djjhRwQies.addAll(rwqys);
-                djjhids.add(djjh.getJHID());
-            }
-        }
-
-        if (djjhRwQies.size() != 0) {
-            //如果有数据，就上传数据
-            djjhSCData(DJJH);
-        }
-    }
+//    //上传点检计划
+//    private void djjhUploadData() {
+//        djjhs.addAll(DataSupport.where("download = ?", "1").find(Djjh.class));
+//        //遍历已经全部检查的计划
+//        for (Djjh djjh : djjhs) {
+//            List<DjjhRwQy> rwqys = DataSupport.where("jhid = ? ", djjh.getJHID()).order("date").find(DjjhRwQy.class);
+//            int nochecked = 0;
+//            for (DjjhRwQy rwqy : rwqys) {
+//                if (!rwqy.isChecked()) {
+//                    nochecked = 1;
+//                    break;
+//                }
+//            }
+//            if (nochecked == 0) {
+//                //如果全部已经检查
+//                djjhRwQies.addAll(rwqys);
+//                djjhids.add(djjh.getJHID());
+//            }
+//        }
+//
+//        if (djjhRwQies.size() != 0) {
+//            //如果有数据，就上传数据
+//            djjhSCData(DJJH);
+//        }
+//    }
 
     //安健环计划上传
     private void ajhjhUploadData() {

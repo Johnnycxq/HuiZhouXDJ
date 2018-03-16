@@ -35,8 +35,6 @@ import com.yolanda.nohttp.rest.Request;
 import com.yolanda.nohttp.rest.RequestQueue;
 import com.yolanda.nohttp.rest.Response;
 
-import org.litepal.crud.DataSupport;
-
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -49,7 +47,6 @@ import butterknife.OnClick;
 
 import static org.litepal.crud.DataSupport.findAll;
 import static org.litepal.crud.DataSupport.updateAll;
-import static org.litepal.crud.DataSupport.where;
 
 /**
  * 设备巡点检管理-点检点上传
@@ -145,7 +142,7 @@ public class DjdscFragment extends BaseFragment {
             }
         });
 
-        TextView yjzj = (TextView) headView.findViewById(R.id.tv_jhlx);
+        TextView yjzj = (TextView) headView.findViewById(R.id.tv_gwmc);
         yjzj.setText("已检/总计");
         head.setVisibility(View.VISIBLE);
     }
@@ -180,39 +177,39 @@ public class DjdscFragment extends BaseFragment {
      * 获取数据库的数据
      */
     public void getDataInSQL() {
-        rwqys.clear();
-        djjhs.clear();
-        list.clear();
-        map.clear();
-
-        //获取点检计划
-        djjhs = where("download = ?", "1").find(Djjh.class);
-        //获取点检计划中所有的区域
-        for (Djjh djjh : djjhs) {
-            List<DjjhRwQy> rwqy = where("JHID = ? and deleted = ?", djjh.getJHID(), "0").order("DATE").find(DjjhRwQy.class);
-            rwqys.addAll(rwqy);
-            map.put(djjh.getJHID(), rwqy);
-        }
-
-        for (int i = 0; i < djjhs.size(); i++) {
-            int zong = 0;
-            int wz = 0;//已检总数
-            List<DjjhRwQy> rwqy = new ArrayList<>();
-            for (int a = 0; a < rwqys.size(); a++) {
-                if (rwqys.get(a).isChecked() && djjhs.get(i).getJHID().equals(rwqys.get(a).getJHID())) {
-                    wz++;
-                }
-
-                if (djjhs.get(i).getJHID().equals(rwqys.get(a).getJHID())) {
-                    zong++;
-                }
-            }
-            Djjh djjh = new Djjh();
-            djjh.setJHMC(djjhs.get(i).getJHMC());
-            djjh.setDQSJ(wz + "/" + zong);
-            djjh.setJHID(djjhs.get(i).getJHID());
-            list.add(djjh);
-        }
+//        rwqys.clear();
+//        djjhs.clear();
+//        list.clear();
+//        map.clear();
+//
+//        //获取点检计划
+//        djjhs = where("download = ?", "1").find(Djjh.class);
+//        //获取点检计划中所有的区域
+//        for (Djjh djjh : djjhs) {
+//            List<DjjhRwQy> rwqy = where("GWID = ? and deleted = ?", djjh.getGWID(), "0").order("DATE").find(DjjhRwQy.class);
+//            rwqys.addAll(rwqy);
+//            map.put(djjh.getJHID(), rwqy);
+//        }
+//
+//        for (int i = 0; i < djjhs.size(); i++) {
+//            int zong = 0;
+//            int wz = 0;//已检总数
+//            List<DjjhRwQy> rwqy = new ArrayList<>();
+//            for (int a = 0; a < rwqys.size(); a++) {
+//                if (rwqys.get(a).isChecked() && djjhs.get(i).getJHID().equals(rwqys.get(a).getJHID())) {
+//                    wz++;
+//                }
+//
+//                if (djjhs.get(i).getJHID().equals(rwqys.get(a).getJHID())) {
+//                    zong++;
+//                }
+//            }
+//            Djjh djjh = new Djjh();
+//            djjh.setJHMC(djjhs.get(i).getJHMC());
+//            djjh.setDQSJ(wz + "/" + zong);
+//            djjh.setJHID(djjhs.get(i).getJHID());
+//            list.add(djjh);
+//        }
     }
 
     private void setListData() {
@@ -274,68 +271,68 @@ public class DjdscFragment extends BaseFragment {
 
     //上传数据
     private void uploadData() {
-
-        removelist.clear();
-        //已检查的项目
-        yjqys = new ArrayList<>();
-        scs.clear();
-        int select = 0;
-        int allCount = 0;
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).isChecked()) {
-
-                List<DjjhRwQy> rwqy = new ArrayList<>();
-
-                rwqy.addAll(map.get(list.get(i).getJHID()));
-
-                for (DjjhRwQy djjh : rwqy) {
-
-
-                    if (!djjh.isUploaded()) {
-                        //那没有上传的添加到这里面
-                        yjqys.add(djjh);
-
-                    }
-
-                    if (djjh.isChecked()) {
-
-                        ++checkedCount;
-                    }
-
-                    allCount++;
-                }
-                //把选择的加入集合中
-                removelist.add(list.get(i));
-                select++;
-            }
-        }
-
-        if (select != 0) {
-            if (checkedCount == allCount) {
-                sCData(toJson());
-                checkedCount = 0;
-            } else {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("提示");
-                builder.setTitle("你还有项目未检查，是否上传？");
-                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        sCData(toJson());
-                        Logger.v(toJson());
-                    }
-                });
-                builder.show();
-            }
-        } else {
-            showToast("没有可上传计划");
-        }
+//
+//        removelist.clear();
+//        //已检查的项目
+//        yjqys = new ArrayList<>();
+//        scs.clear();
+//        int select = 0;
+//        int allCount = 0;
+//        for (int i = 0; i < list.size(); i++) {
+//            if (list.get(i).isChecked()) {
+//
+//                List<DjjhRwQy> rwqy = new ArrayList<>();
+//
+//                rwqy.addAll(map.get(list.get(i).getJHID()));
+//
+//                for (DjjhRwQy djjh : rwqy) {
+//
+//
+//                    if (!djjh.isUploaded()) {
+//                        //那没有上传的添加到这里面
+//                        yjqys.add(djjh);
+//
+//                    }
+//
+//                    if (djjh.isChecked()) {
+//
+//                        ++checkedCount;
+//                    }
+//
+//                    allCount++;
+//                }
+//                //把选择的加入集合中
+//                removelist.add(list.get(i));
+//                select++;
+//            }
+//        }
+//
+//        if (select != 0) {
+//            if (checkedCount == allCount) {
+//                sCData(toJson());
+//                checkedCount = 0;
+//            } else {
+//                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                builder.setTitle("提示");
+//                builder.setTitle("你还有项目未检查，是否上传？");
+//                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        sCData(toJson());
+//                        Logger.v(toJson());
+//                    }
+//                });
+//                builder.show();
+//            }
+//        } else {
+//            showToast("没有可上传计划");
+//        }
     }
 
     //    //删除数据
@@ -363,17 +360,17 @@ public class DjdscFragment extends BaseFragment {
             builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    //删除数据
-                    for (Djjh djjh : deletes) {
-                        DataSupport.deleteAll(DjjhRwQy.class, "jhid = ?", djjh.getJHID());
-                        DataSupport.deleteAll(Djjh.class, "jhid = ?", djjh.getJHID());
-                        DataSupport.deleteAll(XcjsInfo.class, "jhid = ?", djjh.getJHID());
-                    }
-                    //刷新界面
-                    getDataInSQL();
-                    if (adapter != null) {
-                        adapter.notifyDataSetChanged();
-                    }
+//                    //删除数据
+//                    for (Djjh djjh : deletes) {
+//                        DataSupport.deleteAll(DjjhRwQy.class, "jhid = ?", djjh.getJHID());
+//                        DataSupport.deleteAll(Djjh.class, "jhid = ?", djjh.getJHID());
+//                        DataSupport.deleteAll(XcjsInfo.class, "jhid = ?", djjh.getJHID());
+//                    }
+//                    //刷新界面
+//                    getDataInSQL();
+//                    if (adapter != null) {
+//                        adapter.notifyDataSetChanged();
+//                    }
                 }
             });
             builder.show();
@@ -549,25 +546,25 @@ public class DjdscFragment extends BaseFragment {
     private void removeData() {
 
 
-        for (Djjh djjh : removelist) {
-            DataSupport.deleteAll(Djjh.class, "jhid = ?", djjh.getJHID());
-            DataSupport.deleteAll(DjjhRwQy.class, "jhid = ?", djjh.getJHID());
-            List<XcjsInfo> infos = where("jhid = ?", djjh.getJHID()).find(XcjsInfo.class);
-            for (XcjsInfo info : infos) {
-                File file = new File(info.getFilename());
-                if (file.isFile()) {
-                    file.delete();
-                }
-            }
-            DataSupport.deleteAll(XcjsInfo.class, "jhid = ?", djjh.getJHID());
-            DataSupport.deleteAll(QxgdInfo.class);
-        }
-
-
-        getDataInSQL();
-        if (adapter != null) {
-            cb.setChecked(false);
-            adapter.notifyDataSetChanged();
-        }
+//        for (Djjh djjh : removelist) {
+//            DataSupport.deleteAll(Djjh.class, "jhid = ?", djjh.getJHID());
+//            DataSupport.deleteAll(DjjhRwQy.class, "jhid = ?", djjh.getJHID());
+//            List<XcjsInfo> infos = where("jhid = ?", djjh.getJHID()).find(XcjsInfo.class);
+//            for (XcjsInfo info : infos) {
+//                File file = new File(info.getFilename());
+//                if (file.isFile()) {
+//                    file.delete();
+//                }
+//            }
+//            DataSupport.deleteAll(XcjsInfo.class, "jhid = ?", djjh.getJHID());
+//            DataSupport.deleteAll(QxgdInfo.class);
+//        }
+//
+//
+//        getDataInSQL();
+//        if (adapter != null) {
+//            cb.setChecked(false);
+//            adapter.notifyDataSetChanged();
+//        }
     }
 }

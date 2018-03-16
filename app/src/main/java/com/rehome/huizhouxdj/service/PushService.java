@@ -20,12 +20,15 @@ import com.rehome.huizhouxdj.DBModel.Zy;
 import com.rehome.huizhouxdj.DBModel.ZyInfo;
 import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.activity.sbxdj.SxcdjActivity;
+import com.rehome.huizhouxdj.bean.XscbRequestBean;
 import com.rehome.huizhouxdj.contans.Contans;
+import com.rehome.huizhouxdj.utils.GsonUtils;
 import com.rehome.huizhouxdj.utils.HttpListener;
 import com.rehome.huizhouxdj.utils.NohttpUtils;
 import com.rehome.huizhouxdj.utils.SPUtils;
 import com.rehome.huizhouxdj.utils.UiUtlis;
 import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
 import com.yolanda.nohttp.rest.Request;
 import com.yolanda.nohttp.rest.Response;
 
@@ -81,12 +84,13 @@ public class PushService extends IntentService {
                     break;
                 //点检
                 case 1:
-                    Request<String> dj = NoHttp.createStringRequest(Contans.IP + Contans.DJJHLIST);
-                    dj.add("BZMC", UiUtlis.encoder((String) SPUtils.get(getApplicationContext(), Contans.BZBH, "12108080101")));
-                    NohttpUtils.getInstance().add(null, 1, dj, callback, false, false, "加载中...");
+                    Request<String> requestdj = NoHttp.createStringRequest(Contans.IP + Contans.DJJHLIST, RequestMethod.POST);
+//                    dj.add("BZMC", UiUtlis.encoder((String) SPUtils.get(getApplicationContext(), Contans.BZBH, "12108080101")));
 
-//                    Request<String> zy = NoHttp.createStringRequest(Contans.IP + Contans.QXGDZY);
-//                    NohttpUtils.getInstance().add(null, 11, zy, callback, false, false, "");
+                    requestdj.setDefineRequestBodyForJson(createZyJson());
+
+                    NohttpUtils.getInstance().add(null, 1, requestdj, callback, false, false, "加载中...");
+
                     break;
                 //安建环
                 case 2:
@@ -143,21 +147,34 @@ public class PushService extends IntentService {
                     Log.e("serviceData", response.get());
 
                     DjjhList list = GsonToBean(response.get(), DjjhList.class);
+
                     if (list != null) {
-                        if (list.getTotal() != 0) {
+
+                        if (list.getState().equals("1")) {
+
                             int dbcount = -1;//数据库中是否有数据
-                            List<Djjh> djjhs = list.getRows();//服务器数据
+
+                            List<Djjh> djjhs = list.getData();//服务器数据
+
                             //先删除未下 载的计划
+
                             DataSupport.deleteAll(Djjh.class, "download = 0");
+
                             for (Djjh djjh : djjhs) {
-                                List<Djjh> dbdjjh = DataSupport.where("jhid = ? and download = ?", djjh.getJHID(), "1").find(Djjh.class);
+
+                                List<Djjh> dbdjjh = DataSupport.where("GWID = ? and download = ?", djjh.getGWID(), "1").find(Djjh.class);
+
                                 //如果数据库中没有这条数据，就添加到数据库
+
                                 if (dbdjjh.size() == 0) {
+
                                     dbcount = 1;
+
                                     djjh.save();
                                 }
                             }
                             if (dbcount == 1) {
+
                                 shownotification(1, "您有新的点检计划");
                             }
                         } else {
@@ -165,6 +182,8 @@ public class PushService extends IntentService {
                         }
                     }
                     break;
+
+
                 case 2:
                     //安建环计划
 
@@ -317,6 +336,17 @@ public class PushService extends IntentService {
         // level16及之后增加的，API11可以使用getNotificatin()来替代
         notify.flags |= Notification.FLAG_AUTO_CANCEL; // FLAG_AUTO_CANCEL表明当通知被用户点击时，通知将被清除。
         manager.notify(what, notify);
+    }
+
+    private String createZyJson() {
+        String GWID = (String) SPUtils.get(getApplicationContext(), Contans.BZBH, "");
+        String YHID = (String) SPUtils.get(getApplicationContext(), Contans.USERNAME, "");
+        XscbRequestBean info = new XscbRequestBean();
+        info.setAction("DJ_GWLIST_GET");
+        info.setGWID(GWID);
+        info.setYHID(YHID);
+        String json = GsonUtils.GsonString(info);
+        return json;
     }
 
 

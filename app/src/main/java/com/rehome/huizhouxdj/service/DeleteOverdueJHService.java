@@ -64,8 +64,8 @@ public class DeleteOverdueJHService extends IntentService {
 
         List<Djjh> djjh = DataSupport.findAll(Djjh.class);
         for (Djjh jh : djjh) {
-            if (UiUtlis.isdelete(jh.getDQSJ())) {
-                djjhs.add(jh.getJHID());
+            if (UiUtlis.isdelete(jh.getGWID())) {
+                djjhs.add(jh.getGWID());
             }
         }
         List<Ajhjh> ajhjh = DataSupport.findAll(Ajhjh.class);

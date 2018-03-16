@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -15,7 +14,6 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.rehome.huizhouxdj.DBModel.DjjhRwQy;
 import com.rehome.huizhouxdj.DBModel.QYDDATABean;
 import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.adapter.MyFragmentAdapter;
@@ -26,6 +24,7 @@ import com.rehome.huizhouxdj.weight.NoscrollViewPager;
 
 import org.litepal.crud.DataSupport;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -66,10 +65,8 @@ public class SbxdjcjsbActivity extends BaseActivity {
     private CJFragment cj;
     private FfFragment ff;
     private BzFragment bz;
-    private ArrayList<DjjhRwQy> lists;
     private int item = 0;
     private boolean isEdit = false;
-
     private int index = 0;
 
     //新数据
@@ -95,7 +92,6 @@ public class SbxdjcjsbActivity extends BaseActivity {
         Bundle bundle = SbxdjcjsbActivity.this.getIntent().getExtras();
         if (bundle != null) {
             isEdit = bundle.getBoolean("edit");
-//            lists = bundle.getParcelableArrayList(Contans.KEY_DJJHRWQY);
             qyddataBeanArrayList = bundle.getParcelableArrayList(Contans.KEY_DJJHRWQY);
             index = bundle.getInt(Contans.KEY_ITEM);
             item = bundle.getInt(Contans.KEY_ITEM) + 1;
@@ -106,12 +102,12 @@ public class SbxdjcjsbActivity extends BaseActivity {
             btnSaveNext.setVisibility(View.GONE);
         }
         list = new ArrayList<>();
-        if (lists.size() != 0) {
-            cj = CJFragment.newInstance(isEdit, lists.get(index), lists.size(), index + 1);
-            ff = FfFragment.newInstance(isEdit, lists.get(index).getMEAMETHOD());
-            bz = BzFragment.newInstance(isEdit, lists.get(index).getJCBZ());
+        if (qyddataBeanArrayList.size() != 0) {
+            cj = CJFragment.newInstance(isEdit, qyddataBeanArrayList.get(index), qyddataBeanArrayList.size(), index + 1);
+            ff = FfFragment.newInstance(isEdit, qyddataBeanArrayList.get(index).getJCFS());
+            bz = BzFragment.newInstance(isEdit, qyddataBeanArrayList.get(index).getBZZ());
         } else {
-            cj = CJFragment.newInstance(isEdit, new DjjhRwQy(), 0, 0);
+            cj = CJFragment.newInstance(isEdit, new QYDDATABean(), 0, 0);
             ff = FfFragment.newInstance(isEdit, "");
             bz = BzFragment.newInstance(isEdit, "");
         }
@@ -159,11 +155,11 @@ public class SbxdjcjsbActivity extends BaseActivity {
                 if (item == 0) {
                     btnLast.setEnabled(false);
                     item++;
-                    //showToast("已经到头了");
+                    showToast("当前为第一条");
                 } else {
-                    cj.updata(lists.get(item - 1), item, lists.size());
-                    bz.updata(lists.get(item - 1).getMEASTANDARD());
-                    ff.update(lists.get(item - 1).getMEAMETHOD());
+                    cj.updata(qyddataBeanArrayList.get(item - 1), item, qyddataBeanArrayList.size());
+                    bz.updata(qyddataBeanArrayList.get(item - 1).getBZZ());
+                    ff.update(qyddataBeanArrayList.get(item - 1).getJCFS());
                 }
                 break;
             case R.id.btn_next:
@@ -186,16 +182,16 @@ public class SbxdjcjsbActivity extends BaseActivity {
                             isEdit = true;
 
                             //点击退出，处理退出的逻辑
-                            if (lists.size() != 0) {
+                            if (qyddataBeanArrayList.size() != 0) {
 
                                 if (!cj.getCJJG().equals("")) {
                                     ContentValues values = new ContentValues();
                                     values.put("checked", true);
                                     values.put("CJJG", cj.getCJJG());
-
-                                    values.put("date", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+                                    values.put("DATE", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
                                     //更新数据库数据
-                                    int i = DataSupport.updateAll(DjjhRwQy.class, values, "POINTNUM = ? and jhid = ? ", lists.get(item - 1).getPOINTNUM(), lists.get(item - 1).getJHID());
+                                    int i = DataSupport.updateAll(QYDDATABean.class, values, "SCID = ? and DID = ? ",
+                                            qyddataBeanArrayList.get(item - 1).getSCID(), qyddataBeanArrayList.get(item - 1).getDID());
                                     if (i != 0) {
                                         showToast("保存成功");
                                         //更新编辑的内容
@@ -206,7 +202,7 @@ public class SbxdjcjsbActivity extends BaseActivity {
                                 }
 
                             }
-//                            ControllerActivity.getAppManager().finishActivity(SdlbActivity.class);
+//                            ControllerActivity.getAppManager().finishActivity(Sd.class);
                             finish();
                         }
                     });
@@ -220,7 +216,7 @@ public class SbxdjcjsbActivity extends BaseActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void next() {
-        if (lists.size() != 0) {
+        if (qyddataBeanArrayList.size() != 0) {
             if (!btnLast.isEnabled()) {
                 btnLast.setEnabled(true);
             }
@@ -230,13 +226,14 @@ public class SbxdjcjsbActivity extends BaseActivity {
                     ContentValues values = new ContentValues();
                     values.put("checked", true);
                     values.put("CJJG", cj.getCJJG());
-                    values.put("date", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+                    values.put("DATE", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 
                     //更新数据库数据
-                    int i = DataSupport.updateAll(DjjhRwQy.class, values, "POINTNUM = ? and jhid = ? ", lists.get(item - 1).getPOINTNUM(), lists.get(item - 1).getJHID());
+                    int i = DataSupport.updateAll(QYDDATABean.class, values, "SCID = ? and DID = ? ",
+                            qyddataBeanArrayList.get(item - 1).getSCID(), qyddataBeanArrayList.get(item - 1).getDID());
                     if (i != 0) {
-                        lists.get(item - 1).setChecked(true);
-                        lists.get(item - 1).setCJJG(cj.getCJJG());
+                        qyddataBeanArrayList.get(item - 1).setChecked(true);
+                        qyddataBeanArrayList.get(item - 1).setCJJG(cj.getCJJG());
                         showToast("保存成功");
                         //更新编辑的内容
                         updateItem(cj.getCJJG(), item - 1);
@@ -246,28 +243,28 @@ public class SbxdjcjsbActivity extends BaseActivity {
                 }
 
                 ++item;
-                if (item > lists.size()) {
+                if (item > qyddataBeanArrayList.size()) {
                     item--;
-                    cj.updata(lists.get(item - 1), item, lists.size());
+                    cj.updata(qyddataBeanArrayList.get(item - 1), item, qyddataBeanArrayList.size());
                     //showToast("到底了");
                 } else {
-                    cj.updata(lists.get(item - 1), item, lists.size());
-                    bz.updata(lists.get(item - 1).getMEASTANDARD());
-                    ff.update(lists.get(item - 1).getMEAMETHOD());
+                    cj.updata(qyddataBeanArrayList.get(item - 1), item, qyddataBeanArrayList.size());
+                    bz.updata(qyddataBeanArrayList.get(item - 1).getBZZ());
+                    ff.update(qyddataBeanArrayList.get(item - 1).getJCFS());
                 }
             } else {
-                if (lists.size() != 0) {
+                if (qyddataBeanArrayList.size() != 0) {
                     ++item;
                     if (!btnLast.isEnabled()) {
                         btnLast.setEnabled(true);
                     }
-                    if (item > lists.size()) {
+                    if (item > qyddataBeanArrayList.size()) {
                         item--;
                         //showToast("到底了");
                     } else {
-                        cj.updata(lists.get(item - 1), item, lists.size());
-                        bz.updata(lists.get(item - 1).getMEASTANDARD());
-                        ff.update(lists.get(item - 1).getMEAMETHOD());
+                        cj.updata(qyddataBeanArrayList.get(item - 1), item, qyddataBeanArrayList.size());
+                        bz.updata(qyddataBeanArrayList.get(item - 1).getBZZ());
+                        ff.update(qyddataBeanArrayList.get(item - 1).getJCFS());
                     }
                 }
             }
@@ -276,12 +273,6 @@ public class SbxdjcjsbActivity extends BaseActivity {
 
     public int getItem() {
         return item - 1;
-    }
-
-    public void updata(List<DjjhRwQy> lists) {
-        cj.updata(lists.get(0), 1, lists.size());
-        bz.updata(lists.get(0).getMEASTANDARD());
-        ff.update(lists.get(0).getMEAMETHOD());
     }
 
     /**

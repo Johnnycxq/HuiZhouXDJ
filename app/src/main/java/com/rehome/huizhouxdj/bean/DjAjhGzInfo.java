@@ -9,7 +9,6 @@ public class DjAjhGzInfo {
     private String xh;
     private String qy;
     private String djrw;
-    private String ajhrw;
 
     public String getXh() {
         return xh;
@@ -35,11 +34,4 @@ public class DjAjhGzInfo {
         this.djrw = djrw;
     }
 
-    public String getAjhrw() {
-        return ajhrw;
-    }
-
-    public void setAjhrw(String ajhrw) {
-        this.ajhrw = ajhrw;
-    }
 }

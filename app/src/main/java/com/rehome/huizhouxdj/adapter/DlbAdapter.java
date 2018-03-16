@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.rehome.huizhouxdj.DBModel.QYDDATABean;
 import com.rehome.huizhouxdj.R;
+import com.rehome.huizhouxdj.bean.DlbInfo;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;
@@ -19,9 +19,10 @@ import java.util.List;
 public class DlbAdapter extends BaseAdapter {
 
     private Context context;
-    private List<QYDDATABean> list;
+    //    private List<QYDDATABean> list;
+    private List<DlbInfo> list;
 
-    public DlbAdapter(Context context, List<QYDDATABean> list) {
+    public DlbAdapter(Context context, List<DlbInfo> list) {
         this.context = context;
         this.list = list;
     }
@@ -58,11 +59,11 @@ public class DlbAdapter extends BaseAdapter {
         }
 
 
-        holder.tv_d.setText(list.get(i).getSBMC());
-        holder.tv_cjjg.setText(list.get(i).getBJMC());
+        holder.tv_d.setText(list.get(i).getDian());
+        holder.tv_cjjg.setText(list.get(i).getCjjg());
 
 
-        if (list.get(i).isSaved()) {
+        if (list.get(i).isStatu()) {
             holder.tv_zt.setText("已检");
         } else {
             holder.tv_zt.setText("未检");

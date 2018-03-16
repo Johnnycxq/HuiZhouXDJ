@@ -28,16 +28,15 @@ public class XDJJHXZDataBean extends DataSupport implements Parcelable {
      * QYAQFX_DATA : [{"AQFXID":"D3F75475F4D14A25BCBC1C798ED38368","FXLX":"安全风险测试","FXMS":"风险描述","FHCS":"防护措施"},{"AQFXID":"B0B062FDE8FF42E3B3EB59FD78E5639F","FXLX":"安全风险测试1","FXMS":"风险描述1","FHCS":"防护措施1"}]
      */
     private long id;
+    private String GWID;
     private String QYBH;
     private String QYMC;
     private String QYEWM;
     private String QYEWMZT;
-    private String JHID;
     private String QYNFC;
     private String QYNFCZT;
     private List<QYDDATABean> QYD_DATA = new ArrayList<>();
     private List<QYAQFXDATABean> QYAQFX_DATA = new ArrayList<>();
-
     private int SN; //自定义序号
 
     public long getId() {
@@ -64,7 +63,7 @@ public class XDJJHXZDataBean extends DataSupport implements Parcelable {
         QYMC = in.readString();
         QYEWM = in.readString();
         QYEWMZT = in.readString();
-        JHID = in.readString();
+        GWID = in.readString();
         QYNFC = in.readString();
         QYNFCZT = in.readString();
         QYD_DATA = in.createTypedArrayList(QYDDATABean.CREATOR);
@@ -116,12 +115,12 @@ public class XDJJHXZDataBean extends DataSupport implements Parcelable {
         this.QYEWMZT = QYEWMZT;
     }
 
-    public String getJHID() {
-        return JHID;
+    public String getGWID() {
+        return GWID;
     }
 
-    public void setJHID(String JHID) {
-        this.JHID = JHID;
+    public void setGWID(String GWID) {
+        this.GWID = GWID;
     }
 
     public String getQYNFC() {
@@ -167,7 +166,7 @@ public class XDJJHXZDataBean extends DataSupport implements Parcelable {
         dest.writeString(QYMC);
         dest.writeString(QYEWM);
         dest.writeString(QYEWMZT);
-        dest.writeString(JHID);
+        dest.writeString(GWID);
         dest.writeString(QYNFC);
         dest.writeString(QYNFCZT);
         dest.writeTypedList(QYD_DATA);

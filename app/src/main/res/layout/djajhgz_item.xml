@@ -38,13 +38,14 @@
             android:background="#524658" />
 
         <TextView
-            android:id="@+id/tv_qy"
+            android:id="@+id/tv_qymc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10px"
             android:layout_weight="2"
-            android:text="区域" />
+            android:text="区域名称" />
+
 
         <View
             android:layout_width="1dp"
@@ -57,24 +58,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10px"
-            android:layout_weight="1"
-            android:text="点检任务" />
+            android:layout_weight="2"
+            android:text="未检/点检总数" />
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#524658"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/tv_ajhrw"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10px"
-            android:layout_weight="1"
-            android:text="安健环任务"
-            android:visibility="gone" />
 
         <View
             android:layout_width="1dp"

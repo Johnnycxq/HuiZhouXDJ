@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:minHeight="100px"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/head"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#524658"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:minHeight="96px">
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#524658" />
+
+        <TextView
+            android:id="@+id/tv_xh"
+            android:layout_width="80px"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="序号" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#524658" />
+
+        <TextView
+            android:id="@+id/tv_gx"
+            android:layout_width="400px"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10px"
+            android:text="工序" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#524658" />
+
+
+        <TextView
+            android:id="@+id/tv_zt"
+            android:layout_width="120px"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10px"
+            android:text="状态" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#524658" />
+
+        <TextView
+            android:id="@+id/tv_zjdfl"
+            android:layout_width="@dimen/zWidth"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10px"
+            android:text="质检点分类" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#524658" />
+
+        <TextView
+            android:id="@+id/tv_ajzjy"
+            android:layout_width="@dimen/zWidth"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="A级质检员" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#524658" />
+
+        <TextView
+            android:id="@+id/tv_bjzjy"
+            android:layout_width="@dimen/zWidth"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="B级质检员" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#524658" />
+
+        <TextView
+            android:id="@+id/tv_cjzjy"
+            android:layout_width="@dimen/zWidth"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="C级质检员" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#524658" />
+
+        <TextView
+
+            android:id="@+id/tv_jlgcs"
+            android:layout_width="@dimen/zWidth"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="监理工程师" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#524658" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#524658" />
+
+
+</LinearLayout>

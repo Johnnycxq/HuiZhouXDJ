@@ -10,13 +10,6 @@ public class DlbInfo {
     private boolean statu;
     private String cjjg;
 
-    public String getCjjg() {
-        return cjjg;
-    }
-
-    public void setCjjg(String cjjg) {
-        this.cjjg = cjjg;
-    }
 
     public DlbInfo() {
     }
@@ -25,6 +18,14 @@ public class DlbInfo {
         this.xh = xh;
         this.dian = dian;
         this.statu = statu;
+    }
+
+    public String getCjjg() {
+        return cjjg;
+    }
+
+    public void setCjjg(String cjjg) {
+        this.cjjg = cjjg;
     }
 
     public int getXh() {

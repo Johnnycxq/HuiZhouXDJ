@@ -9,7 +9,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="890px">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
         <ListView
             android:id="@+id/lv"
@@ -32,8 +33,10 @@
         android:id="@+id/btn_sm"
         style="@style/button"
         android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/px_10"
         android:layout_marginLeft="@dimen/px_20"
         android:layout_marginRight="@dimen/px_20"
+        android:layout_marginTop="@dimen/px_10"
         android:text="扫描" />
 
 

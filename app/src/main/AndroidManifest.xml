@@ -61,7 +61,9 @@
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.sbxdj.MainSbxdjglActivity" />
         <activity android:name=".activity.sbxdj.SxcdjActivity" />
-        <activity android:name=".activity.sbxdj.SbxdjcjsbActivity" />
+        <activity
+            android:name=".activity.sbxdj.SbxdjcjsbActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.sbxdj.SdjgzActivity" />
         <activity android:name=".activity.sbxdj.YulActivity" />
 

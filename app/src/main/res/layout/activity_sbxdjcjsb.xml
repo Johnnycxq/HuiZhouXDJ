@@ -23,7 +23,8 @@
         android:id="@+id/rg"
         android:layout_width="match_parent"
         android:layout_height="@dimen/px_90"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <RadioButton
             android:id="@+id/rb1"

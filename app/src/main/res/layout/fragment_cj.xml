@@ -15,77 +15,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/px_5"
+                android:maxHeight="120px"
                 android:minHeight="@dimen/px_60">
-
-                <TextView
-                    android:layout_width="@dimen/cjwidth"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|right"
-                    android:text="区域："
-                    android:textSize="@dimen/sbtextSize" />
-
-                <TextView
-                    android:id="@+id/tv_qy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|left"
-                    android:text="区域"
-                    android:textSize="@dimen/sbtextSize" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/px_5"
-                android:minHeight="@dimen/px_60">
-
-                <TextView
-                    android:layout_width="@dimen/cjwidth"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|right"
-                    android:text="设备："
-                    android:textSize="@dimen/sbtextSize" />
-
-                <TextView
-                    android:id="@+id/tv_sb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|left"
-                    android:text="设备"
-                    android:textSize="@dimen/sbtextSize" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/px_5"
-                android:minHeight="50px">
-
-                <TextView
-                    android:layout_width="@dimen/cjwidth"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|right"
-                    android:text="部位："
-                    android:textSize="@dimen/sbtextSize" />
-
-                <TextView
-                    android:id="@+id/tv_bw"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|left"
-                    android:text="轴承"
-                    android:textSize="@dimen/sbtextSize" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/px_5"
-                android:maxHeight="120px">
 
                 <TextView
                     android:layout_width="@dimen/cjwidth"
@@ -105,6 +41,102 @@
                     android:textSize="@dimen/sbtextSize" />
             </LinearLayout>
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/px_5"
+                android:minHeight="@dimen/px_60">
+
+                <TextView
+                    android:layout_width="@dimen/cjwidth"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|right"
+                    android:text="所属设备："
+                    android:textSize="@dimen/sbtextSize" />
+
+                <TextView
+                    android:id="@+id/tv_sb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|left"
+                    android:text="设备"
+                    android:textSize="@dimen/sbtextSize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/px_5"
+                android:minHeight="50px">
+
+                <TextView
+                    android:layout_width="@dimen/cjwidth"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|right"
+                    android:text="所属部件："
+                    android:textSize="@dimen/sbtextSize" />
+
+                <TextView
+                    android:id="@+id/tv_bw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|left"
+                    android:text="轴承"
+                    android:textSize="@dimen/sbtextSize" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/px_5"
+                android:maxHeight="120px"
+                android:minHeight="@dimen/px_60">
+
+                <TextView
+                    android:layout_width="@dimen/cjwidth"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|right"
+                    android:maxHeight="120px"
+                    android:text="检测方法："
+                    android:textSize="@dimen/sbtextSize" />
+
+                <TextView
+                    android:id="@+id/tv_ff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|left"
+                    android:maxHeight="120px"
+                    android:text="方法"
+                    android:textSize="@dimen/sbtextSize" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/px_5"
+                android:maxHeight="120px"
+                android:minHeight="@dimen/px_60">
+
+                <TextView
+                    android:layout_width="@dimen/cjwidth"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|right"
+                    android:maxHeight="120px"
+                    android:text="检测标准："
+                    android:textSize="@dimen/sbtextSize" />
+
+                <TextView
+                    android:id="@+id/tv_bz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|left"
+                    android:maxHeight="120px"
+                    android:text="标准"
+                    android:textSize="@dimen/sbtextSize" />
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -131,8 +163,6 @@
                     android:layout_marginStart="22dp"
                     android:layout_toEndOf="@+id/textView2"
                     android:layout_toRightOf="@+id/textView2"
-                    android:digits="0123456789.-"
-                    android:inputType="numberDecimal"
                     android:textSize="16sp"
                     android:visibility="visible" />
 
@@ -151,6 +181,7 @@
                     android:visibility="visible" />
 
             </RelativeLayout>
+
 
         </LinearLayout>
     </ScrollView>

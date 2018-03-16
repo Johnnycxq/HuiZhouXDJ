@@ -12,21 +12,6 @@ import org.litepal.crud.DataSupport;
 
 public class QYDDATABean extends DataSupport implements Parcelable {
 
-    /**
-     * SCID : B17A736A283C47999347F8E01CB5C1A6
-     * SBMC : 测试设备1
-     * BJMC : 部件2
-     * DID : 5C556F3D44DF420BB8D34593842AF8D2
-     * DMC : 消防测试点3_SBL1
-     * BZZ : 标准值
-     * SJMC : 数据名称
-     * SJDW : 数据单位
-     * JCFS : 检查方式
-     * XMZQ : 1
-     * LRFS : 1
-     * LRMRZ :
-     */
-
     private long id;
     private String SCID;
     private String SBMC;
@@ -37,14 +22,22 @@ public class QYDDATABean extends DataSupport implements Parcelable {
     private String SJMC;
     private String SJDW;
     private String JCFS;
-    private String XMZQ;
     private String LRFS;
     private String LRMRZ;
+    private String DJ_ST;
+    private String DJ_ET;
     private XDJJHXZDataBean xdjjhxzDataBean;
+    private boolean checked;//是否已经检查
+    private boolean uploaded;//是否上传
+    private boolean deleted;//true 已删除，false 未删除
+    private boolean SMFX;//扫描方式，0  NFC  1 一维码二维码
+    private String CJJG;
+    private String DATE;//保存时间
 
 
     public QYDDATABean() {
     }
+
 
     protected QYDDATABean(Parcel in) {
         SCID = in.readString();
@@ -56,9 +49,16 @@ public class QYDDATABean extends DataSupport implements Parcelable {
         SJMC = in.readString();
         SJDW = in.readString();
         JCFS = in.readString();
-        XMZQ = in.readString();
         LRFS = in.readString();
         LRMRZ = in.readString();
+        DJ_ST = in.readString();
+        DJ_ET = in.readString();
+        checked = in.readByte() != 0;
+        uploaded = in.readByte() != 0;
+        deleted = in.readByte() != 0;
+        SMFX = in.readByte() != 0;
+        CJJG = in.readString();
+        DATE = in.readString();
     }
 
     public static final Creator<QYDDATABean> CREATOR = new Creator<QYDDATABean>() {
@@ -88,7 +88,6 @@ public class QYDDATABean extends DataSupport implements Parcelable {
     public void setXdjjhxzDataBean(XDJJHXZDataBean xdjjhxzDataBean) {
         this.xdjjhxzDataBean = xdjjhxzDataBean;
     }
-
 
     public void setId(int id) {
         this.id = id;
@@ -166,14 +165,6 @@ public class QYDDATABean extends DataSupport implements Parcelable {
         this.JCFS = JCFS;
     }
 
-    public String getXMZQ() {
-        return XMZQ;
-    }
-
-    public void setXMZQ(String XMZQ) {
-        this.XMZQ = XMZQ;
-    }
-
     public String getLRFS() {
         return LRFS;
     }
@@ -188,6 +179,70 @@ public class QYDDATABean extends DataSupport implements Parcelable {
 
     public void setLRMRZ(String LRMRZ) {
         this.LRMRZ = LRMRZ;
+    }
+
+    public String getDJ_ST() {
+        return DJ_ST;
+    }
+
+    public void setDJ_ST(String DJ_ST) {
+        this.DJ_ST = DJ_ST;
+    }
+
+    public String getDJ_ET() {
+        return DJ_ET;
+    }
+
+    public void setDJ_ET(String DJ_ET) {
+        this.DJ_ET = DJ_ET;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
+    public boolean isUploaded() {
+        return uploaded;
+    }
+
+    public void setUploaded(boolean uploaded) {
+        this.uploaded = uploaded;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public boolean isSMFX() {
+        return SMFX;
+    }
+
+    public void setSMFX(boolean SMFX) {
+        this.SMFX = SMFX;
+    }
+
+    public String getCJJG() {
+        return CJJG;
+    }
+
+    public void setCJJG(String CJJG) {
+        this.CJJG = CJJG;
+    }
+
+    public String getDATE() {
+        return DATE;
+    }
+
+    public void setDATE(String DATE) {
+        this.DATE = DATE;
     }
 
     @Override
@@ -206,8 +261,15 @@ public class QYDDATABean extends DataSupport implements Parcelable {
         dest.writeString(SJMC);
         dest.writeString(SJDW);
         dest.writeString(JCFS);
-        dest.writeString(XMZQ);
         dest.writeString(LRFS);
         dest.writeString(LRMRZ);
+        dest.writeString(DJ_ST);
+        dest.writeString(DJ_ET);
+        dest.writeByte(this.checked ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.uploaded ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.deleted ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.SMFX ? (byte) 1 : (byte) 0);
+        dest.writeString(CJJG);
+        dest.writeString(DATE);
     }
 }

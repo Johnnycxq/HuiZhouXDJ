@@ -12,25 +12,9 @@ import java.util.List;
 public class DjjhList extends DataSupport {
 
     private int id;
-    private int Total;
-
-    private List<Djjh> Rows = new ArrayList<Djjh>();
-
-    public int getTotal() {
-        return Total;
-    }
-
-    public void setTotal(int Total) {
-        this.Total = Total;
-    }
-
-    public List<Djjh> getRows() {
-        return Rows;
-    }
-
-    public void setRows(List<Djjh> Rows) {
-        this.Rows = Rows;
-    }
+    private String state;
+    private String msg;
+    private List<Djjh> data = new ArrayList<Djjh>();
 
     public int getId() {
         return id;
@@ -38,5 +22,29 @@ public class DjjhList extends DataSupport {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public List<Djjh> getData() {
+        return data;
+    }
+
+    public void setData(List<Djjh> data) {
+        this.data = data;
     }
 }

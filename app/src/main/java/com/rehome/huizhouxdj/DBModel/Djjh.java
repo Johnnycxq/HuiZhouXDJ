@@ -9,38 +9,43 @@ import org.litepal.crud.DataSupport;
 public class Djjh extends DataSupport {
 
     private int id;
-    private String JHID;
-    private String JHMC;
-    private String JHLX;
-    private String DQSJ;
-    private String XZR;
-    private String XZSJ;
+    private String GWID;
+    private String GWMC;
+    private String GWDS;
     private boolean checked;//0:未选中,1:已选中
     private int download;//0:未下载,1:已经下载
     private DjjhList djjhList;
 
-    public String getXZR() {
-        return XZR;
+    public int getId() {
+        return id;
     }
 
-    public void setXZR(String XZR) {
-        this.XZR = XZR;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getXZSJ() {
-        return XZSJ;
+    public String getGWID() {
+        return GWID;
     }
 
-    public void setXZSJ(String XZSJ) {
-        this.XZSJ = XZSJ;
+    public void setGWID(String GWID) {
+        this.GWID = GWID;
     }
 
-    public int getDownload() {
-        return download;
+    public String getGWMC() {
+        return GWMC;
     }
 
-    public void setDownload(int download) {
-        this.download = download;
+    public void setGWMC(String GWMC) {
+        this.GWMC = GWMC;
+    }
+
+    public String getGWDS() {
+        return GWDS;
+    }
+
+    public void setGWDS(String GWDS) {
+        this.GWDS = GWDS;
     }
 
     public boolean isChecked() {
@@ -51,59 +56,19 @@ public class Djjh extends DataSupport {
         this.checked = checked;
     }
 
+    public int getDownload() {
+        return download;
+    }
+
+    public void setDownload(int download) {
+        this.download = download;
+    }
+
     public DjjhList getDjjhList() {
         return djjhList;
     }
 
     public void setDjjhList(DjjhList djjhList) {
         this.djjhList = djjhList;
-    }
-
-    public String getJHID() {
-        return JHID;
-    }
-
-    public void setJHID(String JHID) {
-        this.JHID = JHID;
-    }
-
-    public String getJHMC() {
-        return JHMC;
-    }
-
-    public void setJHMC(String JHMC) {
-        this.JHMC = JHMC;
-    }
-
-    public String getJHLX() {
-        return JHLX;
-    }
-
-    public void setJHLX(String JHLX) {
-        this.JHLX = JHLX;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDQSJ() {
-        return DQSJ;
-    }
-
-    public void setDQSJ(String DQSJ) {
-        this.DQSJ = DQSJ;
-    }
-
-    public DjjhList getList() {
-        return djjhList;
-    }
-
-    public void setList(DjjhList list) {
-        this.djjhList = list;
     }
 }

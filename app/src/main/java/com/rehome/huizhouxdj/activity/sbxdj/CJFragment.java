@@ -7,9 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.rehome.huizhouxdj.DBModel.DjjhRwQy;
+import com.rehome.huizhouxdj.DBModel.QYDDATABean;
 import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.base.BaseFragment;
 import com.rehome.huizhouxdj.weight.ListDialog;
@@ -37,28 +38,32 @@ public class CJFragment extends BaseFragment {
     TextView tv_yjzj;
     @BindView(R.id.tv_zt)
     TextView tv_zt;
-    @BindView(R.id.tv_qy)
-    TextView tvQy;
     @BindView(R.id.tv_sb)
     TextView tvSb;
     Unbinder unbinder;
     @BindView(R.id.et_button)
     Button et_button;
+    @BindView(R.id.tv_ff)
+    TextView tvFf;
+    @BindView(R.id.tv_bz)
+    TextView tvBz;
+    @BindView(R.id.sv)
+    ScrollView sv;
 
     private boolean isEdit;
-
-    private DjjhRwQy info;
-
+    private QYDDATABean info;
     private int zj;
     private int index;
 
 
-    public static CJFragment newInstance(boolean b, DjjhRwQy info, int zj, int index) {
+    public static CJFragment newInstance(boolean b, QYDDATABean info, int zj, int index) {
         Bundle bundle = new Bundle();
         bundle.putBoolean("edit", b);
         bundle.putParcelable("testinfo", info);
         bundle.putInt("zj", zj);
         bundle.putInt("index", index);
+
+
         CJFragment fragment = new CJFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -83,7 +88,12 @@ public class CJFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+
+
         et_jg.setEnabled(isEdit);
+        et_button.setEnabled(isEdit);
+
+
         updata(info, index, zj);
     }
 
@@ -95,7 +105,7 @@ public class CJFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
 
-                ListDialog dialog = new ListDialog(context, stringToList(info.getLRNR()), new ListDialog.ListDialogListener() {
+                ListDialog dialog = new ListDialog(context, stringToList(info.getLRMRZ()), new ListDialog.ListDialogListener() {
 
                     @Override
                     public void selectText(String text, int position) {
@@ -112,24 +122,27 @@ public class CJFragment extends BaseFragment {
     /**
      * 更新数据
      */
-    public void updata(DjjhRwQy info, int item, int size) {
+    public void updata(QYDDATABean info, int item, int size) {
 
-        tvQy.setText(info.getMEAAREA());
         tvSb.setText(info.getSBMC());
         tv_bw.setText(info.getBJMC());
-        tv_dmc.setText(info.getPOINTNAME());
+        tv_dmc.setText(info.getDMC());
+        tvFf.setText(info.getJCFS());
+        tvBz.setText(info.getBZZ());
         tv_zt.setText(info.isChecked() ? "已检" : "未检");
         tv_yjzj.setText(item + "/" + size);
 
-        Log.e("CJFragment","lrlx = "+info.getLRLX()+", cjjg="+info.getCJJG());
 
-        if (info.getLRLX().equals("0")) {  //当时编辑状态的是 不需要按钮
+        Log.e("CJFragment", "lrlx = " + info.getLRFS() + ", cjjg=" + info.getCJJG());
+
+        if (info.getLRFS().equals("0")) {  //当时编辑状态的是 不需要按钮
 
             et_button.setVisibility(View.GONE);
             et_jg.setVisibility(View.VISIBLE);
             et_jg.setText(info.getCJJG());
 
-        } else if (info.getLRLX().equals("1")) {  //不是编辑状态的时候 需要按钮点击弹出菜单
+
+        } else if (info.getLRFS().equals("1")) {    //不是编辑状态的时候 需要按钮点击弹出菜单
 
             et_jg.setVisibility(View.GONE);
             et_button.setVisibility(View.VISIBLE);
@@ -138,6 +151,7 @@ public class CJFragment extends BaseFragment {
 
                 et_button.setText(info.getCJJG());
                 et_jg.setText(info.getCJJG());
+
             } else {
                 et_button.setText("请点击获取采集结果");
 
@@ -151,9 +165,9 @@ public class CJFragment extends BaseFragment {
         return et_jg.getText().toString().trim();
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
         return rootView;

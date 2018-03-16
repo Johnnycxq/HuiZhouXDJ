@@ -57,11 +57,11 @@ public class XzjhAdapter extends BaseAdapter {
             holder = new ViewHolder();
             view = LayoutInflater.from(context).inflate(R.layout.xzjh_item, viewGroup, false);
             holder.cb = (CheckBox) view.findViewById(R.id.cb);
-            holder.tv_jhlx = (TextView) view.findViewById(R.id.tv_jhlx);
-            holder.tv_jhmc = (TextView) view.findViewById(R.id.tv_jhmc);
-            holder.tv_xh = (TextView) view.findViewById(R.id.tv_xh);
-            holder.tv_xzr = (TextView) view.findViewById(R.id.tv_xzr);
-            holder.tv_xzsj = (TextView) view.findViewById(R.id.tv_xzsj);
+            holder.tv_gwmc = (TextView) view.findViewById(R.id.tv_gwmc);
+            holder.tv_gwds = (TextView) view.findViewById(R.id.tv_gwds);
+//            holder.tv_xh = (TextView) view.findViewById(R.id.tv_xh);
+//            holder.tv_xzr = (TextView) view.findViewById(R.id.tv_xzr);
+//            holder.tv_xzsj = (TextView) view.findViewById(R.id.tv_xzsj);
             view.setTag(holder);
             AutoUtils.autoSize(view);
         } else {
@@ -70,13 +70,13 @@ public class XzjhAdapter extends BaseAdapter {
 
 
         holder.cb.setChecked(list.get(i).isChecked());
-        holder.tv_jhlx.setText(list.get(i).getDQSJ());
-        holder.tv_jhmc.setText(list.get(i).getJHMC());
-        holder.tv_xzr.setText(list.get(i).getXZR());
-        holder.tv_xzsj.setText(list.get(i).getXZSJ());
+        holder.tv_gwmc.setText(list.get(i).getGWMC());
+        holder.tv_gwds.setText(list.get(i).getGWDS());
+//        holder.tv_xzr.setText(list.get(i).getXZR());
+//        holder.tv_xzsj.setText(list.get(i).getXZSJ());
 
 
-        holder.tv_xh.setText(i + 1 + "");
+//        holder.tv_xh.setText(i + 1 + "");
         holder.cb.setTag(i);
         holder.cb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,10 +89,10 @@ public class XzjhAdapter extends BaseAdapter {
 
     static class ViewHolder {
         CheckBox cb;
-        TextView tv_xh;
-        TextView tv_jhmc;
-        TextView tv_jhlx;
-        TextView tv_xzr;
-        TextView tv_xzsj;
+        TextView tv_gwmc;
+        TextView tv_gwds;
+//        TextView tv_jhlx;
+//        TextView tv_xzr;
+//        TextView tv_xzsj;
     }
 }
