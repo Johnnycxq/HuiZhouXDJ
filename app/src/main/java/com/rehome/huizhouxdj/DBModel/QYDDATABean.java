@@ -33,7 +33,9 @@ public class QYDDATABean extends DataSupport implements Parcelable {
     private boolean SMFX;//扫描方式，0  NFC  1 一维码二维码
     private String CJJG;
     private String DATE;//保存时间
-
+    private String GWMC;
+    private String GWID;
+    private String QYBH;
 
     public QYDDATABean() {
     }
@@ -59,6 +61,9 @@ public class QYDDATABean extends DataSupport implements Parcelable {
         SMFX = in.readByte() != 0;
         CJJG = in.readString();
         DATE = in.readString();
+        GWMC = in.readString();
+        GWID = in.readString();
+        QYBH = in.readString();
     }
 
     public static final Creator<QYDDATABean> CREATOR = new Creator<QYDDATABean>() {
@@ -245,6 +250,30 @@ public class QYDDATABean extends DataSupport implements Parcelable {
         this.DATE = DATE;
     }
 
+    public String getGWMC() {
+        return GWMC;
+    }
+
+    public void setGWMC(String GWMC) {
+        this.GWMC = GWMC;
+    }
+
+    public String getGWID() {
+        return GWID;
+    }
+
+    public void setGWID(String GWID) {
+        this.GWID = GWID;
+    }
+
+    public String getQYBH() {
+        return QYBH;
+    }
+
+    public void setQYBH(String QYBH) {
+        this.QYBH = QYBH;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -271,5 +300,8 @@ public class QYDDATABean extends DataSupport implements Parcelable {
         dest.writeByte(this.SMFX ? (byte) 1 : (byte) 0);
         dest.writeString(CJJG);
         dest.writeString(DATE);
+        dest.writeString(GWMC);
+        dest.writeString(GWID);
+        dest.writeString(QYBH);
     }
 }

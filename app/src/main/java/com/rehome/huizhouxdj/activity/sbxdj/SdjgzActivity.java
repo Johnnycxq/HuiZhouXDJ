@@ -132,7 +132,7 @@ public class SdjgzActivity extends BaseActivity {
                     }
 
                     viewHolder.setText(R.id.tv_xh, item.getSN() + "");
-                    viewHolder.setText(R.id.tv_qymc, item.getQYMC());
+                    viewHolder.setText(R.id.tv_qymc, item.getGWMC() + "--" + item.getQYMC());
                     viewHolder.setText(R.id.tv_djrw, checkedCount + "/" + qyddataBeen.size());
 
                 }

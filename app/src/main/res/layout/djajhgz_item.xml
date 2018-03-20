@@ -59,7 +59,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="10px"
             android:layout_weight="2"
-            android:text="未检/点检总数" />
+            android:text="已检/点检总数" />
 
 
         <View

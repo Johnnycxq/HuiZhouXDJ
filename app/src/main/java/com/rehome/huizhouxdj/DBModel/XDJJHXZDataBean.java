@@ -38,6 +38,26 @@ public class XDJJHXZDataBean extends DataSupport implements Parcelable {
     private List<QYDDATABean> QYD_DATA = new ArrayList<>();
     private List<QYAQFXDATABean> QYAQFX_DATA = new ArrayList<>();
     private int SN; //自定义序号
+    private String GWMC;
+    private String countPercent;    //已检/总数
+    private boolean isChecked;
+
+
+    public String getCountPercent() {
+        return countPercent;
+    }
+
+    public void setCountPercent(String countPercent) {
+        this.countPercent = countPercent;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
 
     public long getId() {
         return id;
@@ -69,6 +89,9 @@ public class XDJJHXZDataBean extends DataSupport implements Parcelable {
         QYD_DATA = in.createTypedArrayList(QYDDATABean.CREATOR);
         QYAQFX_DATA = in.createTypedArrayList(QYAQFXDATABean.CREATOR);
         SN = in.readInt();
+        isChecked = in.readByte() != 0;
+        countPercent = in.readString();
+        GWMC = in.readString();
     }
 
     public static final Creator<XDJJHXZDataBean> CREATOR = new Creator<XDJJHXZDataBean>() {
@@ -155,6 +178,16 @@ public class XDJJHXZDataBean extends DataSupport implements Parcelable {
         this.QYAQFX_DATA = QYAQFX_DATA;
     }
 
+
+    public String getGWMC() {
+        return GWMC;
+    }
+
+    public void setGWMC(String GWMC) {
+        this.GWMC = GWMC;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -172,5 +205,8 @@ public class XDJJHXZDataBean extends DataSupport implements Parcelable {
         dest.writeTypedList(QYD_DATA);
         dest.writeTypedList(QYAQFX_DATA);
         dest.writeInt(SN);
+        dest.writeByte(this.isChecked ? (byte) 1 : (byte) 0);
+        dest.writeString(countPercent);
+        dest.writeString(GWMC);
     }
 }
