@@ -36,6 +36,9 @@ public class QYDDATABean extends DataSupport implements Parcelable {
     private String GWMC;
     private String GWID;
     private String QYBH;
+    private String QYEWM;
+    private String QYNFC;
+
 
     public QYDDATABean() {
     }
@@ -64,6 +67,8 @@ public class QYDDATABean extends DataSupport implements Parcelable {
         GWMC = in.readString();
         GWID = in.readString();
         QYBH = in.readString();
+        QYEWM = in.readString();
+        QYNFC = in.readString();
     }
 
     public static final Creator<QYDDATABean> CREATOR = new Creator<QYDDATABean>() {
@@ -274,6 +279,23 @@ public class QYDDATABean extends DataSupport implements Parcelable {
         this.QYBH = QYBH;
     }
 
+    public String getQYEWM() {
+        return QYEWM;
+    }
+
+    public void setQYEWM(String QYEWM) {
+        this.QYEWM = QYEWM;
+    }
+
+    public String getQYNFC() {
+        return QYNFC;
+    }
+
+    public void setQYNFC(String QYNFC) {
+        this.QYNFC = QYNFC;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -303,5 +325,7 @@ public class QYDDATABean extends DataSupport implements Parcelable {
         dest.writeString(GWMC);
         dest.writeString(GWID);
         dest.writeString(QYBH);
+        dest.writeString(QYEWM);
+        dest.writeString(QYNFC);
     }
 }

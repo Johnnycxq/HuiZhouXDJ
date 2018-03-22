@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EBEBEB"
+    android:orientation="vertical"
+    tools:context=".activity.aqjc.AqjcrwSaveActivity">
+
+    <include layout="@layout/toolbar" />
+
+
+    <EditText
+        android:id="@+id/et_wtqy"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:background="@android:color/white"
+        android:gravity="top"
+        android:hint="请输入问题区域:"
+        android:padding="5dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black" />
+
+    <EditText
+        android:id="@+id/et_wtms"
+        android:layout_width="match_parent"
+        android:layout_height="166dp"
+        android:layout_margin="5dp"
+        android:background="@android:color/white"
+        android:gravity="top"
+        android:hint="请输入问题描述:"
+        android:padding="5dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black" />
+
+    <GridView
+        android:id="@+id/gridView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:horizontalSpacing="5dp"
+        android:numColumns="3"
+        android:verticalSpacing="5dp" />
+
+    <TextView
+        android:id="@+id/find_comment_submit"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/border_red_roval_sign"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="@android:color/white" />
+</LinearLayout>

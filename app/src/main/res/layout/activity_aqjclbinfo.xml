@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_base" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20px"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tv_ST"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_70"
+            android:text="ST："
+            android:textSize="30px" />
+
+
+        <TextView
+            android:id="@+id/tv_ET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_70"
+            android:text="ET："
+            android:textSize="30px" />
+
+        <TextView
+            android:id="@+id/tv_LCFW"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_70"
+            android:text="LCFW："
+            android:textSize="30px" />
+
+        <TextView
+            android:id="@+id/tv_LCFF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_70"
+            android:text="LCFF："
+            android:textSize="30px" />
+
+        <TextView
+            android:id="@+id/tv_TJR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_70"
+            android:text="TJR："
+            android:textSize="30px"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_TJSJ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_70"
+            android:text="TJSJ："
+            android:textSize="30px"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+
+        <FrameLayout
+            android:id="@+id/FLLL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/xmll"
+            android:layout_margin="@dimen/px_5">
+
+            <ListView
+                android:id="@+id/lv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/px_10"
+                android:divider="#00000000"
+                android:dividerHeight="0px"></ListView>
+
+            <TextView
+                android:id="@+id/tv_nodata"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="暂无保存数据" />
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:id="@+id/xmll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_margin="5dp"
+            android:layout_marginTop="5px"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_sc"
+                style="@style/button"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="@dimen/px_20"
+                android:layout_marginRight="@dimen/px_20"
+                android:layout_weight="1"
+                android:text="上传" />
+
+            <Button
+                android:id="@+id/btn_del"
+                style="@style/button"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="@dimen/px_20"
+                android:layout_marginRight="@dimen/px_20"
+                android:layout_weight="1"
+                android:text="删除"
+                android:visibility="visible" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

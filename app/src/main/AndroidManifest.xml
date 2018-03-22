@@ -66,6 +66,22 @@
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.sbxdj.SdjgzActivity" />
         <activity android:name=".activity.sbxdj.YulActivity" />
+        <activity android:name=".activity.sbxj.XscbglActivity" />
+        <activity android:name=".activity.sbxj.XsBackLogActivity" />
+        <activity android:name=".activity.sbxj.XscbqyWorkActivity" />
+        <activity android:name=".activity.sbxj.XscbqyActivity" />
+        <activity android:name=".activity.sbxj.XscbqyWorkXsActivity" />
+        <activity android:name=".activity.sbxj.XsHistoryActivity" />
+        <activity android:name=".activity.sbxj.NFCInfoActivity" />
+
+        <activity android:name=".activity.aqjc.AqjclbActivity" />
+        <activity android:name=".activity.aqjc.AqjclbinfoActivity" />
+        <activity android:name=".activity.aqjc.AqjcrwlbActivity" />
+        <activity android:name=".activity.aqjc.AqjcrwlbinfoActivity" />
+        <activity android:name=".activity.aqjc.AqjcrwSaveActivity" />
+        <activity android:name=".activity.aqjc.MainAqjcActivity" />
+        <activity android:name=".activity.aqjc.AqZgrwSaveActivity" />
+        <activity android:name=".base.MipcaActivityCapture"/>
 
         <activity
             android:name="com.lidong.photopicker.PhotoPickerActivity"

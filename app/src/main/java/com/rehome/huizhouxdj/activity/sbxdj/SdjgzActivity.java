@@ -16,7 +16,6 @@ import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.adapter.CommonAdapter;
 import com.rehome.huizhouxdj.adapter.ViewHolder;
 import com.rehome.huizhouxdj.base.MipcaActivityCapture;
-import com.rehome.huizhouxdj.bean.DjAjhGzInfo;
 import com.rehome.huizhouxdj.contans.Contans;
 import com.rehome.huizhouxdj.utils.BaseActivity;
 import com.rehome.huizhouxdj.utils.UiUtlis;
@@ -44,7 +43,6 @@ public class SdjgzActivity extends BaseActivity {
     @BindView(R.id.tv_nodata)
     TextView tvNodata;
     private View headView;
-    private List<DjAjhGzInfo> list;
     private CommonAdapter<XDJJHXZDataBean> adapter;
     private String ewm;//二维码或者条形码
     private List<String> qys;
@@ -68,21 +66,19 @@ public class SdjgzActivity extends BaseActivity {
     public void initData() {
 
         initNFC();
-
-
-        map = new HashMap<>();
-        list = new ArrayList<>();
-        qys = new ArrayList<>();
-        qyAll = new ArrayList<>();
-
-
         setTitle("工作");
         setBack();
+
+        map = new HashMap<>();
+        qys = new ArrayList<>();
+        qyAll = new ArrayList<>();
+        getDataInSqlite();
+        setListData();
 
         btn_sm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (list.size() != 0) {
+                if (xdjjhxzDataBeanList.size() != 0) {
                     Intent intent = new Intent(SdjgzActivity.this, MipcaActivityCapture.class);
                     startActivityForResult(intent, 1);
                 } else {
@@ -90,8 +86,7 @@ public class SdjgzActivity extends BaseActivity {
                 }
             }
         });
-        getDataInSqlite();
-        setListData();
+
     }
 
 
@@ -167,7 +162,7 @@ public class SdjgzActivity extends BaseActivity {
                                 Intent intent = new Intent(SdjgzActivity.this, YulActivity.class);
                                 Bundle bundle = new Bundle();
                                 bundle.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
-                                bundle.putBoolean("edit", true);
+                                bundle.putBoolean("edit", false);
                                 bundle.putInt(Contans.KEY_ITEM, 0);
                                 intent.putExtras(bundle);
                                 startActivity(intent);
@@ -193,11 +188,22 @@ public class SdjgzActivity extends BaseActivity {
                 if (resultCode == RESULT_OK) {
                     Bundle bundle = data.getExtras();
                     ewm = bundle.getString("result");
-//                    Intent intent = new Intent(SdjgzActivity.this, SdlbActivity.class);
-//                    intent.putExtra(Contans.NFCOREWM, true);
-//                    intent.putExtra(Contans.KEY_BQBM, ewm);
-//                    intent.putExtra(Contans.KEY_FLAG, Contans.DLB);
-//                    startActivity(intent);
+
+                    List<QYDDATABean> qydDataBeen = DataSupport.where("QYEWM = ?", ewm).find(QYDDATABean.class);//ewm是根据扫描得到的二维码结果来查询
+
+                    qyddataBeanList.clear();
+                    qyddataBeanList.addAll(qydDataBeen);
+
+
+                    Intent intent = new Intent(SdjgzActivity.this, YulActivity.class);
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
+                    bundle2.putBoolean("edit", true);
+                    bundle2.putInt(Contans.KEY_ITEM, 0);
+                    intent.putExtras(bundle2);
+                    startActivity(intent);
+
+
                 }
                 break;
         }
@@ -214,14 +220,20 @@ public class SdjgzActivity extends BaseActivity {
     @Override
     public void handleNfc(String result) {
         super.handleNfc(result);
-//        if (list.size() != 0) {
-//            Intent intent = new Intent(SdjgzActivity.this, SdlbActivity.class);
-//            intent.putExtra(Contans.NFCOREWM, false);
-//            intent.putExtra(Contans.KEY_BQBM, result);
-//            intent.putExtra(Contans.KEY_FLAG, Contans.DLB);
-//            startActivity(intent);
-//        } else {
-//            showToast("你还没有计划");
-//        }
+
+        List<QYDDATABean> qydDataBeen = DataSupport.where("QYNFC = ?", result).find(QYDDATABean.class);
+
+        qyddataBeanList.clear();
+        qyddataBeanList.addAll(qydDataBeen);
+
+
+        Intent intent = new Intent(SdjgzActivity.this, YulActivity.class);
+        Bundle bundle2 = new Bundle();
+        bundle2.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
+        bundle2.putBoolean("edit", true);
+        bundle2.putInt(Contans.KEY_ITEM, 0);
+        intent.putExtras(bundle2);
+        startActivity(intent);
+
     }
 }

@@ -117,7 +117,7 @@ public class YulActivity extends BaseActivity {
                 Intent intent = new Intent(YulActivity.this, SbxdjcjsbActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putParcelableArrayList(Contans.KEY_DJJHRWQY, djjhs);
-                bundle.putBoolean("edit", true);
+                bundle.putBoolean("edit", isEdit);
                 bundle.putInt(Contans.KEY_ITEM, position - 1);
                 intent.putExtras(bundle);
                 startActivity(intent);

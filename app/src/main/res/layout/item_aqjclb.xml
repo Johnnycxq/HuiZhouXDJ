@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="210px">
+
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_JHMC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_70"
+            android:text="JHMC："
+            android:textSize="35px" />
+
+        <TextView
+            android:id="@+id/tv_ST"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_70"
+            android:text="ST："
+            android:textSize="35px" />
+
+
+        <TextView
+            android:id="@+id/tv_ET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_70"
+            android:text="ET："
+            android:textSize="35px" />
+
+        <TextView
+            android:id="@+id/tv_LCFW"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_70"
+            android:visibility="gone"
+            android:text="LCFW："
+            android:textSize="35px" />
+
+        <TextView
+            android:id="@+id/tv_TJR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_70"
+            android:visibility="gone"
+            android:text="TJR："
+            android:textSize="35px" />
+
+        <TextView
+            android:id="@+id/tv_TJSJ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5px"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:minHeight="@dimen/px_70"
+            android:text="TJSJ："
+            android:textSize="35px" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

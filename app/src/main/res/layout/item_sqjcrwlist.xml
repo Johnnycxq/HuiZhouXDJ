@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#EBEBEB"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/px_5"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_JHMC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_70"
+            android:text="JHMC："
+            android:textSize="35px"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_WTQY"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_70"
+            android:text="WTQY："
+            android:textSize="35px" />
+
+
+        <TextView
+            android:id="@+id/tv_WTMS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_70"
+            android:text="WTMS："
+            android:textSize="35px"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_FXLB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_70"
+            android:text="ZGYJ："
+            android:textSize="35px"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_ZRBM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_70"
+            android:text="ZGBM："
+            android:textSize="35px"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_ZGZRR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_70"
+            android:text="ZGZRR："
+            android:textSize="35px"
+            android:visibility="gone" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

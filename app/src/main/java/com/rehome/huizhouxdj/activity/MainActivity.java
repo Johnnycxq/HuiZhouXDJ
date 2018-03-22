@@ -21,16 +21,27 @@ import android.widget.GridView;
 
 import com.rehome.huizhouxdj.DBModel.XwaqgcJh;
 import com.rehome.huizhouxdj.R;
+import com.rehome.huizhouxdj.activity.aqjc.MainAqjcActivity;
 import com.rehome.huizhouxdj.activity.sbxdj.MainSbxdjglActivity;
+import com.rehome.huizhouxdj.activity.sbxj.XscbglActivity;
 import com.rehome.huizhouxdj.adapter.GridViewAdapter;
+import com.rehome.huizhouxdj.bean.BasicDataBean;
 import com.rehome.huizhouxdj.bean.GridViewBean;
 import com.rehome.huizhouxdj.bean.PushInfo;
+import com.rehome.huizhouxdj.bean.XsRequestInfo;
 import com.rehome.huizhouxdj.contans.Contans;
 import com.rehome.huizhouxdj.service.PushService;
 import com.rehome.huizhouxdj.utils.BaseActivity;
 import com.rehome.huizhouxdj.utils.ControllerActivity;
+import com.rehome.huizhouxdj.utils.GsonUtils;
+import com.rehome.huizhouxdj.utils.HttpListener;
 import com.rehome.huizhouxdj.utils.NohttpUtils;
 import com.rehome.huizhouxdj.utils.SPUtils;
+import com.rehome.huizhouxdj.weight.ListDialog;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.Response;
 
 import org.litepal.crud.DataSupport;
 
@@ -47,14 +58,14 @@ public class MainActivity extends BaseActivity {
     private GridViewAdapter adapter;
     private MsgReceiver msgReceiver;
     private PushInfo.Push push;
-    private List<String> dialogDatas;
     private boolean isTask = false;//是否有任务
     private long exitTime = 0;
-    private String str[] = {"设备巡点检"};
-    private int[] imageId = {R.mipmap.icon8};
-    private int[] colors = {R.drawable.radius_a1};
+    private String str[] = {"设备巡点检", "巡视抄表", "安全检查"};
+    private int[] imageId = {R.mipmap.icon8, R.mipmap.icon6, R.mipmap.icon10};
+    private int[] colors = {R.drawable.radius_a1, R.drawable.radius_e3, R.drawable.radius_a3};
     private List<Integer> item;
-
+    private List<String> dialogDatas;
+    private List<BasicDataBean.DataBean> zys;
 
     @Override
     public int getContentViewID() {
@@ -77,24 +88,17 @@ public class MainActivity extends BaseActivity {
 
     }
 
-//
-//    //后台上传数据
-//    private void upLoadData() {
-//        //如果有网络，就上传数据
-//        if (NetworkAvailableUtils.isNetworkAvailable(this)) {
-//            Intent intent = new Intent(this, UploadDataService.class);
-//            startService(intent);
-//        }
-//    }
-
 
     public void initData() {
 
-        mToolbar.setBackgroundColor(Color.parseColor("#00000000"));
 
         title.setText("设备设施巡查");
-
         setExitZx();
+
+        zys = new ArrayList<>();
+        dialogDatas = new ArrayList<>();
+        mToolbar.setBackgroundColor(Color.parseColor("#00000000"));
+
 
         item = new ArrayList<>();
 
@@ -102,16 +106,14 @@ public class MainActivity extends BaseActivity {
 
         checkPush();
 
-        try {
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         beanList.addAll(getGridViewData(isTask));
 
         gv.setSelector(new ColorDrawable(Color.TRANSPARENT));
         adapter = new GridViewAdapter(this, beanList, item, Contans.TEST);
         gv.setAdapter(adapter);
+
+        requestZyDatas();
 
 
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -124,12 +126,83 @@ public class MainActivity extends BaseActivity {
                         intent = new Intent(MainActivity.this, MainSbxdjglActivity.class);
                         startActivity(intent);
                         break;
+                    case 1:
+                        if (dialogDatas.size() == 0) {
+                            intent = new Intent(MainActivity.this, XscbglActivity.class);
+                            startActivity(intent);
+                        } else {
+                            ListDialog dialog2 = new ListDialog(context, dialogDatas, new ListDialog.ListDialogListener() {
+                                @Override
+                                public void selectText(String str, int position) {
 
+                                    Contans.YXCB_ZY_ID = zys.get(position).getId();
+                                    Contans.YXCB_ZY_NAME = str;
+                                    Intent intent = new Intent(MainActivity.this, XscbglActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
+                            dialog2.show();
+                        }
+                        break;
+                    case 2:
+                        intent = new Intent(MainActivity.this, MainAqjcActivity.class);
+                        startActivity(intent);
+                        break;
 
                 }
             }
         });
 
+    }
+
+    private void requestZyDatas() {
+
+        final Request<String> requset = NoHttp.createStringRequest("http://219.131.195.3:8081/" + Contans.XS_JCSJ, RequestMethod.
+                POST);
+
+        requset.setDefineRequestBodyForJson(createZyJson());
+
+        NohttpUtils.getInstance().add(this, 0, requset, new HttpListener<String>() {
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+
+                try {
+                    BasicDataBean bean = GsonUtils.GsonToBean(response.get(), BasicDataBean.class);
+                    if (bean != null) {
+                        if (bean.getState() == 1) {
+                            if (bean.getData().size() != 0) {
+                                zys.clear();
+                                zys.addAll(bean.getData());
+                                initDialogDatas();
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailed(int what, Response<String> response) {
+
+            }
+        });
+    }
+
+    private void initDialogDatas() {
+
+        for (BasicDataBean.DataBean bean : zys) {
+            dialogDatas.add(bean.getName());
+        }
+    }
+
+
+    private String createZyJson() {
+        XsRequestInfo info = new XsRequestInfo();
+        info.setAction("GGJK_JCSJ_GET");
+        info.setModuletype("Set_ZYMC");
+        String json = GsonUtils.GsonString(info);
+        return json;
     }
 
 
@@ -199,6 +272,8 @@ public class MainActivity extends BaseActivity {
             if (!result.isEmpty()) {
                 String[] results = result.split(";");
                 item.add(0);
+                item.add(1);
+                item.add(2);
                 for (String name : results) {
                     if (name.equals("AppDJGL")) {
                         item.add(0);
@@ -217,110 +292,6 @@ public class MainActivity extends BaseActivity {
         }
         return item;
     }
-
-//    //删除过期计划
-//    private void deleteOverdueJH() {
-//
-//        List<String> djjhs = new ArrayList<>();
-//        List<String> xfDjjhs = new ArrayList<>();
-//        List<String> ajhjhs = new ArrayList<>();
-//        List<String> xwaqgcJhs = new ArrayList<>();
-//
-//        List<Djjh> djjh = DataSupport.findAll(Djjh.class);
-//        for (Djjh jh : djjh) {
-//            if (UiUtlis.isdelete(jh.getGWID())) {
-//                djjhs.add(jh.getGWID());
-//            }
-//        }
-//        List<Ajhjh> ajhjh = DataSupport.findAll(Ajhjh.class);
-//        for (Ajhjh jh : ajhjh) {
-//            if (UiUtlis.isdelete(jh.getDQSJ())) {
-//                ajhjhs.add(jh.getJHID());
-//            }
-//        }
-//        List<XfDjjh> xfDjjh = DataSupport.findAll(XfDjjh.class);
-//        for (XfDjjh jh : xfDjjh) {
-//            if (UiUtlis.isdelete(jh.getNexttime())) {
-//                xfDjjhs.add(jh.getJhid());
-//            }
-//        }
-//
-//        List<XwaqgcJh> xwaqgcJh = DataSupport.findAll(XwaqgcJh.class);
-//
-//        for (XwaqgcJh jh : xwaqgcJh) {
-//            if (UiUtlis.isdelete(jh.getDQSJ())) {
-//                xwaqgcJhs.add(jh.getJHID());
-//            }
-//        }
-//        //删除点检数据
-//        for (String jhid : djjhs) {
-//            DataSupport.deleteAll(Djjh.class, "jhid = ?", jhid);
-//            DataSupport.deleteAll(DjjhRwQy.class, "jhid = ?", jhid);
-//            List<XcjsInfo> infos = DataSupport.where("jhid = ?", jhid).find(XcjsInfo.class);
-//            for (XcjsInfo info : infos) {
-//                File file = new File(info.getFilename());
-//                if (file.isFile()) {
-//                    file.delete();
-//                }
-//            }
-//            DataSupport.deleteAll(XcjsInfo.class, "jhid = ?", jhid);
-//            DataSupport.deleteAll(QxgdInfo.class);
-//        }
-//
-//        //删除安健环数据
-//        for (String jhid : ajhjhs) {
-//            List<Ajhxcjs> ajhxcjses = DataSupport.findAll(Ajhxcjs.class);
-//            for (Ajhxcjs js : ajhxcjses) {
-//                File file = new File(js.getFile());
-//                if (file.isFile()) {
-//                    file.delete();
-//                }
-//            }
-//            DataSupport.deleteAll(Ajhxcjs.class, "jhid = ?", jhid);
-//            DataSupport.deleteAll(Ajhjh.class, "jhid = ?", jhid);
-//            DataSupport.deleteAll(Ajhxzrwqy.class, "jhid = ?", jhid);
-//            DataSupport.deleteAll(AjhScInfo.class, "jhid = ?", jhid);
-//            DataSupport.deleteAll(YhpcInfo.class);
-//        }
-//
-//        //删除消防数据
-//        for (String jhid : xfDjjhs) {
-//
-//            List<XfXcjsInfo> infos = DataSupport.where("jhid = ?", jhid).find(XfXcjsInfo.class);
-//            for (XfXcjsInfo info : infos) {
-//                File file = new File(info.getPath());
-//                if (file.isFile()) {
-//                    file.delete();
-//                }
-//            }
-//
-//            List<LyXcjsInfo> lyjs = DataSupport.where("jhid = ?", jhid).find(LyXcjsInfo.class);
-//            for (LyXcjsInfo info : lyjs) {
-//                File file = new File(info.getPath());
-//                if (file.isFile()) {
-//                    file.delete();
-//                }
-//            }
-//            DataSupport.deleteAll(XfDjjh.class, "jhid = ?", jhid);
-//            DataSupport.deleteAll(XfDjjhRwqy.class, "jhid = ?", jhid);
-//            DataSupport.deleteAll(XfXcjsInfo.class, "jhid = ?", jhid);
-//            DataSupport.deleteAll(XfXcxmjg.class, "jhid = ?", jhid);
-//            DataSupport.deleteAll(XfXcmhqc.class, "jhid = ?", jhid);
-//            DataSupport.deleteAll(XfBaxcRwqy.class, "jhid = ?", jhid);
-//            DataSupport.deleteAll(XfXcxm.class, "jhid = ?", jhid);
-//            DataSupport.deleteAll(Lyxcrwqy.class, "jhid = ?", jhid);
-//            DataSupport.deleteAll(LyxcXm.class, "jhid = ?", jhid);
-//            DataSupport.deleteAll(LyXcjsInfo.class, "jhid = ?", jhid);
-//            DataSupport.deleteAll(LyxcXmJg.class, "jhid = ?", jhid);
-//            DataSupport.deleteAll(LyYhpcInfo.class);
-//        }
-//
-//        for (String jh : xwaqgcJhs) {
-//            DataSupport.deleteAll(XwaqgcJh.class, "jhid = ?", jh);
-//            DataSupport.deleteAll(XwaqgcSc.class, "jhid = ?", jh);
-//            DataSupport.deleteAll(XwaqgcJs.class, "jhid = ?", jh);
-//        }
-//    }
 
 
     @Override

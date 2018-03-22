@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    
+    <TextView
+        android:id="@+id/tv_jhmc"
+        android:textColor="@color/blue"
+        android:drawablePadding="20px"
+        android:textSize="35px"
+        android:gravity="center_vertical"
+        android:drawableLeft="@mipmap/icon_plan"
+        android:text="计划"
+        android:layout_width="match_parent"
+        android:layout_height="100px" />
+
+</LinearLayout>

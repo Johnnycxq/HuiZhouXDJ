@@ -33,9 +33,7 @@ import com.yolanda.nohttp.rest.Response;
 
 import org.litepal.crud.DataSupport;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,6 +61,7 @@ public class DjdscFragment extends BaseFragment {
     private ScjhAdapter adapter;
     private WaitDialog dialog;
     private RequestQueue queue;
+    private List<XDJJHXZDataBean> removelist;
 
     public DjdscFragment() {
 
@@ -127,7 +126,7 @@ public class DjdscFragment extends BaseFragment {
     }
 
     public void initData() {
-
+        removelist = new ArrayList<>();
         queue = NoHttp.newRequestQueue(1);
 
 
@@ -260,7 +259,9 @@ public class DjdscFragment extends BaseFragment {
 
     private int noCheck = 0;
 
-    private void uploadData() {//上传点检计划
+    private void uploadData() {   //上传点检计划
+
+        removelist.clear();
 
         noCheck = 0;//没有检查的数量
 
@@ -284,53 +285,58 @@ public class DjdscFragment extends BaseFragment {
 
             if (xdjjhxzDataList.get(i).isChecked()) {
 
-                //获取map中选中的QYDDATABean
 
-                List<QYDDATABean> qyddataBeanList = qydDataBeanMap.get(xdjjhxzDataList.get(i).getGWID());
+                showToast(xdjjhxzDataList.get(i).getGWID());
 
-                scdjjhbean.setGWID(xdjjhxzDataList.get(i).getGWID());
-
-                dhdata.setQYBH(xdjjhxzDataList.get(i).getQYBH());
-
-                dhdata.setQYDJ_ST(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-
-                for (int j = 0; j < qyddataBeanList.size(); j++) {
-
-                    ScdjjhBean.DJ_DATA.QYDJ_DATA qydj_data = new ScdjjhBean.DJ_DATA.QYDJ_DATA();
-
-                    qydj_data.setSCID(qyddataBeanList.get(j).getSCID());
-
-                    if (qyddataBeanList.get(j).getCJJG() == null) {
-
-                        qydj_data.setDJSZ("");
-
-                    } else {
-
-                        qydj_data.setDJSZ(qyddataBeanList.get(j).getCJJG());
-
-                    }
-
-                    if (qyddataBeanList.get(j).getDATE() == null) {
-
-                        qydj_data.setDJSJ("");
-
-                    } else {
-
-                        qydj_data.setDJSJ(qyddataBeanList.get(j).getDATE());
-
-                    }
-
-
-                    qydj_data.setFXNR("");
-
-                    qydj_data.setSMFS("");
-
-                    qydjDataList.add(qydj_data);
-                }
-
-                dhdata.setQYDJ_DATA(qydjDataList);
-
-                djDataList.add(dhdata);
+//                //获取map中选中的QYDDATABean
+//
+//                List<QYDDATABean> qyddataBeanList = qydDataBeanMap.get(xdjjhxzDataList.get(i).getGWID());
+//
+//                scdjjhbean.setGWID(xdjjhxzDataList.get(i).getGWID());
+//
+//                dhdata.setQYBH(xdjjhxzDataList.get(i).getQYBH());
+//
+//                dhdata.setQYDJ_ST(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+//
+//                for (int j = 0; j < qyddataBeanList.size(); j++) {
+//
+//                    ScdjjhBean.DJ_DATA.QYDJ_DATA qydj_data = new ScdjjhBean.DJ_DATA.QYDJ_DATA();
+//
+//                    qydj_data.setSCID(qyddataBeanList.get(j).getSCID());
+//
+//                    if (qyddataBeanList.get(j).getCJJG() == null) {
+//
+//                        qydj_data.setDJSZ("");
+//
+//                    } else {
+//
+//                        qydj_data.setDJSZ(qyddataBeanList.get(j).getCJJG());
+//
+//                    }
+//
+//                    if (qyddataBeanList.get(j).getDATE() == null) {
+//
+//                        qydj_data.setDJSJ("");
+//
+//                    } else {
+//
+//                        qydj_data.setDJSJ(qyddataBeanList.get(j).getDATE());
+//
+//                    }
+//
+//
+//                    qydj_data.setFXNR("");
+//
+//                    qydj_data.setSMFS("");
+//
+//                    qydjDataList.add(qydj_data);
+//                }
+//
+//                dhdata.setQYDJ_DATA(qydjDataList);
+//
+//                djDataList.add(dhdata);
+//
+//                removelist.add(xdjjhxzDataList.get(i));
 
             } else {
                 noCheck++;//代表有没有检查的数量
@@ -341,30 +347,30 @@ public class DjdscFragment extends BaseFragment {
         scdjjhbean.setDJ_DATA(djDataList);
 
         //上传
-        final String json = GsonUtils.GsonString(scdjjhbean);
-
-        if (noCheck > 0) {  //如果未检查的数量大于0 则提示有未检查的项目
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("提示");
-            builder.setTitle("你还有项目未检查，是否上传？");
-            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    sCData(json);
-                }
-            });
-            builder.show();
-
-        } else {
-            sCData(json);
-        }
+//        final String json = GsonUtils.GsonString(scdjjhbean);
+//
+//        if (noCheck > 0) {  //如果未检查的数量大于0 则提示有未检查的项目
+//
+//            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//            builder.setTitle("提示");
+//            builder.setTitle("你还有项目未检查，是否上传？");
+//            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    dialog.dismiss();
+//                }
+//            });
+//            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    sCData(json);
+//                }
+//            });
+//            builder.show();
+//
+//        } else {
+//            sCData(json);
+//        }
 
     }
 
@@ -381,6 +387,7 @@ public class DjdscFragment extends BaseFragment {
             Log.e("11", response.get());
 
             StatusInfo2 info = GsonUtils.GsonToBean(response.get(), StatusInfo2.class);
+
             try {
                 switch (what) {
 
@@ -388,17 +395,29 @@ public class DjdscFragment extends BaseFragment {
 
                         if (info.getState() == 1) { //成功
 
-
                             showToast("上传数据成功");
 
-                            //这里处理那个删除item，更新UI
-                            for (int i = 0; i < xdjjhxzDataList.size(); i++) {
-                                if (xdjjhxzDataList.get(i).isChecked()) {
-                                    xdjjhxzDataList.remove(xdjjhxzDataList.get(i));
-                                }
-                            }
+                            removeData();
+
+//                            //这里处理那个删除item，更新UI
+//                            for (int i = 0; i < xdjjhxzDataList.size(); i++) {
+//
+//                                if (xdjjhxzDataList.get(i).isChecked()) {
+//
+//                                    xdjjhxzDataList.remove(xdjjhxzDataList.get(i));
+//
+//                                    DataSupport.deleteAll(XDJJHXZDataBean.class, "GWID = ?", xdjjhxzDataList.get(i).getGWID());
+//
+//                                    DataSupport.deleteAll(Djjh.class, "GWID = ?", xdjjhxzDataList.get(i).getGWID());
+//
+//                                }
+//                            }
 
                             adapter.notifyDataSetChanged();
+
+                        } else {
+
+                            showToast("上传数据失败");
 
                         }
 
@@ -422,51 +441,59 @@ public class DjdscFragment extends BaseFragment {
     };
 
 
+    //上传成功，移除数据
+    private void removeData() {
+
+        for (XDJJHXZDataBean xdjjhxzdatabean : removelist) {
+
+            DataSupport.deleteAll(XDJJHXZDataBean.class, "GWID = ?", xdjjhxzdatabean.getGWID());
+
+            DataSupport.deleteAll(Djjh.class, "GWID = ?", xdjjhxzdatabean.getGWID());
+        }
+
+    }
+
+
     //    //删除数据
     private void deleteData() {
-        //已检查的项目
-        final List<XDJJHXZDataBean> deletes = new ArrayList<>();
-        int select = 0;
-        for (int i = 0; i < xdjjhxzDataList.size(); i++) {
-            if (xdjjhxzDataList.get(i).isChecked()) {
-                deletes.add(xdjjhxzDataList.get(i));
-                select++;
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("提示");
+        builder.setTitle("你确定要删除？");
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
             }
-        }
+        });
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
-        if (select != 0) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("提示");
-            builder.setTitle("你确定要删除？");
-            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+                for (int i = 0; i < xdjjhxzDataList.size(); i++) {
 
-                    for (XDJJHXZDataBean xdjjhzxdatabean : deletes) {
+                    if (xdjjhxzDataList.get(i).isChecked()) {
 
-                        DataSupport.deleteAll(XDJJHXZDataBean.class, "GWID = ?", xdjjhzxdatabean.getGWID());
+                        DataSupport.deleteAll(XDJJHXZDataBean.class, "GWID = ?", xdjjhxzDataList.get(i).getGWID());
 
-                        DataSupport.deleteAll(Djjh.class, "GWID = ?", xdjjhzxdatabean.getGWID());
+                        DataSupport.deleteAll(QYDDATABean.class, "GWID = ?", xdjjhxzDataList.get(i).getGWID());
+
+                        DataSupport.deleteAll(Djjh.class, "GWID = ?", xdjjhxzDataList.get(i).getGWID());
                     }
-                    //刷新界面
-                    getDataInSQL();
 
-                    if (adapter != null) {
-
-                        adapter.notifyDataSetChanged();
-                    }
                 }
-            });
-            builder.show();
-        } else {
-            showToast("你还没有选择项目");
-        }
+
+                //刷新界面
+                getDataInSQL();
+
+                if (adapter != null) {
+
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+        builder.show();
+
     }
 
 
