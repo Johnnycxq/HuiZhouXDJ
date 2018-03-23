@@ -22,6 +22,7 @@ import android.widget.GridView;
 import com.rehome.huizhouxdj.DBModel.XwaqgcJh;
 import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.activity.aqjc.MainAqjcActivity;
+import com.rehome.huizhouxdj.activity.qfgd.MainQfActivity;
 import com.rehome.huizhouxdj.activity.sbxdj.MainSbxdjglActivity;
 import com.rehome.huizhouxdj.activity.sbxj.XscbglActivity;
 import com.rehome.huizhouxdj.adapter.GridViewAdapter;
@@ -60,9 +61,9 @@ public class MainActivity extends BaseActivity {
     private PushInfo.Push push;
     private boolean isTask = false;//是否有任务
     private long exitTime = 0;
-    private String str[] = {"设备巡点检", "巡视抄表", "安全检查"};
-    private int[] imageId = {R.mipmap.icon8, R.mipmap.icon6, R.mipmap.icon10};
-    private int[] colors = {R.drawable.radius_a1, R.drawable.radius_e3, R.drawable.radius_a3};
+    private String str[] = {"设备巡点检", "巡视抄表", "安全检查", "Q4工单"};
+    private int[] imageId = {R.mipmap.icon8, R.mipmap.icon6, R.mipmap.icon10, R.mipmap.icon9};
+    private int[] colors = {R.drawable.radius_a1, R.drawable.radius_e3, R.drawable.radius_a3, R.drawable.radius_a2};
     private List<Integer> item;
     private List<String> dialogDatas;
     private List<BasicDataBean.DataBean> zys;
@@ -149,6 +150,12 @@ public class MainActivity extends BaseActivity {
                         startActivity(intent);
                         break;
 
+                    case 3:
+                        intent = new Intent(MainActivity.this, MainQfActivity.class);
+                        startActivity(intent);
+                        break;
+
+
                 }
             }
         });
@@ -157,7 +164,7 @@ public class MainActivity extends BaseActivity {
 
     private void requestZyDatas() {
 
-        final Request<String> requset = NoHttp.createStringRequest("http://219.131.195.3:8081/" + Contans.XS_JCSJ, RequestMethod.
+        final Request<String> requset = NoHttp.createStringRequest(Contans.IP + Contans.XS_JCSJ, RequestMethod.
                 POST);
 
         requset.setDefineRequestBodyForJson(createZyJson());
@@ -274,6 +281,7 @@ public class MainActivity extends BaseActivity {
                 item.add(0);
                 item.add(1);
                 item.add(2);
+                item.add(3);
                 for (String name : results) {
                     if (name.equals("AppDJGL")) {
                         item.add(0);

@@ -194,9 +194,12 @@ public class Contans {
     //==============================巡视抄表=========================================//
 
     public final static String XSCB = "XSCB/XSCB_JHGL.ashx";//巡视抄表
+
     public final static String XSDJ = "DQGZ/DQGZ_CHGL.ashx";//定期工作
 
     public final static String SBLC = "SBLC/SBLC_JHGL.ashx";
+
+    public final static String QFGD = "Q4GD/Q4GD_CKGL.ashx";
 
     public final static String AQJC = "AQJC/AQJC_JHGL.ashx";
 

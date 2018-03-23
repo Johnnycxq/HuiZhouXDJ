@@ -81,7 +81,11 @@
         <activity android:name=".activity.aqjc.AqjcrwSaveActivity" />
         <activity android:name=".activity.aqjc.MainAqjcActivity" />
         <activity android:name=".activity.aqjc.AqZgrwSaveActivity" />
-        <activity android:name=".base.MipcaActivityCapture"/>
+        <activity android:name=".base.MipcaActivityCapture" />
+
+        <activity android:name=".activity.qfgd.MainQfActivity" />
+        <activity android:name=".activity.qfgd.bpbjActivity" />
+
 
         <activity
             android:name="com.lidong.photopicker.PhotoPickerActivity"
