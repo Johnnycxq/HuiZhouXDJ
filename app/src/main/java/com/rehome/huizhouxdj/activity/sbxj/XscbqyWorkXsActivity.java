@@ -37,9 +37,9 @@ import butterknife.OnClick;
  */
 public class XscbqyWorkXsActivity extends BaseActivity {
 
-    private static final String JHLX_XS = "51";//巡视
-    private static final String JHLX_CB = "52";//抄表
-    private static final String JHLX_DJ = "53";//定检
+    private static final String JHLX_XS = "1";//巡视
+    private static final String JHLX_CB = "2";//抄表
+    private static final String JHLX_DJ = "3";//定检
 
     @BindView(R.id.lv)
     AutoListView lv;

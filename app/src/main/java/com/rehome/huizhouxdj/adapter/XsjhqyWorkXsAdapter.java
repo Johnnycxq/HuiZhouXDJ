@@ -23,6 +23,7 @@ import java.util.List;
 
 public class XsjhqyWorkXsAdapter extends CommonAdapter<XsjhQyBean.DataBeanX.DataBean> {
 
+
     private Context context;
     private List<XsjhQyBean.DataBeanX.DataBean> datas;
     private boolean histroy;

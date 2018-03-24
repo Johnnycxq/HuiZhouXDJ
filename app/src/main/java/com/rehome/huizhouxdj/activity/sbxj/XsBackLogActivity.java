@@ -29,7 +29,6 @@ import butterknife.BindView;
  * 待办任务
  */
 public class XsBackLogActivity extends BaseActivity {
-
     @BindView(R.id.lv)
     ListView lv;
 

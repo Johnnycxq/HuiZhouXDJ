@@ -207,7 +207,7 @@ public class MainActivity extends BaseActivity {
     private String createZyJson() {
         XsRequestInfo info = new XsRequestInfo();
         info.setAction("GGJK_JCSJ_GET");
-        info.setModuletype("Set_ZYMC");
+        info.setModuletype("XJGL_ZYMC");
         String json = GsonUtils.GsonString(info);
         return json;
     }

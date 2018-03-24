@@ -32,7 +32,6 @@ import butterknife.BindView;
  * 巡视工作区域列表
  */
 public class XscbqyActivity extends BaseActivity {
-
     @BindView(R.id.lv)
     ListView lv;
     private XsJhListBean.DataBean xscbjh;
@@ -58,9 +57,9 @@ public class XscbqyActivity extends BaseActivity {
         xscbjh = (XsJhListBean.DataBean) getIntent().getExtras().get(Contans.KEY_XSCBJH);
         isHistory = getIntent().getExtras().getBoolean(Contans.KEY_XS_HISTORY, false);
 
-        if (QX == null) {
+        if (QX == null){
 
-        } else {
+        }else {
 
             QX = getIntent().getExtras().getString("QX");//如果权限为1 可以修改历史记录
 
@@ -68,6 +67,8 @@ public class XscbqyActivity extends BaseActivity {
 
 
         }
+
+
 
 
         qys = new ArrayList<>();

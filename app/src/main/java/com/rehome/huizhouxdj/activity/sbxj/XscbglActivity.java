@@ -28,9 +28,9 @@ public class XscbglActivity extends BaseActivity {
     @BindView(R.id.gv)
     GridView gv;
 
-    private String[] str = {"待办任务", "历史抄表", "读取NFC标签"};
-    private int[] imageId = {R.mipmap.icon_xs1, R.mipmap.icon_xs5, R.mipmap.icon11};
-    private int[] colors = {R.drawable.radius_b1, R.drawable.radius_a4, R.drawable.radius_b2};
+    private String[] str = {"待办任务","历史抄表","读取NFC标签"};
+    private int[] imageId = {R.mipmap.icon_xs1,R.mipmap.icon_xs5, R.mipmap.icon11};
+    private int[] colors = {R.drawable.radius_b1,R.drawable.radius_a4, R.drawable.radius_b2};
     private GridViewAdapter adapter;
 
     @Override
@@ -48,7 +48,7 @@ public class XscbglActivity extends BaseActivity {
 
         mToolbar.setBackgroundColor(Color.parseColor("#00000000"));
 
-        setTitle("巡视抄表-" + Contans.YXCB_ZY_NAME);
+        setTitle("巡视抄表-"+ Contans.YXCB_ZY_NAME);
 
         setBack();
 
