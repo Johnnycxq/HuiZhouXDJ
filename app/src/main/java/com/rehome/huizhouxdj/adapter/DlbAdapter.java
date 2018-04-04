@@ -1,6 +1,7 @@
 package com.rehome.huizhouxdj.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,8 +66,10 @@ public class DlbAdapter extends BaseAdapter {
 
         if (list.get(i).isStatu()) {
             holder.tv_zt.setText("已检");
+            holder.tv_zt.setTextColor(Color.GREEN);
         } else {
             holder.tv_zt.setText("未检");
+            holder.tv_zt.setTextColor(Color.RED);
         }
         return view;
     }

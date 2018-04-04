@@ -61,7 +61,7 @@ public class XzjhFragment extends BaseFragment {
     Unbinder unbinder;
 
     private WaitDialog dialog;
-    private SxcdjActivity mActivity;
+    private DjMainActivity mActivity;
     private View headView;
     private View head;
     private XzjhAdapter adapter;
@@ -96,7 +96,7 @@ public class XzjhFragment extends BaseFragment {
     protected void initView() {
 
         lv.setEmptyView(tvNodata);
-        mActivity = (SxcdjActivity) getActivity();
+        mActivity = (DjMainActivity) getActivity();
         headView = View.inflate(context, R.layout.xzjh_item, null);
         head = headView.findViewById(R.id.head);
         head.setVisibility(View.VISIBLE);

@@ -74,7 +74,7 @@ public class YulActivity extends BaseActivity {
     @Override
     protected void initView() {
         setBack();
-        setTitle("浏览点检记录");//这里
+        setTitle("浏览点检记录");
 
 
     }
@@ -102,7 +102,7 @@ public class YulActivity extends BaseActivity {
         for (QYDDATABean rw : djjhs) {
             DlbInfo info = new DlbInfo();
             info.setCjjg(rw.getCJJG());
-            info.setDian(rw.getBJMC() + " (" + rw.getDMC() + ")");
+            info.setDian(rw.getSBMC() + " - " + rw.getBJMC());
             info.setStatu(rw.isChecked());
             infos.add(info);
         }

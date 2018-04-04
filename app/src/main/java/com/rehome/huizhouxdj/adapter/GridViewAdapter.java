@@ -24,14 +24,11 @@ public class GridViewAdapter extends BaseAdapter {
 
     private List<GridViewBean> datas;
 
-
     private int item = 0;
 
     private List<Integer> items;//通过传入一些item，让传入的item不可以点击
 
-
     private boolean flag;
-
 
     public GridViewAdapter(Context context, List<GridViewBean> datas, List<Integer> items, boolean flag) {
         this.context = context;

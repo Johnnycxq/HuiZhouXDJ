@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/toolbar" />
+
+    </RelativeLayout>
+
+    <com.rehome.huizhouxdj.utils.CanBanScrollViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="9" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:background="#00000000"
+        android:orientation="vertical">
+
+
+        <com.rehome.huizhouxdj.weight.AutoRadioGroup
+            android:id="@+id/rg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="#00000000"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <RadioButton
+                android:id="@+id/rb_home"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="5px"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:button="@null"
+                android:checked="true"
+                android:drawableTop="@drawable/home"
+                android:gravity="center"
+                android:text="管理"
+                android:textColor="#0099ff"
+                android:textSize="25px" />
+
+            <RadioButton
+                android:id="@+id/rb_contact"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="5px"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:button="@null"
+                android:drawableTop="@drawable/contacts"
+                android:gravity="center"
+                android:text="通讯录"
+                android:textColor="@color/textColor"
+                android:textSize="25px" />
+
+            <RadioButton
+                android:id="@+id/rb_mine"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="5px"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:button="@null"
+                android:drawableTop="@drawable/me"
+                android:gravity="center"
+                android:text="我的"
+                android:textColor="@color/textColor"
+                android:textSize="25px" />
+
+        </com.rehome.huizhouxdj.weight.AutoRadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:background="#00000000"
+            android:orientation="horizontal"
+
+            >
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="#00000000"
+                android:clickable="false"
+                android:visibility="invisible" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/mine_button"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

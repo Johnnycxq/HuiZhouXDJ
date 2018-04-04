@@ -114,7 +114,7 @@ public class MainActivity extends BaseActivity {
         adapter = new GridViewAdapter(this, beanList, item, Contans.TEST);
         gv.setAdapter(adapter);
 
-        requestZyDatas();
+//        requestZyDatas();
 
 
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -128,6 +128,11 @@ public class MainActivity extends BaseActivity {
                         startActivity(intent);
                         break;
                     case 1:
+
+//                        intent = new Intent(MainActivity.this, MainxjActivity.class);
+//                        startActivity(intent);
+//                        break;
+
                         if (dialogDatas.size() == 0) {
                             intent = new Intent(MainActivity.this, XscbglActivity.class);
                             startActivity(intent);

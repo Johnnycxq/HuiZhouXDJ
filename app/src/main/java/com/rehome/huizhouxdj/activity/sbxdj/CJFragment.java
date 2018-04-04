@@ -49,6 +49,8 @@ public class CJFragment extends BaseFragment {
     TextView tvBz;
     @BindView(R.id.sv)
     ScrollView sv;
+    @BindView(R.id.tv_zq)
+    TextView tvZq;
 
     private boolean isEdit;
     private QYDDATABean info;

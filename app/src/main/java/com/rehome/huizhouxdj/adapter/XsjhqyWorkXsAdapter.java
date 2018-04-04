@@ -49,7 +49,9 @@ public class XsjhqyWorkXsAdapter extends CommonAdapter<XsjhQyBean.DataBeanX.Data
         viewHolder.setText(R.id.tv_gbjz, item.getGz());
         viewHolder.setText(R.id.tv_zcz, item.getZczt());
 
-        if (TextUtils.isEmpty(item.getXcnr())) {//如果不是选择的
+
+
+        if (item.getLRFS().equals("0")) {//如果不是选择的
             etEnter.setVisibility(View.VISIBLE);
             tvEnter.setVisibility(View.GONE);
 
@@ -58,7 +60,17 @@ public class XsjhqyWorkXsAdapter extends CommonAdapter<XsjhQyBean.DataBeanX.Data
             tvEnter.setVisibility(View.VISIBLE);
         }
 
-        final String[] items = item.getXcnr().split(";");
+//
+//        if (TextUtils.isEmpty(item.getXcnr())) {//如果不是选择的
+//            etEnter.setVisibility(View.VISIBLE);
+//            tvEnter.setVisibility(View.GONE);
+//
+//        } else {
+//            etEnter.setVisibility(View.GONE);
+//            tvEnter.setVisibility(View.VISIBLE);
+//        }
+
+        final String[] items = item.getMRNR().split(";");
 
         if (TextUtils.isEmpty(item.getCbsz())) {
             tvEnter.setText(items[0]);

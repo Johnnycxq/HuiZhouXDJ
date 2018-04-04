@@ -3,7 +3,7 @@
     <!-- 数据库名字 -->
     <dbname value="rehome"></dbname>
     <!-- 版本号 -->
-    <version value="31"></version>
+    <version value="35"></version>
     <!-- 配置表 -->
     <list>
         <!-- 配置表的路径，需要继承DataSupport -->
@@ -86,10 +86,19 @@
         <!-- 高危作业现场确认-->
         <mapping class="com.rehome.huizhouxdj.DBModel.Gwzyxcqrnr" />
 
-        <!-- 巡点检下载计划-->
+        <!-- 点检下载计划-->
         <mapping class="com.rehome.huizhouxdj.DBModel.XDJJHXZDataBean" />
         <mapping class="com.rehome.huizhouxdj.DBModel.QYAQFXDATABean" />
         <mapping class="com.rehome.huizhouxdj.DBModel.QYDDATABean" />
+
+        <!-- 巡检下载计划-->
+        <mapping class="com.rehome.huizhouxdj.DBModel.XjjhList" />
+        <mapping class="com.rehome.huizhouxdj.DBModel.Xjjh" />
+
+
+        <mapping class="com.rehome.huizhouxdj.DBModel.Othersbsave" />
+
+
 
     </list>
 </litepal>

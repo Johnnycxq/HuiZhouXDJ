@@ -169,6 +169,7 @@ public class XscbqyWorkXsActivity extends BaseActivity {
         info.setQybh(qy.getQybh());
 
         List<XsSaveDataInfo.DataBean> dataBeanList = new ArrayList<>();
+
         for (XsjhQyBean.DataBeanX.DataBean dataBean : qyds) {
 
             XsSaveDataInfo.DataBean bean = new XsSaveDataInfo.DataBean();

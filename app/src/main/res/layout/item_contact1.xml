@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_dept_name"
+        android:layout_width="match_parent"
+        android:layout_height="70px"
+        android:background="#dcdcdc"
+        android:gravity="center_vertical"
+        android:paddingLeft="20px"
+        android:text="部门"
+        android:textSize="30px" />
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:background="@drawable/selector_list_item"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/headView"
+            android:layout_width="60px"
+            android:layout_height="60px"
+            android:layout_margin="20px"
+            android:src="@drawable/head_photo">
+
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="65px"
+                android:gravity="center_vertical"
+                android:paddingLeft="20px"
+                android:text="管理员"
+                android:textSize="35px" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

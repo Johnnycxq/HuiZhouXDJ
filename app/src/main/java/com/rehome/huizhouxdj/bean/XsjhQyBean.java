@@ -163,7 +163,8 @@ public class XsjhQyBean {
             private String sisData;
             private String dpx;
             private String scid;
-
+            private String LRFS;
+            private String MRNR;
 
             public String getDbh() {
                 return dbh;
@@ -309,6 +310,23 @@ public class XsjhQyBean {
                 this.scid = scid;
             }
 
+            public String getLRFS() {
+                return LRFS;
+            }
+
+            public void setLRFS(String LRFS) {
+                this.LRFS = LRFS;
+            }
+
+            public String getMRNR() {
+                return MRNR;
+            }
+
+            public void setMRNR(String MRNR) {
+                this.MRNR = MRNR;
+            }
+
+
             public DataBean() {
             }
 
@@ -337,6 +355,8 @@ public class XsjhQyBean {
                 dest.writeString(this.sisData);
                 dest.writeString(this.dpx);
                 dest.writeString(this.scid);
+                dest.writeString(this.LRFS);
+                dest.writeString(this.MRNR);
             }
 
             protected DataBean(Parcel in) {
@@ -358,6 +378,8 @@ public class XsjhQyBean {
                 this.sisData = in.readString();
                 this.dpx = in.readString();
                 this.scid = in.readString();
+                this.LRFS = in.readString();
+                this.MRNR = in.readString();
             }
 
             public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {

@@ -58,6 +58,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activity.TabMainActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.sbxdj.MainSbxdjglActivity" />
         <activity android:name=".activity.sbxdj.SxcdjActivity" />
@@ -73,18 +77,41 @@
         <activity android:name=".activity.sbxj.XscbqyWorkXsActivity" />
         <activity android:name=".activity.sbxj.XsHistoryActivity" />
         <activity android:name=".activity.sbxj.NFCInfoActivity" />
+        <activity android:name=".activity.sbxdj.TipsActivity" />
+        <activity android:name=".activity.sbxdj.DjMainActivity" />
+        <activity android:name=".activity.sbxdj.SbSelectActivity" />
+
+
+
 
         <activity android:name=".activity.aqjc.AqjclbActivity" />
         <activity android:name=".activity.aqjc.AqjclbinfoActivity" />
         <activity android:name=".activity.aqjc.AqjcrwlbActivity" />
         <activity android:name=".activity.aqjc.AqjcrwlbinfoActivity" />
-        <activity android:name=".activity.aqjc.AqjcrwSaveActivity" />
+        <activity
+            android:name=".activity.aqjc.AqjcrwSaveActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.aqjc.MainAqjcActivity" />
-        <activity android:name=".activity.aqjc.AqZgrwSaveActivity" />
+        <activity
+            android:name=".activity.aqjc.AqZgrwSaveActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".base.MipcaActivityCapture" />
 
         <activity android:name=".activity.qfgd.MainQfActivity" />
-        <activity android:name=".activity.qfgd.bpbjActivity" />
+        <activity
+            android:name=".activity.qfgd.bpbjActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.qfgd.bpbjinfoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape" />
+
+
+        <activity android:name=".activity.xj.MainxjActivity" />
+        <activity android:name=".activity.xj.xjActivity" />
+        <activity android:name=".activity.xj.OtherSBSaveActivity" />
+        <activity android:name=".activity.xj.OhtersbinfoActivity" />
+
 
 
         <activity

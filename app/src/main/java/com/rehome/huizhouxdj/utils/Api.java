@@ -1,10 +1,12 @@
 package com.rehome.huizhouxdj.utils;
 
+import com.rehome.huizhouxdj.bean.ContactListBean;
 import com.rehome.huizhouxdj.bean.UploadPhotosBean;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -65,6 +67,13 @@ public interface Api {
 
 
 
+    /**
+     * 获取通讯录列表
+     *
+     * @return
+     */
+    @GET("PubFile/Data/GetAddressbook.ashx")
+    Call<ContactListBean> getContactList();
 
 //    /**
 //     * 设备联查任务上传

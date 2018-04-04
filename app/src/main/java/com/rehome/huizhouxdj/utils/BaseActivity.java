@@ -77,12 +77,17 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         initView();
         initData();
         initNFC();
-        Toast.makeText(this, getClass().getSimpleName(), Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, getClass().getSimpleName(), Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
+    }
+
+
+    public void setToolbarTitle(String title) {
+        mToolbar.setTitle(title);
     }
 
     /**

@@ -4,7 +4,6 @@
     android:id="@+id/activity_kccx"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFEFDB"
     android:orientation="vertical"
     tools:context="com.rehome.huizhouxdj.activity.qfgd.bpbjActivity">
 
@@ -83,10 +82,5 @@
             android:text="查询" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/lv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null" />
 
 </LinearLayout>

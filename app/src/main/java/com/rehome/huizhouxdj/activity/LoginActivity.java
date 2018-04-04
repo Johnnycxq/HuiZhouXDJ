@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -43,6 +44,8 @@ import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.RequestMethod;
 import com.yolanda.nohttp.rest.Request;
 import com.yolanda.nohttp.rest.Response;
+
+import org.litepal.tablemanager.Connector;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -139,12 +142,7 @@ public class LoginActivity extends BaseActivity {
         if (wifi.equals("") && mob.equals("")) {
 
             SPUtils.put(this, Contans.KEY_4G_IP, "http://192.168.2.189:8092/");
-
-//            SPUtils.put(this, Contans.KEY_4G_IP, "http://192.168.2.189:8091/");
-
-
-            SPUtils.put(this, Contans.KEY_WIFI_IP, "http://10.192.82.55:8083/");
-
+            SPUtils.put(this, Contans.KEY_WIFI_IP, "http://hzl-dj.gdyd.com:8082/");
 
         }
     }
@@ -204,14 +202,14 @@ public class LoginActivity extends BaseActivity {
             }
         });
 
-//        if (first) {
-//            //如果是第一次进入程序，就创建数据库
-//            SQLiteDatabase db = Connector.getDatabase();
-//            SPUtils.put(this, Contans.FIRST, false);
-//            if (db != null) {
-//                //showToast("数据库创建成功");
-//            }
-//        }
+        if (first) {
+            //如果是第一次进入程序，就创建数据库
+            SQLiteDatabase db = Connector.getDatabase();
+            SPUtils.put(this, Contans.FIRST, false);
+            if (db != null) {
+                //showToast("数据库创建成功");
+            }
+        }
     }
 
     private HttpListener<String> callback = new HttpListener<String>() {
@@ -242,7 +240,11 @@ public class LoginActivity extends BaseActivity {
                     SPUtils.put(LoginActivity.this, Contans.BZBH, user.getBzbh() == null ? "" : user.getBzbh());
                     SPUtils.put(LoginActivity.this, Contans.BZMC, user.getBzmc() == null ? "" : user.getBzmc());
                     SPUtils.put(LoginActivity.this, Contans.PERMISSIONSRESULT, user.getPermissionsResult() == null ? "" : user.getPermissionsResult());
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                    startActivity(intent);
+
+
+                    Intent intent = new Intent(LoginActivity.this, TabMainActivity.class);
                     startActivity(intent);
 
 

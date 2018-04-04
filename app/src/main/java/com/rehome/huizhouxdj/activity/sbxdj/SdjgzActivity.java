@@ -1,23 +1,25 @@
 package com.rehome.huizhouxdj.activity.sbxdj;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.rehome.huizhouxdj.DBModel.QYAQFXDATABean;
 import com.rehome.huizhouxdj.DBModel.QYDDATABean;
 import com.rehome.huizhouxdj.DBModel.XDJJHXZDataBean;
 import com.rehome.huizhouxdj.R;
+import com.rehome.huizhouxdj.activity.xj.OhtersbinfoActivity;
 import com.rehome.huizhouxdj.adapter.CommonAdapter;
 import com.rehome.huizhouxdj.adapter.ViewHolder;
 import com.rehome.huizhouxdj.base.MipcaActivityCapture;
 import com.rehome.huizhouxdj.contans.Contans;
-import com.rehome.huizhouxdj.utils.BaseActivity;
+import com.rehome.huizhouxdj.utils.BaseActivity3;
 import com.rehome.huizhouxdj.utils.UiUtlis;
 
 import org.litepal.crud.DataSupport;
@@ -34,7 +36,7 @@ import static org.litepal.crud.DataSupport.where;
 /**
  * 设备巡点检管理-点检工作
  */
-public class SdjgzActivity extends BaseActivity {
+public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener {
 
     @BindView(R.id.lv)
     ListView lv;
@@ -49,14 +51,31 @@ public class SdjgzActivity extends BaseActivity {
     private List<String> qyAll;//全部，包括相同的
     private List<XDJJHXZDataBean> xdjjhxzDataBeanList = new ArrayList<>();//工作列表
     private ArrayList<QYDDATABean> qyddataBeanList = new ArrayList<>();//点检记录列表
+    private ArrayList<QYAQFXDATABean> qyaqfxdataBeanList = new ArrayList<>();//点检记录列表
     private Map<String, ArrayList<QYDDATABean>> map;
+    Intent intent;
 
     @Override
-    public int getContentViewID() {
+    public int getLayoutId() {
         return R.layout.activity_sdjgz;
     }
 
-    protected void initView() {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_left:
+                finish();
+                break;
+            case R.id.tv_right:
+//                intent = new Intent(SdjgzActivity.this, OtherSBSaveActivity.class);
+                intent = new Intent(SdjgzActivity.this, OhtersbinfoActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
+    @Override
+    public void initView() {
 
         lv.setEmptyView(tvNodata);
         headView = View.inflate(this, R.layout.djajhgz_item, null);
@@ -66,8 +85,7 @@ public class SdjgzActivity extends BaseActivity {
     public void initData() {
 
         initNFC();
-        setTitle("工作");
-        setBack();
+        initToolbar("工作", "缺陷提交", this);
 
         map = new HashMap<>();
         qys = new ArrayList<>();
@@ -111,6 +129,8 @@ public class SdjgzActivity extends BaseActivity {
 
     private void setListData() {
         if (adapter == null) {
+
+
             adapter = new CommonAdapter<XDJJHXZDataBean>(context, R.layout.djajhgz_item, xdjjhxzDataBeanList) {
                 @Override
                 protected void convert(ViewHolder viewHolder, XDJJHXZDataBean item, int position) {
@@ -132,6 +152,8 @@ public class SdjgzActivity extends BaseActivity {
 
                 }
             };
+
+
             lv.addHeaderView(headView, null, false);
             lv.setAdapter(adapter);
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -141,6 +163,9 @@ public class SdjgzActivity extends BaseActivity {
                     qyddataBeanList.clear();
                     //获取当前点击的工作栏对应的点检记录列表
                     qyddataBeanList.addAll(where("xdjjhxzDataBean_id = ?", xdjjhxzDataBeanList.get(postion - 1).getId() + "").find(QYDDATABean.class));
+
+                    qyaqfxdataBeanList.clear();
+                    qyaqfxdataBeanList.addAll(where("xdjjhxzDataBean_id = ?", xdjjhxzDataBeanList.get(postion - 1).getId() + "").find(QYAQFXDATABean.class));
 
 
                     if (qyddataBeanList.size() != 0) {
@@ -159,9 +184,11 @@ public class SdjgzActivity extends BaseActivity {
                         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Intent intent = new Intent(SdjgzActivity.this, YulActivity.class);
+
+                                Intent intent = new Intent(SdjgzActivity.this, TipsActivity.class);
                                 Bundle bundle = new Bundle();
                                 bundle.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
+                                bundle.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
                                 bundle.putBoolean("edit", false);
                                 bundle.putInt(Contans.KEY_ITEM, 0);
                                 intent.putExtras(bundle);
@@ -194,10 +221,14 @@ public class SdjgzActivity extends BaseActivity {
                     qyddataBeanList.clear();
                     qyddataBeanList.addAll(qydDataBeen);
 
+                    List<QYAQFXDATABean> qyaqfxdataBeen = DataSupport.where("QYEWM = ?", ewm).find(QYAQFXDATABean.class);//ewm是根据扫描得到的二维码结果来查询
+                    qyaqfxdataBeanList.clear();
+                    qyaqfxdataBeanList.addAll(qyaqfxdataBeen);
 
-                    Intent intent = new Intent(SdjgzActivity.this, YulActivity.class);
+                    Intent intent = new Intent(SdjgzActivity.this, TipsActivity.class);
                     Bundle bundle2 = new Bundle();
                     bundle2.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
+                    bundle2.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
                     bundle2.putBoolean("edit", true);
                     bundle2.putInt(Contans.KEY_ITEM, 0);
                     intent.putExtras(bundle2);
@@ -227,13 +258,21 @@ public class SdjgzActivity extends BaseActivity {
         qyddataBeanList.addAll(qydDataBeen);
 
 
-        Intent intent = new Intent(SdjgzActivity.this, YulActivity.class);
+        List<QYAQFXDATABean> qyaqfxdataBeen = DataSupport.where("QYNFC = ?", result).find(QYAQFXDATABean.class);
+        qyaqfxdataBeanList.clear();
+        qyaqfxdataBeanList.addAll(qyaqfxdataBeen);
+
+
+        Intent intent = new Intent(SdjgzActivity.this, TipsActivity.class);
         Bundle bundle2 = new Bundle();
         bundle2.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
+        bundle2.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
         bundle2.putBoolean("edit", true);
         bundle2.putInt(Contans.KEY_ITEM, 0);
         intent.putExtras(bundle2);
         startActivity(intent);
 
     }
+
+
 }

@@ -24,6 +24,9 @@ public class QYAQFXDATABean extends DataSupport implements Parcelable {
     private String FXMS;
     private String FHCS;
     private XDJJHXZDataBean xdjjhxzDataBean;
+    private String QYEWM;
+    private String QYNFC;
+
 
     public QYAQFXDATABean() {
     }
@@ -33,6 +36,9 @@ public class QYAQFXDATABean extends DataSupport implements Parcelable {
         FXLX = in.readString();
         FXMS = in.readString();
         FHCS = in.readString();
+        QYEWM = in.readString();
+        QYNFC = in.readString();
+
     }
 
     public static final Creator<QYAQFXDATABean> CREATOR = new Creator<QYAQFXDATABean>() {
@@ -99,6 +105,22 @@ public class QYAQFXDATABean extends DataSupport implements Parcelable {
         this.FHCS = FHCS;
     }
 
+    public String getQYEWM() {
+        return QYEWM;
+    }
+
+    public void setQYEWM(String QYEWM) {
+        this.QYEWM = QYEWM;
+    }
+
+    public String getQYNFC() {
+        return QYNFC;
+    }
+
+    public void setQYNFC(String QYNFC) {
+        this.QYNFC = QYNFC;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -110,5 +132,7 @@ public class QYAQFXDATABean extends DataSupport implements Parcelable {
         dest.writeString(FXLX);
         dest.writeString(FXMS);
         dest.writeString(FHCS);
+        dest.writeString(QYEWM);
+        dest.writeString(QYNFC);
     }
 }

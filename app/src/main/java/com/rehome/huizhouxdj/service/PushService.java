@@ -19,7 +19,7 @@ import com.rehome.huizhouxdj.DBModel.XwaqgcJhList;
 import com.rehome.huizhouxdj.DBModel.Zy;
 import com.rehome.huizhouxdj.DBModel.ZyInfo;
 import com.rehome.huizhouxdj.R;
-import com.rehome.huizhouxdj.activity.sbxdj.SxcdjActivity;
+import com.rehome.huizhouxdj.activity.sbxdj.DjMainActivity;
 import com.rehome.huizhouxdj.bean.XscbRequestBean;
 import com.rehome.huizhouxdj.contans.Contans;
 import com.rehome.huizhouxdj.utils.GsonUtils;
@@ -316,7 +316,8 @@ public class PushService extends IntentService {
         if (what == 0) {
 //            intent = new Intent(this, XxzActivity.class);
         } else if (what == 1) {
-            intent = new Intent(this, SxcdjActivity.class);
+//            intent = new Intent(this, SxcdjActivity.class);
+            intent = new Intent(this, DjMainActivity.class);
         } else if (what == 2) {
 //            intent = new Intent(this, AjhXzActivity.class);
         } else if (what == 3) {

@@ -15,6 +15,7 @@ public class QYDDATABean extends DataSupport implements Parcelable {
     private long id;
     private String SCID;
     private String SBMC;
+    private String SBID;
     private String BJMC;
     private String DID;
     private String DMC;
@@ -47,6 +48,7 @@ public class QYDDATABean extends DataSupport implements Parcelable {
     protected QYDDATABean(Parcel in) {
         SCID = in.readString();
         SBMC = in.readString();
+        SBID = in.readString();
         BJMC = in.readString();
         DID = in.readString();
         DMC = in.readString();
@@ -117,6 +119,14 @@ public class QYDDATABean extends DataSupport implements Parcelable {
 
     public void setSBMC(String SBMC) {
         this.SBMC = SBMC;
+    }
+
+    public String getSBID() {
+        return SBID;
+    }
+
+    public void setSBID(String SBID) {
+        this.SBID = SBID;
     }
 
     public String getBJMC() {
@@ -305,6 +315,7 @@ public class QYDDATABean extends DataSupport implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(SCID);
         dest.writeString(SBMC);
+        dest.writeString(SBID);
         dest.writeString(BJMC);
         dest.writeString(DID);
         dest.writeString(DMC);

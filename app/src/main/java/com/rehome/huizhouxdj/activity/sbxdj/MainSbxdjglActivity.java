@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.rehome.huizhouxdj.R;
-import com.rehome.huizhouxdj.activity.MainActivity;
 import com.rehome.huizhouxdj.adapter.GridViewAdapter;
 import com.rehome.huizhouxdj.bean.GridViewBean;
 import com.rehome.huizhouxdj.utils.BaseActivity;
@@ -58,8 +57,8 @@ public class MainSbxdjglActivity extends BaseActivity {
             mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(MainSbxdjglActivity.this, MainActivity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(MainSbxdjglActivity.this, MainActivity.class);
+//                    startActivity(intent);
                     finish();
                 }
             });
@@ -77,7 +76,11 @@ public class MainSbxdjglActivity extends BaseActivity {
                 Intent intent;
                 switch (i) {
                     case 0:
-                        intent = new Intent(MainSbxdjglActivity.this, SxcdjActivity.class);
+
+//                        intent = new Intent(MainSbxdjglActivity.this, SxcdjActivity.class);
+//                        startActivity(intent);
+
+                        intent = new Intent(MainSbxdjglActivity.this, DjMainActivity.class);
                         startActivity(intent);
                         break;
                     case 1:

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center">
+    android:layout_height="230px"
+    android:background="@android:color/transparent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="2px">
 
     <LinearLayout
         android:id="@+id/ll"
-        android:layout_width="370px"
-        android:layout_height="260px"
+        android:layout_width="120px"
+        android:layout_height="130px"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -15,15 +18,17 @@
             android:id="@+id/iv"
             android:layout_width="@dimen/px_120"
             android:layout_height="@dimen/px_120" />
-
-        <TextView
-            android:id="@+id/tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/px_15"
-            android:textColor="#ffffff"
-            android:textSize="@dimen/px_25" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XXXXXXXXX"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/px_15"
+        android:textSize="@dimen/px_25" />
+
 
     <ImageView
         android:id="@+id/iv_reddot"
@@ -32,4 +37,4 @@
         android:layout_alignRight="@id/ll"
         android:background="@drawable/red_dot" />
 
-</RelativeLayout>
+</LinearLayout>
