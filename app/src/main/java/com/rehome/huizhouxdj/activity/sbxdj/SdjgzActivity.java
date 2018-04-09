@@ -1,7 +1,5 @@
 package com.rehome.huizhouxdj.activity.sbxdj;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,14 +18,11 @@ import com.rehome.huizhouxdj.adapter.ViewHolder;
 import com.rehome.huizhouxdj.base.MipcaActivityCapture;
 import com.rehome.huizhouxdj.contans.Contans;
 import com.rehome.huizhouxdj.utils.BaseActivity3;
-import com.rehome.huizhouxdj.utils.UiUtlis;
 
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 
@@ -47,13 +42,11 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
     private View headView;
     private CommonAdapter<XDJJHXZDataBean> adapter;
     private String ewm;//二维码或者条形码
-    private List<String> qys;
-    private List<String> qyAll;//全部，包括相同的
     private List<XDJJHXZDataBean> xdjjhxzDataBeanList = new ArrayList<>();//工作列表
     private ArrayList<QYDDATABean> qyddataBeanList = new ArrayList<>();//点检记录列表
     private ArrayList<QYAQFXDATABean> qyaqfxdataBeanList = new ArrayList<>();//点检记录列表
-    private Map<String, ArrayList<QYDDATABean>> map;
     Intent intent;
+
 
     @Override
     public int getLayoutId() {
@@ -67,7 +60,6 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
                 finish();
                 break;
             case R.id.tv_right:
-//                intent = new Intent(SdjgzActivity.this, OtherSBSaveActivity.class);
                 intent = new Intent(SdjgzActivity.this, OhtersbinfoActivity.class);
                 startActivity(intent);
                 break;
@@ -87,9 +79,6 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
         initNFC();
         initToolbar("工作", "缺陷提交", this);
 
-        map = new HashMap<>();
-        qys = new ArrayList<>();
-        qyAll = new ArrayList<>();
         getDataInSqlite();
         setListData();
 
@@ -170,33 +159,40 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
 
                     if (qyddataBeanList.size() != 0) {
 
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        builder.setCancelable(false);
-                        builder.setTitle("系统提示");
-                        builder.setMessage("是否要浏览该区域下的工作内容");
-                        builder.setNegativeButton(UiUtlis.getString(context, R.string.cancel), new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        });
+                        Bundle bundle = new Bundle();
+                        Intent intent = new Intent(SdjgzActivity.this, SdjSbListActivity.class);
+                        bundle.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
+                        bundle.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
+                        bundle.putBoolean("edit", false);
+                        bundle.putInt(Contans.KEY_ITEM, 0);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
 
-                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-
-                                Intent intent = new Intent(SdjgzActivity.this, TipsActivity.class);
-                                Bundle bundle = new Bundle();
-                                bundle.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
-                                bundle.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
-                                bundle.putBoolean("edit", false);
-                                bundle.putInt(Contans.KEY_ITEM, 0);
-                                intent.putExtras(bundle);
-                                startActivity(intent);
-                                dialogInterface.dismiss();
-                            }
-                        });
-                        builder.show();
+//                        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                        builder.setCancelable(false);
+//                        builder.setTitle("系统提示");
+//                        builder.setMessage("是否要浏览该区域下的工作内容");
+//                        builder.setNegativeButton(UiUtlis.getString(context, R.string.cancel), new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                dialogInterface.dismiss();
+//                            }
+//                        });
+//
+//                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//
+////                                Intent intent = new Intent(SdjgzActivity.this, TipsActivity.class);
+//
+//                                Intent intent = new Intent(SdjgzActivity.this, SdjSbListActivity.class);
+//
+//
+//
+//                                dialogInterface.dismiss();
+//                            }
+//                        });
+//                        builder.show();
                     } else {
                         showToast("暂无该区域点检任务");
                     }

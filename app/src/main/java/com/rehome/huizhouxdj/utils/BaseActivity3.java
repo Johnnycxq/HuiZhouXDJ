@@ -93,7 +93,7 @@ public abstract class BaseActivity3 extends AutoLayoutActivity {
      */
     private Boolean ifNFCUse() {
         if (nfcAdapter == null) {
-            Toast.makeText(this, "设备不支持NFC！", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "设备不支持NFC！", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (nfcAdapter != null && !nfcAdapter.isEnabled()) {

@@ -52,7 +52,6 @@ public class DjdscFragment extends BaseFragment {
     ListView lv;
     @BindView(R.id.btn_sc)
     Button btn_sc;
-
     @BindView(R.id.tv_nodata)
     TextView tvNodata;
 
@@ -120,7 +119,6 @@ public class DjdscFragment extends BaseFragment {
         });
 
     }
-
 
 
     @Override
@@ -261,7 +259,7 @@ public class DjdscFragment extends BaseFragment {
 
     private int noCheck = 0;
 
-    private void uploadData() {   //上传点检计划
+    private void uploadData() {    //上传点检计划
 
         noCheck = 0;//没有检查的数量
         String USERNAME = (String) SPUtils.get(context, Contans.USERNAME, "");
@@ -281,18 +279,34 @@ public class DjdscFragment extends BaseFragment {
                 dhdata.setQYBH(xdjjhxzDataList.get(i).getQYBH());
                 dhdata.setQYDJ_ST(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
                 for (int j = 0; j < qyddataBeanList.size(); j++) {
+
                     ScdjjhBean.DJ_DATA.QYDJ_DATA qydj_data = new ScdjjhBean.DJ_DATA.QYDJ_DATA();
+
                     qydj_data.setSCID(qyddataBeanList.get(j).getSCID());
+
                     if (qyddataBeanList.get(j).getCJJG() == null) {
                         qydj_data.setDJSZ("");
                     } else {
                         qydj_data.setDJSZ(qyddataBeanList.get(j).getCJJG());
                     }
+
+
                     if (qyddataBeanList.get(j).getDATE() == null) {
                         qydj_data.setDJSJ("");
                     } else {
                         qydj_data.setDJSJ(qyddataBeanList.get(j).getDATE());
                     }
+
+                    if (qyddataBeanList.get(j).getCJJG() == null) {
+                        qydj_data.setSBZT("");
+                    } else if (qyddataBeanList.get(j).getCJJG().equals("已停用")) {
+                        qydj_data.setSBZT("3");
+                    } else if (qyddataBeanList.get(j).getCJJG().equals("大小修")) {
+                        qydj_data.setSBZT("4");
+                    } else {
+                        qydj_data.setSBZT("1");
+                    }
+
                     qydj_data.setFXNR("");
                     qydj_data.setSMFS("");
                     qydjDataList.add(qydj_data);

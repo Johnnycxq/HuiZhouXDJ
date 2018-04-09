@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.rehome.huizhouxdj.DBModel.XDJJHXZDataBean;
+import com.rehome.huizhouxdj.DBModel.Xjjh;
 import com.rehome.huizhouxdj.R;
 import com.zhy.autolayout.utils.AutoUtils;
 
@@ -18,13 +18,13 @@ import java.util.List;
 /**
  * 下载计划适配器
  */
-public class ScjhAdapter extends BaseAdapter {
+public class XzxsjhAdapter extends BaseAdapter {
 
     private Context context;
-    private List<XDJJHXZDataBean> list;
+    private List<Xjjh> list;
     private CallBack mCallBack;
 
-    public ScjhAdapter(Context context, List<XDJJHXZDataBean> list, CallBack mCallBack) {
+    public XzxsjhAdapter(Context context, List<Xjjh> list, CallBack mCallBack) {
         this.context = context;
         this.list = list;
         this.mCallBack = mCallBack;
@@ -55,11 +55,13 @@ public class ScjhAdapter extends BaseAdapter {
         ViewHolder holder;
         if (view == null) {
             holder = new ViewHolder();
-            view = LayoutInflater.from(context).inflate(R.layout.scjh_item, viewGroup, false);
+            view = LayoutInflater.from(context).inflate(R.layout.xzxsjh_item, viewGroup, false);
             holder.cb = (CheckBox) view.findViewById(R.id.cb);
             holder.tv_gwmc = (TextView) view.findViewById(R.id.tv_gwmc);
-            holder.tv_yjzj = (TextView) view.findViewById(R.id.tv_yjzj);
-
+            holder.tv_gwds = (TextView) view.findViewById(R.id.tv_gwds);
+//            holder.tv_xh = (TextView) view.findViewById(R.id.tv_xh);
+//            holder.tv_xzr = (TextView) view.findViewById(R.id.tv_xzr);
+//            holder.tv_xzsj = (TextView) view.findViewById(R.id.tv_xzsj);
             view.setTag(holder);
             AutoUtils.autoSize(view);
         } else {
@@ -68,9 +70,13 @@ public class ScjhAdapter extends BaseAdapter {
 
 
         holder.cb.setChecked(list.get(i).isChecked());
-        holder.tv_gwmc.setText(list.get(i).getGWMC());
-        holder.tv_yjzj.setText(list.get(i).getCountPercent());
+        holder.tv_gwmc.setText(list.get(i).getJhmc());
+        holder.tv_gwds.setText(list.get(i).getJhds());
+//        holder.tv_xzr.setText(list.get(i).getXZR());
+//        holder.tv_xzsj.setText(list.get(i).getXZSJ());
 
+
+//        holder.tv_xh.setText(i + 1 + "");
         holder.cb.setTag(i);
         holder.cb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +90,9 @@ public class ScjhAdapter extends BaseAdapter {
     static class ViewHolder {
         CheckBox cb;
         TextView tv_gwmc;
-        TextView tv_yjzj;
-
+        TextView tv_gwds;
+//        TextView tv_jhlx;
+//        TextView tv_xzr;
+//        TextView tv_xzsj;
     }
 }

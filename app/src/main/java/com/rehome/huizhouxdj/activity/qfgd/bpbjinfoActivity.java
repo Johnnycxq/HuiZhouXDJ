@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.rehome.huizhouxdj.R;
@@ -31,6 +32,8 @@ public class bpbjinfoActivity extends BaseActivity {
 
     @BindView(R.id.lv)
     ListView lv;
+    @BindView(R.id.LL_Head)
+    LinearLayout LLHead;
     private View headView;
 
     BpbjinfoAdapter bpbjinfoAdapter;
@@ -135,16 +138,21 @@ public class bpbjinfoActivity extends BaseActivity {
         }
 
         lv.setOnScrollListener(new AbsListView.OnScrollListener() {
+
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
+
             }
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (firstVisibleItem >= 0) {
-                    headView.setVisibility(View.VISIBLE);//显示顶部固定部分
+
+                if (firstVisibleItem >= 1) {
+
+                    LLHead.setVisibility(View.VISIBLE);
                 } else {
-                    headView.setVisibility(View.GONE);//隐藏顶部固定部分
+
+                    LLHead.setVisibility(View.GONE);
                 }
             }
         });

@@ -85,7 +85,6 @@ public class PushService extends IntentService {
                 //点检
                 case 1:
                     Request<String> requestdj = NoHttp.createStringRequest(Contans.IP + Contans.DJJHLIST, RequestMethod.POST);
-//                    dj.add("BZMC", UiUtlis.encoder((String) SPUtils.get(getApplicationContext(), Contans.BZBH, "12108080101")));
 
                     requestdj.setDefineRequestBodyForJson(createZyJson());
 

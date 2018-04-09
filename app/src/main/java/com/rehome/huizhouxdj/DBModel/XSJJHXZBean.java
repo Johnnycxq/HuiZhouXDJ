@@ -11,27 +11,27 @@ import java.util.List;
  * Created by ruihong on 2018/2/26.
  */
 
-public class XDJJHXZBean extends DataSupport implements Parcelable {
+public class XSJJHXZBean extends DataSupport implements Parcelable {
 
     private int state;
     private String msg;
-    private List<XDJJHXZDataBean> data;
+    private List<XSJJHXZDataBean> data;
 
-    protected XDJJHXZBean(Parcel in) {
+    protected XSJJHXZBean(Parcel in) {
         state = in.readInt();
         msg = in.readString();
-        data = in.createTypedArrayList(XDJJHXZDataBean.CREATOR);
+        data = in.createTypedArrayList(XSJJHXZDataBean.CREATOR);
     }
 
-    public static final Creator<XDJJHXZBean> CREATOR = new Creator<XDJJHXZBean>() {
+    public static final Creator<XSJJHXZBean> CREATOR = new Creator<XSJJHXZBean>() {
         @Override
-        public XDJJHXZBean createFromParcel(Parcel in) {
-            return new XDJJHXZBean(in);
+        public XSJJHXZBean createFromParcel(Parcel in) {
+            return new XSJJHXZBean(in);
         }
 
         @Override
-        public XDJJHXZBean[] newArray(int size) {
-            return new XDJJHXZBean[size];
+        public XSJJHXZBean[] newArray(int size) {
+            return new XSJJHXZBean[size];
         }
     };
 
@@ -51,11 +51,11 @@ public class XDJJHXZBean extends DataSupport implements Parcelable {
         this.msg = msg;
     }
 
-    public List<XDJJHXZDataBean> getData() {
+    public List<XSJJHXZDataBean> getData() {
         return data;
     }
 
-    public void setData(List<XDJJHXZDataBean> data) {
+    public void setData(List<XSJJHXZDataBean> data) {
         this.data = data;
     }
 

@@ -6,7 +6,6 @@
     android:gravity="center">
 
     <com.rehome.huizhouxdj.weight.ClearEditText
-        android:textSize="35px"
         android:id="@+id/et_search"
         android:layout_width="match_parent"
         android:layout_height="70px"
@@ -16,5 +15,7 @@
         android:drawableLeft="@drawable/search"
         android:drawablePadding="10px"
         android:hint="请输入搜索内容"
-        android:textColor="@color/textColor" />
+        android:paddingLeft="5dp"
+        android:textColor="@color/textColor"
+        android:textSize="35px" />
 </LinearLayout>

@@ -70,6 +70,14 @@
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.sbxdj.SdjgzActivity" />
         <activity android:name=".activity.sbxdj.YulActivity" />
+
+        <activity android:name=".activity.sbxdj.SdjSbListActivity" />
+
+
+
+
+
+
         <activity android:name=".activity.sbxj.XscbglActivity" />
         <activity android:name=".activity.sbxj.XsBackLogActivity" />
         <activity android:name=".activity.sbxj.XscbqyWorkActivity" />
@@ -77,11 +85,15 @@
         <activity android:name=".activity.sbxj.XscbqyWorkXsActivity" />
         <activity android:name=".activity.sbxj.XsHistoryActivity" />
         <activity android:name=".activity.sbxj.NFCInfoActivity" />
+        <activity android:name=".activity.sbxj.XjMainActivity" />
+        <activity android:name=".activity.sbxj.SxgzActivity" />
+
+        SdjSbListActivity
+
+
         <activity android:name=".activity.sbxdj.TipsActivity" />
         <activity android:name=".activity.sbxdj.DjMainActivity" />
         <activity android:name=".activity.sbxdj.SbSelectActivity" />
-
-
 
 
         <activity android:name=".activity.aqjc.AqjclbActivity" />
@@ -107,11 +119,8 @@
             android:screenOrientation="landscape" />
 
 
-        <activity android:name=".activity.xj.MainxjActivity" />
-        <activity android:name=".activity.xj.xjActivity" />
         <activity android:name=".activity.xj.OtherSBSaveActivity" />
         <activity android:name=".activity.xj.OhtersbinfoActivity" />
-
 
 
         <activity

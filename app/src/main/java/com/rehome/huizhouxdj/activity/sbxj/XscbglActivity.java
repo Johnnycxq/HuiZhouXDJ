@@ -9,16 +9,31 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.rehome.huizhouxdj.DBModel.Xjjh;
+import com.rehome.huizhouxdj.DBModel.XjjhList;
 import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.adapter.GridViewAdapter;
 import com.rehome.huizhouxdj.bean.GridViewBean;
+import com.rehome.huizhouxdj.bean.XsRequestInfo;
 import com.rehome.huizhouxdj.contans.Contans;
 import com.rehome.huizhouxdj.utils.BaseActivity;
+import com.rehome.huizhouxdj.utils.GsonUtils;
+import com.rehome.huizhouxdj.utils.HttpListener;
+import com.rehome.huizhouxdj.utils.NohttpUtils;
+import com.rehome.huizhouxdj.utils.SPUtils;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.Response;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+
+import static com.rehome.huizhouxdj.utils.GsonUtils.GsonToBean;
 
 /**
  * 巡视抄表管理
@@ -28,9 +43,9 @@ public class XscbglActivity extends BaseActivity {
     @BindView(R.id.gv)
     GridView gv;
 
-    private String[] str = {"待办任务","历史抄表","读取NFC标签"};
-    private int[] imageId = {R.mipmap.icon_xs1,R.mipmap.icon_xs5, R.mipmap.icon11};
-    private int[] colors = {R.drawable.radius_b1,R.drawable.radius_a4, R.drawable.radius_b2};
+    private String[] str = {"待办任务", "工作", "历史抄表", "读取NFC标签"};
+    private int[] imageId = {R.mipmap.icon_xs1, R.mipmap.icon6, R.mipmap.icon_xs5, R.mipmap.icon11};
+    private int[] colors = {R.drawable.radius_b1, R.drawable.radius_a4, R.drawable.radius_a2, R.drawable.radius_b2};
     private GridViewAdapter adapter;
 
     @Override
@@ -48,9 +63,11 @@ public class XscbglActivity extends BaseActivity {
 
         mToolbar.setBackgroundColor(Color.parseColor("#00000000"));
 
-        setTitle("巡视抄表-"+ Contans.YXCB_ZY_NAME);
+        setTitle("巡视抄表-" + Contans.YXCB_ZY_NAME);
 
         setBack();
+
+        requestDatas();
 
         adapter = new GridViewAdapter(this, getGridViewData(), new ArrayList<Integer>(), true);
         gv.setSelector(new ColorDrawable(Color.TRANSPARENT));
@@ -61,12 +78,15 @@ public class XscbglActivity extends BaseActivity {
                 Intent intent = null;
                 switch (i) {
                     case 0:
-                        intent = new Intent(XscbglActivity.this, XsBackLogActivity.class);
+                        intent = new Intent(XscbglActivity.this, XjMainActivity.class);
                         break;
                     case 1:
-                        intent = new Intent(XscbglActivity.this, XsHistoryActivity.class);
+                        intent = new Intent(XscbglActivity.this, SxgzActivity.class);
                         break;
                     case 2:
+                        intent = new Intent(XscbglActivity.this, XsHistoryActivity.class);
+                        break;
+                    case 3:
                         intent = new Intent(XscbglActivity.this, NFCInfoActivity.class);
                         break;
 
@@ -90,5 +110,59 @@ public class XscbglActivity extends BaseActivity {
             datas.add(bean);
         }
         return datas;
+    }
+
+    private void requestDatas() {//下载巡检数据
+
+        final Request<String> requestxs = NoHttp.createStringRequest(Contans.IP + Contans.XSCB, RequestMethod.POST);
+
+        requestxs.setDefineRequestBodyForJson(createJson());
+
+        NohttpUtils.getInstance().add(this, 0, requestxs, new HttpListener<String>() {
+
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+
+                XjjhList list = GsonToBean(response.get(), XjjhList.class);
+
+                if (list != null) {
+
+                    if (list.getState().equals("1")) {
+
+                        List<Xjjh> xjjhs = list.getData();//服务器数据
+
+                        DataSupport.deleteAll(Xjjh.class, "download = 0");
+
+                        for (Xjjh xjjh : xjjhs) {
+
+                            List<Xjjh> dbxjjh = DataSupport.where("zxid = ? and download = ? ", xjjh.getZxid(), "1").find(Xjjh.class);
+
+                            if (dbxjjh.size() == 0) {
+                                xjjh.save();
+                            }
+                        }
+                    } else {
+
+                        DataSupport.deleteAll(Xjjh.class, "download = 0");
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onFailed(int what, Response<String> response) {
+
+            }
+        });
+    }
+
+    private String createJson() {
+        XsRequestInfo info = new XsRequestInfo();
+        info.setAction("XSCB_ZXJL_GET");
+        info.setZymc(Contans.YXCB_ZY_ID);
+        info.setZc((String) SPUtils.get(context, Contans.BZBH, ""));
+        String json = GsonUtils.GsonString(info);
+        return json;
     }
 }

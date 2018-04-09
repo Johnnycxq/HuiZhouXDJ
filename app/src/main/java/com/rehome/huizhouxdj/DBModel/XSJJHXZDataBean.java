@@ -1,0 +1,167 @@
+package com.rehome.huizhouxdj.DBModel;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import org.litepal.crud.DataSupport;
+
+import java.util.List;
+
+/**
+ * Created by Johnny_Chen
+ * on 2018/2/28.
+ */
+
+public class XSJJHXZDataBean extends DataSupport implements Parcelable {
+
+
+    private long id;
+    private String zxid;
+    private String qybh;
+    private String qymc;
+    private String nfcbm;
+    private String txm;
+    private String sczt;
+    private String scsj;
+    private List<XSJJHDataBean> xsjjhDataBean;
+    private int SN; //自定义序号
+    private boolean isChecked;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getZxid() {
+        return zxid;
+    }
+
+    public void setZxid(String zxid) {
+        this.zxid = zxid;
+    }
+
+    public String getQybh() {
+        return qybh;
+    }
+
+    public void setQybh(String qybh) {
+        this.qybh = qybh;
+    }
+
+    public String getQymc() {
+        return qymc;
+    }
+
+    public void setQymc(String qymc) {
+        this.qymc = qymc;
+    }
+
+    public String getNfcbm() {
+        return nfcbm;
+    }
+
+    public void setNfcbm(String nfcbm) {
+        this.nfcbm = nfcbm;
+    }
+
+    public String getTxm() {
+        return txm;
+    }
+
+    public void setTxm(String txm) {
+        this.txm = txm;
+    }
+
+    public String getSczt() {
+        return sczt;
+    }
+
+    public void setSczt(String sczt) {
+        this.sczt = sczt;
+    }
+
+    public String getScsj() {
+        return scsj;
+    }
+
+    public void setScsj(String scsj) {
+        this.scsj = scsj;
+    }
+
+    public List<XSJJHDataBean> getXsjjhDataBean() {
+        return xsjjhDataBean;
+    }
+
+    public void setXsjjhDataBean(List<XSJJHDataBean> xsjjhDataBean) {
+        this.xsjjhDataBean = xsjjhDataBean;
+    }
+
+    public int getSN() {
+        return SN;
+    }
+
+    public void setSN(int SN) {
+        this.SN = SN;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.id);
+        dest.writeString(this.zxid);
+        dest.writeString(this.qybh);
+        dest.writeString(this.qymc);
+        dest.writeString(this.nfcbm);
+        dest.writeString(this.txm);
+        dest.writeString(this.sczt);
+        dest.writeString(this.scsj);
+        dest.writeTypedList(this.xsjjhDataBean);
+        dest.writeInt(this.SN);
+        dest.writeByte(this.isChecked ? (byte) 1 : (byte) 0);
+    }
+
+    public XSJJHXZDataBean() {
+    }
+
+    protected XSJJHXZDataBean(Parcel in) {
+        this.id = in.readLong();
+        this.zxid = in.readString();
+        this.qybh = in.readString();
+        this.qymc = in.readString();
+        this.nfcbm = in.readString();
+        this.txm = in.readString();
+        this.sczt = in.readString();
+        this.scsj = in.readString();
+        this.xsjjhDataBean = in.createTypedArrayList(XSJJHDataBean.CREATOR);
+        this.SN = in.readInt();
+        this.isChecked = in.readByte() != 0;
+    }
+
+    public static final Parcelable.Creator<XSJJHXZDataBean> CREATOR = new Parcelable.Creator<XSJJHXZDataBean>() {
+        @Override
+        public XSJJHXZDataBean createFromParcel(Parcel source) {
+            return new XSJJHXZDataBean(source);
+        }
+
+        @Override
+        public XSJJHXZDataBean[] newArray(int size) {
+            return new XSJJHXZDataBean[size];
+        }
+    };
+}

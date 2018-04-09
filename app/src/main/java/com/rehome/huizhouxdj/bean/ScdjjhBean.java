@@ -82,6 +82,7 @@ public class ScdjjhBean {//用于上传点检计划的bean
             private String DJSJ;
             private String FXNR;
             private String SMFS;
+            private String SBZT;
 
             public String getSCID() {
                 return SCID;
@@ -123,6 +124,13 @@ public class ScdjjhBean {//用于上传点检计划的bean
                 this.SMFS = SMFS;
             }
 
+            public String getSBZT() {
+                return SBZT;
+            }
+
+            public void setSBZT(String SBZT) {
+                this.SBZT = SBZT;
+            }
         }
 
     }

@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.rehome.huizhouxdj.DBModel.XDJJHXZDataBean;
+import com.rehome.huizhouxdj.DBModel.XSJJHXZDataBean;
 import com.rehome.huizhouxdj.R;
 import com.zhy.autolayout.utils.AutoUtils;
 
@@ -18,13 +18,13 @@ import java.util.List;
 /**
  * 下载计划适配器
  */
-public class ScjhAdapter extends BaseAdapter {
+public class ScxsAdapter extends BaseAdapter {
 
     private Context context;
-    private List<XDJJHXZDataBean> list;
+    private List<XSJJHXZDataBean> list;
     private CallBack mCallBack;
 
-    public ScjhAdapter(Context context, List<XDJJHXZDataBean> list, CallBack mCallBack) {
+    public ScxsAdapter(Context context, List<XSJJHXZDataBean> list, CallBack mCallBack) {
         this.context = context;
         this.list = list;
         this.mCallBack = mCallBack;
@@ -55,7 +55,7 @@ public class ScjhAdapter extends BaseAdapter {
         ViewHolder holder;
         if (view == null) {
             holder = new ViewHolder();
-            view = LayoutInflater.from(context).inflate(R.layout.scjh_item, viewGroup, false);
+            view = LayoutInflater.from(context).inflate(R.layout.scxscb_item, viewGroup, false);
             holder.cb = (CheckBox) view.findViewById(R.id.cb);
             holder.tv_gwmc = (TextView) view.findViewById(R.id.tv_gwmc);
             holder.tv_yjzj = (TextView) view.findViewById(R.id.tv_yjzj);
@@ -68,8 +68,17 @@ public class ScjhAdapter extends BaseAdapter {
 
 
         holder.cb.setChecked(list.get(i).isChecked());
-        holder.tv_gwmc.setText(list.get(i).getGWMC());
-        holder.tv_yjzj.setText(list.get(i).getCountPercent());
+
+        if (list.get(i).getSczt().equals("0")) {
+
+            holder.tv_yjzj.setText("未上传");
+
+        } else {
+
+            holder.tv_yjzj.setText("已经上传");
+        }
+        holder.tv_gwmc.setText(list.get(i).getQymc());
+
 
         holder.cb.setTag(i);
         holder.cb.setOnClickListener(new View.OnClickListener() {

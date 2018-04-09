@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_sbxdjgl"
     android:layout_width="match_parent"
-    android:background="@mipmap/background"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:fitsSystemWindows="true"
-    >
+    android:background="#ffffff"
+    android:orientation="vertical">
 
     <include layout="@layout/toolbar"></include>
 
-    <GridView
-        android:id="@+id/gv"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/gridview_interval"
-        android:horizontalSpacing="@dimen/gridview_interval"
-        android:listSelector="@null"
-        android:numColumns="2"
-        android:scrollbars="none"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="@dimen/gridview_interval"/>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_gray_solid"
+        app:tabBackground="@drawable/bg_tab"
+        app:tabIndicatorHeight="0dp"
+        app:tabMaxWidth="120dp"
+        app:tabMinWidth="1200dp"
+        app:tabSelectedTextColor="@color/tabSelectedTextColor"
+        app:tabTextColor="@color/tabTextColor" />
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

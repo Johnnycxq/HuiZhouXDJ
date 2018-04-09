@@ -10,6 +10,6 @@
         android:gravity="center"
         android:text="08:30"
         android:textColor="@color/blue"
-        android:textSize="35px" />
+        android:textSize="40px" />
 
 </LinearLayout>

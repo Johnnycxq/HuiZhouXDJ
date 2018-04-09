@@ -39,7 +39,8 @@ public class QYDDATABean extends DataSupport implements Parcelable {
     private String QYBH;
     private String QYEWM;
     private String QYNFC;
-
+    private String SBMCSTATE;//设备状态
+    private String SBMCSTATEVALUE;//设备状态值
 
     public QYDDATABean() {
     }
@@ -71,6 +72,8 @@ public class QYDDATABean extends DataSupport implements Parcelable {
         QYBH = in.readString();
         QYEWM = in.readString();
         QYNFC = in.readString();
+        SBMCSTATE = in.readString();
+        SBMCSTATEVALUE = in.readString();
     }
 
     public static final Creator<QYDDATABean> CREATOR = new Creator<QYDDATABean>() {
@@ -305,6 +308,21 @@ public class QYDDATABean extends DataSupport implements Parcelable {
         this.QYNFC = QYNFC;
     }
 
+    public String getSBMCSTATE() {
+        return SBMCSTATE;
+    }
+
+    public void setSBMCSTATE(String SBMCSTATE) {
+        this.SBMCSTATE = SBMCSTATE;
+    }
+
+    public String getSBMCSTATEVALUE() {
+        return SBMCSTATEVALUE;
+    }
+
+    public void setSBMCSTATEVALUE(String SBMCSTATEVALUE) {
+        this.SBMCSTATEVALUE = SBMCSTATEVALUE;
+    }
 
     @Override
     public int describeContents() {
@@ -338,5 +356,7 @@ public class QYDDATABean extends DataSupport implements Parcelable {
         dest.writeString(QYBH);
         dest.writeString(QYEWM);
         dest.writeString(QYNFC);
+        dest.writeString(SBMCSTATE);
+        dest.writeString(SBMCSTATEVALUE);
     }
 }
