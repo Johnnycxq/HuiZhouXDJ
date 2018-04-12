@@ -16,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.rehome.huizhouxdj.DBModel.XSJJHDataBean;
 import com.rehome.huizhouxdj.DBModel.XSJJHXZBean;
 import com.rehome.huizhouxdj.DBModel.XSJJHXZDataBean;
 import com.rehome.huizhouxdj.DBModel.Xjjh;
@@ -199,40 +198,27 @@ public class XzxsjhFragment extends BaseFragment {
 
                             ContentValues values = new ContentValues();
 
-                            values.put("download", 1);//把Djjh里面的下载过的download变成1
+                            values.put("download", 1);
 
                             for (int i = 0; i < xsjjhxzDataBeanList.size(); i++) {
-
                                 DataSupport.updateAll(Xjjh.class, values, "zxid = ?", xsjjhxzDataBeanList.get(i).getZxid());
-
                             }
-
                             int dataCount = DataSupport.count(XSJJHXZDataBean.class);
-
                             int index;//序号
-
                             if (dataCount == 0) {
-
                                 index = 0;
-
                             } else {
-
                                 index = dataCount;
-
                             }
 
                             for (int i = 0; i < xsjjhxzDataBeanList.size(); i++) {
-
                                 xsjjhxzDataBeanList.get(i).setSN(++index);
-
-                                DataSupport.saveAll(xsjjhxzDataBeanList.get(i).getXsjjhDataBean());
+                                DataSupport.saveAll(xsjjhxzDataBeanList.get(i).getData());
                             }
-
                             DataSupport.saveAll(xsjjhxzDataBeanList);
 
-                            List<XSJJHXZDataBean> xsjjhdatabean = DataSupport.findAll(XSJJHXZDataBean.class);
-
-                            List<XSJJHDataBean> xsjjhDataBeen = where("scid = ?", "9A5F0F5C69AA4A07AE7B8152DF303C6B").find(XSJJHDataBean.class);
+//                            List<XSJJHXZDataBean> xsjjhdatabean = DataSupport.findAll(XSJJHXZDataBean.class);
+//                            List<XSJJHDataBean> xsjjhDataBeen = where("scid = ?", "9A5F0F5C69AA4A07AE7B8152DF303C6B").find(XSJJHDataBean.class);
 
                         } else {
 

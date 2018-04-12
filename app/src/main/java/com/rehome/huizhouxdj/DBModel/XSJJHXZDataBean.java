@@ -23,7 +23,7 @@ public class XSJJHXZDataBean extends DataSupport implements Parcelable {
     private String txm;
     private String sczt;
     private String scsj;
-    private List<XSJJHDataBean> xsjjhDataBean;
+    private List<XSJJHDataBean> data;
     private int SN; //自定义序号
     private boolean isChecked;
 
@@ -91,12 +91,12 @@ public class XSJJHXZDataBean extends DataSupport implements Parcelable {
         this.scsj = scsj;
     }
 
-    public List<XSJJHDataBean> getXsjjhDataBean() {
-        return xsjjhDataBean;
+    public List<XSJJHDataBean> getData() {
+        return data;
     }
 
-    public void setXsjjhDataBean(List<XSJJHDataBean> xsjjhDataBean) {
-        this.xsjjhDataBean = xsjjhDataBean;
+    public void setData(List<XSJJHDataBean> data) {
+        this.data = data;
     }
 
     public int getSN() {
@@ -131,7 +131,7 @@ public class XSJJHXZDataBean extends DataSupport implements Parcelable {
         dest.writeString(this.txm);
         dest.writeString(this.sczt);
         dest.writeString(this.scsj);
-        dest.writeTypedList(this.xsjjhDataBean);
+        dest.writeTypedList(this.data);
         dest.writeInt(this.SN);
         dest.writeByte(this.isChecked ? (byte) 1 : (byte) 0);
     }
@@ -148,12 +148,12 @@ public class XSJJHXZDataBean extends DataSupport implements Parcelable {
         this.txm = in.readString();
         this.sczt = in.readString();
         this.scsj = in.readString();
-        this.xsjjhDataBean = in.createTypedArrayList(XSJJHDataBean.CREATOR);
+        this.data = in.createTypedArrayList(XSJJHDataBean.CREATOR);
         this.SN = in.readInt();
         this.isChecked = in.readByte() != 0;
     }
 
-    public static final Parcelable.Creator<XSJJHXZDataBean> CREATOR = new Parcelable.Creator<XSJJHXZDataBean>() {
+    public static final Creator<XSJJHXZDataBean> CREATOR = new Creator<XSJJHXZDataBean>() {
         @Override
         public XSJJHXZDataBean createFromParcel(Parcel source) {
             return new XSJJHXZDataBean(source);

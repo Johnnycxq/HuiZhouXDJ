@@ -273,7 +273,7 @@ public class DjdscFragment extends BaseFragment {
         for (int i = 0; i < xdjjhxzDataList.size(); i++) {
             ScdjjhBean.DJ_DATA dhdata = new ScdjjhBean.DJ_DATA();
             if (xdjjhxzDataList.get(i).isChecked()) {
-                showToast(xdjjhxzDataList.get(i).getGWID());
+//                showToast(xdjjhxzDataList.get(i).getGWID());
                 List<QYDDATABean> qyddataBeanList = qydDataBeanMap.get(xdjjhxzDataList.get(i).getGWID());
                 scdjjhbean.setGWID(xdjjhxzDataList.get(i).getGWID());
                 dhdata.setQYBH(xdjjhxzDataList.get(i).getQYBH());

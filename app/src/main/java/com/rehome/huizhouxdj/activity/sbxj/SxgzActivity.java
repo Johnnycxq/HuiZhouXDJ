@@ -1,6 +1,7 @@
 package com.rehome.huizhouxdj.activity.sbxj;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -54,7 +55,6 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
                 finish();
                 break;
             case R.id.tv_right:
-
                 break;
         }
     }
@@ -74,6 +74,11 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
         initToolbar("巡视工作", "", this);
         getDataInSqlite();
         setListData();
+
+
+        List<XSJJHXZDataBean> xsjjhxzDataBeen = DataSupport.findAll(XSJJHXZDataBean.class);
+
+        List<XSJJHDataBean> xsjjhdatabean = DataSupport.findAll(XSJJHDataBean.class);
 
         btn_sm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +101,6 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
 
         xsjjhxzDataBeanList.addAll(DataSupport.findAll(XSJJHXZDataBean.class));
 
-//        xsjjhDataBeanArrayList.addAll(DataSupport.findAll(XSJJHDataBean.class));
     }
 
     private void setListData() {
@@ -132,16 +136,11 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
                 public void onItemClick(AdapterView<?> adapterView, View view, final int postion, long l) {
 
 
-                    List<XSJJHDataBean> xsjjhdatabean = where("xsjjhxzDataBean_id = ?", 1 + "").find(XSJJHDataBean.class);
+                    xsjjhDataBeanArrayList.clear();
 
+                    xsjjhDataBeanArrayList.addAll(where("xsjjhxzDataBean_id = ?", xsjjhxzDataBeanList.get(postion - 1).getId() + "").find(XSJJHDataBean.class));
 
-//
-//                    xsjjhDataBeanArrayList.clear();
-//
-//                    xsjjhDataBeanArrayList.addAll(where("xsjjhxzDataBean_id = ?", xsjjhxzDataBeanList.get(postion - 1).getId() + "").find(XSJJHDataBean.class));
-//
-//
-//                    Log.e("size", String.valueOf(xsjjhDataBeanArrayList.size()));
+                    Log.e("size", String.valueOf(xsjjhDataBeanArrayList.size()));
 
 //
 //                    if (qyddataBeanList.size() != 0) {

@@ -74,10 +74,6 @@
         <activity android:name=".activity.sbxdj.SdjSbListActivity" />
 
 
-
-
-
-
         <activity android:name=".activity.sbxj.XscbglActivity" />
         <activity android:name=".activity.sbxj.XsBackLogActivity" />
         <activity android:name=".activity.sbxj.XscbqyWorkActivity" />

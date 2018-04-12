@@ -317,7 +317,6 @@ public class XSJJHDataBean extends DataSupport implements Parcelable {
         dest.writeString(this.sisData);
         dest.writeString(this.LRFS);
         dest.writeString(this.MRNR);
-        dest.writeParcelable(this.xsjjhxzDataBean, flags);
         dest.writeByte(this.checked ? (byte) 1 : (byte) 0);
         dest.writeByte(this.uploaded ? (byte) 1 : (byte) 0);
         dest.writeByte(this.deleted ? (byte) 1 : (byte) 0);
@@ -353,7 +352,6 @@ public class XSJJHDataBean extends DataSupport implements Parcelable {
         this.sisData = in.readString();
         this.LRFS = in.readString();
         this.MRNR = in.readString();
-        this.xsjjhxzDataBean = in.readParcelable(XSJJHXZDataBean.class.getClassLoader());
         this.checked = in.readByte() != 0;
         this.uploaded = in.readByte() != 0;
         this.deleted = in.readByte() != 0;
