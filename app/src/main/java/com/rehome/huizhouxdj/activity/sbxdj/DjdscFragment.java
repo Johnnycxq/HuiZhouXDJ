@@ -274,6 +274,10 @@ public class DjdscFragment extends BaseFragment {
             ScdjjhBean.DJ_DATA dhdata = new ScdjjhBean.DJ_DATA();
             if (xdjjhxzDataList.get(i).isChecked()) {
 //                showToast(xdjjhxzDataList.get(i).getGWID());
+
+//                Log.e("gwid", xdjjhxzDataList.get(i).getGWID() + "--" + i + 1);
+
+
                 List<QYDDATABean> qyddataBeanList = qydDataBeanMap.get(xdjjhxzDataList.get(i).getGWID());
                 scdjjhbean.setGWID(xdjjhxzDataList.get(i).getGWID());
                 dhdata.setQYBH(xdjjhxzDataList.get(i).getQYBH());
@@ -310,41 +314,44 @@ public class DjdscFragment extends BaseFragment {
                     qydj_data.setFXNR("");
                     qydj_data.setSMFS("");
                     qydjDataList.add(qydj_data);
+
+
                 }
+
                 dhdata.setQYDJ_DATA(qydjDataList);
                 djDataList.add(dhdata);
                 scdjjhbean.setDJ_DATA(djDataList);
+                final String json = GsonUtils.GsonString(scdjjhbean);
+                Log.e("json", "第" + i  + "次  " + xdjjhxzDataList.get(i).getGWID() + "  " + json);
+
+
+                if (noCheck > 0) {  //如果未检查的数量大于0 则提示有未检查的项目
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle("提示");
+                    builder.setTitle("你还有项目未检查，是否上传？");
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            sCData(json);
+                        }
+                    });
+                    builder.show();
+
+                } else {
+                    sCData(json);
+                }
             } else {
                 noCheck++;//代表有没有检查的数量
             }
         }
 
-
-//        上传
-        final String json = GsonUtils.GsonString(scdjjhbean);
-
-        if (noCheck > 0) {  //如果未检查的数量大于0 则提示有未检查的项目
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("提示");
-            builder.setTitle("你还有项目未检查，是否上传？");
-            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    sCData(json);
-                }
-            });
-            builder.show();
-
-        } else {
-            sCData(json);
-        }
 
     }
 
