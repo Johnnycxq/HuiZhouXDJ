@@ -87,7 +87,6 @@
             android:layout_height="100px"
             android:background="#00000000"
             android:orientation="horizontal"
-
             >
 
             <Button

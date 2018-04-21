@@ -29,9 +29,9 @@ import java.util.List;
 public class MainQfActivity extends BaseActivity {
 
     private GridView gv;
-    private String[] str = {"备品备件查询"};
-    private int[] imageId = {R.mipmap.icon13};
-    private int[] colors = {R.drawable.radius_c7};
+    private String[] str = {"提交缺陷工单", "缺陷工单查询", "PM工单查询", "备品备件查询",};
+    private int[] imageId = {R.mipmap.icon6, R.mipmap.icon10, R.mipmap.icon11, R.mipmap.icon13};
+    private int[] colors = {R.drawable.radius_c7, R.drawable.radius_a2, R.drawable.radius_d1, R.drawable.radius_a3};
     private boolean flag = true;
 
     @Override
@@ -61,6 +61,17 @@ public class MainQfActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i) {
                     case 0:
+                        Intent intent = new Intent(MainQfActivity.this, TjqxdActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 1:
+
+                        break;
+                    case 2:
+                        Intent intent2 = new Intent(MainQfActivity.this, PMActivity.class);
+                        startActivity(intent2);
+                        break;
+                    case 3:
                         searchDialog();
                         break;
                 }

@@ -272,20 +272,20 @@ public class Contans {
     public final static String KEY_WIFI_IP = "WIFI";
     public final static String KEY_4G_IP = "4G";
     public final static String NFCOREWM = "nfcorewm";
-
     public final static String WIFI_4G = "wifi4g";
-
-    //用户信息
     public final static String PERMISSIONSRESULT = "PermissionsResult";
     public final static String USERNAME = "enterby";
     public final static String BZBH = "bzbh";
-
-
     public final static String BZMC = "bzmc";
     public final static String NAME = "username";
-
     public static boolean NEWWORK_STATE;//网络状态
+
+
+
     public static boolean TEST = false;
+
+
+
 
     public static String PRINTIP = "10.19.110.19";//打印机的IP
 

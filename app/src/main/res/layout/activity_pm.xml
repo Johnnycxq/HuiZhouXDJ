@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/layout_base"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.rehome.huizhouxdj.weight.InputLayout
+            android:id="@+id/il_sbmc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintText="点击选择设备名称"
+            app:isShowTextView="true"
+            app:must="true"
+            app:tv_title="设备名称"/>
+
+        <com.rehome.huizhouxdj.weight.InputLayout
+            android:id="@+id/il_zrbm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintText="责任部门"
+            app:isShowTextView="true"
+            app:must="true"
+            app:tv_title="责任部门"/>
+
+        <com.rehome.huizhouxdj.weight.InputLayout
+            android:id="@+id/il_gzzt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintText="工作状态"
+            app:isShowTextView="true"
+            app:must="true"
+            app:tv_title="工作状态"/>
+
+        <com.rehome.huizhouxdj.weight.InputLayout
+            android:id="@+id/il_gzyxj"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintText="工作优先级"
+            app:isShowTextView="true"
+            app:must="true"
+            app:tv_title="工作优先级"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

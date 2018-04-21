@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+
+    <include layout="@layout/layout_base"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_gdbh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:must="true"
+                app:tv_title="工作单号"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_sbbh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintText="设备编号"
+                app:isShowTextView="true"
+                app:must="true"
+                app:tv_title="设备编号"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_sbmc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintText="点击选择设备名称"
+                app:isShowTextView="true"
+                app:must="true"
+                app:tv_title="设备名称"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_zrbz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintText="点击选择责任班组"
+                app:isShowTextView="true"
+                app:must="true"
+                app:tv_title="责任班组"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_xmfr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintText="点击选择项目负责人"
+                app:isShowTextView="true"
+                app:must="true"
+                app:tv_title="项目负责"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_jxbz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintText="点击选择检修班组"
+                app:isShowTextView="true"
+                app:must="true"
+                app:tv_title="检修班组"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_jxfzr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintText="点击选择检修负责人"
+                app:isShowTextView="true"
+                app:must="true"
+                app:tv_title="检修负责"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_yxj"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintText="点击选择优先级"
+                app:isShowTextView="true"
+                app:must="true"
+                app:tv_title="优先级"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_gzxz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintText="点击选择工作性质"
+                app:isShowTextView="true"
+                app:must="true"
+                app:tv_title="工作性质"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_startime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintText="点击选择开始时间"
+                app:isShowTextView="true"
+                app:must="true"
+                app:tv_title="开始时间"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_endtime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintText="点击选择结束时间"
+                app:isShowTextView="true"
+                app:must="true"
+                app:tv_title="结束时间"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_xzfj"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintText="点击选择附件"
+                app:isShowTextView="true"
+                app:must="true"
+                app:tv_title="选择附件"/>
+
+
+            <EditText
+                android:id="@+id/et_qxms"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:background="@android:color/white"
+                android:gravity="top"
+                android:hint="请输入缺陷描述:"
+                android:padding="5dp"
+                android:textColor="@android:color/black"
+                />
+
+
+            <EditText
+                android:id="@+id/et_gzms"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:background="@android:color/white"
+                android:gravity="top"
+                android:hint="请输入工作描述:"
+                android:padding="5dp"
+                android:textColor="@android:color/black"
+                />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

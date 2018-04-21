@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <include layout="@layout/toolbar"></include>
 
@@ -17,7 +17,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="#99000000" />
+        android:background="#99000000"/>
 
     <com.rehome.huizhouxdj.weight.AutoRadioGroup
         android:id="@+id/rg"
@@ -36,7 +36,7 @@
             android:checked="true"
             android:gravity="center"
             android:text="采集"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"/>
 
         <View
             android:layout_width="1px"
@@ -54,7 +54,7 @@
             android:button="@null"
             android:gravity="center"
             android:text="方法"
-            android:textColor="#777777" />
+            android:textColor="#777777"/>
 
         <View
             android:layout_width="1px"
@@ -72,7 +72,7 @@
             android:button="@null"
             android:gravity="center"
             android:text="标准"
-            android:textColor="#777777" />
+            android:textColor="#777777"/>
 
         <View
             android:layout_width="1px"
@@ -101,7 +101,7 @@
             style="@style/button"
             android:layout_width="@dimen/px_200"
             android:layout_marginRight="@dimen/px_20"
-            android:text="@string/last" />
+            android:text="@string/last"/>
 
         <Button
             android:id="@+id/btn_save_next"
@@ -109,19 +109,19 @@
             android:layout_width="@dimen/px_200"
             android:layout_marginRight="@dimen/px_20"
             android:text="保存并下一条"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/btn_next"
             style="@style/button"
             android:layout_width="@dimen/px_200"
             android:layout_marginRight="20px"
-            android:text="@string/next" />
+            android:text="@string/next"/>
 
         <Button
             android:id="@+id/btn_exit"
             style="@style/button"
             android:layout_width="@dimen/px_200"
-            android:text="退出" />
+            android:text="保存并退出"/>
     </LinearLayout>
 </LinearLayout>

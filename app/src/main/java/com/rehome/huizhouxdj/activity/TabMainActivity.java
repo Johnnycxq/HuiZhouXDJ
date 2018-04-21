@@ -41,10 +41,7 @@ public class TabMainActivity extends BaseActivity {
     AutoRadioGroup rg;
     @BindView(R.id.toolbar)
     AutoToolbar toolbar;
-
-
     private List<Fragment> fragments = new ArrayList<>();
-
     private FragmentPagerAdapter adapter;
 
     @Override
@@ -56,12 +53,9 @@ public class TabMainActivity extends BaseActivity {
     protected void initView() {
 
         toolbar.setVisibility(View.GONE);
-
-
         fragments.add(MainFragment.getInstance());
         fragments.add(ContactFragment.getInstance());
         fragments.add(MineFragment.getInstance());
-
 
 
         adapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
@@ -75,6 +69,8 @@ public class TabMainActivity extends BaseActivity {
                 return fragments.size();
             }
         };
+
+
         vp.setAdapter(adapter);
         vp.setOffscreenPageLimit(3);
         vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
