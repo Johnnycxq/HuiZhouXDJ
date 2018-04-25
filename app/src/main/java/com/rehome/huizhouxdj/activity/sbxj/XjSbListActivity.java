@@ -1,4 +1,4 @@
-package com.rehome.huizhouxdj.activity.sbxdj;
+package com.rehome.huizhouxdj.activity.sbxj;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -8,8 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.rehome.huizhouxdj.DBModel.QYAQFXDATABean;
-import com.rehome.huizhouxdj.DBModel.QYDDATABean;
+import com.rehome.huizhouxdj.DBModel.XSJJHDataBean;
 import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.adapter.CommonAdapter;
 import com.rehome.huizhouxdj.adapter.ViewHolder;
@@ -28,9 +27,9 @@ import java.util.Map;
 import butterknife.BindView;
 
 /**
- * 设备巡点检管理-点检工作
+ * 设备巡点检管理-巡检工作
  */
-public class SdjSbListActivity extends BaseActivity3 implements View.OnClickListener {
+public class XjSbListActivity extends BaseActivity3 implements View.OnClickListener {
 
     @BindView(R.id.lv)
     ListView lv;
@@ -38,8 +37,7 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
     TextView tvNodata;
     private View headView;
     private CommonAdapter<sbInfo> adapter;
-    private ArrayList<QYAQFXDATABean> qyaqfxdataBeanArrayList;
-    private ArrayList<QYDDATABean> qyddataBeanArrayList = new ArrayList<>();
+    private ArrayList<XSJJHDataBean> xsjjhDataBeanArrayList;
     private boolean isEdit = true;
     private int item;
     private List<sbInfo> infos = new ArrayList<>();
@@ -47,7 +45,7 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_sblist;
+        return R.layout.activity_xjsblist;
     }
 
     @Override
@@ -57,10 +55,9 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
                 finish();
                 break;
             case R.id.tv_right:
-                intent = new Intent(SdjSbListActivity.this, TipsActivity.class);
+                intent = new Intent(XjSbListActivity.this, XjYulActivity.class);
                 Bundle bundle2 = new Bundle();
-                bundle2.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanArrayList);
-                bundle2.putParcelableArrayList("QYFXTS", qyaqfxdataBeanArrayList);
+                bundle2.putParcelableArrayList("xsjjhDataBeanArrayList", xsjjhDataBeanArrayList);
                 bundle2.putBoolean("edit", true);
                 bundle2.putInt(Contans.KEY_ITEM, 0);
                 intent.putExtras(bundle2);
@@ -80,33 +77,24 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
     public void initData() {
 
         initNFC();
-
-        initToolbar("当前设备", "点检内容", this);
-
-
-        Bundle bundle = SdjSbListActivity.this.getIntent().getExtras();
-        qyaqfxdataBeanArrayList = new ArrayList<>();
-        qyddataBeanArrayList = new ArrayList<>();
-        qyaqfxdataBeanArrayList = bundle.getParcelableArrayList("QYFXTS");
-        qyddataBeanArrayList = bundle.getParcelableArrayList(Contans.KEY_DJJHRWQY);
+        initToolbar("当前设备", "巡检内容", this);
+        Bundle bundle = XjSbListActivity.this.getIntent().getExtras();
+        xsjjhDataBeanArrayList = new ArrayList<>();
+        xsjjhDataBeanArrayList = bundle.getParcelableArrayList("xsjjhDataBeanArrayList");
         isEdit = bundle.getBoolean("edit");
         item = bundle.getInt(Contans.KEY_ITEM);
-
-
         setListData();
-
-
     }
 
     private void setListData() {
 
         Map<String, sbInfo> maps = new HashMap<String, sbInfo>();
-        for (QYDDATABean rw : qyddataBeanArrayList) {
+        for (XSJJHDataBean rw : xsjjhDataBeanArrayList) {
             sbInfo sbinfo = new sbInfo();
-            sbinfo.setSbmc(rw.getSBMC());
-            sbinfo.setSbid(rw.getSBID());
+            sbinfo.setSbmc(rw.getSb());
+            sbinfo.setSbid(rw.getSbid());
             sbinfo.setSbstate(rw.getSBMCSTATE());
-            String Key = rw.getSBID() + "_" + rw.getSBMC();
+            String Key = rw.getSbid() + "_" + rw.getSb();
             sbInfo data = maps.get(Key);
             if (data == null) {
                 maps.put(Key, sbinfo);
@@ -162,7 +150,7 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
 
                             }
 
-                            int i = DataSupport.updateAll(QYDDATABean.class, values, "SBID = ? ", infos.get(postion - 1).getSbid());
+                            int i = DataSupport.updateAll(XSJJHDataBean.class, values, "sbid = ? ", infos.get(postion - 1).getSbid());
 
                             if (i != 0) {
                                 showToast("修改设备状态成功");

@@ -83,8 +83,8 @@
         <activity android:name=".activity.sbxj.NFCInfoActivity"/>
         <activity android:name=".activity.sbxj.XjMainActivity"/>
         <activity android:name=".activity.sbxj.SxgzActivity"/>
-
-
+        <activity android:name=".activity.sbxj.XjSbListActivity"/>
+        <activity android:name=".activity.sbxj.XjYulActivity"/>
 
         <activity android:name=".activity.sbxdj.TipsActivity"/>
         <activity android:name=".activity.sbxdj.DjMainActivity"/>

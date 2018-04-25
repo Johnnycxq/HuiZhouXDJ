@@ -1,11 +1,13 @@
 package com.rehome.huizhouxdj.activity.sbxj;
 
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.rehome.huizhouxdj.DBModel.XSJJHDataBean;
 import com.rehome.huizhouxdj.DBModel.XSJJHXZDataBean;
 import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.adapter.ScxsAdapter;
@@ -17,9 +19,12 @@ import com.yolanda.nohttp.rest.RequestQueue;
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * 设备巡点检管理-点检点上传
@@ -67,12 +72,12 @@ public class ScxsjhFragment extends BaseFragment {
                 if (cb.isChecked()) {
                     for (int i = 0; i < xsjjhxzDataBeanList.size(); i++) {
                         xsjjhxzDataBeanList.get(i).setChecked(true);
-//                        adapter.notifyDataSetChanged();
+                        adapter.notifyDataSetChanged();
                     }
                 } else {
                     for (int i = 0; i < xsjjhxzDataBeanList.size(); i++) {
                         xsjjhxzDataBeanList.get(i).setChecked(false);
-//                        adapter.notifyDataSetChanged();
+                        adapter.notifyDataSetChanged();
                     }
                 }
             }
@@ -94,12 +99,13 @@ public class ScxsjhFragment extends BaseFragment {
     }
 
 
-    //所有的XDJJHXZDataBean数据
     private List<XSJJHXZDataBean> xsjjhxzDataBeanList = new ArrayList<>();
-    //当前查询的gwid
+
     private String zxid = "";
-    //点检计划列表数据源
-//    private List<XSJJHXZDataBean> xsjhxzdatalist = new ArrayList<>();
+
+    private List<XSJJHXZDataBean> xsjhxzdatalist = new ArrayList<>();
+
+    private Map<String, List<XSJJHDataBean>> xsJjhDataBeanMap = new HashMap<>();
 
     /**
      * 获取数据库的数据
@@ -109,53 +115,94 @@ public class ScxsjhFragment extends BaseFragment {
 
         xsjjhxzDataBeanList.clear();
         xsjjhxzDataBeanList.addAll(DataSupport.findAll(XSJJHXZDataBean.class));
-//        xsjhxzdatalist.clear();
 
-//
-//        for (int i = 0; i < xsjjhxzDataBeanList.size(); i++) {
-//            if (!xsjjhxzDataBeanList.get(i).getZxid().equals(zxid)) {
-//                List<XSJJHDataBean> qydDataBeen = DataSupport.where("zxid = ?", xsjjhxzDataBeanList.get(i).getZxid()).find(XSJJHDataBean.class);
-//                zxid = xsjjhxzDataBeanList.get(i).getZxid();
-//
-//                int count = 0;
-//                for (int j = 0; j < qydDataBeen.size(); j++) {
-//                    if (qydDataBeen.get(j).isChecked()) {
-//                        count++;
-//                    }
-//                }
-//
-////                //训检计划列表bean
-////                XSJJHXZDataBean xsjjhxzDataBean = new XSJJHXZDataBean();
-////                xsjjhxzDataBean.setQymc(xsjjhxzDataBeanList.get(i).getQymc());
-////                xsjjhxzDataBean.setSczt(xsjjhxzDataBeanList.get(i).getSczt());
-////                xsjhxzdatalist.add(xsjjhxzDataBean);
-//
-//
-//            }
-//        }
+        xsjhxzdatalist.clear();
+        xsJjhDataBeanMap.clear();
+
+        for (int i = 0; i < xsjjhxzDataBeanList.size(); i++) {
+            if (!xsjjhxzDataBeanList.get(i).getZxid().equals(zxid)) {
+                List<XSJJHDataBean> qydDataBeen = DataSupport.where("zxid = ?", xsjjhxzDataBeanList.get(i).getZxid()).find(XSJJHDataBean.class);
+                zxid = xsjjhxzDataBeanList.get(i).getZxid();
+
+                int count = 0;
+                for (int j = 0; j < qydDataBeen.size(); j++) {
+                    if (qydDataBeen.get(j).isChecked()) {
+                        count++;
+                    }
+                }
+
+                XSJJHXZDataBean xsjjhxzDataBean = new XSJJHXZDataBean();
+                xsjjhxzDataBean.setQymc(xsjjhxzDataBeanList.get(i).getQymc());
+                xsjjhxzDataBean.setSczt(xsjjhxzDataBeanList.get(i).getSczt());
+                xsjhxzdatalist.add(xsjjhxzDataBean);
+                xsJjhDataBeanMap.put(xsjjhxzDataBeanList.get(i).getZxid(), qydDataBeen);
+
+            }
+        }
     }
 
     private void setListData() {
 
-        adapter = new ScxsAdapter(context, xsjjhxzDataBeanList, new ScxsAdapter.CallBack() {
+        adapter = new ScxsAdapter(context, xsjhxzdatalist, new ScxsAdapter.CallBack() {
             @Override
             public void Click(View view) {
                 CheckBox checkBox = (CheckBox) view;
                 int index = (int) checkBox.getTag();
-                xsjjhxzDataBeanList.get(index).setChecked(checkBox.isChecked());
+                xsjhxzdatalist.get(index).setChecked(checkBox.isChecked());
                 int count = 0;
-                for (int a = 0; a < xsjjhxzDataBeanList.size(); a++) {
-                    if (xsjjhxzDataBeanList.get(a).isChecked()) {
+                for (int a = 0; a < xsjhxzdatalist.size(); a++) {
+                    if (xsjhxzdatalist.get(a).isChecked()) {
                         count++;
                     }
                 }
-                cb.setChecked(count == xsjjhxzDataBeanList.size() ? true : false);
+                cb.setChecked(count == xsjhxzdatalist.size() ? true : false);
                 adapter.notifyDataSetChanged();
             }
         });
         lv.addHeaderView(headView, null, false);
         lv.setAdapter(adapter);
-    }
 
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                xsjhxzdatalist.get(i - 1).setChecked(xsjhxzdatalist.get(i - 1).isChecked() ? false : true);
+                int count = 0;
+                for (int a = 0; a < xsjhxzdatalist.size(); a++) {
+                    if (xsjhxzdatalist.get(a).isChecked()) {
+                        count++;
+                    }
+                }
+                cb.setChecked(count == xsjhxzdatalist.size() ? true : false);
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+
+    }
+    @OnClick({R.id.btn_sc, R.id.btn_hf, R.id.btn_del})
+
+    public void click(View view) {
+
+        switch (view.getId()) {
+
+            case R.id.btn_sc:
+
+//                uploadData();//上传勾选中的数据
+
+                break;
+
+            case R.id.btn_hf:
+
+                break;
+
+            case R.id.btn_del:
+
+//                deleteData();//删除勾选中的数据
+
+                break;
+        }
+    }
 
 }

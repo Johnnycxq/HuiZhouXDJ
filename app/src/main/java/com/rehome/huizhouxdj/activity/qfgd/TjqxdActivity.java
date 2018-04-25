@@ -1,6 +1,8 @@
 package com.rehome.huizhouxdj.activity.qfgd;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -28,6 +30,10 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.text.DecimalFormat;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -36,6 +42,9 @@ import butterknife.ButterKnife;
  */
 
 public class TjqxdActivity extends BaseActivity2 implements View.OnClickListener {
+
+    private static final int REQUEST_AUDIO = 0;
+    private Uri uri;
     @BindView(R.id.il_gdbh)
     InputLayout ilGdbh;
     @BindView(R.id.il_sbbh)
@@ -82,6 +91,10 @@ public class TjqxdActivity extends BaseActivity2 implements View.OnClickListener
 
     private String DJID;
     private String DJMC;
+
+    private String filePath, fileSize, filetype, uploadfiletype;
+
+    private File file;
 
     @Override
     public int getLayoutId() {
@@ -191,6 +204,15 @@ public class TjqxdActivity extends BaseActivity2 implements View.OnClickListener
                 dialog.show();
             }
         });
+        ilXzfj.setTvContentOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("audio/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, REQUEST_AUDIO);
+            }
+        });
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -259,7 +281,68 @@ public class TjqxdActivity extends BaseActivity2 implements View.OnClickListener
                     ilYxj.setContent(DJMC);
                 }
                 break;
+            case REQUEST_AUDIO:
+                if (resultCode == RESULT_OK) {
+                    uri = data.getData();
+                    Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+                    cursor.moveToFirst();
+                    filePath = cursor.getString(1); // 文件路径
+                    file = new File(filePath);
+                    filetype = file.getName().substring(file.getName().lastIndexOf(".") + 1);
+
+                    if (filetype.equals("doc") || filetype.equals("docx") || filetype.equals("xls")
+                            || filetype.equals("xlsx") || filetype.equals("ppt") || filetype.equals("pptx") || filetype.equals("pdf")) {
+                        uploadfiletype = "10001";
+
+                    } else if (filetype.equals("flv") || filetype.equals("mp4")) {
+
+                        uploadfiletype = "10002";
+                    }
+
+                    try {
+                        fileSize = formetFileSize(getFileSize(file));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    ilXzfj.setContent(file.getName());
+                }
+                break;
         }
+    }
+
+    /**
+     * ˙
+     * 计算文件的大小
+     *
+     * @param fileS
+     * @return
+     */
+    public String formetFileSize(long fileS) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        String fileSizeString = "";
+        if (fileS < 1024) {
+            fileSizeString = df.format((double) fileS) + "B";
+        } else if (fileS < 1048576) {
+            fileSizeString = df.format((double) fileS / 1024) + "K";
+        } else if (fileS < 1073741824) {
+            fileSizeString = df.format((double) fileS / 1048576) + "M";
+        } else {
+            fileSizeString = df.format((double) fileS / 1073741824) + "G";
+        }
+        return fileSizeString;
+    }
+
+    public static long getFileSize(File file) throws Exception {
+        if (file == null) {
+            return 0;
+        }
+        long size = 0;
+        if (file.exists()) {
+            FileInputStream fis = null;
+            fis = new FileInputStream(file);
+            size = fis.available();
+        }
+        return size;
     }
 
     private void TJ() {

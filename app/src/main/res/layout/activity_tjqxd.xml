@@ -127,10 +127,10 @@
 
             <EditText
                 android:id="@+id/et_qxms"
+                style="@style/editTextTheme"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
-                android:background="@android:color/white"
                 android:gravity="top"
                 android:hint="请输入缺陷描述:"
                 android:padding="5dp"
@@ -140,10 +140,10 @@
 
             <EditText
                 android:id="@+id/et_gzms"
+                style="@style/editTextTheme"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
-                android:background="@android:color/white"
                 android:gravity="top"
                 android:hint="请输入工作描述:"
                 android:padding="5dp"

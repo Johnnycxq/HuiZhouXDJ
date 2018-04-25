@@ -151,9 +151,10 @@ public class DjdscFragment extends BaseFragment {
 
         xdjjhxzDataBeanList.clear();
         xdjjhxzDataBeanList.addAll(DataSupport.findAll(XDJJHXZDataBean.class));
-        xdjjhxzDataList.clear();
 
+        xdjjhxzDataList.clear();
         qydDataBeanMap.clear();
+
 
         for (int i = 0; i < xdjjhxzDataBeanList.size(); i++) {
 
@@ -183,10 +184,7 @@ public class DjdscFragment extends BaseFragment {
                 xdjjhxzDataBean.setGWID(xdjjhxzDataBeanList.get(i).getGWID());
                 xdjjhxzDataBean.setCountPercent(count + "/" + qydDataBeen.size());
                 xdjjhxzDataBean.setQYBH(xdjjhxzDataBeanList.get(i).getQYBH());
-
                 xdjjhxzDataList.add(xdjjhxzDataBean);
-
-                //点检计划列表对应的map
                 qydDataBeanMap.put(xdjjhxzDataBeanList.get(i).getGWID(), qydDataBeen);
 
             }

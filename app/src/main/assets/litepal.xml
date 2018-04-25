@@ -3,7 +3,7 @@
     <!-- 数据库名字 -->
     <dbname value="rehome"></dbname>
     <!-- 版本号 -->
-    <version value="39"></version>
+    <version value="41"></version>
     <!-- 配置表 -->
     <list>
         <!-- 配置表的路径，需要继承DataSupport -->

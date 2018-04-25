@@ -18,6 +18,7 @@ public class XSJJHDataBean extends DataSupport implements Parcelable {
     private String dbh;
     private String dlxbh;
     private String dlxmc;
+    private String sbid;
     private String sb;
     private String zymc;
     private String dw;
@@ -43,6 +44,13 @@ public class XSJJHDataBean extends DataSupport implements Parcelable {
     private boolean deleted;//true 已删除，false 未删除
     private String DATE;//保存时间
     private String zxid;
+
+    private String SBMCSTATE;//设备状态
+    private String SBMCSTATEVALUE;//设备状态值
+
+
+    private String CJJG;
+    private String BJMC;
 
 
     public long getId() {
@@ -285,6 +293,45 @@ public class XSJJHDataBean extends DataSupport implements Parcelable {
         this.zxid = zxid;
     }
 
+    public String getSBMCSTATE() {
+        return SBMCSTATE;
+    }
+
+    public void setSBMCSTATE(String SBMCSTATE) {
+        this.SBMCSTATE = SBMCSTATE;
+    }
+
+    public String getSBMCSTATEVALUE() {
+        return SBMCSTATEVALUE;
+    }
+
+    public void setSBMCSTATEVALUE(String SBMCSTATEVALUE) {
+        this.SBMCSTATEVALUE = SBMCSTATEVALUE;
+    }
+
+    public String getSbid() {
+        return sbid;
+    }
+
+    public void setSbid(String sbid) {
+        this.sbid = sbid;
+    }
+
+    public String getCJJG() {
+        return CJJG;
+    }
+
+    public void setCJJG(String CJJG) {
+        this.CJJG = CJJG;
+    }
+
+    public String getBJMC() {
+        return BJMC;
+    }
+
+    public void setBJMC(String BJMC) {
+        this.BJMC = BJMC;
+    }
 
     @Override
     public int describeContents() {
@@ -298,6 +345,7 @@ public class XSJJHDataBean extends DataSupport implements Parcelable {
         dest.writeString(this.dbh);
         dest.writeString(this.dlxbh);
         dest.writeString(this.dlxmc);
+        dest.writeString(this.sbid);
         dest.writeString(this.sb);
         dest.writeString(this.zymc);
         dest.writeString(this.dw);
@@ -322,6 +370,10 @@ public class XSJJHDataBean extends DataSupport implements Parcelable {
         dest.writeByte(this.deleted ? (byte) 1 : (byte) 0);
         dest.writeString(this.DATE);
         dest.writeString(this.zxid);
+        dest.writeString(this.SBMCSTATE);
+        dest.writeString(this.SBMCSTATEVALUE);
+        dest.writeString(this.CJJG);
+        dest.writeString(this.BJMC);
     }
 
     public XSJJHDataBean() {
@@ -333,6 +385,7 @@ public class XSJJHDataBean extends DataSupport implements Parcelable {
         this.dbh = in.readString();
         this.dlxbh = in.readString();
         this.dlxmc = in.readString();
+        this.sbid = in.readString();
         this.sb = in.readString();
         this.zymc = in.readString();
         this.dw = in.readString();
@@ -357,6 +410,11 @@ public class XSJJHDataBean extends DataSupport implements Parcelable {
         this.deleted = in.readByte() != 0;
         this.DATE = in.readString();
         this.zxid = in.readString();
+        this.SBMCSTATE = in.readString();
+        this.SBMCSTATEVALUE = in.readString();
+        this.CJJG = in.readString();
+        this.BJMC = in.readString();
+
     }
 
     public static final Parcelable.Creator<XSJJHDataBean> CREATOR = new Parcelable.Creator<XSJJHDataBean>() {

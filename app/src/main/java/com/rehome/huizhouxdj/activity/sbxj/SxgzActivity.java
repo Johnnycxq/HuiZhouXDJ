@@ -1,6 +1,7 @@
 package com.rehome.huizhouxdj.activity.sbxj;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,6 +15,7 @@ import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.adapter.CommonAdapter;
 import com.rehome.huizhouxdj.adapter.ViewHolder;
 import com.rehome.huizhouxdj.base.MipcaActivityCapture;
+import com.rehome.huizhouxdj.contans.Contans;
 import com.rehome.huizhouxdj.utils.BaseActivity3;
 
 import org.litepal.crud.DataSupport;
@@ -76,9 +78,9 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
         setListData();
 
 
-        List<XSJJHXZDataBean> xsjjhxzDataBeen = DataSupport.findAll(XSJJHXZDataBean.class);
-
-        List<XSJJHDataBean> xsjjhdatabean = DataSupport.findAll(XSJJHDataBean.class);
+//        List<XSJJHXZDataBean> xsjjhxzDataBeen = DataSupport.findAll(XSJJHXZDataBean.class);
+//
+//        List<XSJJHDataBean> xsjjhdatabean = DataSupport.findAll(XSJJHDataBean.class);
 
         btn_sm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,6 +144,19 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
 
                     Log.e("size", String.valueOf(xsjjhDataBeanArrayList.size()));
 
+
+                    if (xsjjhDataBeanArrayList.size() != 0) {
+
+                        Bundle bundle = new Bundle();
+                        Intent intent = new Intent(SxgzActivity.this, XjSbListActivity.class);
+                        bundle.putParcelableArrayList("xsjjhDataBeanArrayList", xsjjhDataBeanArrayList);
+                        bundle.putBoolean("edit", false);
+                        bundle.putInt(Contans.KEY_ITEM, 0);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+
+                    }
+
 //
 //                    if (qyddataBeanList.size() != 0) {
 //
@@ -184,5 +199,10 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
 
     }
 
-
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        getDataInSqlite();
+        adapter.notifyDataSetChanged();
+    }
 }
