@@ -56,7 +56,7 @@ public class ScxsAdapter extends BaseAdapter {
         if (view == null) {
             holder = new ViewHolder();
             view = LayoutInflater.from(context).inflate(R.layout.scxscb_item, viewGroup, false);
-            holder.cb = (CheckBox) view.findViewById(R.id.cb);
+            holder.xj_cb = (CheckBox) view.findViewById(R.id.xj_cb);
             holder.tv_gwmc = (TextView) view.findViewById(R.id.tv_gwmc);
             holder.tv_yjzj = (TextView) view.findViewById(R.id.tv_yjzj);
 
@@ -67,21 +67,14 @@ public class ScxsAdapter extends BaseAdapter {
         }
 
 
-        holder.cb.setChecked(list.get(i).isChecked());
-
-        if (list.get(i).getSczt().equals("0")) {
-
-            holder.tv_yjzj.setText("未上传");
-
-        } else {
-
-            holder.tv_yjzj.setText("已经上传");
-        }
+        holder.xj_cb.setChecked(list.get(i).isChecked());
         holder.tv_gwmc.setText(list.get(i).getQymc());
+        holder.tv_yjzj.setText(list.get(i).getCountPercent());
 
 
-        holder.cb.setTag(i);
-        holder.cb.setOnClickListener(new View.OnClickListener() {
+
+        holder.xj_cb.setTag(i);
+        holder.xj_cb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mCallBack.Click(view);
@@ -91,7 +84,7 @@ public class ScxsAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        CheckBox cb;
+        CheckBox xj_cb;
         TextView tv_gwmc;
         TextView tv_yjzj;
 

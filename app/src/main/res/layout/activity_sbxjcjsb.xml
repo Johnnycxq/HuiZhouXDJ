@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/toolbar"></include>
+
+    <com.rehome.huizhouxdj.weight.NoscrollViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="700px"
+        android:layout_margin="@dimen/px_10">
+
+    </com.rehome.huizhouxdj.weight.NoscrollViewPager>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#99000000"/>
+
+    <com.rehome.huizhouxdj.weight.AutoRadioGroup
+        android:id="@+id/rg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_90"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <RadioButton
+            android:id="@+id/rb1"
+            android:layout_width="@dimen/px_100"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/radiobutton"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="采集"
+            android:textColor="#ffffff"/>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#99000000">
+
+        </View>
+
+        <RadioButton
+            android:id="@+id/rb2"
+            android:layout_width="@dimen/px_100"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/radiobutton"
+            android:button="@null"
+            android:gravity="center"
+            android:text="方法"
+            android:textColor="#777777"/>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#99000000">
+
+        </View>
+
+        <RadioButton
+            android:id="@+id/rb3"
+            android:layout_width="@dimen/px_100"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/radiobutton"
+            android:button="@null"
+            android:gravity="center"
+            android:text="标准"
+            android:textColor="#777777"/>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#99000000">
+
+        </View>
+    </com.rehome.huizhouxdj.weight.AutoRadioGroup>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#99000000">
+
+    </View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px_20"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_last"
+            style="@style/button"
+            android:layout_width="@dimen/px_200"
+            android:layout_marginRight="@dimen/px_20"
+            android:text="@string/last"/>
+
+        <Button
+            android:id="@+id/btn_save_next"
+            style="@style/button"
+            android:layout_width="@dimen/px_200"
+            android:layout_marginRight="@dimen/px_20"
+            android:text="保存并下一条"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btn_next"
+            style="@style/button"
+            android:layout_width="@dimen/px_200"
+            android:layout_marginRight="20px"
+            android:text="@string/next"/>
+
+        <Button
+            android:id="@+id/btn_exit"
+            style="@style/button"
+            android:layout_width="@dimen/px_200"
+            android:text="保存并退出"/>
+    </LinearLayout>
+</LinearLayout>

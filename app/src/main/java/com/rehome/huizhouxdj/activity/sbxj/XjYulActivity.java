@@ -1,14 +1,17 @@
 package com.rehome.huizhouxdj.activity.sbxj;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.rehome.huizhouxdj.DBModel.XSJJHDataBean;
 import com.rehome.huizhouxdj.R;
-import com.rehome.huizhouxdj.activity.sbxdj.SbxdjcjsbActivity;
 import com.rehome.huizhouxdj.adapter.DlbAdapter;
 import com.rehome.huizhouxdj.bean.DlbInfo;
 import com.rehome.huizhouxdj.contans.Contans;
@@ -31,37 +34,37 @@ public class XjYulActivity extends BaseActivity {
     private View headView;
     private DlbAdapter adapter;
 
-//    /**
-//     * 广播
-//     */
-//    private BroadcastReceiver myReceiver = new BroadcastReceiver() {
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            //更新指定item
-//            String action = intent.getAction();
-//            switch (action) {
-//                case Contans.ACTION_YULONE: //更新设备点检页面返回时编辑的item内容
-//
-//                    int position = intent.getIntExtra(Contans.KEY_POSITION, -1);
-//                    String name = intent.getStringExtra(Contans.KEY_NAME);
-//                    DlbInfo dlbInfo = infos.get(position);
-//                    dlbInfo.setCjjg(name);
-//                    dlbInfo.setStatu(true);
-//                    infos.set(position, dlbInfo);
-//
-//                    QYDDATABean qyddataBean = djjhs.get(position);
-//                    qyddataBean.setChecked(true);
-//                    qyddataBean.setCJJG(name);
-//                    djjhs.set(position, qyddataBean);
-//
-//                    Log.e("YulActivity", "name=" + name + ", position=" + position);
-//                    break;
-//                default:
-//                    break;
-//            }
-//
-//        }
-//    };
+    /**
+     * 广播
+     */
+    private BroadcastReceiver myReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //更新指定item
+            String action = intent.getAction();
+            switch (action) {
+                case Contans.ACTION_YULONE: //更新设备点检页面返回时编辑的item内容
+
+                    int position = intent.getIntExtra(Contans.KEY_POSITION, -1);
+                    String name = intent.getStringExtra(Contans.KEY_NAME);
+                    DlbInfo dlbInfo = infos.get(position);
+                    dlbInfo.setCjjg(name);
+                    dlbInfo.setStatu(true);
+                    infos.set(position, dlbInfo);
+
+                    XSJJHDataBean xsjjhDataBean = xsjjhDataBeanArrayList.get(position);
+                    xsjjhDataBean.setChecked(true);
+                    xsjjhDataBean.setCJJG(name);
+                    xsjjhDataBeanArrayList.set(position, xsjjhDataBean);
+
+                    Log.e("YulActivity", "name=" + name + ", position=" + position);
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    };
 
     @Override
     public int getContentViewID() {
@@ -71,7 +74,7 @@ public class XjYulActivity extends BaseActivity {
     @Override
     protected void initView() {
         setBack();
-        setTitle("浏览训检记录");
+        setTitle("浏览巡检记录");
 
 
     }
@@ -87,11 +90,11 @@ public class XjYulActivity extends BaseActivity {
         headView.findViewById(R.id.head).setVisibility(View.VISIBLE);
         setListAdapter();
 
-        //创建filter
-//        IntentFilter filter = new IntentFilter();
-//        filter.addAction(Contans.ACTION_YULONE);
-        //注册广播
-//        registerReceiver(myReceiver, filter);
+//        创建filter
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Contans.ACTION_YULONE);
+//        注册广播
+        registerReceiver(myReceiver, filter);
     }
 
     private void setListAdapter() {
@@ -111,7 +114,7 @@ public class XjYulActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent intent = new Intent(XjYulActivity.this, SbxdjcjsbActivity.class);
+                Intent intent = new Intent(XjYulActivity.this, SbxjcjsbActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putParcelableArrayList("xsjjhDataBeanArrayList", xsjjhDataBeanArrayList);
                 bundle.putBoolean("edit", isEdit);
@@ -129,10 +132,10 @@ public class XjYulActivity extends BaseActivity {
         adapter.notifyDataSetChanged();
     }
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        //反注册广播（注销）
-//        unregisterReceiver(myReceiver);
-//    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //反注册广播（注销）
+        unregisterReceiver(myReceiver);
+    }
 }

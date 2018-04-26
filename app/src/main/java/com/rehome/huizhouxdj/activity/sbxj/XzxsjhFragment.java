@@ -77,6 +77,7 @@ public class XzxsjhFragment extends BaseFragment {
     private int selectCount = 0;
     private int requestCount = 0;
     private List<String> zxids = new ArrayList<>();
+    private List<String> jhmcs = new ArrayList<>();
     private RequestQueue queue;
 
     public XzxsjhFragment() {
@@ -149,6 +150,7 @@ public class XzxsjhFragment extends BaseFragment {
         if (xjjhs.size() != 0) {
 
             zxids.clear();
+            jhmcs.clear();
             for (int i = 0; i < xjjhs.size(); i++) {
                 if (xjjhs.get(i).isChecked()) {
                     if (!dialog.isShowing()) {
@@ -156,7 +158,7 @@ public class XzxsjhFragment extends BaseFragment {
                         dialog.show();
                     }
 
-                    downData(xjjhs.get(i).getZxid());
+                    downData(xjjhs.get(i).getZxid(), xjjhs.get(i).getJhmc());
                     zxids.add(xjjhs.get(i).getZxid());
                 }
             }
@@ -165,13 +167,13 @@ public class XzxsjhFragment extends BaseFragment {
         }
     }
 
-    private void downData(String zxid) {
+    private void downData(String zxid, String jhmc) {
 
         selectCount++;
 
         Request<String> request = NoHttp.createStringRequest(Contans.IP + Contans.XSCB, RequestMethod.POST);
 
-        request.setDefineRequestBodyForJson(createZyJson(zxid));
+        request.setDefineRequestBodyForJson(createZyJson(zxid, jhmc));
 
         queue.add(1, request, new HttpResponseListener<>(getActivity(), request, callback, false, false, ""));
 
@@ -266,10 +268,11 @@ public class XzxsjhFragment extends BaseFragment {
     };
 
 
-    private String createZyJson(String zxid) {
+    private String createZyJson(String zxid, String jhmc) {
         XsRequestInfo info = new XsRequestInfo();
         info.setAction("XSCB_ZXJHD_GET");
         info.setZxid(zxid);
+        info.setJhmc(jhmc);
         String json = GsonUtils.GsonString(info);
         return json;
     }

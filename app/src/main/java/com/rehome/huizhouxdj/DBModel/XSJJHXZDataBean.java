@@ -26,6 +26,8 @@ public class XSJJHXZDataBean extends DataSupport implements Parcelable {
     private List<XSJJHDataBean> data;
     private int SN; //自定义序号
     private boolean isChecked;
+    private String countPercent;    //已检/总数
+    private String jhmc;
 
     public long getId() {
         return id;
@@ -115,6 +117,21 @@ public class XSJJHXZDataBean extends DataSupport implements Parcelable {
         isChecked = checked;
     }
 
+    public String getCountPercent() {
+        return countPercent;
+    }
+
+    public void setCountPercent(String countPercent) {
+        this.countPercent = countPercent;
+    }
+
+    public String getJhmc() {
+        return jhmc;
+    }
+
+    public void setJhmc(String jhmc) {
+        this.jhmc = jhmc;
+    }
 
     @Override
     public int describeContents() {
@@ -134,6 +151,8 @@ public class XSJJHXZDataBean extends DataSupport implements Parcelable {
         dest.writeTypedList(this.data);
         dest.writeInt(this.SN);
         dest.writeByte(this.isChecked ? (byte) 1 : (byte) 0);
+        dest.writeString(this.countPercent);
+        dest.writeString(this.jhmc);
     }
 
     public XSJJHXZDataBean() {
@@ -151,6 +170,8 @@ public class XSJJHXZDataBean extends DataSupport implements Parcelable {
         this.data = in.createTypedArrayList(XSJJHDataBean.CREATOR);
         this.SN = in.readInt();
         this.isChecked = in.readByte() != 0;
+        this.countPercent = in.readString();
+        this.jhmc = in.readString();
     }
 
     public static final Creator<XSJJHXZDataBean> CREATOR = new Creator<XSJJHXZDataBean>() {

@@ -264,18 +264,17 @@ public class DjdscFragment extends BaseFragment {
         ScdjjhBean scdjjhbean = new ScdjjhBean();
         scdjjhbean.setAction("DJ_GWSC_SET");
         scdjjhbean.setYHID(USERNAME);
+
         //第二层数据List
         List<ScdjjhBean.DJ_DATA> djDataList = new ArrayList<>();
+
         //第三层数据List
         List<ScdjjhBean.DJ_DATA.QYDJ_DATA> qydjDataList = new ArrayList<>();
+
         for (int i = 0; i < xdjjhxzDataList.size(); i++) {
+
             ScdjjhBean.DJ_DATA dhdata = new ScdjjhBean.DJ_DATA();
             if (xdjjhxzDataList.get(i).isChecked()) {
-//                showToast(xdjjhxzDataList.get(i).getGWID());
-
-//                Log.e("gwid", xdjjhxzDataList.get(i).getGWID() + "--" + i + 1);
-
-
                 List<QYDDATABean> qyddataBeanList = qydDataBeanMap.get(xdjjhxzDataList.get(i).getGWID());
                 scdjjhbean.setGWID(xdjjhxzDataList.get(i).getGWID());
                 dhdata.setQYBH(xdjjhxzDataList.get(i).getQYBH());
@@ -320,10 +319,14 @@ public class DjdscFragment extends BaseFragment {
                 djDataList.add(dhdata);
                 scdjjhbean.setDJ_DATA(djDataList);
                 final String json = GsonUtils.GsonString(scdjjhbean);
+
+
+
+
                 Log.e("json", "第" + i  + "次  " + xdjjhxzDataList.get(i).getGWID() + "  " + json);
 
 
-                if (noCheck > 0) {  //如果未检查的数量大于0 则提示有未检查的项目
+                if (noCheck > 0) {     //如果未检查的数量大于0 则提示有未检查的项目
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setTitle("提示");

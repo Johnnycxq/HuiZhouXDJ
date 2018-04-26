@@ -85,6 +85,10 @@
         <activity android:name=".activity.sbxj.SxgzActivity"/>
         <activity android:name=".activity.sbxj.XjSbListActivity"/>
         <activity android:name=".activity.sbxj.XjYulActivity"/>
+        <activity
+            android:name=".activity.sbxj.SbxjcjsbActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+
 
         <activity android:name=".activity.sbxdj.TipsActivity"/>
         <activity android:name=".activity.sbxdj.DjMainActivity"/>

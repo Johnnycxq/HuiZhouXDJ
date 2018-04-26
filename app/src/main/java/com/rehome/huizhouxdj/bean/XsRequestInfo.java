@@ -32,20 +32,7 @@ public class XsRequestInfo {
     private String sis;
     private String jz;
     private String yhid;
-
-    public String getYhid() {
-        return yhid;
-    }
-
-    public void setYhid(String yhid) {
-        this.yhid = yhid;
-    }
-
-
-
-
-
-
+    private String jhmc;
 
     public String getAction() {
         return action;
@@ -181,5 +168,21 @@ public class XsRequestInfo {
 
     public void setJz(String jz) {
         this.jz = jz;
+    }
+
+    public String getYhid() {
+        return yhid;
+    }
+
+    public void setYhid(String yhid) {
+        this.yhid = yhid;
+    }
+
+    public String getJhmc() {
+        return jhmc;
+    }
+
+    public void setJhmc(String jhmc) {
+        this.jhmc = jhmc;
     }
 }
