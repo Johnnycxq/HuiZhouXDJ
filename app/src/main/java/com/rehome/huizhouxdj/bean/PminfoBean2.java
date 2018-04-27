@@ -1,8 +1,5 @@
 package com.rehome.huizhouxdj.bean;
 
-import com.bin.david.form.annotation.SmartColumn;
-import com.bin.david.form.annotation.SmartTable;
-
 import java.util.List;
 
 /**
@@ -10,7 +7,7 @@ import java.util.List;
  */
 
 
-public class PminfoBean {
+public class PminfoBean2 {
 
 
     private int state;
@@ -41,85 +38,81 @@ public class PminfoBean {
         this.data = data;
     }
 
-    @SmartTable(name = "PM工单查询")
     public static class DataBean {
 
-        @SmartColumn(id = 1, name = "工作单号")
+
         private String GZDH;
 
-        @SmartColumn(id = 2, name = "工作状态")
+
         private String GZZT;
 
-        @SmartColumn(id = 3, name = "责任部门")
+
         private String ZRBM;
 
-        @SmartColumn(id = 4, name = "工作先级")
+
         private String GZYXJ;
 
-        @SmartColumn(id = 5, name = "设备编号")
+
         private String SBBH;
 
-        @SmartColumn(id = 6, name = "设备名称")
+
         private String SBMC;
 
-        @SmartColumn(id = 7, name = "缺陷描述")
+
         private String QXMS;
 
-        @SmartColumn(id = 8, name = "工作描述")
+
         private String GZMS;
 
-        @SmartColumn(id = 9, name = "提交人")
+
         private String TJR;
 
-        @SmartColumn(id = 10, name = "提交人名")
+
         private String TJR_NAME;
 
-        @SmartColumn(id = 11, name = "提交日期")
         private String TJRQ;
 
-        @SmartColumn(id = 12, name = "提交时间")
+
         private String TJSJ;
 
-        @SmartColumn(id = 13, name = "报告人")
+
         private String BGR;
 
-        @SmartColumn(id = 14, name = "报告人名")
         private String BGR_NAME;
 
-        @SmartColumn(id = 15, name = "报告日期")
+
         private String BGRQ;
 
-        @SmartColumn(id = 16, name = "报告时间")
+
         private String BGSJ;
 
-        @SmartColumn(id = 17, name = "安排人")
+
         private String APR;
 
-        @SmartColumn(id = 18, name = "安排人名")
+
         private String APR_NAME;
 
-        @SmartColumn(id = 19, name = "安排日期")
+
         private String APRQ;
 
-        @SmartColumn(id = 20, name = "安排时间")
+
         private String ARSJ;
 
-        @SmartColumn(id = 21, name = "批准人")
+
         private String PZR;
 
-        @SmartColumn(id = 22, name = "批准人名")
+
         private String PZR_NAME;
 
-        @SmartColumn(id = 23, name = "批准日期")
+
         private String PZRQ;
 
-        @SmartColumn(id = 24, name = "批准时间")
+
         private String PZSJ;
 
-        @SmartColumn(id = 25, name = "项目负责人")
         private String XMFZR;
 
-        @SmartColumn(id = 26, name = "录入方式")
+
         private String LRFS;
 
         public String getGZDH() {

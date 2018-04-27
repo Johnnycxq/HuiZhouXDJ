@@ -3,6 +3,9 @@ package com.rehome.huizhouxdj.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.bin.david.form.annotation.SmartColumn;
+import com.bin.david.form.annotation.SmartTable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,14 +43,23 @@ public class Qfkccxbean implements Parcelable {
         this.data = data;
     }
 
+
+    @SmartTable(name = "备品备件查询")
     public static class DataBean implements Parcelable {
 
+        @SmartColumn(id = 1, name = "物资编码")
         private String WZBM;
+        @SmartColumn(id = 2, name = "仓库号")
         private String CKH;
+        @SmartColumn(id = 3, name = "物资名称")
         private String WZMC;
+        @SmartColumn(id = 4, name = "数量")
         private String SL;
+        @SmartColumn(id = 5, name = "单位")
         private String DW;
+        @SmartColumn(id = 6, name = "单价")
         private String DJ;
+        @SmartColumn(id = 7, name = "仓储")
         private String CC;
 
         public String getWZBM() {

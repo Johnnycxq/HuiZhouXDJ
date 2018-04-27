@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical"
-    >
+              android:orientation="vertical">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/layout_base"/>
 
-    <com.bin.david.form.core.SmartTable
-        android:id="@+id/table_bbbj"
+    <ListView
+        android:id="@+id/lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        android:divider="@null"/>
+
 </LinearLayout>

@@ -137,6 +137,12 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"/>
 
+        <activity android:name=".activity.qfgd.QfpmgdListActivity"/>
+        <activity android:name=".activity.qfgd.PMChangeActivity"/>
+        <activity
+            android:name=".activity.qfgd.QfpmgdchangeActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+
         <activity
             android:name="com.lidong.photopicker.PhotoPickerActivity"
             android:configChanges="orientation|screenSize"/>

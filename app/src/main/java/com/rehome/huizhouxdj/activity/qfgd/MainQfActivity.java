@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -29,9 +30,9 @@ import java.util.List;
 public class MainQfActivity extends BaseActivity {
 
     private GridView gv;
-    private String[] str = {"提交缺陷工单", "PM工单查询", "备品备件查询",};
-    private int[] imageId = {R.mipmap.icon6, R.mipmap.icon11, R.mipmap.icon13};
-    private int[] colors = {R.drawable.radius_c7, R.drawable.radius_d1, R.drawable.radius_a3};
+    private String[] str = {"提交缺陷工单", "PM工单查询", "备品备件查询", "PM工单修改"};
+    private int[] imageId = {R.mipmap.icon6, R.mipmap.icon11, R.mipmap.icon13, R.mipmap.icon10};
+    private int[] colors = {R.drawable.radius_c7, R.drawable.radius_d1, R.drawable.radius_a3, R.drawable.radius_a1};
     private boolean flag = true;
 
     @Override
@@ -71,6 +72,10 @@ public class MainQfActivity extends BaseActivity {
                     case 2:
                         searchDialog();
                         break;
+                    case 3:
+                        Intent intent2 = new Intent(MainQfActivity.this, PMChangeActivity.class);
+                        startActivity(intent2);
+                        break;
                 }
             }
         });
@@ -90,13 +95,18 @@ public class MainQfActivity extends BaseActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
 
-                                Intent intent = new Intent(MainQfActivity.this, bpbjinfoActivity.class);
-                                Bundle bundle = new Bundle();
-                                bundle.putString("etMwbm", wzbm_edit.getText().toString());
-                                bundle.putString("etBzmc", wzmc_edit.getText().toString());
-                                bundle.putString("etCkh", ckh_edit.getText().toString());
-                                intent.putExtras(bundle);
-                                startActivity(intent);
+                                if (TextUtils.isEmpty(wzmc_edit.getText()) & TextUtils.isEmpty(wzbm_edit.getText()) & TextUtils.isEmpty(ckh_edit.getText())) {
+                                    showToast("请输入有效的查询条件!");
+                                } else {
+                                    Intent intent = new Intent(MainQfActivity.this, bpbjinfoActivity.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("etMwbm", wzbm_edit.getText().toString());
+                                    bundle.putString("etBzmc", wzmc_edit.getText().toString());
+                                    bundle.putString("etCkh", ckh_edit.getText().toString());
+                                    intent.putExtras(bundle);
+                                    startActivity(intent);
+                                }
+
 
                             }
                         })

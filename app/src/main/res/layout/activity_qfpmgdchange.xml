@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+
+    <include layout="@layout/layout_base"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_GZDH"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tv_title="工作单号"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_GZZT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tv_title="工作状态"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_ZRBM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tv_title="责任部门"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_GZYXJ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tv_title="工作先级"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_SBBH"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tv_title="设备编号"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_SBMC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tv_title="设备名称"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_QXMS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tv_title="缺陷描述"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_GZMS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tv_title="工作描述"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_TJR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tv_title="提交人"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_TJRQ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tv_title="提交日期"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_BGR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tv_title="报告人"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_BGRQ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tv_title="报告日期"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_APR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tv_title="安排人"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_APRQ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tv_title="安排日期"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_PZR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tv_title="批准人"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_PZRQ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tv_title="批准日期"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_XMFZR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tv_title="项目负责人"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_LRFS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tv_title="录入方式"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_gzzt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintText="修改工单状态"
+                app:isShowTextView="true"
+                app:must="true"
+                app:tv_title="点击修改状态"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

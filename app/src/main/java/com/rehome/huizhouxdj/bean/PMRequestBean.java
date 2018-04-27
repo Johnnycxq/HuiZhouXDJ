@@ -12,6 +12,8 @@ public class PMRequestBean {
     private String ZRBM;
     private String GZYXJ;
     private String SBBH;
+    private String GZDH;
+
 
     public String getAction() {
         return Action;
@@ -59,5 +61,13 @@ public class PMRequestBean {
 
     public void setYHID(String YHID) {
         this.YHID = YHID;
+    }
+
+    public String getGZDH() {
+        return GZDH;
+    }
+
+    public void setGZDH(String GZDH) {
+        this.GZDH = GZDH;
     }
 }

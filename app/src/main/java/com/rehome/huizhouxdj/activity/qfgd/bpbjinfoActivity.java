@@ -1,14 +1,9 @@
 package com.rehome.huizhouxdj.activity.qfgd;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 
+import com.bin.david.form.core.SmartTable;
 import com.rehome.huizhouxdj.R;
-import com.rehome.huizhouxdj.adapter.BpbjinfoAdapter;
 import com.rehome.huizhouxdj.bean.Qfkccxbean;
 import com.rehome.huizhouxdj.bean.qfbpbjRequestBean;
 import com.rehome.huizhouxdj.contans.Contans;
@@ -23,21 +18,17 @@ import com.yolanda.nohttp.rest.Request;
 import com.yolanda.nohttp.rest.Response;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class bpbjinfoActivity extends BaseActivity {
 
 
-    @BindView(R.id.lv)
-    ListView lv;
-    @BindView(R.id.LL_Head)
-    LinearLayout LLHead;
-    private View headView;
+    private List<Qfkccxbean.DataBean> datas;
 
-    BpbjinfoAdapter bpbjinfoAdapter;
-    private ArrayList<Qfkccxbean.DataBean> datas;
+    private SmartTable<Qfkccxbean.DataBean> table;
+
 
     @Override
     public int getContentViewID() {
@@ -48,6 +39,8 @@ public class bpbjinfoActivity extends BaseActivity {
     protected void initView() {
         setBack();
         setTitle("查询详情");
+        table = (SmartTable<Qfkccxbean.DataBean>) findViewById(R.id.table_bbbj);
+        table.setZoom(true);
         datas = new ArrayList<>();
     }
 
@@ -79,11 +72,11 @@ public class bpbjinfoActivity extends BaseActivity {
                             showToast(qfkccxbean.getMsg());
                             datas.clear();
                             datas.addAll(qfkccxbean.getData());
-                            setAdapter();
+                            table.setData(datas);//设置数据给table
                         } else {
                             showToast(qfkccxbean.getMsg());
                             datas.clear();
-                            setAdapter();
+
                         }
                     } else {
                         showToast(R.string.data_error);
@@ -114,51 +107,51 @@ public class bpbjinfoActivity extends BaseActivity {
         return json;
     }
 
-    private void setAdapter() {
-
-        if (bpbjinfoAdapter == null) {
-
-
-            headView = View.inflate(context, R.layout.item_bpbjinfo, null);
-            headView.findViewById(R.id.head).setVisibility(View.VISIBLE);
-            bpbjinfoAdapter = new BpbjinfoAdapter(context, datas);
-            lv.addHeaderView(headView, "", false);
-            lv.setAdapter(bpbjinfoAdapter);
-
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-
-
-                }
-            });
-
-        } else {
-            bpbjinfoAdapter.notifyDataSetChanged();
-        }
-
-        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
-
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
-                if (firstVisibleItem >= 1) {
-
-                    LLHead.setVisibility(View.VISIBLE);
-                } else {
-
-                    LLHead.setVisibility(View.GONE);
-                }
-            }
-        });
-
-
-    }
+//    private void setAdapter() {
+//
+//        if (bpbjinfoAdapter == null) {
+//
+//
+//            headView = View.inflate(context, R.layout.item_bpbjinfo, null);
+//            headView.findViewById(R.id.head).setVisibility(View.VISIBLE);
+//            bpbjinfoAdapter = new BpbjinfoAdapter(context, datas);
+//            lv.addHeaderView(headView, "", false);
+//            lv.setAdapter(bpbjinfoAdapter);
+//
+//            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                @Override
+//                public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+//
+//
+//                }
+//            });
+//
+//        } else {
+//            bpbjinfoAdapter.notifyDataSetChanged();
+//        }
+//
+//        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
+//
+//            @Override
+//            public void onScrollStateChanged(AbsListView view, int scrollState) {
+//
+//            }
+//
+//            @Override
+//            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+//
+//                if (firstVisibleItem >= 1) {
+//
+//                    LLHead.setVisibility(View.VISIBLE);
+//                } else {
+//
+//                    LLHead.setVisibility(View.GONE);
+//                }
+//            }
+//        });
+//
+//
+//    }
 
 
     @Override

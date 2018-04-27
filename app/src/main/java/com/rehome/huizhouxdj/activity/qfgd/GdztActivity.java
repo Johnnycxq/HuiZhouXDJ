@@ -55,6 +55,8 @@ public class GdztActivity extends BaseActivity2 implements View.OnClickListener 
 
                         bundle.putString("GDZT_NO", dataBean.getGDZT_NO());
 
+                        bundle.putString("GDZT_SO", dataBean.getGDZT_SO());
+
                         bundle.putString("GDZTMC", dataBean.getGDZTMC());
 
                         resultIntent.putExtras(bundle);

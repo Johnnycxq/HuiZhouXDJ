@@ -43,9 +43,9 @@ public class XscbglActivity extends BaseActivity {
     @BindView(R.id.gv)
     GridView gv;
 
-    private String[] str = {"待办任务", "工作", "历史抄表", "读取NFC标签"};
-    private int[] imageId = {R.mipmap.icon_xs1, R.mipmap.icon6, R.mipmap.icon_xs5, R.mipmap.icon11};
-    private int[] colors = {R.drawable.radius_b1, R.drawable.radius_a4, R.drawable.radius_a2, R.drawable.radius_b2};
+    private String[] str = {"待办任务", "工作"};
+    private int[] imageId = {R.mipmap.icon_xs1, R.mipmap.icon6};
+    private int[] colors = {R.drawable.radius_b1, R.drawable.radius_a4};
     private GridViewAdapter adapter;
 
     @Override
@@ -83,12 +83,12 @@ public class XscbglActivity extends BaseActivity {
                     case 1:
                         intent = new Intent(XscbglActivity.this, SxgzActivity.class);
                         break;
-                    case 2:
-                        intent = new Intent(XscbglActivity.this, XsHistoryActivity.class);
-                        break;
-                    case 3:
-                        intent = new Intent(XscbglActivity.this, NFCInfoActivity.class);
-                        break;
+//                    case 2:
+//                        intent = new Intent(XscbglActivity.this, XsHistoryActivity.class);
+//                        break;
+//                    case 3:
+//                        intent = new Intent(XscbglActivity.this, NFCInfoActivity.class);
+//                        break;
 
                 }
                 if (intent != null) {
