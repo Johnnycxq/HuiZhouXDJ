@@ -1,6 +1,7 @@
 package com.rehome.huizhouxdj.activity.sbxdj;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -44,6 +45,8 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
     private int item;
     private List<sbInfo> infos = new ArrayList<>();
     Intent intent;
+    private int pos = -1;//点击的设备item
+    private String state;
 
     @Override
     public int getLayoutId() {
@@ -61,7 +64,7 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
                 Bundle bundle2 = new Bundle();
                 bundle2.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanArrayList);
                 bundle2.putParcelableArrayList("QYFXTS", qyaqfxdataBeanArrayList);
-                bundle2.putBoolean("edit", true);
+                bundle2.putBoolean("edit", isEdit);
                 bundle2.putInt(Contans.KEY_ITEM, 0);
                 intent.putExtras(bundle2);
                 startActivity(intent);
@@ -118,11 +121,16 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
             adapter = new CommonAdapter<sbInfo>(context, R.layout.djajhsb_item, infos) {
                 @Override
                 protected void convert(ViewHolder viewHolder, sbInfo item, int position) {
+
                     viewHolder.setText(R.id.tv_sbmc, item.getSbmc() + "");
+
                     if (item.getSbstate() == null) {
+
                         viewHolder.setText(R.id.tv_sbstate, " ");
+
                     } else {
                         viewHolder.setText(R.id.tv_sbstate, item.getSbstate() + "");
+
                     }
 
                 }
@@ -132,8 +140,8 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, final int postion, long l) {
-
-
+                    //赋值当前点击的item：从1开始
+                    pos = postion;
                     List<String> datas = new ArrayList<String>();
                     datas.add("已停用");
                     datas.add("大小修");
@@ -141,7 +149,7 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
                     ListDialog dialog = new ListDialog(context, datas, new ListDialog.ListDialogListener() {
                         @Override
                         public void selectText(String text, int position) {
-
+                            state = text;
                             ContentValues values = new ContentValues();
 
                             values.put("CJJG", text);
@@ -171,14 +179,21 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
                                 showToast("修改设备状态失败");
                             }
 
-//
-
-
                         }
 
                     });
                     dialog.setTvTitle("选择设备状态");
                     dialog.show();
+
+                    dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            if (pos != -1) {
+                                infos.get(pos - 1).setSbstate(state);
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+                    });
 
 
 //                    Intent intent = new Intent(SdjSbListActivity.this, TipsActivity.class);
@@ -195,13 +210,6 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
         } else {
             adapter.notifyDataSetChanged();
         }
-    }
-
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        adapter.notifyDataSetChanged();
     }
 
 

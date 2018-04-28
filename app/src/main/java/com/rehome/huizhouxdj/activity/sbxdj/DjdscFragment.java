@@ -3,10 +3,12 @@ package com.rehome.huizhouxdj.activity.sbxdj;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,12 +18,15 @@ import com.rehome.huizhouxdj.DBModel.XDJJHXZDataBean;
 import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.adapter.ScjhAdapter;
 import com.rehome.huizhouxdj.base.BaseFragment;
+import com.rehome.huizhouxdj.bean.ResultBean;
 import com.rehome.huizhouxdj.bean.ScdjjhBean;
 import com.rehome.huizhouxdj.bean.StatusInfo2;
+import com.rehome.huizhouxdj.bean.djuploadrzRequestBean;
 import com.rehome.huizhouxdj.contans.Contans;
 import com.rehome.huizhouxdj.utils.GsonUtils;
 import com.rehome.huizhouxdj.utils.HttpListener;
 import com.rehome.huizhouxdj.utils.HttpResponseListener;
+import com.rehome.huizhouxdj.utils.NohttpUtils;
 import com.rehome.huizhouxdj.utils.SPUtils;
 import com.rehome.huizhouxdj.utils.UiUtlis;
 import com.rehome.huizhouxdj.weight.WaitDialog;
@@ -321,9 +326,7 @@ public class DjdscFragment extends BaseFragment {
                 final String json = GsonUtils.GsonString(scdjjhbean);
 
 
-
-
-                Log.e("json", "第" + i  + "次  " + xdjjhxzDataList.get(i).getGWID() + "  " + json);
+                Log.e("json", "第" + i + "次  " + xdjjhxzDataList.get(i).getGWID() + "  " + json);
 
 
                 if (noCheck > 0) {     //如果未检查的数量大于0 则提示有未检查的项目
@@ -377,7 +380,9 @@ public class DjdscFragment extends BaseFragment {
 
                         if (info.getState() == 1) { //成功
 
-                            showToast("上传数据成功");
+                            final String uploadGWID = info.getGWID();
+
+//                            showToast("上传数据成功");
 
                             //这里处理那个删除item，更新UI
                             for (int i = 0; i < xdjjhxzDataList.size(); i++) {
@@ -396,6 +401,24 @@ public class DjdscFragment extends BaseFragment {
                             }
 
                             adapter.notifyDataSetChanged();
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setTitle("提示");
+                            builder.setTitle("点检数据上传成功,是否要上传该岗位日志");
+                            builder.setNegativeButton("不需要", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            builder.setPositiveButton("需要", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    UploadDialog(uploadGWID);
+                                }
+                            });
+                            builder.show();
+
 
                         } else {
 
@@ -425,8 +448,7 @@ public class DjdscFragment extends BaseFragment {
         }
     };
 
-
-    //    //删除数据
+    //删除数据
     private void deleteData() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -465,6 +487,94 @@ public class DjdscFragment extends BaseFragment {
         });
         builder.show();
 
+    }
+
+    private void UploadDialog(final String uploadGWID) {
+
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        View nameView = layoutInflater.inflate(R.layout.dialog_uploaddjrz, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        alertDialogBuilder.setView(nameView);
+
+        final EditText djqk_edit = (EditText) nameView.findViewById(R.id.djqk_edit);
+        final EditText dxqk_edit = (EditText) nameView.findViewById(R.id.dxqk_edit);
+        final EditText qxqk_edit = (EditText) nameView.findViewById(R.id.qxqk_edit);
+        final EditText sbtf_edit = (EditText) nameView.findViewById(R.id.sbtf_edit);
+        final EditText sbxh_edit = (EditText) nameView.findViewById(R.id.sbxh_edit);
+        final EditText fxjy_edit = (EditText) nameView.findViewById(R.id.fxjy_edit);
+        final EditText js_edit = (EditText) nameView.findViewById(R.id.js_edit);
+
+
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("上传",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                requestDatas(uploadGWID, djqk_edit.getText().toString().trim(), dxqk_edit.getText().toString().trim(), qxqk_edit.getText().toString().trim(),
+                                        sbtf_edit.getText().toString().trim(), sbxh_edit.getText().toString().trim(), fxjy_edit.getText().toString().trim(), js_edit.getText().toString().trim());
+                            }
+                        })
+                .setNegativeButton("不上传",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    private void requestDatas(String uploadGWID, String DJQK, String DXQK, String QXQK, String SBTFYQK, String BPXHQK, String FXHJY, String JS) {
+
+
+        final Request<String> requset = NoHttp.createStringRequest(Contans.IP + Contans.DJJHSC, RequestMethod.POST);
+
+        requset.setDefineRequestBodyForJson(createJson2(uploadGWID, DJQK, DXQK, QXQK, SBTFYQK, BPXHQK, FXHJY, FXHJY));
+
+        NohttpUtils.getInstance().add(getActivity(), 0, requset, new HttpListener<String>() {
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+                try {
+
+                    Log.e("123", response.get());
+
+                    ResultBean info = GsonUtils.GsonToBean(response.get(), ResultBean.class);
+
+                    if (info.getState() == 1) {
+                        showToast("上传日志成功");
+                    } else {
+                        showToast("上传日志失败");
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailed(int what, Response<String> response) {
+
+            }
+        });
+    }
+
+
+    private String createJson2(String uploadGWID, String DJQK, String DXQK, String QXQK, String SBTFYQK, String BPXHQK, String FXHJY, String JS) {
+        djuploadrzRequestBean info = new djuploadrzRequestBean();
+        info.setAction("DJ_RZ_SET");
+        info.setGWID(uploadGWID);
+        info.setYHID((String) SPUtils.get(context, Contans.USERNAME, ""));
+        info.setRZID("");
+        info.setDJQK(DJQK);
+        info.setDXQK(DXQK);
+        info.setQXQK(QXQK);
+        info.setSBTFYQK(SBTFYQK);
+        info.setBPXHQK(BPXHQK);
+        info.setFXHJY(FXHJY);
+        info.setJS(JS);
+        String json = GsonUtils.GsonString(info);
+        return json;
     }
 
 

@@ -1,6 +1,7 @@
 package com.rehome.huizhouxdj.activity.sbxj;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -42,6 +43,8 @@ public class XjSbListActivity extends BaseActivity3 implements View.OnClickListe
     private int item;
     private List<sbInfo> infos = new ArrayList<>();
     Intent intent;
+    private int pos = -1;//点击的设备item
+    private String state;
 
     @Override
     public int getLayoutId() {
@@ -120,7 +123,7 @@ public class XjSbListActivity extends BaseActivity3 implements View.OnClickListe
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, final int postion, long l) {
-
+                    pos = postion;
 
                     List<String> datas = new ArrayList<String>();
                     datas.add("已停用");
@@ -129,7 +132,7 @@ public class XjSbListActivity extends BaseActivity3 implements View.OnClickListe
                     ListDialog dialog = new ListDialog(context, datas, new ListDialog.ListDialogListener() {
                         @Override
                         public void selectText(String text, int position) {
-
+                            state = text;
                             ContentValues values = new ContentValues();
 
                             values.put("CJJG", text);
@@ -167,6 +170,16 @@ public class XjSbListActivity extends BaseActivity3 implements View.OnClickListe
                     });
                     dialog.setTvTitle("选择设备状态");
                     dialog.show();
+
+                    dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            if (pos != -1) {
+                                infos.get(pos - 1).setSbstate(state);
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+                    });
 
 
 //                    Intent intent = new Intent(SdjSbListActivity.this, TipsActivity.class);

@@ -7,15 +7,9 @@ import java.util.List;
  */
 public class StatusInfo2 {
 
-
-    /**
-     * state : 1
-     * msg :
-     * data : []
-     */
-
     private int state;
     private String msg;
+    private String GWID;
     private List<?> data;
 
     public int getState() {
@@ -32,6 +26,14 @@ public class StatusInfo2 {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public String getGWID() {
+        return GWID;
+    }
+
+    public void setGWID(String GWID) {
+        this.GWID = GWID;
     }
 
     public List<?> getData() {

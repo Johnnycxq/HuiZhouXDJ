@@ -226,7 +226,7 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
                     Intent intent = new Intent(SdjgzActivity.this, SdjSbListActivity.class);
                     bundle2.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
                     bundle2.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
-                    bundle2.putBoolean("edit", false);
+                    bundle2.putBoolean("edit", true);
                     bundle2.putInt(Contans.KEY_ITEM, 0);
                     intent.putExtras(bundle2);
                     startActivity(intent);
@@ -274,7 +274,7 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
         Intent intent = new Intent(SdjgzActivity.this, SdjSbListActivity.class);
         bundle3.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
         bundle3.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
-        bundle3.putBoolean("edit", false);
+        bundle3.putBoolean("edit", true);
         bundle3.putInt(Contans.KEY_ITEM, 0);
         intent.putExtras(bundle3);
         startActivity(intent);

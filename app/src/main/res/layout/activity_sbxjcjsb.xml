@@ -122,6 +122,6 @@
             android:id="@+id/btn_exit"
             style="@style/button"
             android:layout_width="@dimen/px_200"
-            android:text="保存并退出"/>
+            android:text="保存数据并退出"/>
     </LinearLayout>
 </LinearLayout>
