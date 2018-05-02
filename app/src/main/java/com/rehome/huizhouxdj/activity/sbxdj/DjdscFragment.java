@@ -530,7 +530,7 @@ public class DjdscFragment extends BaseFragment {
 
         final Request<String> requset = NoHttp.createStringRequest(Contans.IP + Contans.DJJHSC, RequestMethod.POST);
 
-        requset.setDefineRequestBodyForJson(createJson2(uploadGWID, DJQK, DXQK, QXQK, SBTFYQK, BPXHQK, FXHJY, FXHJY));
+        requset.setDefineRequestBodyForJson(createJson2(uploadGWID, DJQK, DXQK, QXQK, SBTFYQK, BPXHQK, FXHJY, JS));
 
         NohttpUtils.getInstance().add(getActivity(), 0, requset, new HttpListener<String>() {
             @Override

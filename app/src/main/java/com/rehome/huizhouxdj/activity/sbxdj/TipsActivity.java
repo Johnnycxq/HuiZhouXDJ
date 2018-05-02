@@ -26,6 +26,8 @@ public class TipsActivity extends BaseActivity2 implements View.OnClickListener 
     private ArrayList<QYDDATABean> qyddataBeanArrayList;
     private boolean isEdit = true;
     private int item;
+    private int itemposition;
+    private String LX,LXResult;
 
     @Override
     public int getLayoutId() {
@@ -49,8 +51,9 @@ public class TipsActivity extends BaseActivity2 implements View.OnClickListener 
         qyddataBeanArrayList = bundle.getParcelableArrayList(Contans.KEY_DJJHRWQY);
         isEdit = bundle.getBoolean("edit");
         item = bundle.getInt(Contans.KEY_ITEM);
-
-
+        itemposition = bundle.getInt("itemposition");
+        LX = bundle.getString("LX");
+        LXResult= bundle.getString("LXResult");
         initViewPager();
 
     }
@@ -87,6 +90,9 @@ public class TipsActivity extends BaseActivity2 implements View.OnClickListener 
                 bundle.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanArrayList);
                 bundle.putBoolean("edit", isEdit);
                 bundle.putInt(Contans.KEY_ITEM, item);
+                bundle.putInt("itemposition", itemposition);
+                bundle.putString("LX", LX);
+                bundle.putString("LXResult", LXResult);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;

@@ -165,6 +165,9 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
                         bundle.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
                         bundle.putBoolean("edit", false);
                         bundle.putInt(Contans.KEY_ITEM, 0);
+                        bundle.putInt("itemposition", postion - 1);
+                        bundle.putString("LX", "Click");
+                        bundle.putString("LXResult", "LXResult");
                         intent.putExtras(bundle);
                         startActivity(intent);
 
@@ -228,6 +231,9 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
                     bundle2.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
                     bundle2.putBoolean("edit", true);
                     bundle2.putInt(Contans.KEY_ITEM, 0);
+                    bundle2.putInt("itemposition", 0);
+                    bundle2.putString("LX", "QRcode");
+                    bundle2.putString("LXResult", ewm);
                     intent.putExtras(bundle2);
                     startActivity(intent);
 
@@ -276,6 +282,9 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
         bundle3.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
         bundle3.putBoolean("edit", true);
         bundle3.putInt(Contans.KEY_ITEM, 0);
+        bundle3.putInt("itemposition", 0);
+        bundle3.putString("LX", "NFC");
+        bundle3.putString("LXResult", result);
         intent.putExtras(bundle3);
         startActivity(intent);
 

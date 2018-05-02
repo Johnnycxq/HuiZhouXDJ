@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@mipmap/background"
-    android:clipToPadding="true"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    tools:context=".activity.LoginActivity">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/background"
+                android:clipToPadding="true"
+                android:fitsSystemWindows="true"
+                android:orientation="vertical"
+                tools:context=".activity.LoginActivity">
 
     <include
         layout="@layout/toolbar"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -26,7 +26,7 @@
             android:gravity="center"
             android:text="设备设施巡查"
             android:textColor="#ffffff"
-            android:textSize="50px" />
+            android:textSize="50px"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -36,7 +36,7 @@
             android:text="版本1.0.0"
             android:textColor="#ffffff"
             android:textSize="35px"
-            android:visibility="gone" />
+            android:visibility="gone"/>
     </LinearLayout>
 
 
@@ -50,7 +50,7 @@
         android:text="版本1.0.0"
         android:textColor="#ffffff"
         android:textSize="25px"
-        android:visibility="visible" />
+        android:visibility="visible"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -69,7 +69,7 @@
             android:layout_marginRight="@dimen/px_20"
             android:gravity="center"
             android:hint="用户名"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"/>
 
         <EditText
             android:id="@+id/et_pwd"
@@ -81,7 +81,7 @@
             android:gravity="center"
             android:hint="密码"
             android:inputType="textPassword"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"/>
 
         <Button
             android:id="@+id/btn_login"
@@ -90,7 +90,7 @@
             android:layout_marginLeft="@dimen/px_20"
             android:layout_marginRight="@dimen/px_20"
             android:layout_marginTop="@dimen/px_20"
-            android:text="登录" />
+            android:text="登录"/>
 
         <Button
             android:id="@+id/btn_test"
@@ -100,7 +100,7 @@
             android:layout_marginRight="@dimen/px_20"
             android:layout_marginTop="@dimen/px_20"
             android:text="测试"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
 
         <LinearLayout
@@ -118,7 +118,7 @@
                 android:gravity="center_vertical"
                 android:text="记住密码"
                 android:textColor="#ffffff"
-                android:textSize="35px" />
+                android:textSize="35px"/>
 
             <RadioGroup
                 android:id="@+id/rg"
@@ -137,7 +137,7 @@
                     android:layout_marginRight="20px"
                     android:checked="true"
                     android:text="内网"
-                    android:textColor="#ffffff" />
+                    android:textColor="#ffffff"/>
 
                 <RadioButton
                     android:id="@+id/rb2"
@@ -145,7 +145,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="外网"
-                    android:textColor="#ffffff" />
+                    android:textColor="#ffffff"/>
 
             </RadioGroup>
         </LinearLayout>

@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -46,7 +47,8 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
     private List<sbInfo> infos = new ArrayList<>();
     Intent intent;
     private int pos = -1;//点击的设备item
-    private String state;
+    private String state, LX,LXResult;
+    private int itemposition;
 
     @Override
     public int getLayoutId() {
@@ -66,6 +68,9 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
                 bundle2.putParcelableArrayList("QYFXTS", qyaqfxdataBeanArrayList);
                 bundle2.putBoolean("edit", isEdit);
                 bundle2.putInt(Contans.KEY_ITEM, 0);
+                bundle2.putInt("itemposition", itemposition);
+                bundle2.putString("LX", LX);
+                bundle2.putString("LXResult", LXResult);
                 intent.putExtras(bundle2);
                 startActivity(intent);
                 break;
@@ -94,8 +99,9 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
         qyddataBeanArrayList = bundle.getParcelableArrayList(Contans.KEY_DJJHRWQY);
         isEdit = bundle.getBoolean("edit");
         item = bundle.getInt(Contans.KEY_ITEM);
-
-
+        itemposition = bundle.getInt("itemposition");
+        LX = bundle.getString("LX");
+        LXResult= bundle.getString("LXResult");
         setListData();
 
 
@@ -137,63 +143,67 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
             };
             lv.addHeaderView(headView, null, false);
             lv.setAdapter(adapter);
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, final int postion, long l) {
-                    //赋值当前点击的item：从1开始
-                    pos = postion;
-                    List<String> datas = new ArrayList<String>();
-                    datas.add("已停用");
-                    datas.add("大小修");
 
-                    ListDialog dialog = new ListDialog(context, datas, new ListDialog.ListDialogListener() {
-                        @Override
-                        public void selectText(String text, int position) {
-                            state = text;
-                            ContentValues values = new ContentValues();
+            if (isEdit) {
 
-                            values.put("CJJG", text);
 
-                            values.put("SBMCSTATE", text);
+                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, final int postion, long l) {
+                        //赋值当前点击的item：从1开始
+                        pos = postion;
+                        List<String> datas = new ArrayList<String>();
+                        datas.add("已停用");
+                        datas.add("大小修");
 
-                            if (text.equals("已停用")) {
+                        ListDialog dialog = new ListDialog(context, datas, new ListDialog.ListDialogListener() {
+                            @Override
+                            public void selectText(String text, int position) {
+                                state = text;
+                                ContentValues values = new ContentValues();
 
-                                values.put("checked", true);
+                                values.put("CJJG", text);
 
-                                values.put("SBMCSTATEVALUE", "3");
+                                values.put("SBMCSTATE", text);
 
-                            } else if (text.equals("大小修")) {
+                                if (text.equals("已停用")) {
 
-                                values.put("checked", true);
+                                    values.put("checked", true);
 
-                                values.put("SBMCSTATEVALUE", "4");
+                                    values.put("SBMCSTATEVALUE", "3");
+
+                                } else if (text.equals("大小修")) {
+
+                                    values.put("checked", true);
+
+                                    values.put("SBMCSTATEVALUE", "4");
+
+                                }
+
+                                int i = DataSupport.updateAll(QYDDATABean.class, values, "SBID = ? ", infos.get(postion - 1).getSbid());
+
+                                if (i != 0) {
+                                    showToast("修改设备状态成功");
+//                                finish();
+                                } else {
+                                    showToast("修改设备状态失败");
+                                }
 
                             }
 
-                            int i = DataSupport.updateAll(QYDDATABean.class, values, "SBID = ? ", infos.get(postion - 1).getSbid());
+                        });
+                        dialog.setTvTitle("选择设备状态");
+                        dialog.show();
 
-                            if (i != 0) {
-                                showToast("修改设备状态成功");
-                                finish();
-                            } else {
-                                showToast("修改设备状态失败");
+                        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+                                if (pos != -1) {
+                                    infos.get(pos - 1).setSbstate(state);
+                                    adapter.notifyDataSetChanged();
+                                }
                             }
-
-                        }
-
-                    });
-                    dialog.setTvTitle("选择设备状态");
-                    dialog.show();
-
-                    dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                        @Override
-                        public void onDismiss(DialogInterface dialog) {
-                            if (pos != -1) {
-                                infos.get(pos - 1).setSbstate(state);
-                                adapter.notifyDataSetChanged();
-                            }
-                        }
-                    });
+                        });
 
 
 //                    Intent intent = new Intent(SdjSbListActivity.this, TipsActivity.class);
@@ -205,11 +215,16 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
 //                    intent.putExtras(bundle);
 //                    startActivity(intent);
 
-                }
-            });
+                    }
+                });
+            } else {
+                adapter.notifyDataSetChanged();
+            }
         } else {
-            adapter.notifyDataSetChanged();
+            Log.e("123", "需要扫描二维码或者NFC");
         }
+
+
     }
 
 

@@ -62,9 +62,9 @@ public class MainFragment extends BaseFragment {
     private PushInfo.Push push;
     private boolean isTask = false;//是否有任务
     private long exitTime = 0;
-    private String str[] = {"设备巡点检", "巡视抄表", "安全检查", "Q4工单"};
-    private int[] imageId = {R.mipmap.icon8, R.mipmap.icon6, R.mipmap.icon10, R.mipmap.icon9};
-    private int[] colors = {R.drawable.radius_a1, R.drawable.radius_e3, R.drawable.radius_a3, R.drawable.radius_a2};
+    private String str[] = {"设备巡点检", "巡视抄表", "安全检查", "Q4工单", "大小修"};
+    private int[] imageId = {R.mipmap.icon8, R.mipmap.icon6, R.mipmap.icon10, R.mipmap.icon9, R.mipmap.icon11};
+    private int[] colors = {R.drawable.radius_a1, R.drawable.radius_e3, R.drawable.radius_a3, R.drawable.radius_a2, R.drawable.radius_a4};
     private List<Integer> item;
     private List<String> dialogDatas;
     private List<BasicDataBean.DataBean> zys;
@@ -154,7 +154,10 @@ public class MainFragment extends BaseFragment {
                         startActivity(intent);
                         break;
 
-
+                    case 4:
+                        intent = new Intent(getActivity(), MainQfActivity.class);
+                        startActivity(intent);
+                        break;
                 }
             }
         });
