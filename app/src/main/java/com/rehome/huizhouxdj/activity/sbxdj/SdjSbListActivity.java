@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -47,7 +46,7 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
     private List<sbInfo> infos = new ArrayList<>();
     Intent intent;
     private int pos = -1;//点击的设备item
-    private String state, LX,LXResult;
+    private String state, LX, LXResult;
     private int itemposition;
 
     @Override
@@ -101,7 +100,7 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
         item = bundle.getInt(Contans.KEY_ITEM);
         itemposition = bundle.getInt("itemposition");
         LX = bundle.getString("LX");
-        LXResult= bundle.getString("LXResult");
+        LXResult = bundle.getString("LXResult");
         setListData();
 
 
@@ -221,7 +220,7 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
                 adapter.notifyDataSetChanged();
             }
         } else {
-            Log.e("123", "需要扫描二维码或者NFC");
+            showToast("需要扫描二维码或者贴近NFC才能进入");
         }
 
 

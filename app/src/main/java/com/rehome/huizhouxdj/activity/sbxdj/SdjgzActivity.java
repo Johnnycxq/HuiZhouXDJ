@@ -4,15 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.rehome.huizhouxdj.DBModel.QYAQFXDATABean;
 import com.rehome.huizhouxdj.DBModel.QYDDATABean;
 import com.rehome.huizhouxdj.DBModel.XDJJHXZDataBean;
 import com.rehome.huizhouxdj.R;
-import com.rehome.huizhouxdj.activity.xj.OhtersbinfoActivity;
+import com.rehome.huizhouxdj.activity.qfgd.TjqxdActivity;
 import com.rehome.huizhouxdj.adapter.CommonAdapter;
 import com.rehome.huizhouxdj.adapter.ViewHolder;
 import com.rehome.huizhouxdj.base.MipcaActivityCapture;
@@ -22,9 +24,13 @@ import com.rehome.huizhouxdj.utils.BaseActivity3;
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import static org.litepal.crud.DataSupport.where;
 
@@ -39,14 +45,20 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
     Button btn_sm;
     @BindView(R.id.tv_nodata)
     TextView tvNodata;
+    @BindView(R.id.spinner)
+    Spinner spinner;
+
+    private ArrayAdapter<String> spineradapter;
     private View headView;
     private CommonAdapter<XDJJHXZDataBean> adapter;
     private String ewm;//二维码或者条形码
+
     private List<XDJJHXZDataBean> xdjjhxzDataBeanList = new ArrayList<>();//工作列表
+    private List<XDJJHXZDataBean> spinnerxdjjhxzDataBeanList = new ArrayList<>();//工作列表
     private ArrayList<QYDDATABean> qyddataBeanList = new ArrayList<>();//点检记录列表
     private ArrayList<QYAQFXDATABean> qyaqfxdataBeanList = new ArrayList<>();//点检记录列表
     Intent intent;
-
+    private List<String> dialogDatas2;
 
     @Override
     public int getLayoutId() {
@@ -60,7 +72,7 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
                 finish();
                 break;
             case R.id.tv_right:
-                intent = new Intent(SdjgzActivity.this, OhtersbinfoActivity.class);
+                intent = new Intent(SdjgzActivity.this, TjqxdActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -77,10 +89,22 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
     public void initData() {
 
         initNFC();
-        initToolbar("工作", "缺陷提交", this);
+
+        initToolbar("工作", "提单", this);
+
+        dialogDatas2 = new ArrayList<>();
 
         getDataInSqlite();
+
         setListData();
+
+        spinnerView();
+
+        smOnclick();
+
+    }
+
+    private void smOnclick() {
 
         btn_sm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,26 +117,60 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
                 }
             }
         });
+    }
 
+    private void spinnerView() {
+        spineradapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, dialogDatas2);
+        spineradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spineradapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                String p = spineradapter.getItem(position);
+                if (p.equals("全部")) {
+                    xdjjhxzDataBeanList.clear();
+                    xdjjhxzDataBeanList.addAll(DataSupport.findAll(XDJJHXZDataBean.class));
+                } else {
+                    xdjjhxzDataBeanList.clear();
+                    xdjjhxzDataBeanList.addAll(where("GWMC = ?", p + "").find(XDJJHXZDataBean.class));
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
 
     //加载数据库中已经下载的计划
     private void getDataInSqlite() {
 
-        xdjjhxzDataBeanList.clear();
-        //获取本地所有的工作列表数据
-        xdjjhxzDataBeanList.addAll(DataSupport.findAll(XDJJHXZDataBean.class));
-        //去除重复数据
-//        Set<XDJJHXZDataBean> xdjjhxzDataBeanSet = new TreeSet<>(new Comparator<XDJJHXZDataBean>() {
-//            @Override
-//            public int compare(XDJJHXZDataBean o1, XDJJHXZDataBean o2) {
-//                return o1.getGWID().compareTo(o2.getGWID());
-//            }
-//        });
-//        xdjjhxzDataBeanSet.addAll(xdjjhxzDataBeanList);
-//        xdjjhxzDataBeanList.clear();
-//        xdjjhxzDataBeanList.addAll(xdjjhxzDataBeanSet);
+
+
+        /*-----去除重复数据------*/
+        spinnerxdjjhxzDataBeanList.clear();
+        spinnerxdjjhxzDataBeanList.addAll(DataSupport.findAll(XDJJHXZDataBean.class));
+        Set<XDJJHXZDataBean> xdjjhxzDataBeanSet = new TreeSet<>(new Comparator<XDJJHXZDataBean>() {
+            @Override
+            public int compare(XDJJHXZDataBean o1, XDJJHXZDataBean o2) {
+                return o1.getGWID().compareTo(o2.getGWID());
+            }
+        });
+        xdjjhxzDataBeanSet.addAll(spinnerxdjjhxzDataBeanList);
+        spinnerxdjjhxzDataBeanList.clear();
+        spinnerxdjjhxzDataBeanList.addAll(xdjjhxzDataBeanSet);
+
+        dialogDatas2.clear();
+        dialogDatas2.add("全部");
+        for (int i = 0; i < spinnerxdjjhxzDataBeanList.size(); i++) {
+            dialogDatas2.add(spinnerxdjjhxzDataBeanList.get(i).getGWMC());
+        }
+
+        /*-----去除重复数据------*/
+
 
     }
 
@@ -301,4 +359,10 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
     }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

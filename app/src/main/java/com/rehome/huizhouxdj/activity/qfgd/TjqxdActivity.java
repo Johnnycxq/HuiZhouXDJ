@@ -123,7 +123,7 @@ public class TjqxdActivity extends BaseActivity2 implements View.OnClickListener
 
         initToolbar("提交缺陷工单", "提交", this);
 
-        ilSbmc.setTvContentOnClickListener(new View.OnClickListener() {//设备名称
+        ilSbbh.setTvContentOnClickListener(new View.OnClickListener() {//设备名称
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TjqxdActivity.this, SblistActivity.class);
