@@ -191,15 +191,18 @@ public class YulActivity extends BaseActivity {
             } else {
                 for (int i = 0; i < setSbModelList.size(); i++) {
                     for (int j = 0; j < infos.size(); j++) {
+
                         if (infos.get(j).getSbid().equals(setSbModelList.get(i).getSbId()))
+
                             infos.get(j).setCjjg(setSbModelList.get(i).getValue());
+
 //                        infos.get(j).setStatu(setSbModelList.get(i).getStatu());
 
                     }
                 }
                 adapter.notifyDataSetChanged();
             }
-
+            adapter.notifyDataSetChanged();
 
         }
         //获取返回时的数据
