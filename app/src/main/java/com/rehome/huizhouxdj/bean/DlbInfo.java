@@ -9,15 +9,17 @@ public class DlbInfo {
     private String dian;
     private boolean statu;
     private String cjjg;
+    private String sbid;//后来加上的设备id
 
 
     public DlbInfo() {
     }
 
-    public DlbInfo(int xh, String dian, boolean statu) {
+    public DlbInfo(int xh, String dian, boolean statu, String sbid) {
         this.xh = xh;
         this.dian = dian;
         this.statu = statu;
+        this.sbid = sbid;
     }
 
     public String getCjjg() {
@@ -52,4 +54,11 @@ public class DlbInfo {
         this.statu = statu;
     }
 
+    public String getSbid() {
+        return sbid;
+    }
+
+    public void setSbid(String sbid) {
+        this.sbid = sbid;
+    }
 }

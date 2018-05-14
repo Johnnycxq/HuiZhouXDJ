@@ -226,6 +226,7 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
                         bundle.putInt("itemposition", postion - 1);
                         bundle.putString("LX", "Click");
                         bundle.putString("LXResult", "LXResult");
+                        bundle.putInt("from", 0);
                         intent.putExtras(bundle);
                         startActivity(intent);
 

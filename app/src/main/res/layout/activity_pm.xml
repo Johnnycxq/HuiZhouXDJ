@@ -9,45 +9,105 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20px"
         android:orientation="vertical">
 
-        <com.rehome.huizhouxdj.weight.InputLayout
-            android:id="@+id/il_sbmc"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="开始时间"
+                android:textSize="36px"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="结束时间"
+                android:textSize="36px"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:hintText="点击选择设备名称"
-            app:isShowTextView="true"
-            app:must="true"
-            app:tv_title="设备名称"/>
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal">
 
-        <com.rehome.huizhouxdj.weight.InputLayout
-            android:id="@+id/il_zrbm"
+            <TextView
+                android:id="@+id/tv_starttime"
+                style="@style/editTextTheme"
+                android:layout_width="match_parent"
+                android:layout_height="70px"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="36px"/>
+
+            <TextView
+                android:id="@+id/tv_endtime"
+                style="@style/editTextTheme"
+                android:layout_weight="1"
+                android:gravity="center"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:hintText="责任部门"
-            app:isShowTextView="true"
-            app:must="true"
-            app:tv_title="责任部门"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <com.rehome.huizhouxdj.weight.InputLayout
-            android:id="@+id/il_gzzt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:hintText="工作状态"
-            app:isShowTextView="true"
-            app:must="true"
-            app:tv_title="工作状态"/>
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_sbmc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:hintText="点击选择设备名称"
+                app:isShowTextView="true"
+                app:must="true"
+                app:tv_title="设备名称"/>
 
-        <com.rehome.huizhouxdj.weight.InputLayout
-            android:id="@+id/il_gzyxj"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:hintText="工作优先级"
-            app:isShowTextView="true"
-            app:must="true"
-            app:tv_title="工作优先级"/>
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_zrbm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintText="责任部门"
+                app:isShowTextView="true"
+                app:must="true"
+                app:tv_title="责任部门"/>
 
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_gzzt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:hintText="工作状态"
+                app:isShowTextView="true"
+                app:must="true"
+                app:tv_title="工作状态"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_gzyxj"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:hintText="工作优先级"
+                app:isShowTextView="true"
+                app:must="true"
+                app:tv_title="工作优先级"/>
+
+
+        </LinearLayout>
 
     </LinearLayout>
 

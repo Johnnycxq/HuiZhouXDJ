@@ -5,5 +5,11 @@
     <declare-styleable name="CanBanScrollViewPager">
         <attr name="isScroll" format="boolean" />
     </declare-styleable>
+    <string-array name="extra_resource_url">
+        <item>http://www.baidu.com</item>
+        <item>http://www.taobao.com</item>
+        <item>http://www.qq.com</item>
+        <item>http://www.sina.com.cn</item>
+    </string-array>
 
 </resources>

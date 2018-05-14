@@ -229,19 +229,19 @@ public class MainFragment extends BaseFragment {
                 item.add(1);
                 item.add(2);
                 item.add(3);
-                for (String name : results) {
-                    if (name.equals("AppDJGL")) {
-                        item.add(0);
-                    } else if (name.equals("AppSBLC")) {
-                        item.add(1);
-                    } else if (name.equals("AppAQJC")) {
-                        item.add(2);
-                    } else if (name.equals("AppGWZY")) {
-                        item.add(3);
-                    } else if (name.equals("AppZDCS")) {
-                        item.add(4);
-                    }
-                }
+//                for (String name : results) {
+//                    if (name.equals("AppDJGL")) {
+//                        item.add(0);
+//                    } else if (name.equals("AppSBLC")) {
+//                        item.add(1);
+//                    } else if (name.equals("AppAQJC")) {
+//                        item.add(2);
+//                    } else if (name.equals("AppGWZY")) {
+//                        item.add(3);
+//                    } else if (name.equals("AppZDCS")) {
+//                        item.add(4);
+//                    }
+//                }
             }
         } catch (Exception e) {
         }

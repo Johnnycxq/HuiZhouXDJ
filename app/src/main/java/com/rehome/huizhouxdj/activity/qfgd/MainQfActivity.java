@@ -30,9 +30,9 @@ import java.util.List;
 public class MainQfActivity extends BaseActivity {
 
     private GridView gv;
-    private String[] str = {"提交缺陷工单", "PM工单查询", "备品备件查询", "PM工单修改"};
-    private int[] imageId = {R.mipmap.icon6, R.mipmap.icon11, R.mipmap.icon13, R.mipmap.icon10};
-    private int[] colors = {R.drawable.radius_c7, R.drawable.radius_d1, R.drawable.radius_a3, R.drawable.radius_a1};
+    private String[] str = {"提交缺陷工单", "PM工单查询", "备品备件查询", "PM工单修改", "缺陷工单查询"};
+    private int[] imageId = {R.mipmap.icon6, R.mipmap.icon11, R.mipmap.icon13, R.mipmap.icon10,R.mipmap.icon8};
+    private int[] colors = {R.drawable.radius_c7, R.drawable.radius_d1, R.drawable.radius_a3, R.drawable.radius_a1,R.drawable.radius_c1};
     private boolean flag = true;
 
     @Override
@@ -75,6 +75,10 @@ public class MainQfActivity extends BaseActivity {
                     case 3:
                         Intent intent2 = new Intent(MainQfActivity.this, PMChangeActivity.class);
                         startActivity(intent2);
+                        break;
+                    case 4:
+                        Intent intent3 = new Intent(MainQfActivity.this, QxGdMainActivity.class);
+                        startActivity(intent3);
                         break;
                 }
             }

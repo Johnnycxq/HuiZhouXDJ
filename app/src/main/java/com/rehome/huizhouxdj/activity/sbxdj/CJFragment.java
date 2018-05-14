@@ -120,6 +120,21 @@ public class CJFragment extends BaseFragment {
         });
     }
 
+    /**
+     * 更新当前检查item的检查结果
+     *
+     * @param value
+     */
+    public void updateState(String value) {
+        et_jg.setText(value);
+        et_button.setText(value);
+    }
+
+    public void updatecheck(Boolean value) {
+
+        tv_zt.setText(value ? "已检" : "未检");
+    }
+
 
     /**
      * 更新数据
@@ -161,7 +176,6 @@ public class CJFragment extends BaseFragment {
         }
 
     }
-
 
     public String getCJJG() {
         return et_jg.getText().toString().trim();

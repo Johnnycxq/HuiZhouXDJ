@@ -15,6 +15,7 @@ import com.rehome.huizhouxdj.DBModel.XDJJHXZDataBean;
 import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.adapter.DlbAdapter;
 import com.rehome.huizhouxdj.bean.DlbInfo;
+import com.rehome.huizhouxdj.bean.SetSbModel;
 import com.rehome.huizhouxdj.contans.Contans;
 import com.rehome.huizhouxdj.utils.BaseActivity;
 
@@ -31,6 +32,8 @@ public class YulActivity extends BaseActivity {
 
     @BindView(R.id.lv)
     ListView lv;
+
+    private static final int Req = 101;
 
     private boolean isEdit = true;
     private int item;
@@ -81,9 +84,11 @@ public class YulActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+
         setBack();
         setTitle("浏览点检记录");
-
+        headView = View.inflate(context, R.layout.dlb_item, null);
+        headView.findViewById(R.id.head).setVisibility(View.VISIBLE);
 
     }
 
@@ -99,6 +104,17 @@ public class YulActivity extends BaseActivity {
         LX = bundle.getString("LX");
         LXResult = bundle.getString("LXResult");
 
+        searchdata();
+        setListAdapter();
+
+        //创建filter
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Contans.ACTION_YULONE);
+        //注册广播
+        registerReceiver(myReceiver, filter);
+    }
+
+    private void searchdata() {
         if (LX.equals("Click")) {
 
 
@@ -126,26 +142,16 @@ public class YulActivity extends BaseActivity {
             qyddataBeanList.addAll(qydDataBeen);
 
         }
-
-
-        headView = View.inflate(context, R.layout.dlb_item, null);
-        headView.findViewById(R.id.head).setVisibility(View.VISIBLE);
-        setListAdapter();
-
-        //创建filter
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Contans.ACTION_YULONE);
-        //注册广播
-        registerReceiver(myReceiver, filter);
     }
 
     private void setListAdapter() {
 
-        for (QYDDATABean rw : qyddataBeanList) {
+        for (QYDDATABean rw : qyddataBeanList) {   //这里进行了数据的一些获取 把必要的拿出来显示
             DlbInfo info = new DlbInfo();
-            info.setCjjg(rw.getCJJG());
-            info.setDian(rw.getSBMC() + " - " + rw.getBJMC());
-            info.setStatu(rw.isChecked());
+            info.setSbid(rw.getSBID());
+            info.setCjjg(rw.getCJJG());//采集结果
+            info.setDian(rw.getSBMC() + " - " + rw.getBJMC());//项目名称
+            info.setStatu(rw.isChecked());//状态
             infos.add(info);
         }
 
@@ -154,23 +160,63 @@ public class YulActivity extends BaseActivity {
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {//这里应该
 
                 Intent intent = new Intent(YulActivity.this, SbxdjcjsbActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
                 bundle.putBoolean("edit", isEdit);
                 bundle.putInt(Contans.KEY_ITEM, position - 1);
+                bundle.putInt("itemposition", itemposition);
+                bundle.putString("LX", LX);
+                bundle.putString("LXResult", LXResult);
                 intent.putExtras(bundle);
-                startActivity(intent);
+                startActivityForResult(intent, Req);
+//                finish();
             }
         });
+    }
+
+    private ArrayList<SetSbModel> setSbModelList;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) return;
+        if (data != null) {
+            setSbModelList = data.getParcelableArrayListExtra("setSbModelList");
+
+            if (setSbModelList == null) {
+
+            } else {
+                for (int i = 0; i < setSbModelList.size(); i++) {
+                    for (int j = 0; j < infos.size(); j++) {
+                        if (infos.get(j).getSbid().equals(setSbModelList.get(i).getSbId()))
+                            infos.get(j).setCjjg(setSbModelList.get(i).getValue());
+//                        infos.get(j).setStatu(setSbModelList.get(i).getStatu());
+
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+
+        }
+        //获取返回时的数据
+
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        //更新list
+        searchdata();
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
         adapter.notifyDataSetChanged();
     }
 

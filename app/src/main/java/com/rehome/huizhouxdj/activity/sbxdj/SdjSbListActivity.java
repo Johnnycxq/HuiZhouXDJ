@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -14,6 +15,7 @@ import com.rehome.huizhouxdj.DBModel.QYDDATABean;
 import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.adapter.CommonAdapter;
 import com.rehome.huizhouxdj.adapter.ViewHolder;
+import com.rehome.huizhouxdj.bean.SetSbModel;
 import com.rehome.huizhouxdj.bean.sbInfo;
 import com.rehome.huizhouxdj.contans.Contans;
 import com.rehome.huizhouxdj.utils.BaseActivity3;
@@ -49,6 +51,8 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
     private String state, LX, LXResult;
     private int itemposition;
 
+    private int from;//0-来自工作页面；1-采集页面
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_sblist;
@@ -58,7 +62,15 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_left:
-                finish();
+                if (from == 0) {//工作页面
+                    finish();
+                } else if (from == 1) {//采集页面
+                    Intent intent = new Intent(SdjSbListActivity.this, SbxdjcjsbActivity.class);
+                    //传list《设备号，内容》
+                    intent.putParcelableArrayListExtra("setSbModelList", setSbModelList);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
                 break;
             case R.id.tv_right:
                 intent = new Intent(SdjSbListActivity.this, TipsActivity.class);
@@ -72,6 +84,7 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
                 bundle2.putString("LXResult", LXResult);
                 intent.putExtras(bundle2);
                 startActivity(intent);
+                finish();
                 break;
         }
     }
@@ -88,12 +101,13 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
 
         initNFC();
 
-        initToolbar("当前设备", "点检内容", this);
-
 
         Bundle bundle = SdjSbListActivity.this.getIntent().getExtras();
+
         qyaqfxdataBeanArrayList = new ArrayList<>();
         qyddataBeanArrayList = new ArrayList<>();
+
+
         qyaqfxdataBeanArrayList = bundle.getParcelableArrayList("QYFXTS");
         qyddataBeanArrayList = bundle.getParcelableArrayList(Contans.KEY_DJJHRWQY);
         isEdit = bundle.getBoolean("edit");
@@ -101,10 +115,21 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
         itemposition = bundle.getInt("itemposition");
         LX = bundle.getString("LX");
         LXResult = bundle.getString("LXResult");
+        from = bundle.getInt("from");
+
+        if (from == 0) {
+            initToolbar("当前设备", "点检内容", this);
+        } else if (from == 1) {
+            initToolbar("当前设备", "", this);
+        }
+
+
         setListData();
 
 
     }
+
+    private ArrayList<SetSbModel> setSbModelList = new ArrayList<>();
 
     private void setListData() {
 
@@ -153,7 +178,7 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
                         pos = postion;
                         List<String> datas = new ArrayList<String>();
                         datas.add("已停用");
-                        datas.add("大小修");
+//                        datas.add("大小修");
 
                         ListDialog dialog = new ListDialog(context, datas, new ListDialog.ListDialogListener() {
                             @Override
@@ -171,21 +196,24 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
 
                                     values.put("SBMCSTATEVALUE", "3");
 
-                                } else if (text.equals("大小修")) {
-
-                                    values.put("checked", true);
-
-                                    values.put("SBMCSTATEVALUE", "4");
-
                                 }
+
+//                                else if (text.equals("大小修")) {
+//
+//                                    values.put("checked", true);
+//
+//                                    values.put("SBMCSTATEVALUE", "4");
+//
+//                                }
 
                                 int i = DataSupport.updateAll(QYDDATABean.class, values, "SBID = ? ", infos.get(postion - 1).getSbid());
 
                                 if (i != 0) {
                                     showToast("修改设备状态成功");
-//                                finish();
+//                                    finish();
                                 } else {
                                     showToast("修改设备状态失败");
+//                                    finish();
                                 }
 
                             }
@@ -200,6 +228,12 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
                                 if (pos != -1) {
                                     infos.get(pos - 1).setSbstate(state);
                                     adapter.notifyDataSetChanged();
+                                    //填充选择的数据
+                                    SetSbModel setSbModel = new SetSbModel();
+                                    setSbModel.setSbId(infos.get(pos - 1).getSbid());
+                                    setSbModel.setValue(state);
+                                    setSbModel.setStatu(true);
+                                    setSbModelList.add(setSbModel);
                                 }
                             }
                         });
@@ -224,6 +258,24 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
         }
 
 
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            if (from == 0) {//工作页面
+                finish();
+            } else if (from == 1) {//采集页面
+                Intent intent = new Intent(SdjSbListActivity.this, SbxdjcjsbActivity.class);
+                intent.putParcelableArrayListExtra("setSbModelList", setSbModelList);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 

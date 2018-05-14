@@ -281,10 +281,7 @@ public class Contans {
     public static boolean NEWWORK_STATE;//网络状态
 
 
-
     public static boolean TEST = false;
-
-
 
 
     public static String PRINTIP = "10.19.110.19";//打印机的IP

@@ -13,7 +13,7 @@
     <color name="result_view">#b0000000</color>
     <color name="viewfinder_mask">#60000000</color>
     <color name="possible_result_points">#c0ffff00</color>
-
+    <color name="lightgray">#90505050</color>
     <color name="gray">#cccccc</color>
     <color name="lucency">#00000000</color>
     <color name="login_title_color">#68696D</color>

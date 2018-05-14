@@ -95,6 +95,7 @@ public class TipsActivity extends BaseActivity2 implements View.OnClickListener 
                 bundle.putString("LXResult", LXResult);
                 intent.putExtras(bundle);
                 startActivity(intent);
+                finish();
                 break;
         }
     }

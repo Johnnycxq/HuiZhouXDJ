@@ -32,7 +32,7 @@
         android:gravity="center"
         android:text="确定"
         android:textColor="@color/white"
-        android:textSize="30px"
+        android:textSize="25px"
         android:visibility="gone" />
 
 </RelativeLayout>

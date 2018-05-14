@@ -1,5 +1,6 @@
 package com.rehome.huizhouxdj.utils;
 
+import com.rehome.huizhouxdj.bean.BmidBean;
 import com.rehome.huizhouxdj.bean.ContactListBean;
 import com.rehome.huizhouxdj.bean.UploadPhotosBean;
 
@@ -45,7 +46,6 @@ public interface Api {
                                             @Body RequestBody body);
 
 
-
     /**
      * 安全检查整改任务上传
      *
@@ -66,7 +66,6 @@ public interface Api {
                                          @Body RequestBody body);
 
 
-
     /**
      * 获取通讯录列表
      *
@@ -74,6 +73,15 @@ public interface Api {
      */
     @GET("PubFile/Data/GetAddressbook.ashx")
     Call<ContactListBean> getContactList();
+
+
+    /**
+     * 获取部门id
+     *
+     * @return
+     */
+    @GET("UserInfos/GetDeptByUserid.aspx")
+    Call<BmidBean> getbmid(@Query("yhid") String yhid);
 
 //    /**
 //     * 设备联查任务上传

@@ -51,7 +51,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.LoginActivity">
+
+        <activity android:name=".vpn.LoginVpnActivity">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -59,6 +62,10 @@
             </intent-filter>
         </activity>
 
+
+        <activity
+            android:name=".activity.LoginActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity
             android:name=".activity.TabMainActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
@@ -70,9 +77,9 @@
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activity.sbxdj.SdjgzActivity"/>
         <activity android:name=".activity.sbxdj.YulActivity"/>
-
+        <activity android:name=".activity.sbxdj.ChangeYulActivity"/>
         <activity android:name=".activity.sbxdj.SdjSbListActivity"/>
-
+        <activity android:name=".activity.sbxdj.ChangeSbListActivity"/>
 
         <activity android:name=".activity.sbxj.XscbglActivity"/>
         <activity android:name=".activity.sbxj.XsBackLogActivity"/>
@@ -139,6 +146,10 @@
 
         <activity android:name=".activity.qfgd.QfpmgdListActivity"/>
         <activity android:name=".activity.qfgd.PMChangeActivity"/>
+        <activity android:name=".activity.qfgd.QxdsearchActivity"/>
+        <activity android:name=".activity.qfgd.QxGdMainActivity"/>
+        <activity android:name=".activity.qfgd.BrqxdActivity"/>
+
         <activity
             android:name=".activity.qfgd.QfpmgdchangeActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
@@ -182,7 +193,14 @@
             android:name=".service.BackUploadService"
             android:enabled="true"
             android:exported="true"/>
-
+        <!-- VpnService服务 -->
+        <service
+            android:name="com.sangfor.ssl.l3vpn.service.EasyappSvpnService"
+            android:permission="android.permission.BIND_VPN_SERVICE">
+            <intent-filter>
+                <action android:name="com.sangfor.ssl.l3vpn.service.EasyappSvpnService"/>
+            </intent-filter>
+        </service>
         <service
             android:name=".service.DeleteOverdueJHService"
             android:exported="false"/>

@@ -13,6 +13,8 @@ public class PMRequestBean {
     private String GZYXJ;
     private String SBBH;
     private String GZDH;
+    private String PM_ST;
+    private String PM_ET;
 
 
     public String getAction() {
@@ -69,5 +71,22 @@ public class PMRequestBean {
 
     public void setGZDH(String GZDH) {
         this.GZDH = GZDH;
+    }
+
+
+    public String getPM_ST() {
+        return PM_ST;
+    }
+
+    public void setPM_ST(String PM_ST) {
+        this.PM_ST = PM_ST;
+    }
+
+    public String getPM_ET() {
+        return PM_ET;
+    }
+
+    public void setPM_ET(String PM_ET) {
+        this.PM_ET = PM_ET;
     }
 }

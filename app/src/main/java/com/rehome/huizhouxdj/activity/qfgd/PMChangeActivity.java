@@ -44,7 +44,7 @@ public class PMChangeActivity extends BaseActivity2 implements View.OnClickListe
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_pm;
+        return R.layout.activity_changepm;
     }
 
     @Override
