@@ -148,7 +148,16 @@
         <activity android:name=".activity.qfgd.PMChangeActivity"/>
         <activity android:name=".activity.qfgd.QxdsearchActivity"/>
         <activity android:name=".activity.qfgd.QxGdMainActivity"/>
-        <activity android:name=".activity.qfgd.BrqxdActivity"/>
+        <activity
+            android:name=".activity.qfgd.BrqxdActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".activity.qfgd.BzgdqxdActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"/>
+
+
 
         <activity
             android:name=".activity.qfgd.QfpmgdchangeActivity"

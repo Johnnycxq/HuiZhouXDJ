@@ -7,13 +7,14 @@ package com.rehome.huizhouxdj.bean;
 public class QXRequestBean {
 
     private String Action;
+    private String YHID;
     private String GZDH;
+    private String ZRBM;
     private String SBBH;
     private String GZZT;
     private String GZYXJ;
     private String PL_WK_DO;
     private String PL_WK_TE;
-
 
     public String getAction() {
         return Action;
@@ -23,12 +24,28 @@ public class QXRequestBean {
         Action = action;
     }
 
+    public String getYHID() {
+        return YHID;
+    }
+
+    public void setYHID(String YHID) {
+        this.YHID = YHID;
+    }
+
     public String getGZDH() {
         return GZDH;
     }
 
     public void setGZDH(String GZDH) {
         this.GZDH = GZDH;
+    }
+
+    public String getZRBM() {
+        return ZRBM;
+    }
+
+    public void setZRBM(String ZRBM) {
+        this.ZRBM = ZRBM;
     }
 
     public String getSBBH() {

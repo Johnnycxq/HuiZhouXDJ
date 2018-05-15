@@ -60,8 +60,8 @@ public class QxGdMainActivity extends BaseActivity {
                         startActivity(intent);
                         break;
                     case 1:
-//                        Intent intent1 = new Intent(QxGdMainActivity.this, PMActivity.class);
-//                        startActivity(intent1);
+                        Intent intent1 = new Intent(QxGdMainActivity.this, BzgdqxdActivity.class);
+                        startActivity(intent1);
                         break;
 
                 }

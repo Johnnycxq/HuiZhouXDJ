@@ -16,82 +16,92 @@
             android:id="@+id/tv_JDBH"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5px"
+            android:layout_margin="2px"
             android:gravity="center_vertical"
-            android:minHeight="@dimen/px_70"
+            android:minHeight="@dimen/px_50"
             android:text="工单编号："
-            android:textSize="35px"/>
+            android:textSize="25px"/>
 
         <TextView
             android:id="@+id/tv_SBMC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5px"
+            android:layout_margin="2px"
             android:gravity="center_vertical"
-            android:minHeight="@dimen/px_70"
+            android:minHeight="@dimen/px_50"
             android:text="设备名称:"
-            android:textSize="35px"/>
+            android:textSize="25px"/>
 
 
         <TextView
             android:id="@+id/tv_QXMS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5px"
+            android:layout_margin="2px"
             android:gravity="center_vertical"
-            android:minHeight="@dimen/px_70"
+            android:minHeight="@dimen/px_50"
             android:text="缺陷描述"
-            android:textSize="35px"/>
+            android:textSize="25px"/>
 
         <TextView
             android:id="@+id/tv_GZMS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5px"
+            android:layout_margin="2px"
             android:gravity="center_vertical"
             android:minHeight="@dimen/px_70"
             android:text="工作描述"
-            android:textSize="35px"/>
+            android:textSize="25px"/>
 
         <TextView
             android:id="@+id/tv_ZT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5px"
+            android:layout_margin="2px"
             android:gravity="center_vertical"
-            android:minHeight="@dimen/px_70"
+            android:minHeight="@dimen/px_50"
             android:text="状态"
-            android:textSize="35px"/>
+            android:textSize="25px"/>
+
+        <TextView
+            android:id="@+id/tv_yxj"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_50"
+            android:text="优先级"
+            android:textSize="25px"/>
 
         <TextView
             android:id="@+id/tv_ZRBZ"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5px"
+            android:layout_margin="2px"
             android:gravity="center_vertical"
-            android:minHeight="@dimen/px_70"
+            android:minHeight="@dimen/px_50"
             android:text="责任班组"
-            android:textSize="35px"/>
+            android:textSize="25px"/>
 
         <TextView
             android:id="@+id/tv_XMFZR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5px"
+            android:layout_margin="2px"
             android:gravity="center_vertical"
-            android:minHeight="@dimen/px_70"
+            android:minHeight="@dimen/px_50"
             android:text="项目负责人"
-            android:textSize="35px"/>
+            android:textSize="25px"/>
 
         <TextView
             android:id="@+id/tv_JXBZ"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5px"
+            android:layout_margin="2px"
             android:gravity="center_vertical"
-            android:minHeight="@dimen/px_70"
+            android:minHeight="@dimen/px_50"
             android:text="检修班组"
-            android:textSize="35px"/>
+            android:textSize="25px"/>
 
     </LinearLayout>
 

@@ -44,6 +44,7 @@ public class QxdAdapter extends CommonAdapter<QxdBean.DataBean> {
         TextView tv_QXMS = viewHolder.getView(R.id.tv_QXMS);
         TextView tv_GZMS = viewHolder.getView(R.id.tv_GZMS);
         TextView tv_ZT = viewHolder.getView(R.id.tv_ZT);
+        TextView tv_yxj = viewHolder.getView(R.id.tv_yxj);
         TextView tv_ZRBZ = viewHolder.getView(R.id.tv_ZRBZ);
         TextView tv_XMFZR = viewHolder.getView(R.id.tv_XMFZR);
         TextView tv_JXBZ = viewHolder.getView(R.id.tv_JXBZ);
@@ -54,6 +55,7 @@ public class QxdAdapter extends CommonAdapter<QxdBean.DataBean> {
         tv_QXMS.setText("缺陷描述: " + item.getPl_wk_fd());
         tv_GZMS.setText("工作描述: " + item.getPl_wk_de());
         tv_ZT.setText("状态: " + item.getWo_st_de());
+        tv_yxj.setText("优先级: " + item.getPriorityclass());
         tv_ZRBZ.setText("责任班组: " + item.getRe_tm_de());
         tv_XMFZR.setText("项目负责人: " + item.getPl_wk_do());
         tv_JXBZ.setText("检修班组: " + item.getPl_wk_wg());

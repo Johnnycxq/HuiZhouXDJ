@@ -11,12 +11,15 @@ import android.widget.ListView;
 
 import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.adapter.QxdAdapter;
+import com.rehome.huizhouxdj.base.BaseCallBack;
+import com.rehome.huizhouxdj.bean.BmidBean;
 import com.rehome.huizhouxdj.bean.QXRequestBean;
 import com.rehome.huizhouxdj.bean.QxdBean;
 import com.rehome.huizhouxdj.contans.Contans;
 import com.rehome.huizhouxdj.utils.BaseActivity2;
 import com.rehome.huizhouxdj.utils.GsonUtils;
 import com.rehome.huizhouxdj.utils.HttpListener;
+import com.rehome.huizhouxdj.utils.HttpUtils;
 import com.rehome.huizhouxdj.utils.NohttpUtils;
 import com.rehome.huizhouxdj.utils.SPUtils;
 import com.yolanda.nohttp.NoHttp;
@@ -31,12 +34,13 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
 
 /**
  * Created by ruihong on 2018/5/11.
  */
 
-public class BrqxdActivity extends BaseActivity2 implements View.OnClickListener {
+public class BzgdqxdActivity extends BaseActivity2 implements View.OnClickListener {
     @BindView(R.id.lv)
     ListView lv;
     @BindView(R.id.yxj_et)
@@ -49,12 +53,20 @@ public class BrqxdActivity extends BaseActivity2 implements View.OnClickListener
     EditText tvStarttime;
     @BindView(R.id.tv_endtime)
     EditText tvEndtime;
+    @BindView(R.id.yxj_zrbm)
+    EditText yxjZrbm;
 
     private String DJID;
     private String DJMC;
 
     private String SBID;
     private String SBMC;
+
+    private String BMID = "";
+    private String BMMC = "";
+
+
+    String yhbmid, yhbmmc;
 
     private List<QxdBean.DataBean> datas;
     QxdAdapter qxdadapter;
@@ -64,7 +76,7 @@ public class BrqxdActivity extends BaseActivity2 implements View.OnClickListener
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_brqxd;
+        return R.layout.activity_bzqxd;
     }
 
     @Override
@@ -80,7 +92,7 @@ public class BrqxdActivity extends BaseActivity2 implements View.OnClickListener
                 break;
             case R.id.tv_right:
 
-                requestDatas(yhid, "", "", DJID, SBID, "", tvStarttime.getText().toString(), tvEndtime.getText().toString());
+                requestDatas("", "", BMID, DJID, SBID, "", tvStarttime.getText().toString(), tvEndtime.getText().toString());
                 break;
         }
     }
@@ -88,15 +100,15 @@ public class BrqxdActivity extends BaseActivity2 implements View.OnClickListener
 
     @Override
     public void initData() {
-        initToolbar("个人缺陷工单查询", "查询", this);
+        initToolbar("班组缺陷工单查询", "查询", this);
         yhid = (String) SPUtils.get(context, Contans.NAME, "");
         datas = new ArrayList<>();
-        requestDatas(yhid, "", "", "", "", "", "", "");
+        getYhbm();
 
         yxjEt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BrqxdActivity.this, DjListActivity.class);
+                Intent intent = new Intent(BzgdqxdActivity.this, DjListActivity.class);
                 startActivityForResult(intent, 1);
             }
         });
@@ -104,7 +116,7 @@ public class BrqxdActivity extends BaseActivity2 implements View.OnClickListener
         yxjSbmc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BrqxdActivity.this, SblistActivity.class);
+                Intent intent = new Intent(BzgdqxdActivity.this, SblistActivity.class);
                 startActivityForResult(intent, 2);
             }
         });
@@ -116,6 +128,15 @@ public class BrqxdActivity extends BaseActivity2 implements View.OnClickListener
 //                startActivityForResult(intent, 3);
             }
         });
+        yxjZrbm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(BzgdqxdActivity.this, BmListActivity.class);
+                startActivityForResult(intent, 3);
+            }
+        });
+
 
         tvStarttime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,6 +228,33 @@ public class BrqxdActivity extends BaseActivity2 implements View.OnClickListener
         return json;
     }
 
+    private void getYhbm() {
+
+
+        String yhid = (String) SPUtils.get(context, Contans.NAME, "");
+
+        HttpUtils.getApi().getbmid(yhid).enqueue(new BaseCallBack<BmidBean>(context) {
+
+            @Override
+            public void onSuccess(Call<BmidBean> call, retrofit2.Response<BmidBean> response) {
+                BmidBean kcmzbean = response.body();
+
+
+                yhbmid = kcmzbean.getRows().get(0).getRe_tm_no_p();
+                yhbmmc = kcmzbean.getRows().get(0).getRe_tm_de();
+
+                yxjZrbm.setText(yhbmmc);
+                BMID = yhbmid;
+
+            }
+
+            @Override
+            public void onError(Call<BmidBean> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void setAdapter() {
 
         if (qxdadapter == null) {
@@ -251,6 +299,14 @@ public class BrqxdActivity extends BaseActivity2 implements View.OnClickListener
                     SBID = bundle.getString("SBID");
                     SBMC = bundle.getString("SBMC");
                     yxjSbmc.setText(SBMC);
+                }
+                break;
+            case 3:
+                if (resultCode == RESULT_OK) {
+                    Bundle bundle = data.getExtras();
+                    BMID = bundle.getString("BMID");
+                    BMMC = bundle.getString("BMMC");
+                    yxjZrbm.setText(BMMC);
                 }
                 break;
         }
