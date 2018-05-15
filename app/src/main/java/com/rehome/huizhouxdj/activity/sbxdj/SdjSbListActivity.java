@@ -52,7 +52,7 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
     private int itemposition;
 
     private int from;//0-来自工作页面；1-采集页面
-
+    private ArrayList<SetSbModel> setSbModelList = new ArrayList<>();
     @Override
     public int getLayoutId() {
         return R.layout.activity_sblist;
@@ -129,7 +129,7 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
 
     }
 
-    private ArrayList<SetSbModel> setSbModelList = new ArrayList<>();
+
 
     private void setListData() {
 

@@ -47,7 +47,6 @@ public class AqjcrwSaveActivity extends BaseActivity {
 
     private ArrayList<String> imagePaths = new ArrayList<>();
     ArrayList<String> finalList;
-
     private GridAdapter gridAdapter;
     private String TAG = AqjcrwSaveActivity.class.getSimpleName();
 

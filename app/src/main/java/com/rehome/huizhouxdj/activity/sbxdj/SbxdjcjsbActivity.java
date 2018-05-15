@@ -137,7 +137,7 @@ public class SbxdjcjsbActivity extends BaseActivity3 implements View.OnClickList
                     for (int j = 0; j < qyddataBeanArrayList.size(); j++) {
                         if (qyddataBeanArrayList.get(j).getSBID().equals(setSbModelList.get(i).getSbId())) {
                             qyddataBeanArrayList.get(j).setCJJG(setSbModelList.get(i).getValue());
-//                            qyddataBeanArrayList.get(j).setChecked();
+                            qyddataBeanArrayList.get(j).setChecked(setSbModelList.get(i).getStatu());
                         }
                     }
                 }

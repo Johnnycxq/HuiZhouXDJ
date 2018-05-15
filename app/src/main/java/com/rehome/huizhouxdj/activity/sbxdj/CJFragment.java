@@ -132,7 +132,12 @@ public class CJFragment extends BaseFragment {
 
     public void updatecheck(Boolean value) {
 
-        tv_zt.setText(value ? "已检" : "未检");
+        if (value) {
+            tv_zt.setText("已检");
+        } else {
+            tv_zt.setText("未检");
+        }
+
     }
 
 

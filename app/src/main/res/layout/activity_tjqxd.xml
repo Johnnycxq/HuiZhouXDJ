@@ -154,6 +154,16 @@
                 app:tv_title="选择附件"/>
 
 
+            <GridView
+                android:id="@+id/gridView"
+                android:layout_width="fill_parent"
+                android:layout_height="250dp"
+                android:layout_margin="5dp"
+                android:horizontalSpacing="5dp"
+                android:numColumns="3"
+                android:verticalSpacing="5dp"/>
+
+
         </LinearLayout>
 
 

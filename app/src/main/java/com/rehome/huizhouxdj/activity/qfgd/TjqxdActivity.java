@@ -4,38 +4,52 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.lidong.photopicker.PhotoPickerActivity;
+import com.lidong.photopicker.PhotoPreviewActivity;
+import com.lidong.photopicker.SelectModel;
+import com.lidong.photopicker.intent.PhotoPickerIntent;
+import com.lidong.photopicker.intent.PhotoPreviewIntent;
 import com.rehome.huizhouxdj.R;
+import com.rehome.huizhouxdj.activity.aqjc.AqjcrwSaveActivity;
+import com.rehome.huizhouxdj.base.BaseCallBack;
 import com.rehome.huizhouxdj.bean.MessageEvent;
-import com.rehome.huizhouxdj.bean.QxTjgdRequestBean;
-import com.rehome.huizhouxdj.bean.ResultBean;
+import com.rehome.huizhouxdj.bean.UploadPhotosBean;
 import com.rehome.huizhouxdj.contans.Contans;
 import com.rehome.huizhouxdj.utils.BaseActivity2;
-import com.rehome.huizhouxdj.utils.GsonUtils;
-import com.rehome.huizhouxdj.utils.HttpListener;
-import com.rehome.huizhouxdj.utils.NohttpUtils;
+import com.rehome.huizhouxdj.utils.RetrofitHttpUtils;
 import com.rehome.huizhouxdj.utils.SPUtils;
 import com.rehome.huizhouxdj.weight.DateTimePickDialog;
 import com.rehome.huizhouxdj.weight.InputLayout;
 import com.rehome.huizhouxdj.weight.toastviewbymyself;
-import com.yolanda.nohttp.NoHttp;
-import com.yolanda.nohttp.RequestMethod;
-import com.yolanda.nohttp.rest.Request;
-import com.yolanda.nohttp.rest.Response;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONArray;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Response;
 
 /**
  * Created by ruihong on 2018/4/17.
@@ -44,6 +58,18 @@ import butterknife.ButterKnife;
 public class TjqxdActivity extends BaseActivity2 implements View.OnClickListener {
 
     private static final int REQUEST_AUDIO = 0;
+    private static final int REQUEST_CAMERA_CODE = 10;
+    private static final int REQUEST_PREVIEW_CODE = 20;
+
+
+    private ArrayList<String> imagePaths = new ArrayList<>();
+    ArrayList<String> finalList;
+    private GridAdapter gridAdapter;
+    private String TAG = AqjcrwSaveActivity.class.getSimpleName();
+
+
+    @BindView(R.id.gridView)
+    GridView gridView;
     private Uri uri;
     @BindView(R.id.il_gdbh)
     InputLayout ilGdbh;
@@ -213,6 +239,40 @@ public class TjqxdActivity extends BaseActivity2 implements View.OnClickListener
                 startActivityForResult(intent, REQUEST_AUDIO);
             }
         });
+
+
+        int cols = getResources().getDisplayMetrics().widthPixels / getResources().getDisplayMetrics().densityDpi;
+        cols = cols < 3 ? 3 : cols;
+        gridView.setNumColumns(cols);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                String imgs = (String) parent.getItemAtPosition(position);
+
+                if ("paizhao".equals(imgs)) {
+                    PhotoPickerIntent intent = new PhotoPickerIntent(TjqxdActivity.this);
+                    intent.setSelectModel(SelectModel.MULTI);
+                    intent.setShowCarema(true); // 是否显示拍照
+                    intent.setMaxTotal(6); // 最多选择照片数量，默认为6
+                    intent.setSelectedPaths(imagePaths); // 已选中的照片地址， 用于回显选中状态
+                    startActivityForResult(intent, REQUEST_CAMERA_CODE);
+                } else {
+                    Toast.makeText(TjqxdActivity.this, "1" + position, Toast.LENGTH_SHORT).show();
+                    PhotoPreviewIntent intent = new PhotoPreviewIntent(TjqxdActivity.this);
+                    intent.setCurrentItem(position);
+                    intent.setPhotoPaths(imagePaths);
+                    startActivityForResult(intent, REQUEST_PREVIEW_CODE);
+                }
+            }
+        });
+
+        imagePaths.add("paizhao");
+        gridAdapter = new GridAdapter(imagePaths);
+        gridView.setAdapter(gridAdapter);
+
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -307,6 +367,18 @@ public class TjqxdActivity extends BaseActivity2 implements View.OnClickListener
                     ilXzfj.setContent(file.getName());
                 }
                 break;
+            case REQUEST_CAMERA_CODE:
+                if (resultCode == RESULT_OK) {
+                    ArrayList<String> list = data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT);
+                    loadAdpater(list);
+                }
+                break;
+            case REQUEST_PREVIEW_CODE:
+                if (resultCode == RESULT_OK) {
+                    ArrayList<String> ListExtra = data.getStringArrayListExtra(PhotoPreviewActivity.EXTRA_RESULT);
+                    loadAdpater(ListExtra);
+                }
+                break;
         }
     }
 
@@ -347,57 +419,172 @@ public class TjqxdActivity extends BaseActivity2 implements View.OnClickListener
 
     private void TJ() {
 
-        final Request<String> requset = NoHttp.createStringRequest(Contans.IP + Contans.QFGD, RequestMethod.POST);
-        requset.setDefineRequestBodyForJson(createJson());
-        NohttpUtils.getInstance().add(this, 0, requset, new HttpListener<String>() {
-            @Override
-            public void onSucceed(int what, Response<String> response) {
-                try {
+        finalList = new ArrayList<>();
+        finalList.addAll(imagePaths);
+        if (finalList.contains("paizhao")) {
+            finalList.remove("paizhao");
+        }
 
-                    ResultBean resultBean = GsonUtils.GsonToBean(response.get(), ResultBean.class);
+        String substring = finalList.toString().substring(1, finalList.toString().length() - 1);
 
-                    if (resultBean != null) {
-                        if (resultBean.getState() == 1) {
-                            showToast(resultBean.getMsg());
-                            finish();
-                        } else {
-                            showToast("数据错误");
-                        }
+
+        String USERNAME = (String) SPUtils.get(context, Contans.USERNAME, "");
+        MultipartBody.Builder builder;
+        if (substring.contains(",")) {
+
+            builder = new MultipartBody.Builder();
+
+            builder.setType(MultipartBody.FORM);
+
+            String[] split = substring.split(",");
+
+            for (String imagePath : split) {
+
+                File file = new File(imagePath.trim());
+
+                RequestBody imageBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+                builder.addFormDataPart("file", file.getName(), imageBody);
+
+            }
+
+        } else {
+
+            builder = new MultipartBody.Builder();
+
+            builder.setType(MultipartBody.FORM);
+
+            File file = new File(substring);
+
+            RequestBody imageBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+            builder.addFormDataPart("file", file.getName(), imageBody);
+
+        }
+
+
+        RetrofitHttpUtils.getApi().upload_QXGD("Q4GD_ADD", USERNAME, "", "", DJID, etQxms.getText().toString(),
+                etGzms.getText().toString(), ilSbbh.getContent(), ilSbmc.getContent(), zrbzBMID, xmYHID, jxbzBMID,
+                jxYHID, "", ilStartime.getContent(), ilEndtime.getContent(), builder.build()).enqueue
+                (new BaseCallBack<UploadPhotosBean>(context) {
+                    @Override
+                    public void onSuccess(Call<UploadPhotosBean> call, Response<UploadPhotosBean> response) {
+
+                        UploadPhotosBean uploadPhotosBean = response.body();
+
+
                     }
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+                    @Override
+                    public void onError(Call<UploadPhotosBean> call, Throwable t) {
 
-            @Override
-            public void onFailed(int what, Response<String> response) {
+                    }
+                });
 
-            }
-        });
+
     }
 
-    private String createJson() {
-        QxTjgdRequestBean info = new QxTjgdRequestBean();
-        info.setAction("Q4GD_ADD");
-        info.setYHID((String) SPUtils.get(context, Contans.USERNAME, ""));
-        info.setGDZT_SO("");
-        info.setGDZT_NO("");
-        info.setGDDJ(DJID);
-        info.setQXMS(etQxms.getText().toString());
-        info.setGZMS(etGzms.getText().toString());
-        info.setSBBH(ilSbbh.getContent());
-        info.setSBMC(ilSbmc.getContent());
-        info.setZRBZ(zrbzBMID);
-        info.setZRR(xmYHID);
-        info.setJXBZ(jxbzBMID);
-        info.setJXR(jxYHID);
-        info.setGZXZ("");
-        info.setST(ilStartime.getContent());
-        info.setET(ilEndtime.getContent());
-        String json = GsonUtils.GsonString(info);
-        return json;
+//    private String createJson() {
+//        QxTjgdRequestBean info = new QxTjgdRequestBean();
+//        info.setAction("Q4GD_ADD");
+//        info.setYHID((String) SPUtils.get(context, Contans.USERNAME, ""));
+//        info.setGDZT_SO("");
+//        info.setGDZT_NO("");
+//        info.setGDDJ(DJID);
+//        info.setQXMS(etQxms.getText().toString());
+//        info.setGZMS(etGzms.getText().toString());
+//        info.setSBBH(ilSbbh.getContent());
+//        info.setSBMC(ilSbmc.getContent());
+//        info.setZRBZ(zrbzBMID);
+//        info.setZRR(xmYHID);
+//        info.setJXBZ(jxbzBMID);
+//        info.setJXR(jxYHID);
+//        info.setGZXZ("");
+//        info.setST(ilStartime.getContent());
+//        info.setET(ilEndtime.getContent());
+//        String json = GsonUtils.GsonString(info);
+//        return json;
+//    }
+
+    private void loadAdpater(ArrayList<String> paths) {
+        if (imagePaths != null && imagePaths.size() > 0) {
+            imagePaths.clear();
+        }
+        if (paths.contains("paizhao")) {
+            paths.remove("paizhao");
+        }
+        paths.add("paizhao");
+        imagePaths.addAll(paths);
+        gridAdapter = new GridAdapter(imagePaths);
+        gridView.setAdapter(gridAdapter);
+        try {
+            JSONArray obj = new JSONArray(imagePaths);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
+    private class GridAdapter extends BaseAdapter {
+        private ArrayList<String> listUrls;
+        private LayoutInflater inflater;
+
+        public GridAdapter(ArrayList<String> listUrls) {
+            this.listUrls = listUrls;
+            if (listUrls.size() == 7) {
+                listUrls.remove(listUrls.size() - 1);
+            }
+            //这个意思就是 如果最后返回的列表有7哥 就把最后一个移除了
+            inflater = LayoutInflater.from(TjqxdActivity.this);
+        }
+
+        public int getCount() {
+            return listUrls.size();
+        }
+
+        @Override
+        public String getItem(int position) {
+            return listUrls.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder = null;
+            if (convertView == null) {
+                holder = new ViewHolder();
+                convertView = inflater.inflate(R.layout.sblcsave_item, parent, false);
+                holder.image = (ImageView) convertView.findViewById(R.id.imageView);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            final String path = listUrls.get(position);
+
+            //这里是如果取到path的值是paizhao  就显示加好  如果不是  就是返回的那个图片
+
+
+            if (path.equals("paizhao")) {
+                holder.image.setImageResource(R.mipmap.find_add_img);
+            } else {
+                Glide.with(TjqxdActivity.this)
+                        .load(path)
+                        .placeholder(R.mipmap.default_error)
+                        .error(R.mipmap.default_error)
+                        .centerCrop()
+                        .crossFade()
+                        .into(holder.image);
+            }
+            return convertView;
+        }
+
+        class ViewHolder {
+            ImageView image;
+        }
+    }
 }
 

@@ -313,6 +313,8 @@ public class AqjclbinfoActivity extends BaseActivity2 implements View.OnClickLis
                 builder.addFormDataPart("file", file.getName(), imageBody);
 
             }
+
+
             RetrofitHttpUtils.getApi().upload_QJRWPhoto("AQJC_RW_SET", USERNAME, JHID_inData, WTQY,
 
                     WTMS, SaveDataTime, "", "", "", builder.build()).enqueue(new BaseCallBack<UploadPhotosBean>(context) {
