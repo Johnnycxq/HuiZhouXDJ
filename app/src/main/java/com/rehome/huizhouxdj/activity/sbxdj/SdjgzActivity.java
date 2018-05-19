@@ -90,7 +90,7 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
 
         initNFC();
 
-        initToolbar("工作", "提单", this);
+        initToolbar("点检工作", "提单", this);
 
         dialogDatas2 = new ArrayList<>();
 
@@ -182,11 +182,8 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
                 @Override
                 protected void convert(ViewHolder viewHolder, XDJJHXZDataBean item, int position) {
 
-                    //已点检数
                     int checkedCount = 0;
-                    //获取每个区域（一个item表示一个区域，这里的item也就是XDJJHXZDataBean的一个实例）对应的所有QYDDATABean条数：查询原理（根据关联表中xdjjhxzDataBean_id 进行查找）
                     List<QYDDATABean> qyddataBeen = where("xdjjhxzDataBean_id = ?", item.getId() + "").find(QYDDATABean.class);
-                    //遍历这个list集合，根据checked字段判断是否已点检，true-已点检，计数加一
                     for (int i = 0; i < qyddataBeen.size(); i++) {
                         if (qyddataBeen.get(i).isChecked()) {
                             checkedCount++;
@@ -221,7 +218,7 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
                         Intent intent = new Intent(SdjgzActivity.this, SdjSbListActivity.class);
                         bundle.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
                         bundle.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
-                        bundle.putBoolean("edit", true);
+                        bundle.putBoolean("edit", false);
                         bundle.putInt(Contans.KEY_ITEM, 0);
                         bundle.putInt("itemposition", postion - 1);
                         bundle.putString("LX", "Click");
@@ -230,31 +227,6 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
                         intent.putExtras(bundle);
                         startActivity(intent);
 
-//                        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//                        builder.setCancelable(false);
-//                        builder.setTitle("系统提示");
-//                        builder.setMessage("是否要浏览该区域下的工作内容");
-//                        builder.setNegativeButton(UiUtlis.getString(context, R.string.cancel), new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                dialogInterface.dismiss();
-//                            }
-//                        });
-//
-//                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//
-////                                Intent intent = new Intent(SdjgzActivity.this, TipsActivity.class);
-//
-//                                Intent intent = new Intent(SdjgzActivity.this, SdjSbListActivity.class);
-//
-//
-//
-//                                dialogInterface.dismiss();
-//                            }
-//                        });
-//                        builder.show();
                     } else {
                         showToast("暂无该区域点检任务");
                     }
@@ -293,6 +265,7 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
                     bundle2.putInt("itemposition", 0);
                     bundle2.putString("LX", "QRcode");
                     bundle2.putString("LXResult", ewm);
+                    bundle2.putInt("from", 0);
                     intent.putExtras(bundle2);
                     startActivity(intent);
 
@@ -344,18 +317,9 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
         bundle3.putInt("itemposition", 0);
         bundle3.putString("LX", "NFC");
         bundle3.putString("LXResult", result);
+        bundle3.putInt("from", 0);
         intent.putExtras(bundle3);
         startActivity(intent);
-
-
-//        Intent intent = new Intent(SdjgzActivity.this, TipsActivity.class);
-//        Bundle bundle2 = new Bundle();
-//        bundle2.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
-//        bundle2.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
-//        bundle2.putBoolean("edit", true);
-//        bundle2.putInt(Contans.KEY_ITEM, 0);
-//        intent.putExtras(bundle2);
-//        startActivity(intent);
 
     }
 

@@ -10,6 +10,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -18,8 +19,9 @@ import android.widget.RadioGroup;
 import com.rehome.huizhouxdj.DBModel.XSJJHDataBean;
 import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.adapter.MyFragmentAdapter;
+import com.rehome.huizhouxdj.bean.SetxjSbModel;
 import com.rehome.huizhouxdj.contans.Contans;
-import com.rehome.huizhouxdj.utils.BaseActivity;
+import com.rehome.huizhouxdj.utils.BaseActivity3;
 import com.rehome.huizhouxdj.weight.AutoRadioGroup;
 import com.rehome.huizhouxdj.weight.NoscrollViewPager;
 
@@ -39,9 +41,9 @@ import butterknife.OnClick;
  * Created by ruihong on 2017/11/30.
  */
 
-public class SbxjcjsbActivity extends BaseActivity {
+public class SbxjcjsbActivity extends BaseActivity3 implements View.OnClickListener {
 
-
+    public static int Req = 101;
     @BindView(R.id.vp)
     NoscrollViewPager vp;
     @BindView(R.id.rb1)
@@ -64,31 +66,92 @@ public class SbxjcjsbActivity extends BaseActivity {
     private MyFragmentAdapter adapter;
     private List<Fragment> list;
     private XJCJFragment xjcjFragment;
-    //    private FfFragment ff;
-//    private BzFragment bz;
     private int item = 0;
     private boolean isEdit = false;
     private int index = 0;
+    private int itemposition;
+    private String LX, LXResult;
 
     //新数据
     private ArrayList<XSJJHDataBean> xsjjhDataBeanArrayList;
-
+    private ArrayList<SetxjSbModel> setSbModelList;
 
     @Override
-    public int getContentViewID() {
+    public int getLayoutId() {
         return R.layout.activity_sbxjcjsb;
     }
 
     @Override
-    protected void initView() {
+    public void initView() {
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_left:
+
+
+                Intent intent2 = new Intent(SbxjcjsbActivity.this, SbxjcjsbActivity.class);
+                intent2.putParcelableArrayListExtra("setSbModelList", setSbModelList);
+                setResult(RESULT_OK, intent2);
+                finish();
+
+                break;
+            case R.id.tv_right://这里
+                Bundle bundle = new Bundle();
+                Intent intent = new Intent(SbxjcjsbActivity.this, XjSbListActivity.class);
+                bundle.putParcelableArrayList("xsjjhDataBeanArrayList", xsjjhDataBeanArrayList);
+                bundle.putBoolean("edit", isEdit);
+                bundle.putInt(Contans.KEY_ITEM, 0);
+                bundle.putInt("itemposition", itemposition);
+                bundle.putString("LX", LX);
+                bundle.putString("LXResult", LXResult);
+                bundle.putInt("from", 1);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, Req);
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode != RESULT_OK) return;
+
+        if (requestCode == Req) {
+
+            if (data != null) {
+
+                setSbModelList = data.getParcelableArrayListExtra("setSbModelList");
+
+                Log.e("123", "size=" + setSbModelList);
+                //更新数据源
+                for (int i = 0; i < setSbModelList.size(); i++) {
+                    for (int j = 0; j < xsjjhDataBeanArrayList.size(); j++) {
+                        if (xsjjhDataBeanArrayList.get(j).getSbid().equals(setSbModelList.get(i).getSbId())) {
+                            xsjjhDataBeanArrayList.get(j).setCJJG(setSbModelList.get(i).getValue());
+                            xsjjhDataBeanArrayList.get(j).setChecked(setSbModelList.get(i).getStatu());
+                        }
+                    }
+                }
+
+                //更新当前的检查配件状态
+                if (xjcjFragment != null) {
+                    xjcjFragment.updateState(xsjjhDataBeanArrayList.get(index).getCJJG());
+                    xjcjFragment.updatecheck(xsjjhDataBeanArrayList.get(index).isChecked());
+                }
+            }
+        }
+
+
+    }
 
     public void initData() {
 
-        setBack();
-        setTitle("设备巡检");
+        initToolbar("设备巡检", "修改设备状态", this);
 
         Bundle bundle = SbxjcjsbActivity.this.getIntent().getExtras();
         if (bundle != null) {
@@ -96,6 +159,9 @@ public class SbxjcjsbActivity extends BaseActivity {
             xsjjhDataBeanArrayList = bundle.getParcelableArrayList("xsjjhDataBeanArrayList");
             index = bundle.getInt(Contans.KEY_ITEM);
             item = bundle.getInt(Contans.KEY_ITEM) + 1;
+            itemposition = bundle.getInt("itemposition");
+            LX = bundle.getString("LX");
+            LXResult = bundle.getString("LXResult");
         }
         ButterKnife.bind(this);
 
@@ -105,16 +171,12 @@ public class SbxjcjsbActivity extends BaseActivity {
         list = new ArrayList<>();
         if (xsjjhDataBeanArrayList.size() != 0) {
             xjcjFragment = XJCJFragment.newInstance(isEdit, xsjjhDataBeanArrayList.get(index), xsjjhDataBeanArrayList.size(), index + 1);
-//            ff = FfFragment.newInstance(isEdit, qyddataBeanArrayList.get(index).getJCFS());
-//            bz = BzFragment.newInstance(isEdit, qyddataBeanArrayList.get(index).getBZZ());
         } else {
             xjcjFragment = XJCJFragment.newInstance(isEdit, new XSJJHDataBean(), 0, 0);
-//            ff = FfFragment.newInstance(isEdit, "");
-//            bz = BzFragment.newInstance(isEdit, "");
+
         }
         list.add(xjcjFragment);
-//        list.add(ff);
-//        list.add(bz);
+
         adapter = new MyFragmentAdapter(getSupportFragmentManager(), list);
         vp.setAdapter(adapter);
         vp.setOffscreenPageLimit(3);
@@ -159,8 +221,7 @@ public class SbxjcjsbActivity extends BaseActivity {
                     showToast("当前为第一条");
                 } else {
                     xjcjFragment.updata(xsjjhDataBeanArrayList.get(item - 1), item, xsjjhDataBeanArrayList.size());
-//                    bz.updata(qyddataBeanArrayList.get(item - 1).getBZZ());
-//                    ff.update(qyddataBeanArrayList.get(item - 1).getJCFS());
+
                 }
                 break;
             case R.id.btn_next:
@@ -200,17 +261,29 @@ public class SbxjcjsbActivity extends BaseActivity {
                                         showToast("保存成功");
                                         //更新编辑的内容
                                         updateItem(xjcjFragment.getCJJG(), item - 1);
+
+
+                                        Intent intent2 = new Intent(SbxjcjsbActivity.this, XjSbListActivity.class);
+                                        intent2.putParcelableArrayListExtra("setSbModelList", setSbModelList);
+                                        setResult(RESULT_OK, intent2);
+                                        finish();
                                     }
                                 } else {
                                     showToast("你没有数据采集结果");
                                 }
 
                             }
+                            Intent intent2 = new Intent(SbxjcjsbActivity.this, XjSbListActivity.class);
+                            intent2.putParcelableArrayListExtra("setSbModelList", setSbModelList);
+                            setResult(RESULT_OK, intent2);
                             finish();
                         }
                     });
                     builder.create().show();
                 } else {
+                    Intent intent2 = new Intent(SbxjcjsbActivity.this, XjSbListActivity.class);
+                    intent2.putParcelableArrayListExtra("setSbModelList", setSbModelList);
+                    setResult(RESULT_OK, intent2);
                     finish();
                 }
                 break;
@@ -258,8 +331,7 @@ public class SbxjcjsbActivity extends BaseActivity {
                     //showToast("到底了");
                 } else {
                     xjcjFragment.updata(xsjjhDataBeanArrayList.get(item - 1), item, xsjjhDataBeanArrayList.size());
-//                    bz.updata(qyddataBeanArrayList.get(item - 1).getBZZ());
-//                    ff.update(qyddataBeanArrayList.get(item - 1).getJCFS());
+
                 }
             } else {
                 if (xsjjhDataBeanArrayList.size() != 0) {
@@ -272,8 +344,7 @@ public class SbxjcjsbActivity extends BaseActivity {
                         //showToast("到底了");
                     } else {
                         xjcjFragment.updata(xsjjhDataBeanArrayList.get(item - 1), item, xsjjhDataBeanArrayList.size());
-//                        bz.updata(qyddataBeanArrayList.get(item - 1).getBZZ());
-//                        ff.update(qyddataBeanArrayList.get(item - 1).getJCFS());
+
                     }
                 }
             }
@@ -305,4 +376,19 @@ public class SbxjcjsbActivity extends BaseActivity {
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            Intent intent2 = new Intent(SbxjcjsbActivity.this, XjSbListActivity.class);
+            intent2.putParcelableArrayListExtra("setSbModelList", setSbModelList);
+            setResult(RESULT_OK, intent2);
+            finish();
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }

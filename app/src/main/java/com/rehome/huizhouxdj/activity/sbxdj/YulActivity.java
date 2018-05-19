@@ -32,12 +32,9 @@ public class YulActivity extends BaseActivity {
 
     @BindView(R.id.lv)
     ListView lv;
-
     private static final int Req = 101;
-
     private boolean isEdit = true;
     private int item;
-    //    private ArrayList<QYDDATABean> djjhs = new ArrayList<>();
     private List<XDJJHXZDataBean> xdjjhxzDataBeanList = new ArrayList<>();//工作列表
     private ArrayList<QYDDATABean> qyddataBeanList = new ArrayList<>();//点检记录列表
     private List<DlbInfo> infos = new ArrayList<>();
@@ -45,6 +42,7 @@ public class YulActivity extends BaseActivity {
     private DlbAdapter adapter;
     private int itemposition;
     private String LX, LXResult;
+
     /**
      * 广播
      */
@@ -107,10 +105,9 @@ public class YulActivity extends BaseActivity {
         searchdata();
         setListAdapter();
 
-        //创建filter
+
         IntentFilter filter = new IntentFilter();
         filter.addAction(Contans.ACTION_YULONE);
-        //注册广播
         registerReceiver(myReceiver, filter);
     }
 
@@ -172,7 +169,6 @@ public class YulActivity extends BaseActivity {
                 bundle.putString("LXResult", LXResult);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, Req);
-//                finish();
             }
         });
     }

@@ -31,7 +31,7 @@ import java.util.Map;
 import butterknife.BindView;
 
 /**
- * 设备巡点检管理-点检工作
+ * 设备巡点检管理-点检设备列表
  */
 public class SdjSbListActivity extends BaseActivity3 implements View.OnClickListener {
 
@@ -52,7 +52,9 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
     private int itemposition;
 
     private int from;//0-来自工作页面；1-采集页面
+
     private ArrayList<SetSbModel> setSbModelList = new ArrayList<>();
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_sblist;
@@ -62,11 +64,10 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_left:
-                if (from == 0) {//工作页面
+                if (from == 0) { //工作页面
                     finish();
-                } else if (from == 1) {//采集页面
+                } else if (from == 1) { //采集页面
                     Intent intent = new Intent(SdjSbListActivity.this, SbxdjcjsbActivity.class);
-                    //传list《设备号，内容》
                     intent.putParcelableArrayListExtra("setSbModelList", setSbModelList);
                     setResult(RESULT_OK, intent);
                     finish();
@@ -130,7 +131,6 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
     }
 
 
-
     private void setListData() {
 
         Map<String, sbInfo> maps = new HashMap<String, sbInfo>();
@@ -170,15 +170,14 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
 
             if (isEdit) {
 
-
                 lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, final int postion, long l) {
-                        //赋值当前点击的item：从1开始
+
                         pos = postion;
                         List<String> datas = new ArrayList<String>();
                         datas.add("已停用");
-//                        datas.add("大小修");
+
 
                         ListDialog dialog = new ListDialog(context, datas, new ListDialog.ListDialogListener() {
                             @Override
@@ -198,22 +197,15 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
 
                                 }
 
-//                                else if (text.equals("大小修")) {
-//
-//                                    values.put("checked", true);
-//
-//                                    values.put("SBMCSTATEVALUE", "4");
-//
-//                                }
 
                                 int i = DataSupport.updateAll(QYDDATABean.class, values, "SBID = ? ", infos.get(postion - 1).getSbid());
 
                                 if (i != 0) {
                                     showToast("修改设备状态成功");
-//                                    finish();
+
                                 } else {
                                     showToast("修改设备状态失败");
-//                                    finish();
+
                                 }
 
                             }
@@ -239,22 +231,15 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
                         });
 
 
-//                    Intent intent = new Intent(SdjSbListActivity.this, TipsActivity.class);
-//                    Bundle bundle = new Bundle();
-//                    bundle.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanArrayList);
-//                    bundle.putParcelableArrayList("QYFXTS", qyaqfxdataBeanArrayList);
-//                    bundle.putBoolean("edit", false);
-//                    bundle.putInt(Contans.KEY_ITEM, 0);
-//                    intent.putExtras(bundle);
-//                    startActivity(intent);
-
                     }
                 });
+
             } else {
-                adapter.notifyDataSetChanged();
+                showToast("需要扫描二维码或者贴近NFC才能进入");
+
             }
         } else {
-            showToast("需要扫描二维码或者贴近NFC才能进入");
+            adapter.notifyDataSetChanged();
         }
 
 

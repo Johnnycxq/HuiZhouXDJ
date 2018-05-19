@@ -70,7 +70,7 @@ public class SbxdjcjsbActivity extends BaseActivity3 implements View.OnClickList
     private FfFragment ff;
     private BzFragment bz;
     private int item = 0;
-    private boolean isEdit = false;
+    private boolean isEdit = true;
     private int index = 0;
     private int itemposition;
     private String LX, LXResult;
@@ -104,7 +104,7 @@ public class SbxdjcjsbActivity extends BaseActivity3 implements View.OnClickList
                 Bundle bundle = new Bundle();
                 Intent intent = new Intent(SbxdjcjsbActivity.this, SdjSbListActivity.class);
                 bundle.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanArrayList);
-                bundle.putBoolean("edit", true);
+                bundle.putBoolean("edit", isEdit);
                 bundle.putInt(Contans.KEY_ITEM, 0);
                 bundle.putInt("itemposition", itemposition);
                 bundle.putString("LX", LX);

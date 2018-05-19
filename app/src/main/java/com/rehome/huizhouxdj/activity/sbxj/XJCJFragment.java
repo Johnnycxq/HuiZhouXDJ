@@ -21,6 +21,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.rehome.huizhouxdj.R.id.et_button;
+import static com.rehome.huizhouxdj.R.id.et_jg;
+import static com.rehome.huizhouxdj.R.id.tv_zt;
+
 
 public class XJCJFragment extends BaseFragment {
 
@@ -43,15 +47,15 @@ public class XJCJFragment extends BaseFragment {
     TextView tvXcnr;
     @BindView(R.id.textView2)
     TextView textView2;
-    @BindView(R.id.et_jg)
+    @BindView(et_jg)
     EditText etJg;
-    @BindView(R.id.et_button)
+    @BindView(et_button)
     Button etButton;
     @BindView(R.id.sv)
     ScrollView sv;
     @BindView(R.id.tv_yjzj)
     TextView tvYjzj;
-    @BindView(R.id.tv_zt)
+    @BindView(tv_zt)
     TextView tvZt;
     private boolean isEdit;
     private XSJJHDataBean info;
@@ -120,8 +124,24 @@ public class XJCJFragment extends BaseFragment {
             }
         });
     }
+    /**
+     * 更新当前检查item的检查结果
+     *
+     * @param value
+     */
+    public void updateState(String value) {
+        etJg.setText(value);
+        etButton.setText(value);
+    }
+    public void updatecheck(Boolean value) {
 
+        if (value) {
+            tvZt.setText("已检");
+        } else {
+            tvZt.setText("未检");
+        }
 
+    }
     /**
      * 更新数据
      */

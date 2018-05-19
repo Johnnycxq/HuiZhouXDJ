@@ -219,8 +219,6 @@ public class XzxsjhFragment extends BaseFragment {
                             }
                             DataSupport.saveAll(xsjjhxzDataBeanList);
 
-//                            List<XSJJHXZDataBean> xsjjhdatabean = DataSupport.findAll(XSJJHXZDataBean.class);
-//                            List<XSJJHDataBean> xsjjhDataBeen = where("scid = ?", "9A5F0F5C69AA4A07AE7B8152DF303C6B").find(XSJJHDataBean.class);
 
                         } else {
 

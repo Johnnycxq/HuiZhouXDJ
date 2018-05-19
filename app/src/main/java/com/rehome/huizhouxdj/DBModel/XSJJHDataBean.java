@@ -52,6 +52,8 @@ public class XSJJHDataBean extends DataSupport implements Parcelable {
     private String CJJG;
     private String BJMC;
 
+    private String nfcbm;
+    private String txm;
 
     public long getId() {
         return id;
@@ -333,6 +335,22 @@ public class XSJJHDataBean extends DataSupport implements Parcelable {
         this.BJMC = BJMC;
     }
 
+    public String getNfcbm() {
+        return nfcbm;
+    }
+
+    public void setNfcbm(String nfcbm) {
+        this.nfcbm = nfcbm;
+    }
+
+    public String getTxm() {
+        return txm;
+    }
+
+    public void setTxm(String txm) {
+        this.txm = txm;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -374,6 +392,9 @@ public class XSJJHDataBean extends DataSupport implements Parcelable {
         dest.writeString(this.SBMCSTATEVALUE);
         dest.writeString(this.CJJG);
         dest.writeString(this.BJMC);
+        dest.writeString(this.nfcbm);
+        dest.writeString(this.txm);
+
     }
 
     public XSJJHDataBean() {
@@ -414,6 +435,8 @@ public class XSJJHDataBean extends DataSupport implements Parcelable {
         this.SBMCSTATEVALUE = in.readString();
         this.CJJG = in.readString();
         this.BJMC = in.readString();
+        this.nfcbm = in.readString();
+        this.txm = in.readString();
 
     }
 

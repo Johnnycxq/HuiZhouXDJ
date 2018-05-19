@@ -62,7 +62,6 @@
             </intent-filter>
         </activity>
 
-
         <activity
             android:name=".activity.LoginActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
@@ -79,7 +78,6 @@
         <activity android:name=".activity.sbxdj.YulActivity"/>
         <activity android:name=".activity.sbxdj.ChangeYulActivity"/>
         <activity android:name=".activity.sbxdj.SdjSbListActivity"/>
-        <activity android:name=".activity.sbxdj.ChangeSbListActivity"/>
 
         <activity android:name=".activity.sbxj.XscbglActivity"/>
         <activity android:name=".activity.sbxj.XsBackLogActivity"/>
@@ -156,7 +154,6 @@
             android:name=".activity.qfgd.BzgdqxdActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"/>
-
 
 
         <activity

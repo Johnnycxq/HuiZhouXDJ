@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.rehome.huizhouxdj.DBModel.XSJJHDataBean;
 import com.rehome.huizhouxdj.DBModel.XSJJHXZDataBean;
 import com.rehome.huizhouxdj.R;
+import com.rehome.huizhouxdj.activity.qfgd.TjqxdActivity;
 import com.rehome.huizhouxdj.adapter.CommonAdapter;
 import com.rehome.huizhouxdj.adapter.ViewHolder;
 import com.rehome.huizhouxdj.base.MipcaActivityCapture;
@@ -40,10 +41,10 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
     TextView tvNodata;
     private View headView;
     private CommonAdapter<XSJJHXZDataBean> adapter;
-    private String ewm;//二维码或者条形码
     private List<XSJJHXZDataBean> xsjjhxzDataBeanList = new ArrayList<>();
     private ArrayList<XSJJHDataBean> xsjjhDataBeanArrayList = new ArrayList<>();//点检记录列表
     Intent intent;
+    private String txm;//二维码或者条形码
 
     @Override
     public int getLayoutId() {
@@ -57,6 +58,8 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
                 finish();
                 break;
             case R.id.tv_right:
+                intent = new Intent(SxgzActivity.this, TjqxdActivity.class);
+                startActivity(intent);
                 break;
         }
     }
@@ -73,15 +76,15 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
     public void initData() {
 
         initNFC();
-        initToolbar("巡视工作", "", this);
+        initToolbar("巡视工作", "提单", this);
         getDataInSqlite();
         setListData();
 
 
-//        List<XSJJHXZDataBean> xsjjhxzDataBeen = DataSupport.findAll(XSJJHXZDataBean.class);
-//
-//        List<XSJJHDataBean> xsjjhdatabean = DataSupport.findAll(XSJJHDataBean.class);
+        smOnclick();
+    }
 
+    private void smOnclick() {
         btn_sm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,49 +155,80 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
                         bundle.putParcelableArrayList("xsjjhDataBeanArrayList", xsjjhDataBeanArrayList);
                         bundle.putBoolean("edit", false);
                         bundle.putInt(Contans.KEY_ITEM, 0);
+                        bundle.putInt("itemposition", postion - 1);
+                        bundle.putString("LX", "Click");
+                        bundle.putString("LXResult", "LXResult");
+                        bundle.putInt("from", 0);
                         intent.putExtras(bundle);
                         startActivity(intent);
 
                     }
 
-//
-//                    if (qyddataBeanList.size() != 0) {
-//
-//                        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//                        builder.setCancelable(false);
-//                        builder.setTitle("系统提示");
-//                        builder.setMessage("是否要浏览该区域下的工作内容");
-//                        builder.setNegativeButton(UiUtlis.getString(context, R.string.cancel), new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                dialogInterface.dismiss();
-//                            }
-//                        });
-//
-//                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                                Intent intent = new Intent(SdjgzActivity.this, TipsActivity.class);
-//                                Bundle bundle = new Bundle();
-//                                bundle.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
-//                                bundle.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
-//                                bundle.putBoolean("edit", false);
-//                                bundle.putInt(Contans.KEY_ITEM, 0);
-//                                intent.putExtras(bundle);
-//                                startActivity(intent);
-//                                dialogInterface.dismiss();
-//                            }
-//                        });
-//                        builder.show();
-//                    } else {
-//                        showToast("暂无该区域点检任务");
-//                    }
+
                 }
             });
         } else {
             adapter.notifyDataSetChanged();
         }
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    Bundle bundle = data.getExtras();
+                    txm = bundle.getString("result");
+
+                    List<XSJJHDataBean> xsjjhDataBeen = DataSupport.where("txm = ?", txm).find(XSJJHDataBean.class);//txm是根据扫描得到的二维码结果来查询
+
+                    xsjjhDataBeanArrayList.clear();
+                    xsjjhDataBeanArrayList.addAll(xsjjhDataBeen);
+
+
+                    Bundle bundle2 = new Bundle();
+                    Intent intent = new Intent(SxgzActivity.this, XjSbListActivity.class);
+                    bundle2.putParcelableArrayList("xsjjhDataBeanArrayList", xsjjhDataBeanArrayList);
+                    bundle2.putBoolean("edit", true);
+                    bundle2.putInt(Contans.KEY_ITEM, 0);
+                    bundle2.putInt("itemposition", 0);
+                    bundle2.putString("LX", "QRcode");
+                    bundle2.putString("LXResult", txm);
+                    bundle2.putInt("from", 0);
+                    intent.putExtras(bundle2);
+                    startActivity(intent);
+
+
+                }
+                break;
+        }
+    }
+
+    //处理NFC的数据
+    @Override
+    public void handleNfc(String result) {
+        super.handleNfc(result);
+
+        List<XSJJHDataBean> xsjjhDataBeen = DataSupport.where("nfcbm = ?", result).find(XSJJHDataBean.class);
+
+        xsjjhDataBeanArrayList.clear();
+        xsjjhDataBeanArrayList.addAll(xsjjhDataBeen);
+
+
+        Bundle bundle3 = new Bundle();
+        Intent intent = new Intent(SxgzActivity.this, XjSbListActivity.class);
+        bundle3.putParcelableArrayList("xsjjhDataBeanArrayList", xsjjhDataBeanArrayList);
+        bundle3.putBoolean("edit", true);
+        bundle3.putInt(Contans.KEY_ITEM, 0);
+        bundle3.putInt("itemposition", 0);
+        bundle3.putString("LX", "NFC");
+        bundle3.putString("LXResult", result);
+        bundle3.putInt("from", 0);
+        intent.putExtras(bundle3);
+        startActivity(intent);
 
 
     }
