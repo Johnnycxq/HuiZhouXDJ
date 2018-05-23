@@ -15,6 +15,12 @@ public class QXRequestBean {
     private String GZYXJ;
     private String PL_WK_DO;
     private String PL_WK_TE;
+    private String RWZT;
+    private String ST;
+    private String ET;
+    private String RWID;
+    private String BMID;
+
 
     public String getAction() {
         return Action;
@@ -86,5 +92,45 @@ public class QXRequestBean {
 
     public void setPL_WK_TE(String PL_WK_TE) {
         this.PL_WK_TE = PL_WK_TE;
+    }
+
+    public String getRWZT() {
+        return RWZT;
+    }
+
+    public void setRWZT(String RWZT) {
+        this.RWZT = RWZT;
+    }
+
+    public String getST() {
+        return ST;
+    }
+
+    public void setST(String ST) {
+        this.ST = ST;
+    }
+
+    public String getET() {
+        return ET;
+    }
+
+    public void setET(String ET) {
+        this.ET = ET;
+    }
+
+    public String getRWID() {
+        return RWID;
+    }
+
+    public void setRWID(String RWID) {
+        this.RWID = RWID;
+    }
+
+    public String getBMID() {
+        return BMID;
+    }
+
+    public void setBMID(String BMID) {
+        this.BMID = BMID;
     }
 }

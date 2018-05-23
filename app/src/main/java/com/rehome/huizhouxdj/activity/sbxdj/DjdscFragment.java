@@ -76,24 +76,7 @@ public class DjdscFragment extends BaseFragment {
         DjdscFragment fragment = new DjdscFragment();
         return fragment;
     }
-//
-//    @Override
-//    public void setUserVisibleHint(boolean isVisibleToUser) {
-//        super.setUserVisibleHint(isVisibleToUser);
-//        if (getUserVisibleHint()) {
-//            visible();
-//        }
-//    }
-//
-//    //视图显示时才查询数据库数据
-//    private void visible() {
-//
-//        if (adapter == null) {
-//
-//        } else {
-//            adapter.notifyDataSetChanged();
-//        }
-//    }
+
 
     @Override
     protected void initView() {
@@ -190,6 +173,9 @@ public class DjdscFragment extends BaseFragment {
                 xdjjhxzDataBean.setCountPercent(count + "/" + qydDataBeen.size());
                 xdjjhxzDataBean.setQYBH(xdjjhxzDataBeanList.get(i).getQYBH());
                 xdjjhxzDataList.add(xdjjhxzDataBean);
+
+
+
                 qydDataBeanMap.put(xdjjhxzDataBeanList.get(i).getGWID(), qydDataBeen);
 
             }

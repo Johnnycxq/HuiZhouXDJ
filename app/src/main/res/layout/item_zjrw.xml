@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:minHeight="210px">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_RWMC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_50"
+            android:text="任务名称："
+            android:textSize="25px"/>
+
+        <TextView
+            android:id="@+id/tv_RWKSSJ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_50"
+            android:text="任务开始时间:"
+            android:textSize="25px"/>
+
+
+        <TextView
+            android:id="@+id/tv_RWJSSJ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_50"
+            android:text="任务结束时间"
+            android:textSize="25px"/>
+
+        <TextView
+            android:id="@+id/tv_YJWCSJ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_50"
+            android:text="预计完成时间 "
+            android:textSize="25px"/>
+
+        <TextView
+            android:id="@+id/tv_RWLX"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_50"
+            android:text="任务类型"
+            android:textSize="25px"/>
+
+        <TextView
+            android:id="@+id/tv_RWZT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_50"
+            android:text="任务状态"
+            android:textSize="25px"/>
+
+        <TextView
+            android:id="@+id/tv_TJR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_50"
+            android:text="添加人"
+            android:textSize="25px"/>
+
+        <TextView
+            android:id="@+id/tv_TJSJ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_50"
+            android:text="添加时间"
+            android:textSize="25px"/>
+
+        <TextView
+            android:id="@+id/tv_XGR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_50"
+            android:text="修改人"
+            android:textSize="25px"/>
+
+        <TextView
+            android:id="@+id/tv_XGSJ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_50"
+            android:text="修改时间"
+            android:textSize="25px"/>
+
+
+        <TextView
+            android:id="@+id/tv_BZSM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_50"
+            android:text="备注说明"
+            android:textSize="25px"/>
+
+
+        <TextView
+            android:id="@+id/tv_ZJJZ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_50"
+            android:text="质检机组"
+            android:textSize="25px"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

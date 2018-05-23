@@ -75,7 +75,7 @@ public class PMChangeActivity extends BaseActivity2 implements View.OnClickListe
     @Override
     public void initData() {
 
-        initToolbar("PM工单查询", "查询", this);
+        initToolbar("PM工单修改", "查询", this);
 
         ilSbmc.setTvContentOnClickListener(new View.OnClickListener() {
             @Override

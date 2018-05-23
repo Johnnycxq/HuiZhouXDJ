@@ -52,7 +52,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".vpn.LoginVpnActivity">
+        <activity android:name=".activity.LoginActivity">
 
 
             <intent-filter>
@@ -62,8 +62,12 @@
             </intent-filter>
         </activity>
 
+
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".activity.VPNforLoginActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity
+            android:name=".vpn.LoginVpnActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity
             android:name=".activity.TabMainActivity"
@@ -78,6 +82,8 @@
         <activity android:name=".activity.sbxdj.YulActivity"/>
         <activity android:name=".activity.sbxdj.ChangeYulActivity"/>
         <activity android:name=".activity.sbxdj.SdjSbListActivity"/>
+
+        <activity android:name=".activity.sbxdj.DjgwListActivity"/>
 
         <activity android:name=".activity.sbxj.XscbglActivity"/>
         <activity android:name=".activity.sbxj.XsBackLogActivity"/>
@@ -164,6 +170,11 @@
             android:name="com.lidong.photopicker.PhotoPickerActivity"
             android:configChanges="orientation|screenSize"/>
         <activity android:name="com.lidong.photopicker.PhotoPreviewActivity"/>
+
+        <activity android:name=".activity.DaXiaoXiu.MainDxxActivity"/>
+        <activity android:name=".activity.DaXiaoXiu.ZjrwcxActivity"/>
+        <activity android:name=".activity.DaXiaoXiu.ZjrwcxinfoActivity"/>
+        <activity android:name=".activity.DaXiaoXiu.DxxBmListActivity"/>
 
 
         <provider

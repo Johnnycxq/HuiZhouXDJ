@@ -21,6 +21,7 @@ import android.widget.GridView;
 
 import com.rehome.huizhouxdj.DBModel.XwaqgcJh;
 import com.rehome.huizhouxdj.R;
+import com.rehome.huizhouxdj.activity.DaXiaoXiu.MainDxxActivity;
 import com.rehome.huizhouxdj.activity.aqjc.MainAqjcActivity;
 import com.rehome.huizhouxdj.activity.qfgd.MainQfActivity;
 import com.rehome.huizhouxdj.activity.sbxdj.MainSbxdjglActivity;
@@ -113,9 +114,6 @@ public class MainActivity extends BaseActivity {
         adapter = new GridViewAdapter(this, beanList, item, Contans.TEST);
         gv.setAdapter(adapter);
 
-//        requestZyDatas();
-
-
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -127,11 +125,6 @@ public class MainActivity extends BaseActivity {
                         startActivity(intent);
                         break;
                     case 1:
-
-//                        intent = new Intent(MainActivity.this, MainxjActivity.class);
-//                        startActivity(intent);
-//                        break;
-
                         if (dialogDatas.size() == 0) {
                             intent = new Intent(MainActivity.this, XscbglActivity.class);
                             startActivity(intent);
@@ -153,15 +146,12 @@ public class MainActivity extends BaseActivity {
                         intent = new Intent(MainActivity.this, MainAqjcActivity.class);
                         startActivity(intent);
                         break;
-
                     case 3:
                         intent = new Intent(MainActivity.this, MainQfActivity.class);
                         startActivity(intent);
                         break;
-
-
                     case 4:
-                        intent = new Intent(MainActivity.this, MainQfActivity.class);
+                        intent = new Intent(MainActivity.this, MainDxxActivity.class);
                         startActivity(intent);
                         break;
 
@@ -291,18 +281,19 @@ public class MainActivity extends BaseActivity {
                 item.add(1);
                 item.add(2);
                 item.add(3);
+                item.add(4);
                 for (String name : results) {
-                    if (name.equals("AppDJGL")) {
-                        item.add(0);
-                    } else if (name.equals("AppSBLC")) {
-                        item.add(1);
-                    } else if (name.equals("AppAQJC")) {
-                        item.add(2);
-                    } else if (name.equals("AppGWZY")) {
-                        item.add(3);
-                    } else if (name.equals("AppZDCS")) {
-                        item.add(4);
-                    }
+//                    if (name.equals("AppDJGL")) {
+//                        item.add(0);
+//                    } else if (name.equals("AppSBLC")) {
+//                        item.add(1);
+//                    } else if (name.equals("AppAQJC")) {
+//                        item.add(2);
+//                    } else if (name.equals("AppGWZY")) {
+//                        item.add(3);
+//                    } else if (name.equals("AppZDCS")) {
+//                        item.add(4);
+//                    }
                 }
             }
         } catch (Exception e) {

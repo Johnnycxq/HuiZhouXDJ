@@ -38,6 +38,7 @@ import com.rehome.huizhouxdj.utils.NetworkAvailableUtils;
 import com.rehome.huizhouxdj.utils.NohttpUtils;
 import com.rehome.huizhouxdj.utils.SPUtils;
 import com.rehome.huizhouxdj.utils.UiUtlis;
+import com.rehome.huizhouxdj.vpn.LoginVpnActivity;
 import com.xiaomi.mipush.sdk.MiPushClient;
 import com.yanzhenjie.permission.AndPermission;
 import com.yolanda.nohttp.NoHttp;
@@ -63,8 +64,8 @@ public class LoginActivity extends BaseActivity {
     LinearLayout linearLayout;
     @BindView(R.id.tv_version)
     TextView tvVersion;
-    @BindView(R.id.btn_test)
-    Button btnTest;
+    @BindView(R.id.btn_wwdl)
+    Button btn_wwdl;
     @BindView(R.id.save_pw_user)
     CheckBox savePwUser;
     @BindView(R.id.rb1)
@@ -117,10 +118,13 @@ public class LoginActivity extends BaseActivity {
         }
 
 
-        rb1.setChecked((Boolean) SPUtils.get(context, Contans.WIFI_4G, true));
+//        rb1.setChecked((Boolean) SPUtils.get(context, Contans.WIFI_4G, true));
+//
+//
+//        rb2.setChecked(!(Boolean) SPUtils.get(context, Contans.WIFI_4G, true));
 
 
-        rb2.setChecked(!(Boolean) SPUtils.get(context, Contans.WIFI_4G, true));
+        rb1.setChecked(true);
 
 
         tvVersion.setText("版本" + getVersionName());
@@ -143,9 +147,9 @@ public class LoginActivity extends BaseActivity {
 
             SPUtils.put(this, Contans.KEY_4G_IP, "http://hzl-dj.gdyd.com:8082/");
 
-//            SPUtils.put(this, Contans.KEY_4G_IP, "http://192.168.2.189:8092/");
+//            SPUtils.put(this, Contans.KEY_WIFI_IP, "http://hzl-dj.gdyd.com:8082/");
 
-            SPUtils.put(this, Contans.KEY_WIFI_IP, "http://hzl-dj.gdyd.com:8082/");
+            SPUtils.put(this, Contans.KEY_WIFI_IP, "http://192.168.2.189:8092/");
 
         }
     }
@@ -204,6 +208,16 @@ public class LoginActivity extends BaseActivity {
 
             }
         });
+
+
+        btn_wwdl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, LoginVpnActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         if (first) {
             //如果是第一次进入程序，就创建数据库

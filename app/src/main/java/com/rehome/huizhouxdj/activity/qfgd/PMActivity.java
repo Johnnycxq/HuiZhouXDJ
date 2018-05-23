@@ -57,6 +57,7 @@ public class PMActivity extends BaseActivity2 implements View.OnClickListener {
     private String SBID = "";
     private String SBMC = "";
     private Calendar c = Calendar.getInstance();
+    private String bmid, bmmc;
 
     @Override
     public int getLayoutId() {
@@ -98,7 +99,18 @@ public class PMActivity extends BaseActivity2 implements View.OnClickListener {
     @Override
     public void initData() {
         initToolbar("PM工单查询", "查询", this);
-//        requestDatas();
+        requestDatas();
+
+
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+        Calendar calendar = Calendar.getInstance();
+
+        tvStarttime.setText(sf.format(calendar.getTime()));
+
+        calendar.add(Calendar.DAY_OF_MONTH, 7);
+
+        tvEndtime.setText(sf.format(calendar.getTime()));
 
 
         ilSbmc.setTvContentOnClickListener(new View.OnClickListener() {
@@ -186,8 +198,9 @@ public class PMActivity extends BaseActivity2 implements View.OnClickListener {
                 BmidBean kcmzbean = response.body();
 
 
-                String bmid = kcmzbean.getRows().get(0).getRe_tm_no_p();
-                String bmmc = kcmzbean.getRows().get(0).getRe_tm_de();
+                bmid = kcmzbean.getRows().get(0).getRe_tm_no_p();
+                bmmc = kcmzbean.getRows().get(0).getRe_tm_de();
+                ilZrbm.setContent(bmmc);
 
             }
 

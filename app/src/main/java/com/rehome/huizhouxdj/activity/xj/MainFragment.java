@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.rehome.huizhouxdj.R;
+import com.rehome.huizhouxdj.activity.DaXiaoXiu.MainDxxActivity;
 import com.rehome.huizhouxdj.activity.aqjc.MainAqjcActivity;
 import com.rehome.huizhouxdj.activity.qfgd.MainQfActivity;
 import com.rehome.huizhouxdj.activity.sbxdj.MainSbxdjglActivity;
@@ -155,7 +156,7 @@ public class MainFragment extends BaseFragment {
                         break;
 
                     case 4:
-                        intent = new Intent(getActivity(), MainQfActivity.class);
+                        intent = new Intent(getActivity(), MainDxxActivity.class);
                         startActivity(intent);
                         break;
                 }
@@ -229,6 +230,7 @@ public class MainFragment extends BaseFragment {
                 item.add(1);
                 item.add(2);
                 item.add(3);
+                item.add(4);
 //                for (String name : results) {
 //                    if (name.equals("AppDJGL")) {
 //                        item.add(0);

@@ -24,7 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rehome.huizhouxdj.R;
-import com.rehome.huizhouxdj.activity.LoginActivity;
+import com.rehome.huizhouxdj.activity.VPNforLoginActivity;
 import com.sangfor.bugreport.logger.Log;
 import com.sangfor.ssl.BaseMessage;
 import com.sangfor.ssl.ChallengeMessage;
@@ -715,7 +715,7 @@ public class LoginVpnActivity extends BaseCheckPermissionActivity implements Log
      * 可以开始访问资源。
      */
     private void doResourceRequest() {
-        startActivity(new Intent(LoginVpnActivity.this, LoginActivity.class));
+        startActivity(new Intent(LoginVpnActivity.this, VPNforLoginActivity.class));
         finish();
 
     }

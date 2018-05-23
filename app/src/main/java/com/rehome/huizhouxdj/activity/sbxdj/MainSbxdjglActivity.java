@@ -84,7 +84,9 @@ public class MainSbxdjglActivity extends BaseActivity {
                         startActivity(intent);
                         break;
                     case 1:
-                        intent = new Intent(MainSbxdjglActivity.this, SdjgzActivity.class);
+//                        intent = new Intent(MainSbxdjglActivity.this, SdjgzActivity.class);
+//                        startActivity(intent);
+                        intent = new Intent(MainSbxdjglActivity.this, DjgwListActivity.class);
                         startActivity(intent);
                         break;
 

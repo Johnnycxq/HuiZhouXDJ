@@ -166,12 +166,10 @@ public class BrqxdActivity extends BaseActivity2 implements View.OnClickListener
                     QxdBean qxdBean = GsonUtils.GsonToBean(response.get(), QxdBean.class);
                     if (qxdBean != null) {
                         if (qxdBean.getState() == 1) {
-//                            showToast(qxdBean.getMsg());
                             datas.clear();
                             datas.addAll(qxdBean.getData());
                             setAdapter();
                         } else {
-//                            showToast(qxdBean.getMsg());
                             datas.clear();
                             setAdapter();
                         }

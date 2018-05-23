@@ -60,6 +60,8 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
     Intent intent;
     private List<String> dialogDatas2;
 
+    private String GWID;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_sdjgz;
@@ -92,13 +94,21 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
 
         initToolbar("点检工作", "提单", this);
 
+        Bundle bundle = SdjgzActivity.this.getIntent().getExtras();
+
+        GWID = bundle.getString("GWID");
+
+        xdjjhxzDataBeanList.clear();
+
+        xdjjhxzDataBeanList.addAll(where("GWID = ?", GWID + "").find(XDJJHXZDataBean.class));
+
         dialogDatas2 = new ArrayList<>();
 
-        getDataInSqlite();
+//        getDataInSqlite();
 
         setListData();
 
-        spinnerView();
+//        spinnerView();
 
         smOnclick();
 
@@ -183,11 +193,17 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
                 protected void convert(ViewHolder viewHolder, XDJJHXZDataBean item, int position) {
 
                     int checkedCount = 0;
+
                     List<QYDDATABean> qyddataBeen = where("xdjjhxzDataBean_id = ?", item.getId() + "").find(QYDDATABean.class);
+
                     for (int i = 0; i < qyddataBeen.size(); i++) {
+
                         if (qyddataBeen.get(i).isChecked()) {
+
                             checkedCount++;
+
                         }
+
                     }
 
                     viewHolder.setText(R.id.tv_xh, item.getSN() + "");
