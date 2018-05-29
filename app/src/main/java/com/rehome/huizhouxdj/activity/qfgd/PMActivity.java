@@ -59,7 +59,6 @@ public class PMActivity extends BaseActivity2 implements View.OnClickListener {
     private String bmid, bmmc;
     SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
     Calendar c = Calendar.getInstance();
-    int day_of_week = c.get(Calendar.DAY_OF_WEEK) - 1;
 
 
     @Override
@@ -254,18 +253,20 @@ public class PMActivity extends BaseActivity2 implements View.OnClickListener {
         ButterKnife.bind(this);
     }
 
-    public void getMondayOfThisWeek() { //设置周一
-        if (day_of_week == 0)
-            day_of_week = 7;
-        c.add(Calendar.DATE, -day_of_week + 1);
-        tvStarttime.setText(sf.format(c.getTime()));
+    public void getMondayOfThisWeek() { //设置上周六
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_WEEK, 7);
+        calendar.add(Calendar.WEEK_OF_MONTH, -1);
+        tvStarttime.setText(sf.format(calendar.getTime()));
     }
 
-    public void getSundayOfThisWeek() {//设置周五
+    public void getSundayOfThisWeek() {//设置本周周五
+        Calendar calendar = Calendar.getInstance();
+        int day_of_week = calendar.get(Calendar.DAY_OF_WEEK) - 1;
         if (day_of_week == 0)
             day_of_week = 7;
-        c.add(Calendar.DATE, -day_of_week + 5);
-        tvEndtime.setText(sf.format(c.getTime()));
+        calendar.add(Calendar.DATE, -day_of_week + 5);
+        tvEndtime.setText(sf.format(calendar.getTime()));
     }
 
 }
