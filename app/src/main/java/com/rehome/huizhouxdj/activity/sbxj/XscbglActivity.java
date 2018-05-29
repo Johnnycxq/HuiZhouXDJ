@@ -63,7 +63,7 @@ public class XscbglActivity extends BaseActivity {
 
         mToolbar.setBackgroundColor(Color.parseColor("#00000000"));
 
-        setTitle("巡视抄表-" + Contans.YXCB_ZY_NAME);
+        setTitle("巡视抄表" + Contans.YXCB_ZY_NAME);
 
         setBack();
 

@@ -56,8 +56,11 @@ public class PMActivity extends BaseActivity2 implements View.OnClickListener {
     private String GDZTMC = "";
     private String SBID = "";
     private String SBMC = "";
-    private Calendar c = Calendar.getInstance();
     private String bmid, bmmc;
+    SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+    Calendar c = Calendar.getInstance();
+    int day_of_week = c.get(Calendar.DAY_OF_WEEK) - 1;
+
 
     @Override
     public int getLayoutId() {
@@ -99,18 +102,6 @@ public class PMActivity extends BaseActivity2 implements View.OnClickListener {
     @Override
     public void initData() {
         initToolbar("PM工单查询", "查询", this);
-        requestDatas();
-
-
-        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-
-        Calendar calendar = Calendar.getInstance();
-
-        tvStarttime.setText(sf.format(calendar.getTime()));
-
-        calendar.add(Calendar.DAY_OF_MONTH, 7);
-
-        tvEndtime.setText(sf.format(calendar.getTime()));
 
 
         ilSbmc.setTvContentOnClickListener(new View.OnClickListener() {
@@ -178,6 +169,12 @@ public class PMActivity extends BaseActivity2 implements View.OnClickListener {
 
             }
         });
+
+
+        getMondayOfThisWeek();
+        getSundayOfThisWeek();
+        requestDatas();
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -257,6 +254,19 @@ public class PMActivity extends BaseActivity2 implements View.OnClickListener {
         ButterKnife.bind(this);
     }
 
+    public void getMondayOfThisWeek() { //设置周一
+        if (day_of_week == 0)
+            day_of_week = 7;
+        c.add(Calendar.DATE, -day_of_week + 1);
+        tvStarttime.setText(sf.format(c.getTime()));
+    }
+
+    public void getSundayOfThisWeek() {//设置周五
+        if (day_of_week == 0)
+            day_of_week = 7;
+        c.add(Calendar.DATE, -day_of_week + 5);
+        tvEndtime.setText(sf.format(c.getTime()));
+    }
 
 }
 

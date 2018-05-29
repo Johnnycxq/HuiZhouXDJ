@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.rehome.huizhouxdj.DBModel.XSJJHDataBean;
 import com.rehome.huizhouxdj.DBModel.XSJJHXZDataBean;
 import com.rehome.huizhouxdj.R;
-import com.rehome.huizhouxdj.activity.qfgd.TjqxdActivity;
 import com.rehome.huizhouxdj.adapter.CommonAdapter;
 import com.rehome.huizhouxdj.adapter.ViewHolder;
 import com.rehome.huizhouxdj.base.MipcaActivityCapture;
@@ -58,8 +57,8 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
                 finish();
                 break;
             case R.id.tv_right:
-                intent = new Intent(SxgzActivity.this, TjqxdActivity.class);
-                startActivity(intent);
+//                intent = new Intent(SxgzActivity.this, TjqxdActivity.class);
+//                startActivity(intent);
                 break;
         }
     }
@@ -76,7 +75,7 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
     public void initData() {
 
         initNFC();
-        initToolbar("巡视工作", "提单", this);
+        initToolbar("巡视工作", "", this);
         getDataInSqlite();
         setListData();
 
@@ -153,7 +152,7 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
                         Bundle bundle = new Bundle();
                         Intent intent = new Intent(SxgzActivity.this, XjSbListActivity.class);
                         bundle.putParcelableArrayList("xsjjhDataBeanArrayList", xsjjhDataBeanArrayList);
-                        bundle.putBoolean("edit", false);
+                        bundle.putBoolean("edit", true);
                         bundle.putInt(Contans.KEY_ITEM, 0);
                         bundle.putInt("itemposition", postion - 1);
                         bundle.putString("LX", "Click");

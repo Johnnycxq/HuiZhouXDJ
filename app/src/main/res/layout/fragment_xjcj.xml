@@ -27,16 +27,16 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
                     android:maxHeight="120px"
-                    android:text="部件名称："
+                    android:text="设备名称："
                     android:textSize="@dimen/sbtextSize"/>
 
                 <TextView
-                    android:id="@+id/tv_bjmc"
+                    android:id="@+id/tv_sbmc"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|left"
                     android:maxHeight="120px"
-                    android:text="部件名称"
+                    android:text="设备名称"
                     android:textSize="@dimen/sbtextSize"/>
             </LinearLayout>
 
@@ -52,16 +52,16 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
                     android:maxHeight="120px"
-                    android:text="设备名称："
+                    android:text="部件名称："
                     android:textSize="@dimen/sbtextSize"/>
 
                 <TextView
-                    android:id="@+id/tv_sbmc"
+                    android:id="@+id/tv_bjmc"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|left"
                     android:maxHeight="120px"
-                    android:text="设备名称"
+                    android:text="部件名称"
                     android:textSize="@dimen/sbtextSize"/>
             </LinearLayout>
 
@@ -92,14 +92,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/px_5"
-                android:minHeight="50px">
+                android:minHeight="50px"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="@dimen/cjwidth"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
                     android:text="低值："
-                    android:textSize="@dimen/sbtextSize"/>
+                    android:textSize="@dimen/sbtextSize"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/tv_dz"
@@ -107,7 +109,8 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|left"
                     android:text="低值"
-                    android:textSize="@dimen/sbtextSize"/>
+                    android:textSize="@dimen/sbtextSize"
+                    android:visibility="gone"/>
             </LinearLayout>
 
 
@@ -116,7 +119,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/px_5"
                 android:maxHeight="120px"
-                android:minHeight="@dimen/px_60">
+                android:minHeight="@dimen/px_60"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="@dimen/cjwidth"
@@ -124,7 +128,8 @@
                     android:gravity="center_vertical|right"
                     android:maxHeight="120px"
                     android:text="高值："
-                    android:textSize="@dimen/sbtextSize"/>
+                    android:textSize="@dimen/sbtextSize"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/tv_gz"
@@ -133,7 +138,8 @@
                     android:gravity="center_vertical|left"
                     android:maxHeight="120px"
                     android:text="高值"
-                    android:textSize="@dimen/sbtextSize"/>
+                    android:textSize="@dimen/sbtextSize"
+                    android:visibility="gone"/>
             </LinearLayout>
 
 
@@ -168,7 +174,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/px_5"
                 android:maxHeight="120px"
-                android:minHeight="@dimen/px_60">
+                android:minHeight="@dimen/px_60"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="@dimen/cjwidth"
@@ -176,7 +183,8 @@
                     android:gravity="center_vertical|right"
                     android:maxHeight="120px"
                     android:text="闭锁压力："
-                    android:textSize="@dimen/sbtextSize"/>
+                    android:textSize="@dimen/sbtextSize"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/tv_bsyl"
@@ -185,7 +193,8 @@
                     android:gravity="center_vertical|left"
                     android:maxHeight="120px"
                     android:text="闭锁压力"
-                    android:textSize="@dimen/sbtextSize"/>
+                    android:textSize="@dimen/sbtextSize"
+                    android:visibility="gone"/>
             </LinearLayout>
 
 

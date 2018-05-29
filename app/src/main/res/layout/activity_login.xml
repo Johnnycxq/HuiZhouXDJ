@@ -139,7 +139,7 @@
             android:layout_marginLeft="@dimen/px_20"
             android:layout_marginRight="@dimen/px_20"
             android:layout_marginTop="@dimen/px_20"
-            android:text="内网登录"/>
+            android:text="厂内登录"/>
 
         <Button
             android:id="@+id/btn_wwdl"
@@ -148,7 +148,7 @@
             android:layout_marginLeft="@dimen/px_20"
             android:layout_marginRight="@dimen/px_20"
             android:layout_marginTop="@dimen/px_20"
-            android:text="外网登录"
+            android:text="厂外登录"
             />
 
 

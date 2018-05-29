@@ -2,6 +2,7 @@ package com.rehome.huizhouxdj.activity.sbxdj;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -207,6 +208,7 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
                     }
 
                     viewHolder.setText(R.id.tv_xh, item.getSN() + "");
+
                     viewHolder.setText(R.id.tv_qymc, item.getGWMC() + "--" + item.getQYMC());
                     viewHolder.setText(R.id.tv_djrw, checkedCount + "/" + qyddataBeen.size());
 
@@ -230,13 +232,16 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
 
                     if (qyddataBeanList.size() != 0) {
 
+                        Log.e("123", xdjjhxzDataBeanList.get(postion - 1).getSN() + "");
+
                         Bundle bundle = new Bundle();
                         Intent intent = new Intent(SdjgzActivity.this, SdjSbListActivity.class);
                         bundle.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
                         bundle.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
-                        bundle.putBoolean("edit", false);
+                        bundle.putBoolean("edit", true);
                         bundle.putInt(Contans.KEY_ITEM, 0);
-                        bundle.putInt("itemposition", postion - 1);
+//                        bundle.putInt("itemposition", postion - 1);
+                        bundle.putInt("itemposition", xdjjhxzDataBeanList.get(postion - 1).getSN() - 1);
                         bundle.putString("LX", "Click");
                         bundle.putString("LXResult", "LXResult");
                         bundle.putInt("from", 0);

@@ -175,8 +175,8 @@ public class CJFragment extends BaseFragment {
                 et_jg.setText(info.getCJJG());
 
             } else {
-                et_button.setText("请点击获取采集结果");
-
+                et_button.setText("正常");
+                et_jg.setText("正常");
             }
         }
 

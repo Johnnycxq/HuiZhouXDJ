@@ -146,6 +146,8 @@ public class XjSbListActivity extends BaseActivity3 implements View.OnClickListe
                         viewHolder.setText(R.id.tv_sbstate, item.getSbstate() + "");
                     }
 
+
+
                 }
             };
             lv.addHeaderView(headView, null, false);

@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|left"
-                    android:maxHeight="120px"
+                    android:maxHeight="180px"
                     android:text="振动"
                     android:textSize="@dimen/sbtextSize" />
             </LinearLayout>
@@ -133,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|left"
-                    android:maxHeight="120px"
+                    android:maxHeight="160px"
                     android:text="标准"
                     android:textSize="@dimen/sbtextSize" />
             </LinearLayout>

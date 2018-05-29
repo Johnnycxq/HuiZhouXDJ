@@ -112,7 +112,7 @@ public class XJCJFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
 
-                ListDialog dialog = new ListDialog(context, stringToList(info.getLRFS()), new ListDialog.ListDialogListener() {
+                ListDialog dialog = new ListDialog(context, stringToList(info.getMRNR()), new ListDialog.ListDialogListener() {
 
                     @Override
                     public void selectText(String text, int position) {
@@ -124,6 +124,7 @@ public class XJCJFragment extends BaseFragment {
             }
         });
     }
+
     /**
      * 更新当前检查item的检查结果
      *
@@ -133,6 +134,7 @@ public class XJCJFragment extends BaseFragment {
         etJg.setText(value);
         etButton.setText(value);
     }
+
     public void updatecheck(Boolean value) {
 
         if (value) {
@@ -142,6 +144,7 @@ public class XJCJFragment extends BaseFragment {
         }
 
     }
+
     /**
      * 更新数据
      */
@@ -178,8 +181,8 @@ public class XJCJFragment extends BaseFragment {
                 etJg.setText(info.getCJJG());
 
             } else {
-                etButton.setText("请点击获取采集结果");
-
+                etButton.setText("正常");
+                etJg.setText("正常");
             }
         }
 

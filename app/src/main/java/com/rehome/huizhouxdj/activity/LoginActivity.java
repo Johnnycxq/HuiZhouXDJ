@@ -147,9 +147,9 @@ public class LoginActivity extends BaseActivity {
 
             SPUtils.put(this, Contans.KEY_4G_IP, "http://hzl-dj.gdyd.com:8082/");
 
-//            SPUtils.put(this, Contans.KEY_WIFI_IP, "http://hzl-dj.gdyd.com:8082/");
+            SPUtils.put(this, Contans.KEY_WIFI_IP, "http://hzl-dj.gdyd.com:8082/");
 
-            SPUtils.put(this, Contans.KEY_WIFI_IP, "http://192.168.2.189:8092/");
+//            SPUtils.put(this, Contans.KEY_WIFI_IP, "http://192.168.2.189:8092/");
 
         }
     }

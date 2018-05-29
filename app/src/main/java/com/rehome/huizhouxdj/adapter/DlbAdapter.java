@@ -63,6 +63,21 @@ public class DlbAdapter extends BaseAdapter {
         holder.tv_d.setText(list.get(i).getDian());
         holder.tv_cjjg.setText(list.get(i).getCjjg());
 
+
+        if (list.get(i).getCjjg()!=null){
+            if (list.get(i).getCjjg().equals("异常")){
+                holder.tv_cjjg.setTextColor(Color.RED);
+            }else if (list.get(i).getCjjg().equals("已停用")){
+                holder.tv_cjjg.setTextColor(Color.RED);
+            }else {
+                holder.tv_cjjg.setTextColor(Color.GRAY);
+            }
+
+        }
+
+
+
+
         if (list.get(i).getCjjg() == null) {
 
         }else if (list.get(i).getCjjg().equals("已停用")){
