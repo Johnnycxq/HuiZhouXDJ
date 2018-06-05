@@ -24,14 +24,23 @@ import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.activity.aqjc.AqjcrwSaveActivity;
 import com.rehome.huizhouxdj.base.BaseCallBack;
 import com.rehome.huizhouxdj.bean.MessageEvent;
+import com.rehome.huizhouxdj.bean.QxTjgdRequestBean;
+import com.rehome.huizhouxdj.bean.ResultBean2;
 import com.rehome.huizhouxdj.bean.UploadPhotosBean;
 import com.rehome.huizhouxdj.contans.Contans;
 import com.rehome.huizhouxdj.utils.BaseActivity2;
+import com.rehome.huizhouxdj.utils.GsonUtils;
+import com.rehome.huizhouxdj.utils.HttpListener;
+import com.rehome.huizhouxdj.utils.NohttpUtils;
 import com.rehome.huizhouxdj.utils.RetrofitHttpUtils;
 import com.rehome.huizhouxdj.utils.SPUtils;
 import com.rehome.huizhouxdj.weight.DateTimePickDialog;
 import com.rehome.huizhouxdj.weight.InputLayout;
 import com.rehome.huizhouxdj.weight.toastviewbymyself;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.Response;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -49,7 +58,8 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
-import retrofit2.Response;
+
+import static com.rehome.huizhouxdj.contans.Contans.USERNAME;
 
 /**
  * Created by ruihong on 2018/4/17.
@@ -143,6 +153,7 @@ public class TjqxdActivity extends BaseActivity2 implements View.OnClickListener
                 break;
         }
     }
+
 
     @Override
     public void initData() {
@@ -418,6 +429,40 @@ public class TjqxdActivity extends BaseActivity2 implements View.OnClickListener
     }
 
     private void TJ() {
+        final Request<String> requset = NoHttp.createStringRequest(Contans.IP + Contans.QFGD, RequestMethod.POST);
+        requset.setDefineRequestBodyForJson(createJson());
+        NohttpUtils.getInstance().add(this, 0, requset, new HttpListener<String>() {
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+                try {
+
+
+                    ResultBean2 resultbean = GsonUtils.GsonToBean(response.get(), ResultBean2.class);
+
+                    if (resultbean.getState() == 1) {
+
+                        String gdid = resultbean.getGdid();
+
+                        TJTP(gdid);
+
+                    } else {
+
+                        showToast("提交失败,请稍后再试试");
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailed(int what, Response<String> response) {
+
+            }
+        });
+    }
+
+    private void TJTP(String gdid) {
 
         finalList = new ArrayList<>();
         finalList.addAll(imagePaths);
@@ -427,9 +472,8 @@ public class TjqxdActivity extends BaseActivity2 implements View.OnClickListener
 
         String substring = finalList.toString().substring(1, finalList.toString().length() - 1);
 
-
-        String USERNAME = (String) SPUtils.get(context, Contans.USERNAME, "");
         MultipartBody.Builder builder;
+
         if (substring.contains(",")) {
 
             builder = new MultipartBody.Builder();
@@ -462,49 +506,53 @@ public class TjqxdActivity extends BaseActivity2 implements View.OnClickListener
 
         }
 
+        RetrofitHttpUtils.getApi().upload_QXGDTP(gdid, builder.build()).enqueue(new BaseCallBack<UploadPhotosBean>(context) {
+            @Override
+            public void onSuccess(Call<UploadPhotosBean> call, retrofit2.Response<UploadPhotosBean> response) {
 
-        RetrofitHttpUtils.getApi().upload_QXGD("Q4GD_ADD", USERNAME, "", "", DJID, etQxms.getText().toString(),
-                etGzms.getText().toString(), ilSbbh.getContent(), ilSbmc.getContent(), zrbzBMID, xmYHID, jxbzBMID,
-                jxYHID, "", ilStartime.getContent(), ilEndtime.getContent(), builder.build()).enqueue
-                (new BaseCallBack<UploadPhotosBean>(context) {
-                    @Override
-                    public void onSuccess(Call<UploadPhotosBean> call, Response<UploadPhotosBean> response) {
+                UploadPhotosBean uploadPhotosBean = response.body();
 
-                        UploadPhotosBean uploadPhotosBean = response.body();
+                if (uploadPhotosBean != null) {
+
+                    if (uploadPhotosBean.getState().equals("1")) {
+
+                        showToast("上传图片成功");
+
+                        finish();
 
 
                     }
+                }
+            }
 
-                    @Override
-                    public void onError(Call<UploadPhotosBean> call, Throwable t) {
+            @Override
+            public void onError(Call<UploadPhotosBean> call, Throwable t) {
 
-                    }
-                });
-
-
+            }
+        });
     }
 
-//    private String createJson() {
-//        QxTjgdRequestBean info = new QxTjgdRequestBean();
-//        info.setAction("Q4GD_ADD");
-//        info.setYHID((String) SPUtils.get(context, Contans.USERNAME, ""));
-//        info.setGDZT_SO("");
-//        info.setGDZT_NO("");
-//        info.setGDDJ(DJID);
-//        info.setQXMS(etQxms.getText().toString());
-//        info.setGZMS(etGzms.getText().toString());
-//        info.setSBBH(ilSbbh.getContent());
-//        info.setSBMC(ilSbmc.getContent());
-//        info.setZRBZ(zrbzBMID);
-//        info.setZRR(xmYHID);
-//        info.setJXBZ(jxbzBMID);
-//        info.setJXR(jxYHID);
-//        info.setGZXZ("");
-//        info.setST(ilStartime.getContent());
-//        info.setET(ilEndtime.getContent());
-//        String json = GsonUtils.GsonString(info);
-//        return json;
-//    }
+    private String createJson() {
+        QxTjgdRequestBean info = new QxTjgdRequestBean();
+        info.setAction("Q4GD_ADD");
+        info.setYHID((String) SPUtils.get(context, USERNAME, ""));
+        info.setGDZT_SO("");
+        info.setGDZT_NO("");
+        info.setGDDJ(DJID);
+        info.setQXMS(etQxms.getText().toString());
+        info.setGZMS(etGzms.getText().toString());
+        info.setSBBH(ilSbbh.getContent());
+        info.setSBMC(ilSbmc.getContent());
+        info.setZRBZ(zrbzBMID);
+        info.setZRR(xmYHID);
+        info.setJXBZ(jxbzBMID);
+        info.setJXR(jxYHID);
+        info.setGZXZ("");
+        info.setST(ilStartime.getContent());
+        info.setET(ilEndtime.getContent());
+        String json = GsonUtils.GsonString(info);
+        return json;
+    }
 
     private void loadAdpater(ArrayList<String> paths) {
         if (imagePaths != null && imagePaths.size() > 0) {

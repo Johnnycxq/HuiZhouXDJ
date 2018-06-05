@@ -137,7 +137,7 @@ public class QfpmgdListActivity extends BaseActivity2 implements View.OnClickLis
 
     private String createJson(String GDZT_NO, String DJID, String BMID, String SBID) {
         PMRequestBean info = new PMRequestBean();
-        info.setAction("Q4GD_PMGD_GET");
+        info.setAction("Q4GD_PMGD1_GET");
         info.setYHID((String) SPUtils.get(context, Contans.USERNAME, ""));
         info.setGZZT(GDZT_NO);
         info.setZRBM(BMID);

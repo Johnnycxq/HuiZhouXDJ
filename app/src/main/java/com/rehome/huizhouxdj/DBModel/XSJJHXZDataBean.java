@@ -28,6 +28,12 @@ public class XSJJHXZDataBean extends DataSupport implements Parcelable {
     private boolean isChecked;
     private String countPercent;    //已检/总数
     private String jhmc;
+    private String sbmc;
+
+
+    private String SBMCSTATE;//设备状态
+    private String SBMCSTATEVALUE;//设备状态值
+
 
     public long getId() {
         return id;
@@ -133,6 +139,31 @@ public class XSJJHXZDataBean extends DataSupport implements Parcelable {
         this.jhmc = jhmc;
     }
 
+    public String getSbmc() {
+        return sbmc;
+    }
+
+    public void setSbmc(String sbmc) {
+        this.sbmc = sbmc;
+    }
+
+    public String getSBMCSTATE() {
+        return SBMCSTATE;
+    }
+
+    public void setSBMCSTATE(String SBMCSTATE) {
+        this.SBMCSTATE = SBMCSTATE;
+    }
+
+    public String getSBMCSTATEVALUE() {
+        return SBMCSTATEVALUE;
+    }
+
+    public void setSBMCSTATEVALUE(String SBMCSTATEVALUE) {
+        this.SBMCSTATEVALUE = SBMCSTATEVALUE;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -153,6 +184,9 @@ public class XSJJHXZDataBean extends DataSupport implements Parcelable {
         dest.writeByte(this.isChecked ? (byte) 1 : (byte) 0);
         dest.writeString(this.countPercent);
         dest.writeString(this.jhmc);
+        dest.writeString(this.sbmc);
+        dest.writeString(this.SBMCSTATE);
+        dest.writeString(this.SBMCSTATEVALUE);
     }
 
     public XSJJHXZDataBean() {
@@ -172,6 +206,9 @@ public class XSJJHXZDataBean extends DataSupport implements Parcelable {
         this.isChecked = in.readByte() != 0;
         this.countPercent = in.readString();
         this.jhmc = in.readString();
+        this.sbmc = in.readString();
+        this.SBMCSTATE = in.readString();
+        this.SBMCSTATEVALUE = in.readString();
     }
 
     public static final Creator<XSJJHXZDataBean> CREATOR = new Creator<XSJJHXZDataBean>() {

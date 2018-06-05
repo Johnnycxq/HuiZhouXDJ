@@ -40,6 +40,9 @@ public class PminfoActivity extends BaseActivity {
         table = (SmartTable<PminfoNewBean.DataBean>) findViewById(R.id.table);
         table.setZoom(true);
         datas = new ArrayList<>();
+
+
+
     }
 
     @Override

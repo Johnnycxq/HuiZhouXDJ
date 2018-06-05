@@ -94,6 +94,7 @@
         <activity android:name=".activity.sbxj.NFCInfoActivity"/>
         <activity android:name=".activity.sbxj.XjMainActivity"/>
         <activity android:name=".activity.sbxj.SxgzActivity"/>
+        <activity android:name=".activity.sbxj.SxSbListActivity"/>
         <activity android:name=".activity.sbxj.XjSbListActivity"/>
         <activity android:name=".activity.sbxj.XjYulActivity"/>
         <activity

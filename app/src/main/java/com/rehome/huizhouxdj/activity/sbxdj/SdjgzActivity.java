@@ -58,6 +58,10 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
     private List<XDJJHXZDataBean> spinnerxdjjhxzDataBeanList = new ArrayList<>();//工作列表
     private ArrayList<QYDDATABean> qyddataBeanList = new ArrayList<>();//点检记录列表
     private ArrayList<QYAQFXDATABean> qyaqfxdataBeanList = new ArrayList<>();//点检记录列表
+
+
+
+
     Intent intent;
     private List<String> dialogDatas2;
 
@@ -164,15 +168,19 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
         /*-----去除重复数据------*/
         spinnerxdjjhxzDataBeanList.clear();
         spinnerxdjjhxzDataBeanList.addAll(DataSupport.findAll(XDJJHXZDataBean.class));
+
         Set<XDJJHXZDataBean> xdjjhxzDataBeanSet = new TreeSet<>(new Comparator<XDJJHXZDataBean>() {
             @Override
             public int compare(XDJJHXZDataBean o1, XDJJHXZDataBean o2) {
                 return o1.getGWID().compareTo(o2.getGWID());
             }
         });
+
         xdjjhxzDataBeanSet.addAll(spinnerxdjjhxzDataBeanList);
         spinnerxdjjhxzDataBeanList.clear();
         spinnerxdjjhxzDataBeanList.addAll(xdjjhxzDataBeanSet);
+
+
 
         dialogDatas2.clear();
         dialogDatas2.add("全部");
@@ -309,7 +317,7 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
     @Override
     protected void onRestart() {
         super.onRestart();
-        getDataInSqlite();
+//        getDataInSqlite();
         adapter.notifyDataSetChanged();
     }
 

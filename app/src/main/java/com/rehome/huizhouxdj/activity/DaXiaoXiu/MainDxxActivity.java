@@ -1,22 +1,15 @@
 package com.rehome.huizhouxdj.activity.DaXiaoXiu;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
-import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.GridView;
 
 import com.rehome.huizhouxdj.R;
-import com.rehome.huizhouxdj.activity.qfgd.bpbjinfoActivity;
 import com.rehome.huizhouxdj.adapter.GridViewAdapter;
 import com.rehome.huizhouxdj.bean.GridViewBean;
 import com.rehome.huizhouxdj.utils.BaseActivity;
@@ -70,46 +63,6 @@ public class MainDxxActivity extends BaseActivity {
                 }
             }
         });
-    }
-
-    private void searchDialog() {
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
-        View nameView = layoutInflater.inflate(R.layout.qcdialog_edt, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setView(nameView);
-        final EditText wzmc_edit = (EditText) nameView.findViewById(R.id.wzmc_edit);
-        final EditText wzbm_edit = (EditText) nameView.findViewById(R.id.wzbm_edit);
-        final EditText ckh_edit = (EditText) nameView.findViewById(R.id.ckh_edit);
-        alertDialogBuilder
-                .setCancelable(false)
-                .setPositiveButton("查询",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-                                if (TextUtils.isEmpty(wzmc_edit.getText()) & TextUtils.isEmpty(wzbm_edit.getText()) & TextUtils.isEmpty(ckh_edit.getText())) {
-                                    showToast("请输入有效的查询条件!");
-                                } else {
-                                    Intent intent = new Intent(MainDxxActivity.this, bpbjinfoActivity.class);
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString("etMwbm", wzbm_edit.getText().toString());
-                                    bundle.putString("etBzmc", wzmc_edit.getText().toString());
-                                    bundle.putString("etCkh", ckh_edit.getText().toString());
-                                    intent.putExtras(bundle);
-                                    startActivity(intent);
-                                }
-
-
-                            }
-                        })
-                .setNegativeButton("取消",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
     }
 
     private List<GridViewBean> getGridViewData() {

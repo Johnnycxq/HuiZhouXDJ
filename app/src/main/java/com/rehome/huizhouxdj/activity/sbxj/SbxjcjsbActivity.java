@@ -99,17 +99,17 @@ public class SbxjcjsbActivity extends BaseActivity3 implements View.OnClickListe
 
                 break;
             case R.id.tv_right://这里
-                Bundle bundle = new Bundle();
-                Intent intent = new Intent(SbxjcjsbActivity.this, XjSbListActivity.class);
-                bundle.putParcelableArrayList("xsjjhDataBeanArrayList", xsjjhDataBeanArrayList);
-                bundle.putBoolean("edit", isEdit);
-                bundle.putInt(Contans.KEY_ITEM, 0);
-                bundle.putInt("itemposition", itemposition);
-                bundle.putString("LX", LX);
-                bundle.putString("LXResult", LXResult);
-                bundle.putInt("from", 1);
-                intent.putExtras(bundle);
-                startActivityForResult(intent, Req);
+//                Bundle bundle = new Bundle();
+//                Intent intent = new Intent(SbxjcjsbActivity.this, XjSbListActivity.class);
+//                bundle.putParcelableArrayList("xsjjhDataBeanArrayList", xsjjhDataBeanArrayList);
+//                bundle.putBoolean("edit", isEdit);
+//                bundle.putInt(Contans.KEY_ITEM, 0);
+//                bundle.putInt("itemposition", itemposition);
+//                bundle.putString("LX", LX);
+//                bundle.putString("LXResult", LXResult);
+//                bundle.putInt("from", 1);
+//                intent.putExtras(bundle);
+//                startActivityForResult(intent, Req);
                 break;
         }
     }
@@ -151,7 +151,9 @@ public class SbxjcjsbActivity extends BaseActivity3 implements View.OnClickListe
 
     public void initData() {
 
-        initToolbar("设备巡检", "修改设备状态", this);
+//        initToolbar("设备巡检", "修改设备状态", this);
+
+        initToolbar("设备巡检", "", this);
 
         Bundle bundle = SbxjcjsbActivity.this.getIntent().getExtras();
         if (bundle != null) {
@@ -263,9 +265,9 @@ public class SbxjcjsbActivity extends BaseActivity3 implements View.OnClickListe
                                         updateItem(xjcjFragment.getCJJG(), item - 1);
 
 
-                                        Intent intent2 = new Intent(SbxjcjsbActivity.this, XjSbListActivity.class);
-                                        intent2.putParcelableArrayListExtra("setSbModelList", setSbModelList);
-                                        setResult(RESULT_OK, intent2);
+//                                        Intent intent2 = new Intent(SbxjcjsbActivity.this, XjSbListActivity.class);
+//                                        intent2.putParcelableArrayListExtra("setSbModelList", setSbModelList);
+//                                        setResult(RESULT_OK, intent2);
                                         finish();
                                     }
                                 } else {
@@ -273,17 +275,17 @@ public class SbxjcjsbActivity extends BaseActivity3 implements View.OnClickListe
                                 }
 
                             }
-                            Intent intent2 = new Intent(SbxjcjsbActivity.this, XjSbListActivity.class);
-                            intent2.putParcelableArrayListExtra("setSbModelList", setSbModelList);
-                            setResult(RESULT_OK, intent2);
+//                            Intent intent2 = new Intent(SbxjcjsbActivity.this, XjSbListActivity.class);
+//                            intent2.putParcelableArrayListExtra("setSbModelList", setSbModelList);
+//                            setResult(RESULT_OK, intent2);
                             finish();
                         }
                     });
                     builder.create().show();
                 } else {
-                    Intent intent2 = new Intent(SbxjcjsbActivity.this, XjSbListActivity.class);
-                    intent2.putParcelableArrayListExtra("setSbModelList", setSbModelList);
-                    setResult(RESULT_OK, intent2);
+//                    Intent intent2 = new Intent(SbxjcjsbActivity.this, XjSbListActivity.class);
+//                    intent2.putParcelableArrayListExtra("setSbModelList", setSbModelList);
+//                    setResult(RESULT_OK, intent2);
                     finish();
                 }
                 break;
@@ -381,9 +383,9 @@ public class SbxjcjsbActivity extends BaseActivity3 implements View.OnClickListe
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            Intent intent2 = new Intent(SbxjcjsbActivity.this, XjSbListActivity.class);
-            intent2.putParcelableArrayListExtra("setSbModelList", setSbModelList);
-            setResult(RESULT_OK, intent2);
+//            Intent intent2 = new Intent(SbxjcjsbActivity.this, XjSbListActivity.class);
+//            intent2.putParcelableArrayListExtra("setSbModelList", setSbModelList);
+//            setResult(RESULT_OK, intent2);
             finish();
 
             return true;

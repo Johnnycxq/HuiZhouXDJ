@@ -1,5 +1,6 @@
 package com.rehome.huizhouxdj.utils;
 
+import com.rehome.huizhouxdj.bean.ApkUpdateBean;
 import com.rehome.huizhouxdj.bean.BmidBean;
 import com.rehome.huizhouxdj.bean.ContactListBean;
 import com.rehome.huizhouxdj.bean.UploadPhotosBean;
@@ -16,7 +17,13 @@ import retrofit2.http.Query;
  */
 
 public interface Api {
-
+    /**
+     * 检查更新
+     *
+     * @return
+     */
+    @GET("ApkUpdate/GetData.aspx")
+    Call<ApkUpdateBean> getCheckUpdataApk();
 
     /**
      * 安全检查任务上传
@@ -48,22 +55,28 @@ public interface Api {
 
     @POST("Q4GD/Q4GD_CKGL.ashx")
     Call<UploadPhotosBean> upload_QXGD(@Query("Action") String action,
-                                        @Query("YHID") String YHID,
-                                        @Query("GDZT_SO") String GDZT_SO,
-                                        @Query("GDZT_NO") String GDZT_NO,
-                                        @Query("GDDJ") String GDDJ,
-                                        @Query("QXMS") String QXMS,
-                                        @Query("GZMS") String GZMS,
-                                        @Query("SBBH") String SBBH,
-                                        @Query("SBMC") String SBMC,
-                                        @Query("ZRBZ") String ZRBZ,
-                                        @Query("ZRR") String ZRR,
-                                        @Query("JXBZ") String JXBZ,
-                                        @Query("JXR") String JXR,
-                                        @Query("GZXZ") String GZXZ,
-                                        @Query("ST") String ST,
-                                        @Query("ET") String ET,
-                                        @Body RequestBody body);
+                                       @Query("YHID") String YHID,
+                                       @Query("GDZT_SO") String GDZT_SO,
+                                       @Query("GDZT_NO") String GDZT_NO,
+                                       @Query("GDDJ") String GDDJ,
+                                       @Query("QXMS") String QXMS,
+                                       @Query("GZMS") String GZMS,
+                                       @Query("SBBH") String SBBH,
+                                       @Query("SBMC") String SBMC,
+                                       @Query("ZRBZ") String ZRBZ,
+                                       @Query("ZRR") String ZRR,
+                                       @Query("JXBZ") String JXBZ,
+                                       @Query("JXR") String JXR,
+                                       @Query("GZXZ") String GZXZ,
+                                       @Query("ST") String ST,
+                                       @Query("ET") String ET,
+                                       @Body RequestBody body);
+
+
+    @POST("Q4GD/Q4GD_IMG.ashx")
+    Call<UploadPhotosBean> upload_QXGDTP(
+            @Query("GDID") String GDID,
+            @Body RequestBody body);
 
 
     /**
@@ -102,7 +115,6 @@ public interface Api {
      */
     @GET("UserInfos/GetDeptByUserid.aspx")
     Call<BmidBean> getbmid(@Query("yhid") String yhid);
-
 
 
 }

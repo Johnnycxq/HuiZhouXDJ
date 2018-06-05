@@ -134,6 +134,7 @@ public class SblistActivity extends BaseActivity2 implements View.OnClickListene
         rlv.setLayoutManager(new LinearLayoutManager(context));
 
         rlv.setAdapter(qfSblbinfoAdapter);
+
         qfSblbinfoAdapter.setOnChildItemClickListener(new QfSblbinfoAdapter.OnChildItemClickListener() {
             @Override
             public void onClick(QfsblistBean.DataBean dataBean) {

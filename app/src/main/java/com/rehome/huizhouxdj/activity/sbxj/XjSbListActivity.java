@@ -109,6 +109,8 @@ public class XjSbListActivity extends BaseActivity3 implements View.OnClickListe
         LX = bundle.getString("LX");
         LXResult = bundle.getString("LXResult");
         from = bundle.getInt("from");
+
+
         if (from == 0) {
             initToolbar("当前设备", "巡检内容", this);
         } else if (from == 1) {

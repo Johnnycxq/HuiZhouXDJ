@@ -81,7 +81,7 @@ public class XscbglActivity extends BaseActivity {
                         intent = new Intent(XscbglActivity.this, XjMainActivity.class);
                         break;
                     case 1:
-                        intent = new Intent(XscbglActivity.this, SxgzActivity.class);
+                        intent = new Intent(XscbglActivity.this, SxSbListActivity.class);
                         break;
 //                    case 2:
 //                        intent = new Intent(XscbglActivity.this, XsHistoryActivity.class);

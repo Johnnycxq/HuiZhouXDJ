@@ -3,6 +3,7 @@ package com.rehome.huizhouxdj.base;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
+import android.hardware.Camera;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
@@ -14,6 +15,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
@@ -28,11 +30,16 @@ import com.rehome.huizhouxdj.zxing.view.ViewfinderView;
 import java.io.IOException;
 import java.util.Vector;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * 二维码扫描界面
  */
 public class MipcaActivityCapture extends BaseActivity implements Callback {
 
+    @BindView(R.id.flashlightButton)
+    Button flashlightButton;
     private CaptureActivityHandler handler;
     private ViewfinderView viewfinderView;
     private boolean hasSurface;
@@ -43,6 +50,9 @@ public class MipcaActivityCapture extends BaseActivity implements Callback {
     private boolean playBeep;
     private static final float BEEP_VOLUME = 0.10f;
     private boolean vibrate;
+    private static Camera camera;
+    private Camera.Parameters params;
+    private boolean isOpen = true;
 
     @Override
     public int getContentViewID() {
@@ -66,7 +76,33 @@ public class MipcaActivityCapture extends BaseActivity implements Callback {
                 finish();
             }
         });
+
+        flashlightButton.setOnClickListener(openListener);
+
+
     }
+
+    private View.OnClickListener openListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //获取到ZXing相机管理器创建的camera
+            camera = CameraManager.getCamera();
+            params = camera.getParameters();
+            // TODO 开灯
+            if (isOpen) {
+                flashlightButton.setText("关闭闪光灯");
+                params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                camera.setParameters(params);
+                isOpen = false;
+            } else {  // 关灯
+                flashlightButton.setText("打开闪光灯");
+                params.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                camera.setParameters(params);
+                isOpen = true;
+            }
+        }
+    };
+
 
     @Override
     protected void onResume() {
@@ -115,7 +151,6 @@ public class MipcaActivityCapture extends BaseActivity implements Callback {
      * @param barcode
      */
     public void handleDecode(Result result, Bitmap barcode) {
-
 
 
         inactivityTimer.onActivity();
@@ -238,4 +273,10 @@ public class MipcaActivityCapture extends BaseActivity implements Callback {
         }
     };
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

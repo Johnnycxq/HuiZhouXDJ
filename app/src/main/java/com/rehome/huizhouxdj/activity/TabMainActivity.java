@@ -1,6 +1,10 @@
 package com.rehome.huizhouxdj.activity;
 
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -11,9 +15,13 @@ import android.widget.RadioGroup;
 
 import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.activity.xj.MainFragment;
+import com.rehome.huizhouxdj.base.BaseCallBack;
+import com.rehome.huizhouxdj.bean.ApkUpdateBean;
 import com.rehome.huizhouxdj.utils.AutoToolbar;
 import com.rehome.huizhouxdj.utils.BaseActivity;
 import com.rehome.huizhouxdj.utils.CanBanScrollViewPager;
+import com.rehome.huizhouxdj.utils.HttpUtils;
+import com.rehome.huizhouxdj.weight.AuditDialog;
 import com.rehome.huizhouxdj.weight.AutoRadioGroup;
 
 import java.util.ArrayList;
@@ -21,6 +29,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Response;
 
 /**
  * Created by ruihong on 2018/4/2.
@@ -156,7 +166,65 @@ public class TabMainActivity extends BaseActivity {
 
     public void initData() {
         title.setText("首页");
+        checkUpdateApk();
+    }
 
+    private void checkUpdateApk() {
+
+        HttpUtils.getApi().getCheckUpdataApk().enqueue(new BaseCallBack<ApkUpdateBean>(context) {
+            @Override
+            public void onSuccess(Call<ApkUpdateBean> call, Response<ApkUpdateBean> response) {
+
+                ApkUpdateBean appUploadInfo = response.body();
+
+                if (appUploadInfo != null) {
+
+                    if (!appUploadInfo.getTotal().equals("0")) {
+
+                        final ApkUpdateBean.RowsBean versoinInfo = appUploadInfo.getRows().get(0);
+
+                        if (!versoinInfo.getVersionname().equals(getVersionName())) {
+
+                            AuditDialog auditUpdateDialog = new AuditDialog(context, "发现新版本,请更新", new AuditDialog.AuditDialogListener() {
+                                @Override
+                                public void confirm() {
+                                    Uri uri = Uri.parse("https://pgyer.com/oGhk");
+                                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                    startActivity(intent);
+                                }
+
+                                @Override
+                                public void cancel() {
+
+                                }
+                            });
+
+                            auditUpdateDialog.show();
+                        }
+                    }
+                }
+
+            }
+
+            @Override
+            public void onError(Call<ApkUpdateBean> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private String getVersionName() {
+        //1,包管理者对象packageManager
+        PackageManager pm = getPackageManager();
+        //2,从包的管理者对象中,获取指定包名的基本信息(版本名称,版本号),传0代表获取基本信息
+        try {
+            PackageInfo packageInfo = pm.getPackageInfo(getPackageName(), 0);
+            //3,获取版本名称
+            return packageInfo.versionName;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

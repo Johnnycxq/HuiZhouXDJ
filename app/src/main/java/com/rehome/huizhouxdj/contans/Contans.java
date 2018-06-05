@@ -218,7 +218,7 @@ public class Contans {
     public final static String SCTP = "SBLC/SBLC_RWIMG.ashx";
 
 
-    public final static String UPDATEURL = "ApkUpdate/GetDataversion.aspx";
+    public final static String UPDATEURL = "ApkUpdate/GetData.aspx";
 
 
     // ========================= 用于判断是哪个界面传过的数据 =========================//
@@ -284,8 +284,6 @@ public class Contans {
 
     public static boolean TEST = true;
 
-
-    public static String PRINTIP = "10.19.110.19";//打印机的IP
 
 
     /********************广播字段（唯一性）********************************/

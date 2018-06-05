@@ -39,6 +39,7 @@ import com.rehome.huizhouxdj.utils.NohttpUtils;
 import com.rehome.huizhouxdj.utils.SPUtils;
 import com.rehome.huizhouxdj.utils.UiUtlis;
 import com.rehome.huizhouxdj.vpn.LoginVpnActivity;
+import com.rehome.huizhouxdj.weight.AuditDialog;
 import com.xiaomi.mipush.sdk.MiPushClient;
 import com.yanzhenjie.permission.AndPermission;
 import com.yolanda.nohttp.NoHttp;
@@ -86,6 +87,7 @@ public class LoginActivity extends BaseActivity {
     private boolean first;
     private boolean NETWORK_STATE;//网络状态
     private String NEWWORK_TYPE;//网络类型
+    AuditDialog dialog;
 
     @Override
     public int getContentViewID() {
@@ -155,6 +157,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     public void initData() {
+
 
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -228,6 +231,7 @@ public class LoginActivity extends BaseActivity {
             }
         }
     }
+
 
     private HttpListener<String> callback = new HttpListener<String>() {
         @Override

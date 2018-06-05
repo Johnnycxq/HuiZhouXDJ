@@ -23,7 +23,7 @@
             android:minWidth="100dp"
             android:text="标题"
             android:textColor="@color/black"
-            android:textSize="35px" />
+            android:textSize="30px" />
 
         <com.rehome.huizhouxdj.weight.ClearEditText
             android:id="@+id/et_content"
@@ -36,7 +36,7 @@
             android:minHeight="45dp"
             android:paddingBottom="15dp"
             android:textColor="@color/textColor"
-            android:textSize="35px"
+            android:textSize="30px"
             android:visibility="visible" />
 
         <TextView

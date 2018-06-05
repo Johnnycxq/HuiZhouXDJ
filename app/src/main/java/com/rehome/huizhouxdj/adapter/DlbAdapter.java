@@ -64,26 +64,26 @@ public class DlbAdapter extends BaseAdapter {
         holder.tv_cjjg.setText(list.get(i).getCjjg());
 
 
-        if (list.get(i).getCjjg()!=null){
-            if (list.get(i).getCjjg().equals("异常")){
+        if (list.get(i).getCjjg() != null) {
+            if (list.get(i).getCjjg().equals("异常")) {
                 holder.tv_cjjg.setTextColor(Color.RED);
-            }else if (list.get(i).getCjjg().equals("已停用")){
+            } else if (list.get(i).getCjjg().equals("已停用")) {
                 holder.tv_cjjg.setTextColor(Color.RED);
-            }else {
+            } else if (list.get(i).getCjjg().equals("不正常")) {
+                holder.tv_cjjg.setTextColor(Color.RED);
+            } else {
                 holder.tv_cjjg.setTextColor(Color.GRAY);
             }
 
         }
 
 
-
-
         if (list.get(i).getCjjg() == null) {
 
-        }else if (list.get(i).getCjjg().equals("已停用")){
+        } else if (list.get(i).getCjjg().equals("已停用")) {
             holder.tv_zt.setText("已检");
             holder.tv_zt.setTextColor(Color.GREEN);
-        }else {
+        } else {
             holder.tv_zt.setText("未检");
             holder.tv_zt.setTextColor(Color.RED);
 

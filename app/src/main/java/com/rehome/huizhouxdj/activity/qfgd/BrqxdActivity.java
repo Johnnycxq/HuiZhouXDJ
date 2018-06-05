@@ -80,7 +80,10 @@ public class BrqxdActivity extends BaseActivity2 implements View.OnClickListener
                 break;
             case R.id.tv_right:
 
-                requestDatas(yhid, "", "", DJID, SBID, "", tvStarttime.getText().toString(), tvEndtime.getText().toString());
+//                requestDatas(yhid, "", "", DJID, SBID, "", tvStarttime.getText().toString(), tvEndtime.getText().toString());
+
+                requestDatas(yhid, "", "", "", "", "", "", "");
+
                 break;
         }
     }
@@ -88,7 +91,7 @@ public class BrqxdActivity extends BaseActivity2 implements View.OnClickListener
 
     @Override
     public void initData() {
-        initToolbar("个人缺陷工单查询", "查询", this);
+        initToolbar("个人缺陷工单查询", "", this);
         yhid = (String) SPUtils.get(context, Contans.NAME, "");
         datas = new ArrayList<>();
         requestDatas(yhid, "", "", "", "", "", "", "");

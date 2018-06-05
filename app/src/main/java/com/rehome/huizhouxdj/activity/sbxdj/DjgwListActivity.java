@@ -85,6 +85,7 @@ public class DjgwListActivity extends BaseActivity3 implements View.OnClickListe
 
 
         xdjjhxzDataBeanList.clear();
+
         xdjjhxzDataBeanList.addAll(DataSupport.findAll(XDJJHXZDataBean.class));
 
         xdjjhxzDataList.clear();

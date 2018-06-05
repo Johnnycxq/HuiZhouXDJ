@@ -75,7 +75,7 @@ public class PMChangeActivity extends BaseActivity2 implements View.OnClickListe
     @Override
     public void initData() {
 
-        initToolbar("PM工单修改", "查询", this);
+        initToolbar("Q4工单修改", "查询", this);
 
         ilSbmc.setTvContentOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +114,7 @@ public class PMChangeActivity extends BaseActivity2 implements View.OnClickListe
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMoonEvent(MessageEvent messageEvent) {
-        ilSbmc.setContent(messageEvent.getMessage());
+        ilSbmc.setContent(messageEvent.getMessage() + "(" + messageEvent.getMessageid() + ")");
         SBID = messageEvent.getMessageid();
     }
 
@@ -128,7 +128,7 @@ public class PMChangeActivity extends BaseActivity2 implements View.OnClickListe
                     Bundle bundle = data.getExtras();
                     SBID = bundle.getString("SBID");
                     SBMC = bundle.getString("SBMC");
-                    ilSbmc.setContent(SBMC);
+                    ilSbmc.setContent(SBMC + "(" + SBID + ")");
                 }
                 break;
             case 1:

@@ -20,6 +20,7 @@ public class XSJJHDataBean extends DataSupport implements Parcelable {
     private String dlxmc;
     private String sbid;
     private String sb;
+    private String sbmc;
     private String zymc;
     private String dw;
     private String dz;
@@ -101,6 +102,14 @@ public class XSJJHDataBean extends DataSupport implements Parcelable {
 
     public void setSb(String sb) {
         this.sb = sb;
+    }
+
+    public String getSbmc() {
+        return sbmc;
+    }
+
+    public void setSbmc(String sbmc) {
+        this.sbmc = sbmc;
     }
 
     public String getZymc() {
@@ -365,6 +374,7 @@ public class XSJJHDataBean extends DataSupport implements Parcelable {
         dest.writeString(this.dlxmc);
         dest.writeString(this.sbid);
         dest.writeString(this.sb);
+        dest.writeString(this.sbmc);
         dest.writeString(this.zymc);
         dest.writeString(this.dw);
         dest.writeString(this.dz);
@@ -408,6 +418,7 @@ public class XSJJHDataBean extends DataSupport implements Parcelable {
         this.dlxmc = in.readString();
         this.sbid = in.readString();
         this.sb = in.readString();
+        this.sbmc = in.readString();
         this.zymc = in.readString();
         this.dw = in.readString();
         this.dz = in.readString();

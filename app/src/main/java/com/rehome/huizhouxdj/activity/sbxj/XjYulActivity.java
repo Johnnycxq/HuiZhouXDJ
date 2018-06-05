@@ -96,7 +96,6 @@ public class XjYulActivity extends BaseActivity {
         isEdit = bundle.getBoolean("edit");
 //        xsjjhDataBeanArrayList = bundle.getParcelableArrayList("xsjjhDataBeanArrayList");
         item = bundle.getInt(Contans.KEY_ITEM);
-
         itemposition = bundle.getInt("itemposition");
         LX = bundle.getString("LX");
         LXResult = bundle.getString("LXResult");

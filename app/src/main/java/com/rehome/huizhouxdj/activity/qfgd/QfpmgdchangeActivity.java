@@ -254,7 +254,7 @@ public class QfpmgdchangeActivity extends BaseActivity2 implements View.OnClickL
 
     private String createJson(String GZDH) {
         PMRequestBean info = new PMRequestBean();
-        info.setAction("Q4GD_PMGD_GET");
+        info.setAction("Q4GD_PMGD1_GET");
         info.setYHID((String) SPUtils.get(context, Contans.USERNAME, ""));
         info.setGZZT("");
         info.setZRBM("");

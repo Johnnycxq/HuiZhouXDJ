@@ -1,6 +1,7 @@
 package com.rehome.huizhouxdj.activity.sbxj;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -127,7 +128,18 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
 
                     viewHolder.setText(R.id.tv_xh, item.getSN() + "");
                     viewHolder.setText(R.id.tv_qymc, item.getQymc());
+
+                    int a = checkedCount;
+                    int b = xsjjhdatabean.size();
+
+                    if (a == b){
+                        viewHolder.setTextColor(R.id.tv_djrw, Color.parseColor("#00CD00"));//已经检查完成绿色
+                    }else {
+                        viewHolder.setTextColor(R.id.tv_djrw, Color.parseColor("#FF0000"));//未检查完成红色
+                    }
+
                     viewHolder.setText(R.id.tv_djrw, checkedCount + "/" + xsjjhdatabean.size());
+
 
                 }
             };
@@ -150,7 +162,7 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
                     if (xsjjhDataBeanArrayList.size() != 0) {
 
                         Bundle bundle = new Bundle();
-                        Intent intent = new Intent(SxgzActivity.this, XjSbListActivity.class);
+                        Intent intent = new Intent(SxgzActivity.this, XjYulActivity.class);
                         bundle.putParcelableArrayList("xsjjhDataBeanArrayList", xsjjhDataBeanArrayList);
                         bundle.putBoolean("edit", true);
                         bundle.putInt(Contans.KEY_ITEM, 0);
@@ -189,7 +201,7 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
 
 
                     Bundle bundle2 = new Bundle();
-                    Intent intent = new Intent(SxgzActivity.this, XjSbListActivity.class);
+                    Intent intent = new Intent(SxgzActivity.this, XjYulActivity.class);
                     bundle2.putParcelableArrayList("xsjjhDataBeanArrayList", xsjjhDataBeanArrayList);
                     bundle2.putBoolean("edit", true);
                     bundle2.putInt(Contans.KEY_ITEM, 0);
@@ -218,7 +230,7 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
 
 
         Bundle bundle3 = new Bundle();
-        Intent intent = new Intent(SxgzActivity.this, XjSbListActivity.class);
+        Intent intent = new Intent(SxgzActivity.this, XjYulActivity.class);
         bundle3.putParcelableArrayList("xsjjhDataBeanArrayList", xsjjhDataBeanArrayList);
         bundle3.putBoolean("edit", true);
         bundle3.putInt(Contans.KEY_ITEM, 0);

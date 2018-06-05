@@ -69,12 +69,20 @@
                 />
 
             <com.rehome.huizhouxdj.weight.InputLayout
+                android:id="@+id/il_yxj"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintText="点击选择优先级"
+                app:isShowTextView="true"
+                app:must="true"
+                app:tv_title="优先级"/>
+
+            <com.rehome.huizhouxdj.weight.InputLayout
                 android:id="@+id/il_zrbz"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:hintText="点击选择责任班组"
                 app:isShowTextView="true"
-                app:must="true"
                 app:tv_title="责任班组"/>
 
             <com.rehome.huizhouxdj.weight.InputLayout
@@ -83,7 +91,7 @@
                 android:layout_height="wrap_content"
                 app:hintText="点击选择项目负责人"
                 app:isShowTextView="true"
-                app:must="true"
+
                 app:tv_title="项目负责人"/>
 
             <com.rehome.huizhouxdj.weight.InputLayout
@@ -92,7 +100,6 @@
                 android:layout_height="wrap_content"
                 app:hintText="点击选择检修班组"
                 app:isShowTextView="true"
-                app:must="true"
                 app:tv_title="检修班组"/>
 
             <com.rehome.huizhouxdj.weight.InputLayout
@@ -101,17 +108,9 @@
                 android:layout_height="wrap_content"
                 app:hintText="点击选择检修负责人"
                 app:isShowTextView="true"
-                app:must="true"
+
                 app:tv_title="检修负责人"/>
 
-            <com.rehome.huizhouxdj.weight.InputLayout
-                android:id="@+id/il_yxj"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:hintText="点击选择优先级"
-                app:isShowTextView="true"
-                app:must="true"
-                app:tv_title="优先级"/>
 
             <com.rehome.huizhouxdj.weight.InputLayout
                 android:id="@+id/il_gzxz"
