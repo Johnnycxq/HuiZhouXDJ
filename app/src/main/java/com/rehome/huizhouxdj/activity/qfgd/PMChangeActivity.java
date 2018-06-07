@@ -114,7 +114,7 @@ public class PMChangeActivity extends BaseActivity2 implements View.OnClickListe
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMoonEvent(MessageEvent messageEvent) {
-        ilSbmc.setContent(messageEvent.getMessage() + "(" + messageEvent.getMessageid() + ")");
+        ilSbmc.setContent("(" + messageEvent.getMessageid() + ")," + messageEvent.getMessage());
         SBID = messageEvent.getMessageid();
     }
 
@@ -128,7 +128,7 @@ public class PMChangeActivity extends BaseActivity2 implements View.OnClickListe
                     Bundle bundle = data.getExtras();
                     SBID = bundle.getString("SBID");
                     SBMC = bundle.getString("SBMC");
-                    ilSbmc.setContent(SBMC + "(" + SBID + ")");
+                    ilSbmc.setContent("(" + SBID + ")," + SBMC);
                 }
                 break;
             case 1:

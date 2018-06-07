@@ -59,6 +59,7 @@ public class aqjcsaveAdapter extends BaseAdapter {
             view = LayoutInflater.from(context).inflate(R.layout.sblcsavedata_item_wtqy, viewGroup, false);
             holder.cb = (CheckBox) view.findViewById(R.id.cb);
             holder.tv_savetime = (TextView) view.findViewById(R.id.tv_savetime);
+            holder.tv_st = (TextView) view.findViewById(R.id.tv_st);
             view.setTag(holder);
             AutoUtils.autoSize(view);
         } else {
@@ -68,6 +69,7 @@ public class aqjcsaveAdapter extends BaseAdapter {
 
         holder.cb.setChecked(list.get(i).isChecked());
         holder.tv_savetime.setText(list.get(i).getWTQY());
+        holder.tv_st.setText(list.get(i).getLRSJ());
         holder.cb.setTag(i);
         holder.cb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +83,6 @@ public class aqjcsaveAdapter extends BaseAdapter {
     static class ViewHolder {
         CheckBox cb;
         TextView tv_savetime;
-
+        TextView tv_st;
     }
 }

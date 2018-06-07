@@ -133,6 +133,7 @@ public class SxSbListActivity extends BaseActivity3 implements View.OnClickListe
                     List<String> datas = new ArrayList<String>();
                     datas.add("已停用");
                     datas.add("大小修");
+                    datas.add("已运行");
                     ListDialog dialog = new ListDialog(context, datas, new ListDialog.ListDialogListener() {
 
                         @Override
@@ -142,15 +143,15 @@ public class SxSbListActivity extends BaseActivity3 implements View.OnClickListe
 
                             ContentValues values = new ContentValues();
 
-                            values.put("CJJG", text);
-
-                            values.put("SBMCSTATE", text);
-
                             if (text.equals("已停用")) {
 
                                 values.put("checked", true);
 
                                 values.put("SBMCSTATEVALUE", "3");
+
+                                values.put("CJJG", text);
+
+                                values.put("SBMCSTATE", text);
 
                             } else if (text.equals("大小修")) {
 
@@ -158,22 +159,44 @@ public class SxSbListActivity extends BaseActivity3 implements View.OnClickListe
 
                                 values.put("SBMCSTATEVALUE", "4");
 
+                                values.put("CJJG", text);
+
+                                values.put("SBMCSTATE", text);
+
+                            } else if (text.equals("已运行")) {
+
+                                values.put("checked", false);
+
+                                values.put("CJJG", text);
+
+                                values.put("SBMCSTATE", text);
+
+                                values.put("SBMCSTATEVALUE", "5");
+
                             }
+
 
                             int i = DataSupport.updateAll(XSJJHDataBean.class, values, "sbmc = ? ", xsjjhxzDataBeanList_sb.get(postion - 1).getSbmc());
 
                             ContentValues values2 = new ContentValues();
 
-                            values2.put("SBMCSTATE", text);
-
                             if (text.equals("已停用")) {
+
+                                values2.put("SBMCSTATE", text);
 
                                 values2.put("SBMCSTATEVALUE", "3");
 
                             } else if (text.equals("大小修")) {
 
+                                values2.put("SBMCSTATE", text);
+
                                 values2.put("SBMCSTATEVALUE", "4");
 
+                            } else if (text.equals("已运行")) {
+
+                                values2.put("SBMCSTATE", text);
+
+                                values2.put("SBMCSTATEVALUE", "5");
                             }
 
                             int J = DataSupport.updateAll(XSJJHXZDataBean.class, values2, "sbmc = ? ", xsjjhxzDataBeanList_sb.get(postion - 1).getSbmc());

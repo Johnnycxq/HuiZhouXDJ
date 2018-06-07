@@ -24,9 +24,9 @@ import java.util.List;
 public class QxGdMainActivity extends BaseActivity {
 
     private GridView gv;
-    private String[] str = {"个人工单", "班组工单"};
-    private int[] imageId = {R.mipmap.icon10, R.mipmap.icon8};
-    private int[] colors = {R.drawable.radius_a1, R.drawable.radius_c1};
+    private String[] str = {"个人工单", "班组工单", "自定义查询"};
+    private int[] imageId = {R.mipmap.icon10, R.mipmap.icon8, R.mipmap.icon11};
+    private int[] colors = {R.drawable.radius_a1, R.drawable.radius_c1, R.drawable.radius_b2};
     private boolean flag = true;
 
     @Override
@@ -63,7 +63,10 @@ public class QxGdMainActivity extends BaseActivity {
                         Intent intent1 = new Intent(QxGdMainActivity.this, BzgdqxdActivity.class);
                         startActivity(intent1);
                         break;
-
+                    case 2:
+//                        Intent intent2 = new Intent(QxGdMainActivity.this, BzgdqxdActivity.class);
+//                        startActivity(intent2);
+                        break;
                 }
             }
         });

@@ -1,7 +1,6 @@
 package com.rehome.huizhouxdj.activity.sbxj;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -161,31 +160,53 @@ public class XJCJFragment extends BaseFragment {
         tvZt.setText(info.isChecked() ? "已检" : "未检");
         tvYjzj.setText(item + "/" + size);
 
-        Log.e("XJCJFragment", "lrlx = " + info.getLRFS() + ", cjjg=" + info.getCJJG());
+//        Log.e("XJCJFragment", "lrlx = " + info.getLRFS() + ", cjjg=" + info.getCJJG());
 
-        if (info.getLRFS().equals("0")) {  //当时编辑状态的是 不需要按钮
+        if (info.getLRFS().equals("0")) {      //当时编辑状态的是 不需要按钮
 
             etButton.setVisibility(View.GONE);
             etJg.setVisibility(View.VISIBLE);
-            etJg.setText(info.getCJJG());
 
 
-        } else if (info.getLRFS().equals("1")) {    //不是编辑状态的时候 需要按钮点击弹出菜单
+            if (info.getCJJG() == null) {
+                etJg.setText("");
+            } else {
+                if (info.getCJJG().equals("已运行")) {
+                    etJg.setText("");
+                } else if (info.getCJJG().equals("大小修")) {
+                    etJg.setText("大小修");
+                } else if (info.getCJJG().equals("已停用")) {
+                    etJg.setText("已停用");
+                } else {
+                    etJg.setText(info.getCJJG());
+                }
+            }
+
+
+        } else if (info.getLRFS().equals("1")) {       //不是编辑状态的时候 需要按钮点击弹出菜单
 
             etJg.setVisibility(View.GONE);
             etButton.setVisibility(View.VISIBLE);
 
-            if (info.getCJJG() != null) {  //当按钮有内容的时候 显示在按钮上
-
-                etButton.setText(info.getCJJG());
-                etJg.setText(info.getCJJG());
-
-            } else {
+            if (info.getCJJG() == null) {
                 etButton.setText("正常");
                 etJg.setText("正常");
+            } else {
+                if (info.getCJJG().equals("已运行")) {
+                    etButton.setText("正常");
+                    etJg.setText("正常");
+                } else if (info.getCJJG().equals("大小修")) {
+                    etButton.setText("大小修");
+                    etJg.setText("大小修");
+                } else if (info.getCJJG().equals("已停用")) {
+                    etButton.setText("已停用");
+                    etJg.setText("已停用");
+                } else {
+                    etButton.setText(info.getCJJG());
+                    etJg.setText(info.getCJJG());
+                }
             }
         }
-
     }
 
 

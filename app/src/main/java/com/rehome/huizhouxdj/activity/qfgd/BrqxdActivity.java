@@ -92,7 +92,7 @@ public class BrqxdActivity extends BaseActivity2 implements View.OnClickListener
     @Override
     public void initData() {
         initToolbar("个人缺陷工单查询", "", this);
-        yhid = (String) SPUtils.get(context, Contans.NAME, "");
+        yhid = (String) SPUtils.get(context, Contans.USERNAME, "");
         datas = new ArrayList<>();
         requestDatas(yhid, "", "", "", "", "", "", "");
 

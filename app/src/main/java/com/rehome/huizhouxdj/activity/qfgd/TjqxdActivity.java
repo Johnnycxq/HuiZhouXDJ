@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -101,14 +100,18 @@ public class TjqxdActivity extends BaseActivity2 implements View.OnClickListener
     InputLayout ilStartime;
     @BindView(R.id.il_endtime)
     InputLayout ilEndtime;
-    @BindView(R.id.et_qxms)
-    EditText etQxms;
-    @BindView(R.id.et_gzms)
-    EditText etGzms;
+
     @BindView(R.id.il_xzfj)
     InputLayout ilXzfj;
     @BindView(R.id.il_sbmc)
     InputLayout ilSbmc;
+
+
+    @BindView(R.id.et_qxms)
+    InputLayout etQxms;
+    @BindView(R.id.et_gzms)
+    InputLayout etGzms;
+
 
     private String SBID;
     private String SBMC;
@@ -516,7 +519,7 @@ public class TjqxdActivity extends BaseActivity2 implements View.OnClickListener
 
                     if (uploadPhotosBean.getState().equals("1")) {
 
-                        showToast("上传图片成功");
+                        showToast("上传数据成功");
 
                         finish();
 
@@ -539,8 +542,8 @@ public class TjqxdActivity extends BaseActivity2 implements View.OnClickListener
         info.setGDZT_SO("");
         info.setGDZT_NO("");
         info.setGDDJ(DJID);
-        info.setQXMS(etQxms.getText().toString());
-        info.setGZMS(etGzms.getText().toString());
+        info.setQXMS(etQxms.getContent());
+        info.setGZMS(etGzms.getContent());
         info.setSBBH(ilSbbh.getContent());
         info.setSBMC(ilSbmc.getContent());
         info.setZRBZ(zrbzBMID);

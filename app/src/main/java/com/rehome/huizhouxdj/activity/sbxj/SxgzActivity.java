@@ -164,7 +164,7 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
                         Bundle bundle = new Bundle();
                         Intent intent = new Intent(SxgzActivity.this, XjYulActivity.class);
                         bundle.putParcelableArrayList("xsjjhDataBeanArrayList", xsjjhDataBeanArrayList);
-                        bundle.putBoolean("edit", true);
+                        bundle.putBoolean("edit", false);
                         bundle.putInt(Contans.KEY_ITEM, 0);
                         bundle.putInt("itemposition", postion - 1);
                         bundle.putString("LX", "Click");
