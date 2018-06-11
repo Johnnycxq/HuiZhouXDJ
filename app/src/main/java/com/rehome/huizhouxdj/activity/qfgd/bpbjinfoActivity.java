@@ -3,6 +3,10 @@ package com.rehome.huizhouxdj.activity.qfgd;
 import android.os.Bundle;
 
 import com.bin.david.form.core.SmartTable;
+import com.bin.david.form.data.column.Column;
+import com.bin.david.form.data.format.draw.MultiLineDrawFormat;
+import com.bin.david.form.data.table.TableData;
+import com.bin.david.form.listener.OnColumnItemClickListener;
 import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.bean.Qfkccxbean;
 import com.rehome.huizhouxdj.bean.qfbpbjRequestBean;
@@ -72,7 +76,10 @@ public class bpbjinfoActivity extends BaseActivity {
                             showToast(qfkccxbean.getMsg());
                             datas.clear();
                             datas.addAll(qfkccxbean.getData());
-                            table.setData(datas);//设置数据给table
+                            parsePG1Data(datas);
+
+
+//                            table.setData(datas);//设置数据给table
                         } else {
                             showToast(qfkccxbean.getMsg());
                             datas.clear();
@@ -93,6 +100,30 @@ public class bpbjinfoActivity extends BaseActivity {
 
             }
         });
+    }
+
+    private void parsePG1Data(List<Qfkccxbean.DataBean> list) {
+        Column<String> mLine1 = new Column<>("物资编码", "WZBM");
+//        mLine1.setFixed(true);
+        mLine1.setOnColumnItemClickListener(new OnColumnItemClickListener<String>() {
+            @Override
+            public void onClick(Column<String> column, String value, String s, int position) {
+//                showToast(value);
+            }
+        });
+
+        Column<String> mLine2 = new Column<>("仓库号", "CKH");
+        Column<String> mLine3 = new Column<>("物质名称", "WZMC");
+        mLine3.setDrawFormat(new MultiLineDrawFormat<String>(500));
+
+        Column<String> mLine4 = new Column<>("数量", "SL");
+        Column<String> mLine5 = new Column<>("单位", "DW");
+        Column<String> mLine6 = new Column<>("单价", "DJ");
+        Column<String> mLine7 = new Column<>("仓储", "CC");
+        TableData<Qfkccxbean.DataBean> data = new TableData("备品查询", list, mLine1, mLine2, mLine3, mLine4, mLine5, mLine6, mLine7);
+        table.setTableData(data);
+        table.setZoom(true, 3, 1);
+        table.getConfig().setShowXSequence(false);
     }
 
 

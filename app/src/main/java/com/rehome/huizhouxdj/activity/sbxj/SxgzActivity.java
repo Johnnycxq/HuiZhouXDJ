@@ -3,7 +3,6 @@ package com.rehome.huizhouxdj.activity.sbxj;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -132,9 +131,9 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
                     int a = checkedCount;
                     int b = xsjjhdatabean.size();
 
-                    if (a == b){
+                    if (a == b) {
                         viewHolder.setTextColor(R.id.tv_djrw, Color.parseColor("#00CD00"));//已经检查完成绿色
-                    }else {
+                    } else {
                         viewHolder.setTextColor(R.id.tv_djrw, Color.parseColor("#FF0000"));//未检查完成红色
                     }
 
@@ -155,8 +154,6 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
                     xsjjhDataBeanArrayList.clear();
 
                     xsjjhDataBeanArrayList.addAll(where("xsjjhxzDataBean_id = ?", xsjjhxzDataBeanList.get(postion - 1).getId() + "").find(XSJJHDataBean.class));
-
-                    Log.e("size", String.valueOf(xsjjhDataBeanArrayList.size()));
 
 
                     if (xsjjhDataBeanArrayList.size() != 0) {

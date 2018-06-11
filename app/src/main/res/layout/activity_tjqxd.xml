@@ -48,42 +48,17 @@
                 android:id="@+id/et_qxms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:isShowTextView="true"
-                app:tv_title="请输入缺陷描述" />
+                app:must="true"
+                app:tv_title="请输入缺陷描述"/>
+
 
             <com.rehome.huizhouxdj.weight.InputLayout
                 android:id="@+id/et_gzms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:isShowTextView="true"
-                app:tv_title="请输入工作描述" />
+                app:must="true"
+                app:tv_title="请输入工作描述"/>
 
-<!--
-            <EditText
-                android:id="@+id/et_qxms"
-                style="@style/editTextTheme"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_margin="5dp"
-                android:gravity="top"
-                android:hint="请输入缺陷描述:"
-                android:padding="5dp"
-                android:textColor="@android:color/black"
-                />
--->
-
-<!--
-            <EditText
-                android:id="@+id/et_gzms"
-                style="@style/editTextTheme"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_margin="5dp"
-                android:gravity="top"
-                android:hint="请输入工作描述:"
-                android:padding="5dp"
-                android:textColor="@android:color/black"
-                />-->
 
             <com.rehome.huizhouxdj.weight.InputLayout
                 android:id="@+id/il_yxj"

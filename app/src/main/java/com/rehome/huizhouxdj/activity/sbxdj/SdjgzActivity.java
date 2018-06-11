@@ -60,8 +60,6 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
     private ArrayList<QYAQFXDATABean> qyaqfxdataBeanList = new ArrayList<>();//点检记录列表
 
 
-
-
     Intent intent;
     private List<String> dialogDatas2;
 
@@ -179,7 +177,6 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
         xdjjhxzDataBeanSet.addAll(spinnerxdjjhxzDataBeanList);
         spinnerxdjjhxzDataBeanList.clear();
         spinnerxdjjhxzDataBeanList.addAll(xdjjhxzDataBeanSet);
-
 
 
         dialogDatas2.clear();

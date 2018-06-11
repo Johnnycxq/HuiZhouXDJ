@@ -43,7 +43,6 @@ public class Qfkccxbean implements Parcelable {
         this.data = data;
     }
 
-
     @SmartTable(name = "备品备件查询")
     public static class DataBean implements Parcelable {
 

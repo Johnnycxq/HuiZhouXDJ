@@ -141,9 +141,10 @@ public class SxSbListActivity extends BaseActivity3 implements View.OnClickListe
 
                             state = text;
 
-                            ContentValues values = new ContentValues();
 
                             if (text.equals("已停用")) {
+
+                                ContentValues values = new ContentValues();
 
                                 values.put("checked", true);
 
@@ -153,30 +154,56 @@ public class SxSbListActivity extends BaseActivity3 implements View.OnClickListe
 
                                 values.put("SBMCSTATE", text);
 
+                                int i = DataSupport.updateAll(XSJJHDataBean.class, values, "sbmc = ? and  TJXJZT = ? ", xsjjhxzDataBeanList_sb.get(postion - 1).getSbmc(), "1");
+
+                                if (i != 0) {
+                                    showToast("修改设备状态成功");
+                                } else {
+                                    showToast("修改设备状态失败");
+                                }
+
                             } else if (text.equals("大小修")) {
 
-                                values.put("checked", true);
+                                ContentValues values2 = new ContentValues();
 
-                                values.put("SBMCSTATEVALUE", "4");
+                                values2.put("checked", true);
 
-                                values.put("CJJG", text);
+                                values2.put("SBMCSTATEVALUE", "4");
 
-                                values.put("SBMCSTATE", text);
+                                values2.put("CJJG", text);
+
+                                values2.put("SBMCSTATE", text);
+
+                                int i = DataSupport.updateAll(XSJJHDataBean.class, values2, "sbmc = ? and  TJXJZT = ? ", xsjjhxzDataBeanList_sb.get(postion - 1).getSbmc(), "1");
+
+                                if (i != 0) {
+                                    showToast("修改设备状态成功");
+                                } else {
+                                    showToast("修改设备状态失败");
+                                }
 
                             } else if (text.equals("已运行")) {
 
-                                values.put("checked", false);
+                                ContentValues values3 = new ContentValues();
 
-                                values.put("CJJG", text);
+                                values3.put("checked", false);
 
-                                values.put("SBMCSTATE", text);
+                                values3.put("CJJG", text);
 
-                                values.put("SBMCSTATEVALUE", "5");
+                                values3.put("SBMCSTATE", text);
+
+                                values3.put("SBMCSTATEVALUE", "5");
+
+                                int i = DataSupport.updateAll(XSJJHDataBean.class, values3, "sbmc = ?", xsjjhxzDataBeanList_sb.get(postion - 1).getSbmc());
+
+                                if (i != 0) {
+                                    showToast("修改设备状态成功");
+                                } else {
+                                    showToast("修改设备状态失败");
+                                }
 
                             }
 
-
-                            int i = DataSupport.updateAll(XSJJHDataBean.class, values, "sbmc = ? ", xsjjhxzDataBeanList_sb.get(postion - 1).getSbmc());
 
                             ContentValues values2 = new ContentValues();
 
@@ -201,11 +228,6 @@ public class SxSbListActivity extends BaseActivity3 implements View.OnClickListe
 
                             int J = DataSupport.updateAll(XSJJHXZDataBean.class, values2, "sbmc = ? ", xsjjhxzDataBeanList_sb.get(postion - 1).getSbmc());
 
-                            if (i != 0) {
-                                showToast("修改设备状态成功");
-                            } else {
-                                showToast("修改设备状态失败");
-                            }
 
                             if (J != 0) {
                                 showToast("修改设备状态成功");

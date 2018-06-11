@@ -34,6 +34,8 @@ public class XSJJHXZDataBean extends DataSupport implements Parcelable {
     private String SBMCSTATE;//设备状态
     private String SBMCSTATEVALUE;//设备状态值
 
+    private String TJXJZT;//1停用不需要检查了  0停用也要检查
+
 
     public long getId() {
         return id;
@@ -163,6 +165,13 @@ public class XSJJHXZDataBean extends DataSupport implements Parcelable {
         this.SBMCSTATEVALUE = SBMCSTATEVALUE;
     }
 
+    public String getTJXJZT() {
+        return TJXJZT;
+    }
+
+    public void setTJXJZT(String TJXJZT) {
+        this.TJXJZT = TJXJZT;
+    }
 
     @Override
     public int describeContents() {
@@ -187,6 +196,7 @@ public class XSJJHXZDataBean extends DataSupport implements Parcelable {
         dest.writeString(this.sbmc);
         dest.writeString(this.SBMCSTATE);
         dest.writeString(this.SBMCSTATEVALUE);
+        dest.writeString(this.TJXJZT);
     }
 
     public XSJJHXZDataBean() {
@@ -209,6 +219,8 @@ public class XSJJHXZDataBean extends DataSupport implements Parcelable {
         this.sbmc = in.readString();
         this.SBMCSTATE = in.readString();
         this.SBMCSTATEVALUE = in.readString();
+        this.TJXJZT = in.readString();
+
     }
 
     public static final Creator<XSJJHXZDataBean> CREATOR = new Creator<XSJJHXZDataBean>() {
