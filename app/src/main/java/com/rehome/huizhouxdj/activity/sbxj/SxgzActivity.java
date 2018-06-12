@@ -127,6 +127,7 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
 
                     viewHolder.setText(R.id.tv_xh, item.getSN() + "");
                     viewHolder.setText(R.id.tv_qymc, item.getQymc());
+                    viewHolder.setText(R.id.tv_djrw, checkedCount + "/" + xsjjhdatabean.size());
 
                     int a = checkedCount;
                     int b = xsjjhdatabean.size();
@@ -137,7 +138,7 @@ public class SxgzActivity extends BaseActivity3 implements View.OnClickListener 
                         viewHolder.setTextColor(R.id.tv_djrw, Color.parseColor("#FF0000"));//未检查完成红色
                     }
 
-                    viewHolder.setText(R.id.tv_djrw, checkedCount + "/" + xsjjhdatabean.size());
+
 
 
                 }

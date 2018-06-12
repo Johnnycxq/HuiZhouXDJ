@@ -1,6 +1,7 @@
 package com.rehome.huizhouxdj.activity;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -9,11 +10,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatTextView;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -81,6 +84,8 @@ public class LoginActivity extends BaseActivity {
     EditText etPwd;
     @BindView(R.id.btn_login)
     Button btnLogin;
+    @BindView(R.id.btn_kjdl)
+    Button btnKjdl;
     private String username;
     private String pwd;
     private long exitTime = 0;
@@ -156,10 +161,62 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
+    private void checkOnline() {
+        if (NetworkAvailableUtils.isNetworkAvailable(context)) {
+            btnKjdl.setVisibility(View.GONE);
+
+        } else {
+            btnKjdl.setVisibility(View.VISIBLE);
+            btn_wwdl.setVisibility(View.GONE);
+            btnLogin.setVisibility(View.GONE);
+        }
+    }
+
+    private void GHDialog() {
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        View nameView = layoutInflater.inflate(R.layout.srghdialog, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setView(nameView);
+        final EditText srgh_edit = (EditText) nameView.findViewById(R.id.srgh_edit);
+
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("确定",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                if (TextUtils.isEmpty(srgh_edit.getText())) {
+                                    showToast("请输入你的工号!");
+                                } else {
+
+
+                                    if (srgh_edit.getText().toString().equals(username)) {
+                                        Intent intent = new Intent(LoginActivity.this, TabMainActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        showToast("请输入你的工号!");
+                                    }
+
+
+                                }
+
+
+                            }
+                        })
+                .setNegativeButton("取消",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
     public void initData() {
 
-
-
+        checkOnline();
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -195,20 +252,27 @@ public class LoginActivity extends BaseActivity {
 
                         NohttpUtils.getInstance().add(LoginActivity.this, 0, request, callback, true, true, "登录中...");
 
-
                     }
                 } else {
+
+
                     if (isLogin()) {
                         if (UiUtlis.getText(etUse).equals(SPUtils.get(context, Contans.USERNAME, ""))
                                 && UiUtlis.getText(etPwd).equals(SPUtils.get(context, "pwd", ""))) {
-                            Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
-                            startActivity(intent);
+                            showToast("无网络");
                         } else {
                             showToast("你还没有登录过");
                         }
                     }
                 }
 
+            }
+        });
+
+        btnKjdl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GHDialog();
             }
         });
 

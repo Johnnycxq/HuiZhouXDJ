@@ -101,7 +101,6 @@ public class YulActivity extends BaseActivity {
         itemposition = bundle.getInt("itemposition");
         LX = bundle.getString("LX");
         LXResult = bundle.getString("LXResult");
-
         searchdata();
         setListAdapter();
 

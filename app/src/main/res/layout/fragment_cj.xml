@@ -1,8 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <ScrollView
         android:id="@+id/sv"
@@ -29,7 +29,7 @@
                     android:gravity="center_vertical|right"
                     android:maxHeight="120px"
                     android:text="项目名称："
-                    android:textSize="@dimen/sbtextSize" />
+                    android:textSize="@dimen/sbtextSize"/>
 
                 <TextView
                     android:id="@+id/tv_dmc"
@@ -38,7 +38,7 @@
                     android:gravity="center_vertical|left"
                     android:maxHeight="180px"
                     android:text="振动"
-                    android:textSize="@dimen/sbtextSize" />
+                    android:textSize="@dimen/sbtextSize"/>
             </LinearLayout>
 
 
@@ -53,7 +53,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
                     android:text="所属设备："
-                    android:textSize="@dimen/sbtextSize" />
+                    android:textSize="@dimen/sbtextSize"/>
 
                 <TextView
                     android:id="@+id/tv_sb"
@@ -61,7 +61,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|left"
                     android:text="设备"
-                    android:textSize="@dimen/sbtextSize" />
+                    android:textSize="@dimen/sbtextSize"/>
             </LinearLayout>
 
             <LinearLayout
@@ -75,7 +75,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
                     android:text="所属部件："
-                    android:textSize="@dimen/sbtextSize" />
+                    android:textSize="@dimen/sbtextSize"/>
 
                 <TextView
                     android:id="@+id/tv_bw"
@@ -83,7 +83,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|left"
                     android:text="轴承"
-                    android:textSize="@dimen/sbtextSize" />
+                    android:textSize="@dimen/sbtextSize"/>
             </LinearLayout>
 
 
@@ -100,7 +100,7 @@
                     android:gravity="center_vertical|right"
                     android:maxHeight="120px"
                     android:text="检测方法："
-                    android:textSize="@dimen/sbtextSize" />
+                    android:textSize="@dimen/sbtextSize"/>
 
                 <TextView
                     android:id="@+id/tv_ff"
@@ -109,7 +109,7 @@
                     android:gravity="center_vertical|left"
                     android:maxHeight="120px"
                     android:text="方法"
-                    android:textSize="@dimen/sbtextSize" />
+                    android:textSize="@dimen/sbtextSize"/>
             </LinearLayout>
 
 
@@ -126,7 +126,7 @@
                     android:gravity="center_vertical|right"
                     android:maxHeight="120px"
                     android:text="检测标准："
-                    android:textSize="@dimen/sbtextSize" />
+                    android:textSize="@dimen/sbtextSize"/>
 
                 <TextView
                     android:id="@+id/tv_bz"
@@ -135,7 +135,7 @@
                     android:gravity="center_vertical|left"
                     android:maxHeight="160px"
                     android:text="标准"
-                    android:textSize="@dimen/sbtextSize" />
+                    android:textSize="@dimen/sbtextSize"/>
             </LinearLayout>
 
 
@@ -152,7 +152,7 @@
                     android:gravity="center_vertical|right"
                     android:maxHeight="120px"
                     android:text="检测周期："
-                    android:textSize="@dimen/sbtextSize" />
+                    android:textSize="@dimen/sbtextSize"/>
 
                 <TextView
                     android:id="@+id/tv_zq"
@@ -161,7 +161,7 @@
                     android:gravity="center_vertical|left"
                     android:maxHeight="120px"
                     android:text="周期"
-                    android:textSize="@dimen/sbtextSize" />
+                    android:textSize="@dimen/sbtextSize"/>
             </LinearLayout>
 
             <RelativeLayout
@@ -178,7 +178,7 @@
                     android:layout_alignTop="@+id/et_jg"
                     android:gravity="center_vertical|right"
                     android:text="采集结果："
-                    android:textSize="@dimen/sbtextSize" />
+                    android:textSize="@dimen/sbtextSize"/>
 
                 <EditText
                     android:id="@+id/et_jg"
@@ -189,11 +189,40 @@
                     android:layout_marginStart="22dp"
                     android:layout_toEndOf="@+id/textView2"
                     android:layout_toRightOf="@+id/textView2"
+                    android:inputType="numberSigned|numberDecimal"
                     android:textSize="16sp"
-                    android:visibility="visible" />
+                    android:visibility="visible"/>
 
-                <Button
-                    android:id="@+id/et_button"
+
+                <TextView
+                    android:id="@+id/textview_ty"
+                    android:layout_width="400px"
+                    android:layout_height="@dimen/px_70"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginStart="22dp"
+                    android:layout_toEndOf="@+id/textView2"
+                    android:layout_toRightOf="@+id/textView2"
+                    android:text="已停用"
+                    android:textSize="28sp"
+                    android:visibility="gone"
+                    />
+
+                <!--             <Button
+                                 android:id="@+id/et_button"
+                                 android:layout_width="400px"
+                                 android:layout_height="@dimen/px_70"
+                                 android:layout_alignParentTop="true"
+                                 android:layout_marginLeft="22dp"
+                                 android:layout_marginStart="22dp"
+                                 android:layout_toEndOf="@+id/textView2"
+                                 android:layout_toRightOf="@+id/textView2"
+                                 android:background="@drawable/border_line_while"
+                                 android:text="请点击获取采集结果"
+                                 android:textColor="@color/colorPrimary"
+                                 android:visibility="gone"/>-->
+
+                <RadioGroup
+                    android:id="@+id/RGZC"
                     android:layout_width="400px"
                     android:layout_height="@dimen/px_70"
                     android:layout_alignParentTop="true"
@@ -201,10 +230,23 @@
                     android:layout_marginStart="22dp"
                     android:layout_toEndOf="@+id/textView2"
                     android:layout_toRightOf="@+id/textView2"
-                    android:background="@drawable/border_line_while"
-                    android:text="请点击获取采集结果"
-                    android:textColor="@color/colorPrimary"
-                    android:visibility="visible" />
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <RadioButton
+                        android:id="@+id/rbzc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="正常"/>
+
+                    <RadioButton
+                        android:id="@+id/rbbzc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="不正常"/>
+                </RadioGroup>
+
 
             </RelativeLayout>
 
@@ -223,7 +265,7 @@
             android:layout_height="@dimen/sbHeight"
             android:gravity="center_vertical"
             android:text="当前点检点:"
-            android:textSize="@dimen/sbtextSize" />
+            android:textSize="@dimen/sbtextSize"/>
 
         <TextView
             android:id="@+id/tv_yjzj"
@@ -232,7 +274,7 @@
             android:layout_marginLeft="@dimen/px_10"
             android:gravity="center_vertical"
             android:text="2/40"
-            android:textSize="@dimen/sbtextSize" />
+            android:textSize="@dimen/sbtextSize"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -240,7 +282,7 @@
             android:layout_marginLeft="@dimen/px_40"
             android:gravity="center_vertical"
             android:text="状态："
-            android:textSize="@dimen/sbtextSize" />
+            android:textSize="@dimen/sbtextSize"/>
 
         <TextView
             android:id="@+id/tv_zt"
@@ -248,7 +290,7 @@
             android:layout_height="@dimen/sbHeight"
             android:gravity="center_vertical"
             android:text="未检"
-            android:textSize="@dimen/sbtextSize" />
+            android:textSize="@dimen/sbtextSize"/>
 
     </LinearLayout>
 

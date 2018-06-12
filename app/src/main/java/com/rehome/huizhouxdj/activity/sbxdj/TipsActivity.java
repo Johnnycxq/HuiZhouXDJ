@@ -27,7 +27,8 @@ public class TipsActivity extends BaseActivity2 implements View.OnClickListener 
     private boolean isEdit = true;
     private int item;
     private int itemposition;
-    private String LX,LXResult;
+    private String LX, LXResult;
+    private int from;//0-来自工作页面；1-采集页面
 
     @Override
     public int getLayoutId() {
@@ -53,7 +54,8 @@ public class TipsActivity extends BaseActivity2 implements View.OnClickListener 
         item = bundle.getInt(Contans.KEY_ITEM);
         itemposition = bundle.getInt("itemposition");
         LX = bundle.getString("LX");
-        LXResult= bundle.getString("LXResult");
+        LXResult = bundle.getString("LXResult");
+        from = bundle.getInt("from");
         initViewPager();
 
     }
@@ -85,17 +87,32 @@ public class TipsActivity extends BaseActivity2 implements View.OnClickListener 
                 finish();
                 break;
             case R.id.tv_right:
-                Intent intent = new Intent(TipsActivity.this, YulActivity.class);
+//                Intent intent = new Intent(TipsActivity.this, YulActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanArrayList);
+//                bundle.putBoolean("edit", isEdit);
+//                bundle.putInt(Contans.KEY_ITEM, item);
+//                bundle.putInt("itemposition", itemposition);
+//                bundle.putString("LX", LX);
+//                bundle.putString("LXResult", LXResult);
+//                intent.putExtras(bundle);
+//                startActivity(intent);
+//                finish();
+
+
                 Bundle bundle = new Bundle();
+                Intent intent = new Intent(TipsActivity.this, SdjSbListActivity.class);
                 bundle.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanArrayList);
+                bundle.putParcelableArrayList("QYFXTS", qyaqfxdataBeanArrayList);
                 bundle.putBoolean("edit", isEdit);
-                bundle.putInt(Contans.KEY_ITEM, item);
+                bundle.putInt(Contans.KEY_ITEM, 0);
                 bundle.putInt("itemposition", itemposition);
-                bundle.putString("LX", LX);
-                bundle.putString("LXResult", LXResult);
+                bundle.putString("LX", "Click");
+                bundle.putString("LXResult", "LXResult");
+                bundle.putInt("from", 0);
                 intent.putExtras(bundle);
                 startActivity(intent);
-                finish();
+//                finish();
                 break;
         }
     }

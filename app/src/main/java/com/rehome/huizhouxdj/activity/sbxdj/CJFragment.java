@@ -1,19 +1,18 @@
 package com.rehome.huizhouxdj.activity.sbxdj;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.rehome.huizhouxdj.DBModel.QYDDATABean;
 import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.base.BaseFragment;
-import com.rehome.huizhouxdj.weight.ListDialog;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,8 +40,7 @@ public class CJFragment extends BaseFragment {
     @BindView(R.id.tv_sb)
     TextView tvSb;
     Unbinder unbinder;
-    @BindView(R.id.et_button)
-    Button et_button;
+
     @BindView(R.id.tv_ff)
     TextView tvFf;
     @BindView(R.id.tv_bz)
@@ -51,6 +49,15 @@ public class CJFragment extends BaseFragment {
     ScrollView sv;
     @BindView(R.id.tv_zq)
     TextView tvZq;
+
+    @BindView(R.id.rbzc)
+    RadioButton rbzc;
+    @BindView(R.id.rbbzc)
+    RadioButton rbbzc;
+    @BindView(R.id.RGZC)
+    RadioGroup RGZC;
+    @BindView(R.id.textview_ty)
+    TextView textviewTy;
 
     private boolean isEdit;
     private QYDDATABean info;
@@ -93,7 +100,6 @@ public class CJFragment extends BaseFragment {
 
 
         et_jg.setEnabled(isEdit);
-        et_button.setEnabled(isEdit);
 
 
         updata(info, index, zj);
@@ -103,21 +109,39 @@ public class CJFragment extends BaseFragment {
     @Override
     public void initData() {
 
-        et_button.setOnClickListener(new View.OnClickListener() {
+//        et_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                ListDialog dialog = new ListDialog(context, stringToList(info.getLRMRZ()), new ListDialog.ListDialogListener() {
+//
+//                    @Override
+//                    public void selectText(String text, int position) {
+//                        et_button.setText(text);
+//                        et_jg.setText(text);
+//                    }
+//                });
+//                dialog.show();
+//            }
+//        });
+
+
+        RGZC.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch (i) {
+                    case R.id.rbzc:
 
-                ListDialog dialog = new ListDialog(context, stringToList(info.getLRMRZ()), new ListDialog.ListDialogListener() {
+                        et_jg.setText("正常");
+                        break;
+                    case R.id.rbbzc:
 
-                    @Override
-                    public void selectText(String text, int position) {
-                        et_button.setText(text);
-                        et_jg.setText(text);
-                    }
-                });
-                dialog.show();
+                        et_jg.setText("不正常");
+                        break;
+                }
             }
         });
+
     }
 
     /**
@@ -127,7 +151,7 @@ public class CJFragment extends BaseFragment {
      */
     public void updateState(String value) {
         et_jg.setText(value);
-        et_button.setText(value);
+
     }
 
     public void updatecheck(Boolean value) {
@@ -155,29 +179,83 @@ public class CJFragment extends BaseFragment {
         tv_yjzj.setText(item + "/" + size);
 
 
-        Log.e("CJFragment", "lrlx = " + info.getLRFS() + ", cjjg=" + info.getCJJG());
-
         if (info.getLRFS().equals("0")) {  //当时编辑状态的是 不需要按钮
 
-            et_button.setVisibility(View.GONE);
+
             et_jg.setVisibility(View.VISIBLE);
-            et_jg.setText(info.getCJJG());
+            RGZC.setVisibility(View.GONE);
+            textviewTy.setVisibility(View.GONE);
+
+
+            if (info.getCJJG() == null) {
+                et_jg.setText("");
+            } else {
+                if (info.getCJJG().equals("已运行")) {
+                    et_jg.setText("");
+                } else if (info.getCJJG().equals("已停用")) {
+                    et_jg.setText("已停用");
+                    et_jg.setVisibility(View.GONE);
+                    textviewTy.setVisibility(View.VISIBLE);
+                } else {
+                    et_jg.setText(info.getCJJG());
+                }
+            }
 
 
         } else if (info.getLRFS().equals("1")) {    //不是编辑状态的时候 需要按钮点击弹出菜单
 
             et_jg.setVisibility(View.GONE);
-            et_button.setVisibility(View.VISIBLE);
+            textviewTy.setVisibility(View.GONE);
+            rbzc.setVisibility(View.VISIBLE);
+            rbbzc.setVisibility(View.VISIBLE);
+            RGZC.setVisibility(View.VISIBLE);
 
-            if (info.getCJJG() != null) {  //当按钮有内容的时候 显示在按钮上
+            rbzc.setText("正常");
+            rbbzc.setText("不正常");
 
-                et_button.setText(info.getCJJG());
-                et_jg.setText(info.getCJJG());
+            rbzc.setChecked(true);
+            rbbzc.setChecked(false);
+
+            if (info.getCJJG() == null) {
+
+                et_jg.setText("正常");
+                rbzc.setChecked(true);
+                rbbzc.setChecked(false);
 
             } else {
-                et_button.setText("正常");
-                et_jg.setText("正常");
+                if (info.getCJJG().equals("已运行")) {
+
+                    et_jg.setText("正常");
+                    rbzc.setChecked(true);
+                    rbbzc.setChecked(false);
+
+                } else if (info.getCJJG().equals("已停用")) {
+
+
+                    textviewTy.setVisibility(View.VISIBLE);
+
+                    et_jg.setText("已停用");
+                    RGZC.setVisibility(View.GONE);
+                    textviewTy.setVisibility(View.VISIBLE);
+//                    rbbzc.setText("已停用");
+//                    rbbzc.setChecked(true);
+//                    rbzc.setChecked(false);
+//                    rbzc.setVisibility(View.GONE);
+
+                } else if (info.getCJJG().equals("不正常")) {
+
+                    et_jg.setText("不正常");
+                    rbbzc.setChecked(true);
+                    rbzc.setChecked(false);
+
+                } else {
+                    et_jg.setText(info.getCJJG());
+                    rbzc.setText(info.getCJJG());
+                    rbzc.setChecked(true);
+                    rbbzc.setChecked(false);
+                }
             }
+
         }
 
     }
@@ -185,6 +263,8 @@ public class CJFragment extends BaseFragment {
     public String getCJJG() {
         return et_jg.getText().toString().trim();
     }
+
+
 
 
     @Override

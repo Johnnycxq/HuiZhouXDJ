@@ -155,7 +155,11 @@ public class SbxdjcjsbActivity extends BaseActivity3 implements View.OnClickList
 
     public void initData() {
 
-        initToolbar("设备点检", "修改设备状态", this);
+//        initToolbar("设备点检", "修改设备状态", this);
+
+
+        initToolbar("设备点检", "", this);
+
 
         Bundle bundle = SbxdjcjsbActivity.this.getIntent().getExtras();
         if (bundle != null) {
@@ -237,6 +241,7 @@ public class SbxdjcjsbActivity extends BaseActivity3 implements View.OnClickList
                 break;
             case R.id.btn_next:
                 next();
+//                cj.setcheck();
                 break;
             case R.id.btn_exit:
                 if (isEdit) {
@@ -378,6 +383,8 @@ public class SbxdjcjsbActivity extends BaseActivity3 implements View.OnClickList
         sendBroadcast(intent);
 
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

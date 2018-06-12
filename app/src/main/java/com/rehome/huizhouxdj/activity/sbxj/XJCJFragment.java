@@ -97,6 +97,9 @@ public class XJCJFragment extends BaseFragment {
 
 
         etJg.setEnabled(isEdit);
+
+//        etJg.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+
         etButton.setEnabled(isEdit);
 
 

@@ -151,6 +151,16 @@
             android:text="厂外登录"
             />
 
+        <Button
+            android:id="@+id/btn_kjdl"
+            style="@style/button"
+            android:layout_width="550px"
+            android:layout_marginLeft="@dimen/px_20"
+            android:layout_marginRight="@dimen/px_20"
+            android:layout_marginTop="@dimen/px_20"
+            android:text="快捷登录"
+            />
+
 
     </LinearLayout>
 </RelativeLayout>

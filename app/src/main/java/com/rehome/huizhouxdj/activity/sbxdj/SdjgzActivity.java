@@ -1,6 +1,7 @@
 package com.rehome.huizhouxdj.activity.sbxdj;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -199,23 +200,31 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
                 protected void convert(ViewHolder viewHolder, XDJJHXZDataBean item, int position) {
 
                     int checkedCount = 0;
-
                     List<QYDDATABean> qyddataBeen = where("xdjjhxzDataBean_id = ?", item.getId() + "").find(QYDDATABean.class);
-
                     for (int i = 0; i < qyddataBeen.size(); i++) {
-
                         if (qyddataBeen.get(i).isChecked()) {
-
                             checkedCount++;
-
                         }
-
                     }
 
                     viewHolder.setText(R.id.tv_xh, item.getSN() + "");
-
                     viewHolder.setText(R.id.tv_qymc, item.getGWMC() + "--" + item.getQYMC());
                     viewHolder.setText(R.id.tv_djrw, checkedCount + "/" + qyddataBeen.size());
+
+                    int a = checkedCount;
+                    int b = qyddataBeen.size();
+
+                    if (a == b){
+                        viewHolder.setTextColor(R.id.tv_djrw, Color.parseColor("#00CD00"));//已经检查完成绿色
+                    }else {
+                        viewHolder.setTextColor(R.id.tv_djrw, Color.parseColor("#FF0000"));//已经检查完成绿色
+                    }
+
+
+
+
+
+
 
                 }
             };
@@ -239,11 +248,26 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
 
                         Log.e("123", xdjjhxzDataBeanList.get(postion - 1).getSN() + "");
 
+//                        Bundle bundle = new Bundle();
+//                        Intent intent = new Intent(SdjgzActivity.this, SdjSbListActivity.class);
+//                        bundle.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
+//                        bundle.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
+//                        bundle.putBoolean("edit", true);
+//                        bundle.putInt(Contans.KEY_ITEM, 0);
+////                        bundle.putInt("itemposition", postion - 1);
+//                        bundle.putInt("itemposition", xdjjhxzDataBeanList.get(postion - 1).getSN() - 1);
+//                        bundle.putString("LX", "Click");
+//                        bundle.putString("LXResult", "LXResult");
+//                        bundle.putInt("from", 0);
+//                        intent.putExtras(bundle);
+//                        startActivity(intent);
+
+
                         Bundle bundle = new Bundle();
-                        Intent intent = new Intent(SdjgzActivity.this, SdjSbListActivity.class);
+                        Intent intent = new Intent(SdjgzActivity.this, TipsActivity.class);
                         bundle.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
                         bundle.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
-                        bundle.putBoolean("edit", false);
+                        bundle.putBoolean("edit", true);
                         bundle.putInt(Contans.KEY_ITEM, 0);
 //                        bundle.putInt("itemposition", postion - 1);
                         bundle.putInt("itemposition", xdjjhxzDataBeanList.get(postion - 1).getSN() - 1);
@@ -252,6 +276,7 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
                         bundle.putInt("from", 0);
                         intent.putExtras(bundle);
                         startActivity(intent);
+
 
                     } else {
                         showToast("暂无该区域点检任务");
@@ -283,10 +308,10 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
 
 
                     Bundle bundle2 = new Bundle();
-                    Intent intent = new Intent(SdjgzActivity.this, SdjSbListActivity.class);
+                    Intent intent = new Intent(SdjgzActivity.this, TipsActivity.class);
                     bundle2.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
                     bundle2.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
-                    bundle2.putBoolean("edit", true);
+                    bundle2.putBoolean("edit", false);
                     bundle2.putInt(Contans.KEY_ITEM, 0);
                     bundle2.putInt("itemposition", 0);
                     bundle2.putString("LX", "QRcode");
@@ -295,15 +320,6 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
                     intent.putExtras(bundle2);
                     startActivity(intent);
 
-
-//                    Intent intent = new Intent(SdjgzActivity.this, TipsActivity.class);
-//                    Bundle bundle2 = new Bundle();
-//                    bundle2.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
-//                    bundle2.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
-//                    bundle2.putBoolean("edit", true);
-//                    bundle2.putInt(Contans.KEY_ITEM, 0);
-//                    intent.putExtras(bundle2);
-//                    startActivity(intent);
 
 
                 }
@@ -334,8 +350,9 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
         qyaqfxdataBeanList.addAll(qyaqfxdataBeen);
 
 
+
         Bundle bundle3 = new Bundle();
-        Intent intent = new Intent(SdjgzActivity.this, SdjSbListActivity.class);
+        Intent intent = new Intent(SdjgzActivity.this, TipsActivity.class);
         bundle3.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
         bundle3.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
         bundle3.putBoolean("edit", true);

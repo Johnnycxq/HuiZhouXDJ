@@ -70,22 +70,35 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
                     Intent intent = new Intent(SdjSbListActivity.this, SbxdjcjsbActivity.class);
                     intent.putParcelableArrayListExtra("setSbModelList", setSbModelList);
                     setResult(RESULT_OK, intent);
-                    finish();
+//                    finish();
                 }
                 break;
             case R.id.tv_right:
-                intent = new Intent(SdjSbListActivity.this, TipsActivity.class);
+//                intent = new Intent(SdjSbListActivity.this, TipsActivity.class);
+//                Bundle bundle2 = new Bundle();
+//                bundle2.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanArrayList);
+//                bundle2.putParcelableArrayList("QYFXTS", qyaqfxdataBeanArrayList);
+//                bundle2.putBoolean("edit", isEdit);
+//                bundle2.putInt(Contans.KEY_ITEM, 0);
+//                bundle2.putInt("itemposition", itemposition);
+//                bundle2.putString("LX", LX);
+//                bundle2.putString("LXResult", LXResult);
+//                intent.putExtras(bundle2);
+//                startActivity(intent);
+//                finish();
+
+                intent = new Intent(SdjSbListActivity.this, YulActivity.class);
                 Bundle bundle2 = new Bundle();
-                bundle2.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanArrayList);
-                bundle2.putParcelableArrayList("QYFXTS", qyaqfxdataBeanArrayList);
+//                bundle2.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanArrayList);
                 bundle2.putBoolean("edit", isEdit);
                 bundle2.putInt(Contans.KEY_ITEM, 0);
+//                bundle2.putInt("item", item);
                 bundle2.putInt("itemposition", itemposition);
                 bundle2.putString("LX", LX);
                 bundle2.putString("LXResult", LXResult);
                 intent.putExtras(bundle2);
                 startActivity(intent);
-                finish();
+//                finish();
                 break;
         }
     }
@@ -177,36 +190,61 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
                         pos = postion;
                         List<String> datas = new ArrayList<String>();
                         datas.add("已停用");
-
+                        datas.add("已运行");
 
                         ListDialog dialog = new ListDialog(context, datas, new ListDialog.ListDialogListener() {
+
                             @Override
                             public void selectText(String text, int position) {
+
                                 state = text;
-                                ContentValues values = new ContentValues();
-
-                                values.put("CJJG", text);
-
-                                values.put("SBMCSTATE", text);
 
                                 if (text.equals("已停用")) {
+
+                                    ContentValues values = new ContentValues();
+
+                                    values.put("CJJG", text);
+
+                                    values.put("SBMCSTATE", text);
 
                                     values.put("checked", true);
 
                                     values.put("SBMCSTATEVALUE", "3");
 
+                                    int i = DataSupport.updateAll(QYDDATABean.class, values, "SBID = ? ", infos.get(postion - 1).getSbid());
+
+                                    if (i != 0) {
+                                        showToast("设置设备状态为已停用");
+
+                                    } else {
+                                        showToast("设置设备状态为已停用失败");
+
+                                    }
+
+                                } else if (text.equals("已运行")) {
+
+                                    ContentValues values2 = new ContentValues();
+
+                                    values2.put("CJJG", text);
+
+                                    values2.put("SBMCSTATE", text);
+
+                                    values2.put("checked", false);
+
+                                    values2.put("SBMCSTATEVALUE", "3");
+
+                                    int i = DataSupport.updateAll(QYDDATABean.class, values2, "SBID = ? ", infos.get(postion - 1).getSbid());
+
+                                    if (i != 0) {
+                                        showToast("设置设备状态为已运行");
+
+                                    } else {
+                                        showToast("设置设备状态为已运行失败");
+
+                                    }
+
                                 }
 
-
-                                int i = DataSupport.updateAll(QYDDATABean.class, values, "SBID = ? ", infos.get(postion - 1).getSbid());
-
-                                if (i != 0) {
-                                    showToast("修改设备状态成功");
-
-                                } else {
-                                    showToast("修改设备状态失败");
-
-                                }
 
                             }
 
@@ -256,7 +294,7 @@ public class SdjSbListActivity extends BaseActivity3 implements View.OnClickList
                 Intent intent = new Intent(SdjSbListActivity.this, SbxdjcjsbActivity.class);
                 intent.putParcelableArrayListExtra("setSbModelList", setSbModelList);
                 setResult(RESULT_OK, intent);
-                finish();
+//                finish();
             }
             return true;
         }
