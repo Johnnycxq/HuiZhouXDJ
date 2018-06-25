@@ -3,6 +3,9 @@ package com.rehome.huizhouxdj.activity.qfgd;
 import android.os.Bundle;
 
 import com.bin.david.form.core.SmartTable;
+import com.bin.david.form.data.column.Column;
+import com.bin.david.form.data.format.draw.MultiLineDrawFormat;
+import com.bin.david.form.data.table.TableData;
 import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.bean.PMRequestBean;
 import com.rehome.huizhouxdj.bean.PminfoNewBean;
@@ -40,7 +43,6 @@ public class PminfoActivity extends BaseActivity {
         table = (SmartTable<PminfoNewBean.DataBean>) findViewById(R.id.table);
         table.setZoom(true);
         datas = new ArrayList<>();
-
 
 
     }
@@ -82,7 +84,9 @@ public class PminfoActivity extends BaseActivity {
 
                             datas.addAll(pminfoBean.getData());
 
-                            table.setData(datas);//设置数据给table
+                            parseData(datas);
+
+//                            table.setData(datas);//设置数据给table
 
                         } else {
                             showToast(pminfoBean.getMsg());
@@ -120,6 +124,26 @@ public class PminfoActivity extends BaseActivity {
         String json = GsonUtils.GsonString(info);
         return json;
     }
+
+
+    private void parseData(List<PminfoNewBean.DataBean> list) {
+        Column<String> mLine1 = new Column<>("PM单号", "ta_pm_no_p");
+        mLine1.setFixed(true);
+        Column<String> mLine2 = new Column<>("设备描述", "eq_ma_de");
+        Column<String> mLine3 = new Column<>("工作规范描述", "ta_ws_de");
+        mLine3.setDrawFormat(new MultiLineDrawFormat<String>(800));
+        Column<String> mLine4 = new Column<>("数据日期", "ta_pm_ld");
+        Column<String> mLine5 = new Column<>("下次到期", "ta_pm_nextdue");
+        Column<String> mLine6 = new Column<>("PM状态", "ta_pm_fl");
+        Column<String> mLine7 = new Column<>("责任单位", "re_tm_de");
+        Column<String> mLine8 = new Column<>("工作规范", "ta_md_de");
+        TableData<PminfoNewBean.DataBean> data = new TableData("PM工单查询", list, mLine1, mLine2, mLine3, mLine4, mLine5, mLine6, mLine7, mLine8);
+        table.setTableData(data);
+        table.setZoom(true, 3, 1);
+        table.getConfig().setShowXSequence(false);
+        table.getConfig().setShowYSequence(false);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

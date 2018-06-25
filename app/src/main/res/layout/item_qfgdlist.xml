@@ -13,14 +13,26 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_gzzt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5px"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/px_60"
+            android:text="工作状态"
+            android:textColor="@color/red"
+            android:textSize="32px"
+            />
+
+        <TextView
             android:id="@+id/tv_zrmb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5px"
             android:gravity="center_vertical"
-            android:minHeight="@dimen/px_70"
+            android:minHeight="@dimen/px_60"
             android:text="责任部门"
-            android:textSize="35px"/>
+            android:textSize="28px"/>
 
         <TextView
             android:id="@+id/tv_sbmc"
@@ -28,9 +40,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="5px"
             android:gravity="center_vertical"
-            android:minHeight="@dimen/px_70"
+            android:minHeight="@dimen/px_60"
             android:text="设备名称"
-            android:textSize="35px"/>
+            android:textSize="28px"/>
 
 
         <TextView
@@ -39,21 +51,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="5px"
             android:gravity="center_vertical"
-            android:minHeight="@dimen/px_70"
+            android:minHeight="@dimen/px_60"
             android:text="报告人"
-            android:textSize="35px"/>
+            android:textSize="28px"/>
 
-        <TextView
-            android:id="@+id/tv_gzzt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5px"
-            android:gravity="center_vertical"
-            android:minHeight="@dimen/px_70"
-            android:text="工作状态"
-            android:textColor="@color/red"
-            android:textSize="35px"
-            />
 
     </LinearLayout>
 

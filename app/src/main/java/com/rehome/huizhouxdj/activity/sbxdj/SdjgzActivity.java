@@ -214,16 +214,11 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
                     int a = checkedCount;
                     int b = qyddataBeen.size();
 
-                    if (a == b){
+                    if (a == b) {
                         viewHolder.setTextColor(R.id.tv_djrw, Color.parseColor("#00CD00"));//已经检查完成绿色
-                    }else {
+                    } else {
                         viewHolder.setTextColor(R.id.tv_djrw, Color.parseColor("#FF0000"));//已经检查完成绿色
                     }
-
-
-
-
-
 
 
                 }
@@ -269,7 +264,7 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
                         bundle.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
                         bundle.putBoolean("edit", true);
                         bundle.putInt(Contans.KEY_ITEM, 0);
-//                        bundle.putInt("itemposition", postion - 1);
+                        bundle.putLong("xdjjhxzDataBean_id", xdjjhxzDataBeanList.get(postion - 1).getId());
                         bundle.putInt("itemposition", xdjjhxzDataBeanList.get(postion - 1).getSN() - 1);
                         bundle.putString("LX", "Click");
                         bundle.putString("LXResult", "LXResult");
@@ -311,7 +306,8 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
                     Intent intent = new Intent(SdjgzActivity.this, TipsActivity.class);
                     bundle2.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
                     bundle2.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
-                    bundle2.putBoolean("edit", false);
+                    bundle2.putLong("xdjjhxzDataBean_id", 0);
+                    bundle2.putBoolean("edit", true);
                     bundle2.putInt(Contans.KEY_ITEM, 0);
                     bundle2.putInt("itemposition", 0);
                     bundle2.putString("LX", "QRcode");
@@ -319,7 +315,6 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
                     bundle2.putInt("from", 0);
                     intent.putExtras(bundle2);
                     startActivity(intent);
-
 
 
                 }
@@ -339,22 +334,21 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
     public void handleNfc(String result) {
         super.handleNfc(result);
 
-        List<QYDDATABean> qydDataBeen = DataSupport.where("QYNFC = ?", result).find(QYDDATABean.class);
+        List<QYDDATABean> qydDataBeen = DataSupport.where("QYNFC = ?", result).find(QYDDATABean.class);//ewm是根据扫描得到的二维码结果来查询
 
         qyddataBeanList.clear();
         qyddataBeanList.addAll(qydDataBeen);
 
-
-        List<QYAQFXDATABean> qyaqfxdataBeen = DataSupport.where("QYNFC = ?", result).find(QYAQFXDATABean.class);
+        List<QYAQFXDATABean> qyaqfxdataBeen = DataSupport.where("QYNFC = ?", result).find(QYAQFXDATABean.class);//ewm是根据扫描得到的二维码结果来查询
         qyaqfxdataBeanList.clear();
         qyaqfxdataBeanList.addAll(qyaqfxdataBeen);
-
 
 
         Bundle bundle3 = new Bundle();
         Intent intent = new Intent(SdjgzActivity.this, TipsActivity.class);
         bundle3.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
         bundle3.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
+        bundle3.putLong("xdjjhxzDataBean_id", 0);
         bundle3.putBoolean("edit", true);
         bundle3.putInt(Contans.KEY_ITEM, 0);
         bundle3.putInt("itemposition", 0);
@@ -364,13 +358,36 @@ public class SdjgzActivity extends BaseActivity3 implements View.OnClickListener
         intent.putExtras(bundle3);
         startActivity(intent);
 
+//        List<QYDDATABean> qydDataBeen = DataSupport.where("QYNFC = ?", result).find(QYDDATABean.class);
+//
+//        qyddataBeanList.clear();
+//        qyddataBeanList.addAll(qydDataBeen);
+//
+//
+//        List<QYAQFXDATABean> qyaqfxdataBeen = DataSupport.where("QYNFC = ?", result).find(QYAQFXDATABean.class);
+//        qyaqfxdataBeanList.clear();
+//        qyaqfxdataBeanList.addAll(qyaqfxdataBeen);
+//
+//
+//        Bundle bundle3 = new Bundle();
+//        Intent intent = new Intent(SdjgzActivity.this, TipsActivity.class);
+//        bundle3.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanList);
+//        bundle3.putParcelableArrayList("QYFXTS", qyaqfxdataBeanList);
+//        bundle3.putBoolean("edit", true);
+//        bundle3.putInt(Contans.KEY_ITEM, 0);
+//        bundle3.putInt("itemposition", 0);
+//        bundle3.putString("LX", "NFC");
+//        bundle3.putString("LXResult", result);
+//        bundle3.putInt("from", 0);
+//        intent.putExtras(bundle3);
+//        startActivity(intent);
+
     }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
 }

@@ -3,6 +3,15 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/jhmctextview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="岗位名称"
+        android:textSize="28sp"
+        />
 
     <EditText
         android:id="@+id/djqk_edit"

@@ -1,8 +1,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_margin="@dimen/px_10"
+        />
 
     <FrameLayout
         android:id="@+id/FL"
@@ -16,23 +23,23 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/px_10"
             android:divider="#00000000"
-            android:dividerHeight="0px" />
+            android:dividerHeight="0px"/>
 
         <TextView
             android:id="@+id/tv_nodata"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_gravity="top"
-            android:text="暂无保存数据" />
+            android:gravity="center"
+            android:text="暂无保存数据"/>
 
     </FrameLayout>
 
     <LinearLayout
         android:id="@+id/LL"
-        android:layout_marginBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:layout_marginTop="10px"
         android:gravity="center"
         android:orientation="horizontal">
@@ -45,7 +52,7 @@
             android:layout_marginLeft="@dimen/px_20"
             android:layout_marginRight="@dimen/px_20"
             android:layout_weight="1"
-            android:text="下载" />
+            android:text="下载"/>
 
         <Button
             android:id="@+id/btn_delete"
@@ -55,7 +62,8 @@
             android:layout_marginLeft="@dimen/px_20"
             android:layout_marginRight="@dimen/px_20"
             android:layout_weight="1"
-            android:text="删除" />
+            android:text="删除"
+            android:visibility="gone"/>
     </LinearLayout>
 
 

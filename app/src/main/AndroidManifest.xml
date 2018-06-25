@@ -72,7 +72,6 @@
         <activity
             android:name=".activity.TabMainActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
-        <activity android:name=".activity.MainActivity"/>
         <activity android:name=".activity.sbxdj.MainSbxdjglActivity"/>
         <activity android:name=".activity.sbxdj.SxcdjActivity"/>
         <activity
@@ -80,6 +79,9 @@
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activity.sbxdj.SdjgzActivity"/>
         <activity android:name=".activity.sbxdj.YulActivity"/>
+
+        <activity android:name=".activity.sbxdj.Yul_SBActivity"/>
+
         <activity android:name=".activity.sbxdj.ChangeYulActivity"/>
         <activity android:name=".activity.sbxdj.SdjSbListActivity"/>
 
@@ -157,6 +159,7 @@
             android:name=".activity.qfgd.BrqxdActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"/>
+
         <activity
             android:name=".activity.qfgd.BzgdqxdActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

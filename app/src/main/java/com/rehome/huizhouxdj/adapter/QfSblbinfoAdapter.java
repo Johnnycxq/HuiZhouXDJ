@@ -42,7 +42,7 @@ public class QfSblbinfoAdapter extends RecyclerView.Adapter<QfSblbinfoAdapter.Vi
         }
     }
 
-    public List<QfsblistBean.DataBean> getDatas(){
+    public List<QfsblistBean.DataBean> getDatas() {
         return datas;
     }
 
@@ -71,7 +71,7 @@ public class QfSblbinfoAdapter extends RecyclerView.Adapter<QfSblbinfoAdapter.Vi
             }
         });
 
-        holder.tv_smmc.setText(datas.get(position).getSBMC());
+        holder.tv_smmc.setText(datas.get(position).getSBMC() + "-" + datas.get(position).getSBID());
         holder.tv_smmc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,11 +85,11 @@ public class QfSblbinfoAdapter extends RecyclerView.Adapter<QfSblbinfoAdapter.Vi
         return datas.size();
     }
 
-    public void setOnChildItemClickListener(OnChildItemClickListener onChildItemClickListener){ //接口回调
+    public void setOnChildItemClickListener(OnChildItemClickListener onChildItemClickListener) { //接口回调
         this.onChildItemClickListener = onChildItemClickListener;
     }
 
-    public interface OnChildItemClickListener{
+    public interface OnChildItemClickListener {
         void onClick(QfsblistBean.DataBean dataBean);
     }
 

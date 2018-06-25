@@ -180,6 +180,8 @@ public class XJCJFragment extends BaseFragment {
                     etJg.setText("大小修");
                 } else if (info.getCJJG().equals("已停用")) {
                     etJg.setText("已停用");
+                }else if (info.getCJJG().equals("")) {
+                    etJg.setText("");
                 } else {
                     etJg.setText(info.getCJJG());
                 }
@@ -204,6 +206,9 @@ public class XJCJFragment extends BaseFragment {
                 } else if (info.getCJJG().equals("已停用")) {
                     etButton.setText("已停用");
                     etJg.setText("已停用");
+                } else if (info.getCJJG().equals("")) {
+                    etButton.setText("正常");
+                    etJg.setText("正常");
                 } else {
                     etButton.setText(info.getCJJG());
                     etJg.setText(info.getCJJG());

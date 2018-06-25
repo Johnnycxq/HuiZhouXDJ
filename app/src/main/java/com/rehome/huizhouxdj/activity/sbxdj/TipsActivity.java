@@ -29,6 +29,7 @@ public class TipsActivity extends BaseActivity2 implements View.OnClickListener 
     private int itemposition;
     private String LX, LXResult;
     private int from;//0-来自工作页面；1-采集页面
+    private long xdjjhxzDataBean_id;
 
     @Override
     public int getLayoutId() {
@@ -53,6 +54,7 @@ public class TipsActivity extends BaseActivity2 implements View.OnClickListener 
         isEdit = bundle.getBoolean("edit");
         item = bundle.getInt(Contans.KEY_ITEM);
         itemposition = bundle.getInt("itemposition");
+        xdjjhxzDataBean_id = bundle.getLong("xdjjhxzDataBean_id");
         LX = bundle.getString("LX");
         LXResult = bundle.getString("LXResult");
         from = bundle.getInt("from");
@@ -107,8 +109,9 @@ public class TipsActivity extends BaseActivity2 implements View.OnClickListener 
                 bundle.putBoolean("edit", isEdit);
                 bundle.putInt(Contans.KEY_ITEM, 0);
                 bundle.putInt("itemposition", itemposition);
-                bundle.putString("LX", "Click");
-                bundle.putString("LXResult", "LXResult");
+                bundle.putLong("xdjjhxzDataBean_id", xdjjhxzDataBean_id);
+                bundle.putString("LX", LX);
+                bundle.putString("LXResult", LXResult);
                 bundle.putInt("from", 0);
                 intent.putExtras(bundle);
                 startActivity(intent);

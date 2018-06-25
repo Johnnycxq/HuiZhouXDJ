@@ -101,17 +101,17 @@ public class SbxdjcjsbActivity extends BaseActivity3 implements View.OnClickList
 
                 break;
             case R.id.tv_right://这里
-                Bundle bundle = new Bundle();
-                Intent intent = new Intent(SbxdjcjsbActivity.this, SdjSbListActivity.class);
-                bundle.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanArrayList);
-                bundle.putBoolean("edit", isEdit);
-                bundle.putInt(Contans.KEY_ITEM, 0);
-                bundle.putInt("itemposition", itemposition);
-                bundle.putString("LX", LX);
-                bundle.putString("LXResult", LXResult);
-                bundle.putInt("from", 1);
-                intent.putExtras(bundle);
-                startActivityForResult(intent, Req);
+//                Bundle bundle = new Bundle();
+//                Intent intent = new Intent(SbxdjcjsbActivity.this, SdjSbListActivity.class);
+//                bundle.putParcelableArrayList(Contans.KEY_DJJHRWQY, qyddataBeanArrayList);
+//                bundle.putBoolean("edit", isEdit);
+//                bundle.putInt(Contans.KEY_ITEM, 0);
+//                bundle.putInt("itemposition", itemposition);
+//                bundle.putString("LX", LX);
+//                bundle.putString("LXResult", LXResult);
+//                bundle.putInt("from", 1);
+//                intent.putExtras(bundle);
+//                startActivityForResult(intent, Req);
                 break;
         }
     }
@@ -275,7 +275,6 @@ public class SbxdjcjsbActivity extends BaseActivity3 implements View.OnClickList
                                         //更新编辑的内容
                                         updateItem(cj.getCJJG(), item - 1);
 
-
                                         Intent intent2 = new Intent(SbxdjcjsbActivity.this, SbxdjcjsbActivity.class);
                                         intent2.putParcelableArrayListExtra("setSbModelList", setSbModelList);
                                         setResult(RESULT_OK, intent2);
@@ -321,8 +320,7 @@ public class SbxdjcjsbActivity extends BaseActivity3 implements View.OnClickList
                     values.put("DATE", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 
                     //更新数据库数据
-                    int i = DataSupport.updateAll(QYDDATABean.class, values, "SCID = ? and DID = ? ",
-                            qyddataBeanArrayList.get(item - 1).getSCID(), qyddataBeanArrayList.get(item - 1).getDID());
+                    int i = DataSupport.updateAll(QYDDATABean.class, values, "SCID = ? and DID = ? ", qyddataBeanArrayList.get(item - 1).getSCID(), qyddataBeanArrayList.get(item - 1).getDID());
                     if (i != 0) {
                         qyddataBeanArrayList.get(item - 1).setChecked(true);
                         qyddataBeanArrayList.get(item - 1).setCJJG(cj.getCJJG());
@@ -338,7 +336,15 @@ public class SbxdjcjsbActivity extends BaseActivity3 implements View.OnClickList
                 if (item > qyddataBeanArrayList.size()) {
                     item--;
                     cj.updata(qyddataBeanArrayList.get(item - 1), item, qyddataBeanArrayList.size());
-                    //showToast("到底了");
+
+                    ContentValues values = new ContentValues();
+//                    values.put("CJJG", "已运行");
+                    values.put("SBMCSTATE", "已运行");
+                    values.put("checked", true);
+                    int i = DataSupport.updateAll(QYDDATABean.class, values, "SBID = ? ", qyddataBeanArrayList.get(0).getSBID());
+
+                    showToast("最后一条数据了");
+
                 } else {
                     cj.updata(qyddataBeanArrayList.get(item - 1), item, qyddataBeanArrayList.size());
                     bz.updata(qyddataBeanArrayList.get(item - 1).getBZZ());
@@ -385,11 +391,9 @@ public class SbxdjcjsbActivity extends BaseActivity3 implements View.OnClickList
     }
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
 

@@ -79,24 +79,11 @@ public class PMActivity extends BaseActivity2 implements View.OnClickListener {
                 finish();
                 break;
             case R.id.tv_right:
-
-                String startTime = tvStarttime.getText().toString();
-                String endTime = tvEndtime.getText().toString();
-
-                Intent intent = new Intent(PMActivity.this, PminfoActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("GDZT_NO", GDZT_NO);
-                bundle.putString("DJID", DJID);
-                bundle.putString("BMID", BMID);
-                bundle.putString("SBID", SBID);
-                bundle.putString("PM_ST", startTime);
-                bundle.putString("PM_ET", endTime);
-
-                intent.putExtras(bundle);
-                startActivity(intent);
+                sherchGD();
                 break;
         }
     }
+
 
     @Override
     public void initData() {
@@ -173,7 +160,24 @@ public class PMActivity extends BaseActivity2 implements View.OnClickListener {
         getMondayOfThisWeek();
         getSundayOfThisWeek();
         requestDatas();
+        sherchGD();
+    }
 
+    private void sherchGD() {
+        String startTime = tvStarttime.getText().toString();
+        String endTime = tvEndtime.getText().toString();
+
+        Intent intent = new Intent(PMActivity.this, PminfoActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("GDZT_NO", GDZT_NO);
+        bundle.putString("DJID", DJID);
+        bundle.putString("BMID", BMID);
+        bundle.putString("SBID", SBID);
+        bundle.putString("PM_ST", startTime);
+        bundle.putString("PM_ET", endTime);
+
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -185,7 +189,7 @@ public class PMActivity extends BaseActivity2 implements View.OnClickListener {
 
     private void requestDatas() {
 
-        String yhid = (String) SPUtils.get(context, Contans.NAME, "");
+        String yhid = (String) SPUtils.get(context, Contans.USERNAME, "");
 
         HttpUtils.getApi().getbmid(yhid).enqueue(new BaseCallBack<BmidBean>(context) {
 

@@ -20,6 +20,8 @@ public class QXRequestBean {
     private String ET;
     private String RWID;
     private String BMID;
+    private String ZRR;
+
 
 
     public String getAction() {
@@ -132,5 +134,13 @@ public class QXRequestBean {
 
     public void setBMID(String BMID) {
         this.BMID = BMID;
+    }
+
+    public String getZRR() {
+        return ZRR;
+    }
+
+    public void setZRR(String ZRR) {
+        this.ZRR = ZRR;
     }
 }

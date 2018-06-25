@@ -10,6 +10,7 @@ public class StatusInfo2 {
     private int state;
     private String msg;
     private String GWID;
+    private String GWMC;
     private List<?> data;
 
     public int getState() {
@@ -34,6 +35,14 @@ public class StatusInfo2 {
 
     public void setGWID(String GWID) {
         this.GWID = GWID;
+    }
+
+    public String getGWMC() {
+        return GWMC;
+    }
+
+    public void setGWMC(String GWMC) {
+        this.GWMC = GWMC;
     }
 
     public List<?> getData() {

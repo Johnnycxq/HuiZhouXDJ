@@ -175,7 +175,6 @@ public class DjdscFragment extends BaseFragment {
                 xdjjhxzDataList.add(xdjjhxzDataBean);
 
 
-
                 qydDataBeanMap.put(xdjjhxzDataBeanList.get(i).getGWID(), qydDataBeen);
 
             }
@@ -268,6 +267,7 @@ public class DjdscFragment extends BaseFragment {
             if (xdjjhxzDataList.get(i).isChecked()) {
                 List<QYDDATABean> qyddataBeanList = qydDataBeanMap.get(xdjjhxzDataList.get(i).getGWID());
                 scdjjhbean.setGWID(xdjjhxzDataList.get(i).getGWID());
+                scdjjhbean.setGWMC(xdjjhxzDataList.get(i).getGWMC());
                 dhdata.setQYBH(xdjjhxzDataList.get(i).getQYBH());
                 dhdata.setQYDJ_ST(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
                 for (int j = 0; j < qyddataBeanList.size(); j++) {
@@ -367,6 +367,7 @@ public class DjdscFragment extends BaseFragment {
                         if (info.getState() == 1) { //成功
 
                             final String uploadGWID = info.getGWID();
+                            final String uploadGWMC = info.getGWMC();
 
 //                            showToast("上传数据成功");
 
@@ -400,7 +401,7 @@ public class DjdscFragment extends BaseFragment {
                             builder.setPositiveButton("需要", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    UploadDialog(uploadGWID);
+                                    UploadDialog(uploadGWID, uploadGWMC);
                                 }
                             });
                             builder.show();
@@ -475,12 +476,16 @@ public class DjdscFragment extends BaseFragment {
 
     }
 
-    private void UploadDialog(final String uploadGWID) {
+    private void UploadDialog(final String uploadGWID, String uploadGWMC) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View nameView = layoutInflater.inflate(R.layout.dialog_uploaddjrz, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
         alertDialogBuilder.setView(nameView);
+
+
+        final TextView jhmctextview = (TextView) nameView.findViewById(R.id.jhmctextview);
+        jhmctextview.setText(uploadGWMC);
 
         final EditText djqk_edit = (EditText) nameView.findViewById(R.id.djqk_edit);
         final EditText dxqk_edit = (EditText) nameView.findViewById(R.id.dxqk_edit);
@@ -523,7 +528,7 @@ public class DjdscFragment extends BaseFragment {
             public void onSucceed(int what, Response<String> response) {
                 try {
 
-                    Log.e("123", response.get());
+//                    Log.e("123", response.get());
 
                     ResultBean info = GsonUtils.GsonToBean(response.get(), ResultBean.class);
 

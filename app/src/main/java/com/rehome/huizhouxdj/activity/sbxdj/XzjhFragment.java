@@ -9,10 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.rehome.huizhouxdj.DBModel.Djjh;
@@ -38,12 +40,15 @@ import com.yolanda.nohttp.rest.Response;
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+
+import static org.litepal.crud.DataSupport.where;
 
 /**
  * 设备巡点检管理-下载计划
@@ -59,6 +64,8 @@ public class XzjhFragment extends BaseFragment {
     @BindView(R.id.LL)
     LinearLayout LL;
     Unbinder unbinder;
+    @BindView(R.id.spinner)
+    Spinner spinner;
 
     private WaitDialog dialog;
     private DjMainActivity mActivity;
@@ -71,7 +78,10 @@ public class XzjhFragment extends BaseFragment {
     private int requestCount = 0;
     private List<String> gwids = new ArrayList<>();
     private RequestQueue queue;
+    List<String> SB_XJ_DJ_Dialogs = new ArrayList<>(Arrays.asList("全部", "点检", "巡检"));
+    private ArrayAdapter<String> XJDJAdapter;
 
+    private String SpState;//给下载成功 数据刷新用的
 
     public XzjhFragment() {
 
@@ -130,7 +140,7 @@ public class XzjhFragment extends BaseFragment {
         djjhs = new ArrayList<>();
         //如果数据库中有数据
         if (DataSupport.count("Djjh") != 0) {
-            List<Djjh> djjhall = DataSupport.where("download = ?", "0").find(Djjh.class);
+            List<Djjh> djjhall = where("download = ?", "0").find(Djjh.class);
             djjhs.clear();
             djjhs.addAll(djjhall);
             setListData();
@@ -140,7 +150,7 @@ public class XzjhFragment extends BaseFragment {
             tvNodata.setText("暂无数据");
             LL.setVisibility(View.GONE);
         }
-
+        spinnerView();
 
     }
 
@@ -200,6 +210,43 @@ public class XzjhFragment extends BaseFragment {
         }
     }
 
+    private void spinnerView() {
+        XJDJAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, SB_XJ_DJ_Dialogs);
+        XJDJAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(XJDJAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                String p = XJDJAdapter.getItem(position);
+
+                if (p.equals("全部")) {
+                    List<Djjh> djjhall = where("download = ?", "0").find(Djjh.class);
+                    djjhs.clear();
+                    djjhs.addAll(djjhall);
+                    SpState = "ALL";
+
+                } else if (p.equals("点检")) {
+
+                    List<Djjh> djjhall = where("download = ? and GWLX = ?", "0", "D").find(Djjh.class);
+                    djjhs.clear();
+                    djjhs.addAll(djjhall);
+                    SpState = "D";
+
+                } else if (p.equals("巡检")) {
+                    List<Djjh> djjhall = where("download = ? and GWLX = ?", "0", "X").find(Djjh.class);
+                    djjhs.clear();
+                    djjhs.addAll(djjhall);
+                    SpState = "X";
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+    }
 
     private void downData(String gwid) {
 
@@ -303,7 +350,16 @@ public class XzjhFragment extends BaseFragment {
                     mActivity.updataDjdsc();
 
                     djjhs.clear();
-                    djjhs.addAll(DataSupport.where("download = ?", "0").find(Djjh.class));
+
+                    if (SpState.equals("D")) {//判断spinner的类型 如果是巡检 下载成功之后页面则更新成巡检的数据
+                        djjhs.addAll(where("download = ? and GWLX = ?", "0", "D").find(Djjh.class));
+                    } else if (SpState.equals("X")) {
+                        djjhs.addAll(where("download = ? and GWLX = ?", "0", "X").find(Djjh.class));
+                    } else if (SpState.equals("ALL")) {
+                        djjhs.addAll(where("download = ?", "0").find(Djjh.class));
+                    }
+
+
                     if (adapter != null) {
                         cb.setChecked(false);
                         adapter.notifyDataSetChanged();

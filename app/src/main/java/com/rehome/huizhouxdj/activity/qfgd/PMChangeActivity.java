@@ -5,8 +5,13 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.rehome.huizhouxdj.R;
+import com.rehome.huizhouxdj.base.BaseCallBack;
+import com.rehome.huizhouxdj.bean.BmidBean;
 import com.rehome.huizhouxdj.bean.MessageEvent;
+import com.rehome.huizhouxdj.contans.Contans;
 import com.rehome.huizhouxdj.utils.BaseActivity2;
+import com.rehome.huizhouxdj.utils.HttpUtils;
+import com.rehome.huizhouxdj.utils.SPUtils;
 import com.rehome.huizhouxdj.weight.InputLayout;
 
 import org.greenrobot.eventbus.EventBus;
@@ -15,6 +20,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
 
 /**
  * Created by ruihong on 2018/4/17.
@@ -41,6 +47,7 @@ public class PMChangeActivity extends BaseActivity2 implements View.OnClickListe
     private String SBID = "";
     private String SBMC = "";
 
+    private String bmid, bmmc;
 
     @Override
     public int getLayoutId() {
@@ -60,16 +67,20 @@ public class PMChangeActivity extends BaseActivity2 implements View.OnClickListe
                 finish();
                 break;
             case R.id.tv_right:
-                Intent intent = new Intent(PMChangeActivity.this, QfpmgdListActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("GDZT_NO", GDZT_NO);
-                bundle.putString("DJID", DJID);
-                bundle.putString("BMID", BMID);
-                bundle.putString("SBID", SBID);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                searchqxgd();
                 break;
         }
+    }
+
+    private void searchqxgd() {
+        Intent intent = new Intent(PMChangeActivity.this, QfpmgdListActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("GDZT_NO", GDZT_NO);
+        bundle.putString("DJID", DJID);
+        bundle.putString("BMID", BMID);
+        bundle.putString("SBID", SBID);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     @Override
@@ -109,7 +120,8 @@ public class PMChangeActivity extends BaseActivity2 implements View.OnClickListe
             }
         });
 
-
+        requestDatas();
+        searchqxgd();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -118,6 +130,30 @@ public class PMChangeActivity extends BaseActivity2 implements View.OnClickListe
         SBID = messageEvent.getMessageid();
     }
 
+
+    private void requestDatas() {
+
+        String yhid = (String) SPUtils.get(context, Contans.USERNAME, "");
+
+        HttpUtils.getApi().getbmid(yhid).enqueue(new BaseCallBack<BmidBean>(context) {
+
+            @Override
+            public void onSuccess(Call<BmidBean> call, retrofit2.Response<BmidBean> response) {
+                BmidBean kcmzbean = response.body();
+
+
+                bmid = kcmzbean.getRows().get(0).getRe_tm_no_p();
+                bmmc = kcmzbean.getRows().get(0).getRe_tm_de();
+                ilZrbm.setContent(bmmc);
+
+            }
+
+            @Override
+            public void onError(Call<BmidBean> call, Throwable t) {
+
+            }
+        });
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

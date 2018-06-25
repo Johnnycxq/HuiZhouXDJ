@@ -12,6 +12,7 @@ public class Djjh extends DataSupport {
     private String GWID;
     private String GWMC;
     private String GWDS;
+    private String GWLX;
     private boolean checked;//0:未选中,1:已选中
     private int download;//0:未下载,1:已经下载
     private DjjhList djjhList;
@@ -70,5 +71,13 @@ public class Djjh extends DataSupport {
 
     public void setDjjhList(DjjhList djjhList) {
         this.djjhList = djjhList;
+    }
+
+    public String getGWLX() {
+        return GWLX;
+    }
+
+    public void setGWLX(String GWLX) {
+        this.GWLX = GWLX;
     }
 }

@@ -11,6 +11,7 @@ public class ScdjjhBean {//用于上传点检计划的bean
     private String Action;
     private String GWID;
     private String YHID;
+    private String GWMC;
     private List<DJ_DATA> DJ_DATA;
 
     public List<ScdjjhBean.DJ_DATA> getDJ_DATA() {
@@ -45,6 +46,13 @@ public class ScdjjhBean {//用于上传点检计划的bean
         this.YHID = YHID;
     }
 
+    public String getGWMC() {
+        return GWMC;
+    }
+
+    public void setGWMC(String GWMC) {
+        this.GWMC = GWMC;
+    }
 
     public static class DJ_DATA {
         private String QYBH;

@@ -136,7 +136,7 @@ public class CJFragment extends BaseFragment {
                         break;
                     case R.id.rbbzc:
 
-                        et_jg.setText("不正常");
+                        et_jg.setText("异常");
                         break;
                 }
             }
@@ -211,7 +211,7 @@ public class CJFragment extends BaseFragment {
             RGZC.setVisibility(View.VISIBLE);
 
             rbzc.setText("正常");
-            rbbzc.setText("不正常");
+            rbbzc.setText("异常");
 
             rbzc.setChecked(true);
             rbbzc.setChecked(false);
@@ -242,9 +242,9 @@ public class CJFragment extends BaseFragment {
 //                    rbzc.setChecked(false);
 //                    rbzc.setVisibility(View.GONE);
 
-                } else if (info.getCJJG().equals("不正常")) {
+                } else if (info.getCJJG().equals("异常")) {
 
-                    et_jg.setText("不正常");
+                    et_jg.setText("异常");
                     rbbzc.setChecked(true);
                     rbzc.setChecked(false);
 

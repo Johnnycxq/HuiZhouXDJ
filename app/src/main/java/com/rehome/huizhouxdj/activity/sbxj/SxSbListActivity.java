@@ -188,7 +188,7 @@ public class SxSbListActivity extends BaseActivity3 implements View.OnClickListe
 
                                 values3.put("checked", false);
 
-                                values3.put("CJJG", text);
+                                values3.put("CJJG", "");
 
                                 values3.put("SBMCSTATE", text);
 

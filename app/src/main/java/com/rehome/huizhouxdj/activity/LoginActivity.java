@@ -178,6 +178,7 @@ public class LoginActivity extends BaseActivity {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setView(nameView);
         final EditText srgh_edit = (EditText) nameView.findViewById(R.id.srgh_edit);
+        srgh_edit.setText(username);
 
         alertDialogBuilder
                 .setCancelable(false)
@@ -325,9 +326,6 @@ public class LoginActivity extends BaseActivity {
                     SPUtils.put(LoginActivity.this, Contans.BZBH, user.getBzbh() == null ? "" : user.getBzbh());
                     SPUtils.put(LoginActivity.this, Contans.BZMC, user.getBzmc() == null ? "" : user.getBzmc());
                     SPUtils.put(LoginActivity.this, Contans.PERMISSIONSRESULT, user.getPermissionsResult() == null ? "" : user.getPermissionsResult());
-//                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                    startActivity(intent);
-
 
                     Intent intent = new Intent(LoginActivity.this, TabMainActivity.class);
                     startActivity(intent);

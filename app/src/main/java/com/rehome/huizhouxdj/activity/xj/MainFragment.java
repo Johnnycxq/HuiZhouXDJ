@@ -2,21 +2,27 @@ package com.rehome.huizhouxdj.activity.xj;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.GridView;
 
 import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.activity.DaXiaoXiu.MainDxxActivity;
 import com.rehome.huizhouxdj.activity.aqjc.MainAqjcActivity;
 import com.rehome.huizhouxdj.activity.qfgd.MainQfActivity;
+import com.rehome.huizhouxdj.activity.qfgd.PMActivity;
+import com.rehome.huizhouxdj.activity.qfgd.bpbjinfoActivity;
 import com.rehome.huizhouxdj.activity.sbxdj.MainSbxdjglActivity;
 import com.rehome.huizhouxdj.activity.sbxj.XscbglActivity;
 import com.rehome.huizhouxdj.adapter.GridViewAdapter;
@@ -63,9 +69,9 @@ public class MainFragment extends BaseFragment {
     private PushInfo.Push push;
     private boolean isTask = false;//是否有任务
     private long exitTime = 0;
-    private String str[] = {"点检", "巡检", "安全检查", "Q4工单", "大小修"};
-    private int[] imageId = {R.mipmap.icon8, R.mipmap.icon6, R.mipmap.icon10, R.mipmap.icon9, R.mipmap.icon11};
-    private int[] colors = {R.drawable.radius_a1, R.drawable.radius_e3, R.drawable.radius_a3, R.drawable.radius_a2, R.drawable.radius_a4};
+    private String str[] = {"点检", "巡检", "安全检查", "Q4工单", "大小修", "PM工单查询", "备品备件查询"};
+    private int[] imageId = {R.mipmap.icon8, R.mipmap.icon6, R.mipmap.icon10, R.mipmap.icon9, R.mipmap.icon11, R.mipmap.icon9, R.mipmap.icon13};
+    private int[] colors = {R.drawable.radius_a1, R.drawable.radius_e3, R.drawable.radius_a3, R.drawable.radius_a2, R.drawable.radius_a4, R.drawable.radius_d1, R.drawable.radius_a3};
     private List<Integer> item;
     private List<String> dialogDatas;
     private List<BasicDataBean.DataBean> zys;
@@ -159,10 +165,58 @@ public class MainFragment extends BaseFragment {
                         intent = new Intent(getActivity(), MainDxxActivity.class);
                         startActivity(intent);
                         break;
+
+                    case 5:
+                        intent = new Intent(getActivity(), PMActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 6:
+                        searchDialog();
+                        break;
                 }
             }
         });
 
+    }
+
+    private void searchDialog() {
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        View nameView = layoutInflater.inflate(R.layout.qcdialog_edt, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        alertDialogBuilder.setView(nameView);
+        final EditText wzmc_edit = (EditText) nameView.findViewById(R.id.wzmc_edit);
+        final EditText wzbm_edit = (EditText) nameView.findViewById(R.id.wzbm_edit);
+        final EditText ckh_edit = (EditText) nameView.findViewById(R.id.ckh_edit);
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("查询",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                if (TextUtils.isEmpty(wzmc_edit.getText()) & TextUtils.isEmpty(wzbm_edit.getText()) & TextUtils.isEmpty(ckh_edit.getText())) {
+                                    showToast("请输入有效的查询条件!");
+                                } else {
+                                    Intent intent = new Intent(getActivity(), bpbjinfoActivity.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("etMwbm", wzbm_edit.getText().toString());
+                                    bundle.putString("etBzmc", wzmc_edit.getText().toString());
+                                    bundle.putString("etCkh", ckh_edit.getText().toString());
+                                    intent.putExtras(bundle);
+                                    startActivity(intent);
+                                }
+
+
+                            }
+                        })
+                .setNegativeButton("取消",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     private void requestZyDatas() {
@@ -293,20 +347,11 @@ public class MainFragment extends BaseFragment {
     //检查系统是否有任务推送
     private void checkPush() {
 
-        int[] whats = new int[]{-1, -1, -1, -1, -1};
-        int[] test = {0, 1, 2, 3, 4};
+        int[] whats = new int[]{1, 1, 1, 1, 1};
         for (int i = 0; i < item.size(); i++) {
-
             if (item.get(i) == 0) {
                 //点检
                 whats[0] = 1;
-            } else if (item.get(i) == 2) {
-                //安健环
-                whats[1] = 2;
-                whats[2] = 3;
-            } else if (item.get(i) == 3) {
-                //消防
-                whats[4] = 0;
             }
         }
 

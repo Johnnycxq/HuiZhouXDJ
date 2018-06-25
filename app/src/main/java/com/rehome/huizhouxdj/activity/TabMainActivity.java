@@ -17,12 +17,21 @@ import com.rehome.huizhouxdj.R;
 import com.rehome.huizhouxdj.activity.xj.MainFragment;
 import com.rehome.huizhouxdj.base.BaseCallBack;
 import com.rehome.huizhouxdj.bean.ApkUpdateBean;
+import com.rehome.huizhouxdj.bean.QXRequestBean;
+import com.rehome.huizhouxdj.contans.Contans;
 import com.rehome.huizhouxdj.utils.AutoToolbar;
 import com.rehome.huizhouxdj.utils.BaseActivity;
 import com.rehome.huizhouxdj.utils.CanBanScrollViewPager;
+import com.rehome.huizhouxdj.utils.GsonUtils;
+import com.rehome.huizhouxdj.utils.HttpListener;
 import com.rehome.huizhouxdj.utils.HttpUtils;
+import com.rehome.huizhouxdj.utils.NohttpUtils;
+import com.rehome.huizhouxdj.utils.SPUtils;
 import com.rehome.huizhouxdj.weight.AuditDialog;
 import com.rehome.huizhouxdj.weight.AutoRadioGroup;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.Request;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -167,6 +176,7 @@ public class TabMainActivity extends BaseActivity {
     public void initData() {
         title.setText("首页");
         checkUpdateApk();
+        requestDatas();
     }
 
     private void checkUpdateApk() {
@@ -212,6 +222,39 @@ public class TabMainActivity extends BaseActivity {
             }
         });
     }
+
+
+    private void requestDatas() {
+
+
+        final Request<String> requset = NoHttp.createStringRequest(Contans.IP + Contans.QFGD, RequestMethod.POST);
+
+        requset.setDefineRequestBodyForJson(createJson());
+
+        NohttpUtils.getInstance().add(this, 0, requset, new HttpListener<String>() {
+            @Override
+            public void onSucceed(int what, com.yolanda.nohttp.rest.Response<String> response) {
+
+            }
+
+            @Override
+            public void onFailed(int what, com.yolanda.nohttp.rest.Response<String> response) {
+
+            }
+
+        });
+    }
+
+
+    private String createJson() {
+        String yhid = (String) SPUtils.get(context, Contans.USERNAME, "");
+        QXRequestBean info = new QXRequestBean();
+        info.setAction("Q4GD_WWC_GET");
+        info.setZRR(yhid);
+        String json = GsonUtils.GsonString(info);
+        return json;
+    }
+
 
     private String getVersionName() {
         //1,包管理者对象packageManager

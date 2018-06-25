@@ -163,7 +163,7 @@ public class UploadService extends IntentService {
             }
             String json = "{\"Rows\":" + GsonUtils.GsonString(scs) + ",\"Total\": " + scs.size() + "}";
             //计划
-            Request<String> request = NoHttp.createStringRequest(Contans.IP+Contans.DJJHSC, RequestMethod.POST);
+            Request<String> request = NoHttp.createStringRequest(Contans.IP + Contans.DJJHSC, RequestMethod.POST);
             request.setDefineRequestBodyForJson(json);
             NohttpUtils.getInstance().add(null, 0, request, callback, false, false, "");
 
@@ -171,7 +171,7 @@ public class UploadService extends IntentService {
             List<QxgdInfo> infos = DataSupport.findAll(QxgdInfo.class);
             if (infos.size() != 0) {
                 ++requestCount;
-                Request<String> request1 = NoHttp.createStringRequest(Contans.IP+Contans.DJJHQXGD, RequestMethod.POST);
+                Request<String> request1 = NoHttp.createStringRequest(Contans.IP + Contans.DJJHQXGD, RequestMethod.POST);
                 String qxgdjson = "{\"Rows\":" + GsonUtils.GsonString(infos) + ",\"Total\": " + infos.size() + "}";
                 Logger.json(qxgdjson);
                 request1.setDefineRequestBodyForJson(qxgdjson);
@@ -181,7 +181,7 @@ public class UploadService extends IntentService {
             List<XcjsInfo> xcjss = DataSupport.findAll(XcjsInfo.class);
             for (int i = 0; i < xcjss.size(); i++) {
                 ++requestCount;
-                Request<String> xcjs = NoHttp.createStringRequest(Contans.IP+Contans.DJJHXCJSSC + "?ms=" + xcjss.get(i).getMs() +
+                Request<String> xcjs = NoHttp.createStringRequest(Contans.IP + Contans.DJJHXCJSSC + "?ms=" + xcjss.get(i).getMs() +
                         "&jhid=" + xcjss.get(i).getJhid() + "&pointnum=" + xcjss.get(i).getPointnum() +
                         "&djr=" + xcjss.get(i).getDjr(), RequestMethod.POST);
                 xcjs.add(Contans.FILEPS, new FileBinary(new File(xcjss.get(i).getFilename())));
@@ -208,7 +208,7 @@ public class UploadService extends IntentService {
                 infos.add(info);
             }
             String json = "{\"Rows\":" + GsonUtils.GsonString(infos) + ",\"Total\": " + infos.size() + "}";
-            Request<String> request = NoHttp.createStringRequest(Contans.IP+Contans.AJHSC, RequestMethod.POST);
+            Request<String> request = NoHttp.createStringRequest(Contans.IP + Contans.AJHSC, RequestMethod.POST);
             request.setDefineRequestBodyForJson(json);
             NohttpUtils.getInstance().add(null, 0, request, callback, false, false, "");
 
@@ -216,7 +216,7 @@ public class UploadService extends IntentService {
                 List<Ajhxcjs> xcjs = DataSupport.where("jhid = ?", jhid).find(Ajhxcjs.class);
                 for (Ajhxcjs ajhxcjs : xcjs) {
                     requestCount++;
-                    Request<String> request1 = NoHttp.createStringRequest(Contans.IP+Contans.AJHXCJS +
+                    Request<String> request1 = NoHttp.createStringRequest(Contans.IP + Contans.AJHXCJS +
                             "?bz=" + UiUtlis.encoder(ajhxcjs.getBz()) +
                             "&jhid=" + UiUtlis.encoder(ajhxcjs.getJhid()) +
                             "&areacode=" + UiUtlis.encoder(ajhxcjs.getAreacode()) +
@@ -225,7 +225,7 @@ public class UploadService extends IntentService {
                     NohttpUtils.getInstance().add(null, 1, request1, callback, false, false, "");
                 }
             }
-            Request<String> request2 = NoHttp.createStringRequest(Contans.IP+Contans.YHPC, RequestMethod.POST);
+            Request<String> request2 = NoHttp.createStringRequest(Contans.IP + Contans.YHPC, RequestMethod.POST);
             List<YhpcInfo> info = DataSupport.findAll(YhpcInfo.class);
             if (info.size() != 0) {
                 requestCount++;

@@ -104,7 +104,7 @@ public class bpbjinfoActivity extends BaseActivity {
 
     private void parsePG1Data(List<Qfkccxbean.DataBean> list) {
         Column<String> mLine1 = new Column<>("物资编码", "WZBM");
-//        mLine1.setFixed(true);
+        mLine1.setFixed(true);
         mLine1.setOnColumnItemClickListener(new OnColumnItemClickListener<String>() {
             @Override
             public void onClick(Column<String> column, String value, String s, int position) {
@@ -124,6 +124,7 @@ public class bpbjinfoActivity extends BaseActivity {
         table.setTableData(data);
         table.setZoom(true, 3, 1);
         table.getConfig().setShowXSequence(false);
+        table.getConfig().setShowYSequence(false);
     }
 
 
